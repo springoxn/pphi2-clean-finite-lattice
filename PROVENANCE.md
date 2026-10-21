@@ -104,12 +104,13 @@ run:
 AImathPPhi2Clean.lean   7f1aeda871be56abbcada56d3e99b78164335765674f0d4cd0ec8de2f37cfd1e
 ```
 
-The evidence is shipped, not summarised:
+The evidence is shipped, not summarised.  Both files are in the `docs`
+directory, next to the manuscript:
 
-| Path | What it is |
+| File | What it is |
 |---|---|
-| `docs/extension_evidence.log` | a transcript of one run on the build host: toolchain and Mathlib pins, the two module hashes, the root's imports and hash, `lake build` (8880 jobs = the archive's 8878 + one job per module), and the axiom footprint of each of the 14 declarations the two modules introduce |
-| `docs/ext_axioms.lean` | the `#print axioms` query of that run; regenerating it from the two modules reproduces it byte-for-byte |
+| `extension_evidence.log` | a transcript of one run on the build host: toolchain and Mathlib pins, the two module hashes, the root's imports and hash, `lake build` (8880 jobs = the archive's 8878 + one job per module), and the axiom footprint of each of the 14 declarations the two modules introduce |
+| `ext_axioms.lean` | the `#print axioms` query of that run; regenerating it from the two modules reproduces it byte-for-byte |
 
 `python verify.py --ext` checks the part that a published repository can check:
 each module still hashes to what the transcript pinned, the root still imports
