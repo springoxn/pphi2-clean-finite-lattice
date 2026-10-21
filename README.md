@@ -33,6 +33,27 @@ Numbers (recomputed from the sources, never typed by hand): 34 modules,
 the axiom report, 27 per-module interface certificates, 8878 build jobs in the
 archived log.  `PROVENANCE.md` says how each number is obtained.
 
+## One step beyond the pinned archive
+
+The repository also publishes a single step taken *after* the archive was
+pinned: the **physical sampling convention** and the **UV-uniform second-moment
+bound**.
+
+| Post-pin result | Statement |
+|---|---|
+| Spectral floor | $m^2\le\lambda_k$ for every eigenvalue of the mass operator, with the *same* $m^2$ for every lattice spacing — constant functions attain it |
+| Sampled covariance | $\langle T_{\mathrm{GJ}}\varphi_f,T_{\mathrm{GJ}}\varphi_f\rangle\le m^{-2}\lVert f\rVert_{a,N}^2$ for the Riemann sample $\varphi_f=a^d(f(ax))_{x\in\Lambda}$ |
+| Spacing-uniform bound | at fixed physical volume $L=aN$, $\int(\omega f)^2\,\mathrm{d}\mu_{a,N}\le m^{-2}L^d\lVert f\rVert_\infty^2$ — the constant sees neither $a$ nor $N$ |
+
+That is a bound, not a limit: no tightness, no convergence of measures, no
+moments beyond the second, no interacting measure.  The two modules introduce 14
+declarations (279 lines), all with a footprint inside the same allowlist, and
+they are **not** in the audited archive — so they carry their own evidence in
+`docs/extension_evidence.log`, a transcript of a build and axiom run on the build
+host, which `python verify.py --ext` re-binds to the bytes here (module hashes,
+the root's imports, coverage of all 14 declarations, allowlist containment).  The
+companion manuscript's §11 states the results and their scope.
+
 ## What is *not* claimed
 
 This is a **free**, **finite-volume**, **lattice** object.  The repository
@@ -54,10 +75,13 @@ AImathPPhi2Clean/
   NumberedLatticeGaussianMoment.lean   the Fin n (numbered) interface
   LatticeCovarianceRepresentation.lean ℓ² coefficient embedding, isometry
   LatticeGaussianContinuumConsumer.lean consumer interface, L² transfer
+  PhysicalLatticeGaussianBound.lean    post-pin: eigenvalue floor, sampled bound
+  PhysicalLatticeSampling.lean         post-pin: the sampling convention
   ...                                  further clean interfaces (Wick,
                                        Nelson layer cake, tightness, positivity)
 audit/                                 the gates and their logs (the evidence)
-docs/                                  companion manuscript, archived README
+docs/                                  companion manuscript, archived README,
+                                       the post-pin evidence transcript
 verify.py                              portable verification entry point
 PROVENANCE.md                          archive hash, delta policy, upstream pin
 MANIFEST.sha256                        SHA-256 of every published file
@@ -85,6 +109,8 @@ code.
 
 ```bash
 python verify.py          # every published file against MANIFEST.sha256
+python verify.py --ext    # the post-pin extension: hashes, coverage, axioms
+python verify.py --count  # the numbers in this README, recomputed
 python verify.py --lean   # additionally re-run the axiom gates (needs lake)
 ```
 
@@ -107,10 +133,11 @@ manuscript (in `docs/`), §9, and summarised in `PROVENANCE.md`.
 
 The Lean sources here are **byte-identical** to a registered, audited archive
 except for three audit scripts that carried machine-specific absolute paths and
-were made portable.  The exclusions (the upstream axiom-census tooling, which
-depends on a private baseline checkout) and the full delta are listed in
-`PROVENANCE.md`, and `verify.py` re-checks the manifest.  Definitions in
-`AImathPPhi2Clean/ConcreteLatticeOperator.lean` are adapted from
+were made portable, plus the library root, which gained two `import` lines for
+the post-pin modules.  The exclusions (the upstream axiom-census tooling, which
+depends on a private baseline checkout), the two post-pin modules and the full
+delta are listed in `PROVENANCE.md`, and `verify.py` re-checks the manifest.
+Definitions in `AImathPPhi2Clean/ConcreteLatticeOperator.lean` are adapted from
 `mrdouglasny/GaussianField`; the correspondence is checked textually against
 the pinned commit.  See `NOTICE`.
 

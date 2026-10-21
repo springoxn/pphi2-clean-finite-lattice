@@ -1,0 +1,17 @@
+import AImathPPhi2Clean
+open Pphi2Clean.Continuum
+
+#print axioms physicalLatticeSample
+#print axioms latticeTestSeminormSq
+#print axioms massOperator_quadratic_lower
+#print axioms massOperatorMatrix_eigenvalues_ge_mass_sq
+#print axioms latticeCovarianceGJ_sampled_second_moment_le
+#print axioms physicalCoordinateEval
+#print axioms numberedLatticeGJ_physical_second_moment_le
+#print axioms latticePhysicalPoint
+#print axioms physicalTestEval
+#print axioms sampled_testSeminormSq_le
+#print axioms physicalGJMeasure
+#print axioms physicalGJMeasure_probability
+#print axioms physicalGJMeasure_second_moment_le
+#print axioms physicalGJMeasure_fixed_volume_second_moment_le

@@ -35,3 +35,5 @@ import AImathPPhi2Clean.FiniteLiftGaussianMoment
 import AImathPPhi2Clean.ConcreteGaussianMoment
 import AImathPPhi2Clean.LatticeCovarianceRepresentation
 import AImathPPhi2Clean.NumberedLatticeGaussianMoment
+import AImathPPhi2Clean.PhysicalLatticeGaussianBound
+import AImathPPhi2Clean.PhysicalLatticeSampling

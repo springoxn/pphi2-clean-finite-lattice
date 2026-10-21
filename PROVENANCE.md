@@ -26,13 +26,16 @@ Checked mechanically at export time, against the archive's own per-file hashes:
 | Bucket | Count |
 |---|---|
 | archive entries | 118 |
-| present here, **byte-identical** | 103 |
-| present here, changed (all listed below) | 5 |
+| present here, **byte-identical** | 102 |
+| present here, changed (all listed below) | 6 |
 | excluded (all listed below) | 10 |
+| present here, **not in the archive** (all listed below) | 2 |
 
-The five changed files are `README.md`, `LICENSE`, and the three audit
-scripts; every Lean module, every audit log and the build configuration are
-byte-for-byte the audited ones.
+The six changed files are `README.md`, `LICENSE`, the three audit scripts, and
+the library root `AImathPPhi2Clean.lean`; apart from the root, every Lean module,
+every audit log and the build configuration are byte-for-byte the audited ones.
+The two files that are not in the archive are the post-pin extension, described
+under *Post-pin extension* below.
 
 ### Rewritten or upgraded (2)
 
@@ -78,6 +81,49 @@ each now falls back to the same elan location as before.
 (this file), `verify.py`, and `docs/` (the archived README and the companion
 manuscript).
 
+## Post-pin extension
+
+This repository publishes one step taken **after** the archive was pinned: the
+physical sampling convention and the UV-uniform second-moment bound.  It lives
+outside the audited archive, so it is kept in a separate bucket with its own
+evidence, and the paper it accompanies reports it in a separate section.
+
+| Path | What it is | SHA-256 |
+|---|---|---|
+| `AImathPPhi2Clean/PhysicalLatticeGaussianBound.lean` | the eigenvalue floor `m² ≤ λ_k`, the sampled covariance bound, the numbered form | `098adab81139f267196f6cd057f59c1cd32036112eb1f62116ee044268d79a09` |
+| `AImathPPhi2Clean/PhysicalLatticeSampling.lean` | physical lattice points, Riemann weights, the pushforward measure, the spacing-uniform bound | `956db2c6924cbfaf27c102794170924ca4950d743d50663fa86c198ea19e8e88` |
+
+Both files are the working tree's bytes, copied unchanged.  The library root is
+the one substantive change: the archive's root plus two `import` lines.  The
+working tree imports a third module as well (work in progress, not published
+here), so the published root is the tree's root **minus that one line** — and
+that is why it reproduces, byte-for-byte, the root hash recorded by the evidence
+run:
+
+```
+AImathPPhi2Clean.lean   7f1aeda871be56abbcada56d3e99b78164335765674f0d4cd0ec8de2f37cfd1e
+```
+
+The evidence is shipped, not summarised:
+
+| Path | What it is |
+|---|---|
+| `docs/extension_evidence.log` | a transcript of one run on the build host: toolchain and Mathlib pins, the two module hashes, the root's imports and hash, `lake build` (8880 jobs = the archive's 8878 + one job per module), and the axiom footprint of each of the 14 declarations the two modules introduce |
+| `docs/ext_axioms.lean` | the `#print axioms` query of that run; regenerating it from the two modules reproduces it byte-for-byte |
+
+`python verify.py --ext` checks the part that a published repository can check:
+each module still hashes to what the transcript pinned, the root still imports
+both and still hashes to the root the run built, every declaration of the two
+modules has a report, and every reported footprint is inside the archive's
+allowlist.  It does **not** re-run the build (that needs Mathlib; see the README)
+and it cannot tell you that the statements are the intended ones — that is what
+the manuscript's §11 is for.
+
+A caveat, stated because the transcript is a transcript: Lean's line wrapping
+inside the axiom lists is removed (one line per declaration) and the build's
+warning output is dropped.  No value that the repository or the manuscript prints
+comes from the removed text.
+
 ## Byte-stability across `git`
 
 `.gitattributes` sets `* -text`, so git performs **no end-of-line conversion**.
@@ -92,6 +138,7 @@ They are functions of the sources, not transcriptions:
 
 ```bash
 python verify.py --count    # modules, lines, declarations, theorem-level count
+python verify.py --ext      # the post-pin extension: hashes, coverage, axioms
 ```
 
 The archived numbers that cannot be recomputed from prose — 64 declarations in

@@ -1,0 +1,34 @@
+# POST-DELIVERY EXTENSION EVIDENCE -- transcript of one run on the build host
+#   raw log: /tmp/ext_evidence.log (same run; this file drops Lean's line
+#   wrapping inside axiom lists and the build-warning noise)
+#   regenerate: bash .tmp/run_ext_evidence.sh  (then the compactor)
+date_utc: 2026-10-21T09:34:31Z
+host: localhost.localdomain
+cwd: /home/zhengyj/AImath-lean/AImathPPhi2Clean
+lean_toolchain: leanprover/lean4:v4.34.0-rc2
+lake: Lake version 5.0.0-src+6a10ac8 (Lean version 4.34.0-rc2)
+mathlib_rev: 852d20a84581aeba8527bd01d0be361d8c0e71c0
+query_source_sha256: e3df6592d9ac04b492c2220dcb2d9b87aa248af275850f574e8c4aebd6217ee4
+root_sha256_at_run: 7f1aeda871be56abbcada56d3e99b78164335765674f0d4cd0ec8de2f37cfd1e
+root_imports_added: AImathPPhi2Clean.PhysicalLatticeGaussianBound AImathPPhi2Clean.PhysicalLatticeSampling
+--- source hashes ---
+source_sha256 098adab81139f267196f6cd057f59c1cd32036112eb1f62116ee044268d79a09 AImathPPhi2Clean/PhysicalLatticeGaussianBound.lean
+source_sha256 956db2c6924cbfaf27c102794170924ca4950d743d50663fa86c198ea19e8e88 AImathPPhi2Clean/PhysicalLatticeSampling.lean
+build: Build completed successfully (8880 jobs)
+build_exit: 0
+axiom_exit: 0
+--- axiom footprint, one line per queried declaration ---
+axioms Pphi2Clean.Continuum.latticeCovarianceGJ_sampled_second_moment_le :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.latticePhysicalPoint :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.latticeTestSeminormSq :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.massOperatorMatrix_eigenvalues_ge_mass_sq :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.massOperator_quadratic_lower :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.numberedLatticeGJ_physical_second_moment_le :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalCoordinateEval :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalGJMeasure :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalGJMeasure_fixed_volume_second_moment_le :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalGJMeasure_probability :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalGJMeasure_second_moment_le :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalLatticeSample :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.physicalTestEval :: propext, Classical.choice, Quot.sound
+axioms Pphi2Clean.Continuum.sampled_testSeminormSq_le :: propext, Classical.choice, Quot.sound
