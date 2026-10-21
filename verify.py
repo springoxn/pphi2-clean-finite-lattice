@@ -274,8 +274,9 @@ def check_lean() -> tuple[bool, str]:
             or str(Path.home() / ".elan" / "toolchains"
                    / "leanprover--lean4---v4.34.0-rc2" / "bin" / "lake"))
     if not Path(lake).exists() and not shutil.which(lake):
-        return False, ("no `lake` found: set LAKE, or install the pinned "
-                       "toolchain (see lean-toolchain)")
+        # a missing toolchain is a tool error (exit 2), not a failed assertion
+        raise RuntimeError("no `lake` found: set LAKE, or install the pinned "
+                           "toolchain (see lean-toolchain)")
     env = dict(**__import__("os").environ, LAKE=lake)
     py = shutil.which("python3") or sys.executable
     for script in ("audit/run_firewall.sh", "audit/run_interface_gate.py"):
