@@ -1,0 +1,14 @@
+# Lake build products
+.lake/
+build/
+*.olean
+*.ilean
+*.trace
+*.hash
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

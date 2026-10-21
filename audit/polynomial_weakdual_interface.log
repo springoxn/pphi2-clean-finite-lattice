@@ -1,0 +1,1 @@
+'Pphi2Clean.Continuum.polynomial_weakDual_box_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]

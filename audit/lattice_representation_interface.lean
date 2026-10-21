@@ -1,0 +1,12 @@
+import AImathPPhi2Clean
+#print axioms Pphi2Clean.Continuum.finiteCoefficientInclusion
+#print axioms Pphi2Clean.Continuum.spectralCoefficientEmbedding
+#print axioms Pphi2Clean.Continuum.spectralCovariance_repr
+#print axioms Pphi2Clean.Continuum.spectralCoefficientEmbedding_covariance
+#print axioms Pphi2Clean.Continuum.finiteCoefficientInclusion_inner
+#print axioms Pphi2Clean.Continuum.spectralCoefficientEmbedding_inner
+#print axioms Pphi2Clean.Continuum.latticeCovarianceGJ_upstream_coefficients
+#print axioms Pphi2Clean.Continuum.reindexCovariance
+#print axioms Pphi2Clean.Continuum.reindexCovariance_inner
+#print axioms Pphi2Clean.Continuum.numberedLatticeCovarianceGJ
+#print axioms Pphi2Clean.Continuum.numberedLatticeCovarianceGJ_lift_second_moment

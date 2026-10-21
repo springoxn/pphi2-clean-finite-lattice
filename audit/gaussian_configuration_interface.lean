@@ -1,0 +1,12 @@
+import AImathPPhi2Clean.GaussianConfiguration
+
+#print axioms Pphi2Clean.Continuum.gaussianHilbertSeriesLimit_stronglyMeasurable
+#print axioms Pphi2Clean.Continuum.gaussianHilbertSeriesLimit_eq_tsum_ae
+#print axioms Pphi2Clean.Continuum.gaussianSeriesConfiguration_measurable
+#print axioms Pphi2Clean.Continuum.gaussianWeakDualMeasure_isProbability
+#print axioms Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_eq_tsum_ae
+#print axioms Pphi2Clean.Continuum.gaussianSeriesConfiguration_coeff_summable
+#print axioms Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_series_summable_ae
+#print axioms Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_L2_hasSum_ae
+#print axioms Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_L2_norm_bound
+#print axioms Pphi2Clean.Continuum.gaussianWeakDualMeasure_eval_L2_norm_bound

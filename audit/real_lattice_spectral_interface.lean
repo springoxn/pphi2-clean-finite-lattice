@@ -1,0 +1,11 @@
+import AImathPPhi2Clean
+#print axioms Pphi2Clean.Continuum.finiteFieldConfiguration_eval_single
+#print axioms Pphi2Clean.Continuum.finiteSiteEmbedLift_configuration_eval
+#print axioms Pphi2Clean.Continuum.finiteSiteEmbedLift_gaussian_second_moment
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian_linear_second_moment_eq
+#print axioms Pphi2Clean.UpstreamLattice.massOperator_pos_def
+#print axioms Pphi2Clean.UpstreamLattice.massOperatorMatrix_eigenvalues_pos
+#print axioms Pphi2Clean.Continuum.latticeCovariance
+#print axioms Pphi2Clean.Continuum.latticeCovariance_inner
+#print axioms Pphi2Clean.Continuum.latticeCovarianceGJ
+#print axioms Pphi2Clean.Continuum.latticeCovarianceGJ_inner

@@ -1,0 +1,96 @@
+'Pphi2Clean.Continuum.finiteSiteEmbedLift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.SpectralCovarianceData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCovariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCovariance_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCovarianceGJ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCovarianceGJ_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.FinLatticeSites' does not depend on any axioms
+'Pphi2Clean.UpstreamLattice.InfLatticeSites' does not depend on any axioms
+'Pphi2Clean.UpstreamLattice.FinLatticeField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.finLatticeDelta' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.finiteLaplacianFun' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.finiteLaplacianLM' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.finiteLaplacian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.finiteLaplacian_selfAdjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.finiteLaplacian_neg_semidefinite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator_pos_def' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperatorEntry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperatorMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator_selfAdjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperatorMatrix_isHermitian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massMatrixHerm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massEigenvalues' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massEigenvectorBasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator_eq_matrix_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator_eigenCoeff_eq_eigenvalues_mul_eigenCoeff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.UpstreamLattice.massEigenbasis_sum_mul_sum_eq_site_inner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator_quadratic_eq_spectral' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperatorMatrix_eigenvalues_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.UpstreamLattice.spectralData' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovariance_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_linear_second_moment_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_linear_second_moment_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.finiteFieldConfiguration' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.finiteSiteEmbedLift_gaussian_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.covarianceConfiguration' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.covarianceConfiguration_second_moment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.covarianceConfiguration_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.covarianceConfiguration_covariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.finiteSiteEmbedLift_eval_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_gaussian_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_lift_second_moment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.covarianceConfiguration_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_covariance_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_pushforward_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.finiteSiteEmbedLift_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_pushforward_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.finiteCoefficientInclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCoefficientEmbedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCovariance_repr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCoefficientEmbedding_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.finiteCoefficientInclusion_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCoefficientEmbedding_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_upstream_coefficients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.reindexCovariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.reindexCovariance_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.numberedLatticeCovarianceGJ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.numberedLatticeCovarianceGJ_lift_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

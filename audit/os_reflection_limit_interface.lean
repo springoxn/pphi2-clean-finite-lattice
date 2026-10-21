@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.OSReflectionLimit
+#print axioms Pphi2Clean.OS.rp_closed_under_weak_limit

@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.PolynomialMomentTightness
+#print axioms Pphi2Clean.Continuum.polynomial_tail_budget
+#print axioms Pphi2Clean.Continuum.weakDual_compact_containment_of_polynomial_moments

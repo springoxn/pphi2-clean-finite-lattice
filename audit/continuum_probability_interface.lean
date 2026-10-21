@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.ContinuumProbability
+#print axioms Pphi2Clean.Continuum.map_preserves_probability

@@ -1,0 +1,24 @@
+'Pphi2Clean.Continuum.gaussianHilbertSeriesLimit_stronglyMeasurable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.gaussianHilbertSeriesLimit_eq_tsum_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.gaussianSeriesConfiguration_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.gaussianWeakDualMeasure_isProbability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_eq_tsum_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.gaussianSeriesConfiguration_coeff_summable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_series_summable_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_L2_hasSum_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_L2_norm_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.gaussianWeakDualMeasure_eval_L2_norm_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

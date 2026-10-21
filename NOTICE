@@ -1,0 +1,28 @@
+pphi2-clean-finite-lattice
+Copyright 2026 The AImath Project
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes definitions adapted from GaussianField:
+
+  GaussianField
+  Copyright 2026 Michael R. Douglas
+  https://github.com/mrdouglasny/GaussianField
+  commit d63a28568a75d99f6cb27af1f888a49a69855a66
+  Licensed under the Apache License, Version 2.0
+
+The adapted definitions are the finite-lattice site, Laplacian, mass-operator
+and spectral-covariance definitions in
+AImathPPhi2Clean/ConcreteLatticeOperator.lean.  Their correspondence with the
+pinned upstream commit is checked, file by file and body by body, by
+audit/check_upstream_finite_definitions.py (with two deliberate-corruption
+negative controls that the check must reject).  That check is a textual
+provenance test; it is not a proof, and the Lean theorems in this repository
+stand on their own proofs.
+
+The remaining modules are original to this project, except where a file header
+says otherwise (the Wick, layer-cake, tightness and reconstruction modules name
+their upstream sources in their headers).
+
+Mathlib and Lean 4 are used, but not vendored, under their own licenses:
+  https://github.com/leanprover-community/mathlib4  (Apache-2.0)
+  https://github.com/leanprover/lean4               (Apache-2.0)

@@ -1,0 +1,3 @@
+'Wick.wick_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Polynomial.derivative_hermite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'WickBridge.wick_eq_hermite' depends on axioms: [propext, Classical.choice, Quot.sound]

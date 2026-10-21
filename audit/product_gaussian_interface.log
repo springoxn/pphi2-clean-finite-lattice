@@ -1,0 +1,11 @@
+'Pphi2Clean.LatticeGaussian.SpatialField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_isProbability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_coordinate_map' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_coordinate_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.LatticeGaussian.gaussianReal_integral_sq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_coordinate_second_moment_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

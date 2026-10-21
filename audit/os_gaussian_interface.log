@@ -1,0 +1,1 @@
+'Pphi2Clean.OS.gaussian_transfer_isPositivityImproving' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,4 @@
+'Pphi2Clean.Continuum.inverseSquare_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.weighted_coefficient_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.weighted_coefficients_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.weighted_coefficients_tsum_le' depends on axioms: [propext, Classical.choice, Quot.sound]

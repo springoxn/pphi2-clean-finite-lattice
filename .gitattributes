@@ -1,0 +1,4 @@
+# Keep every byte exactly as audited: no end-of-line conversion, no filters.
+# A silent CRLF/LF rewrite would invalidate MANIFEST.sha256 on a fresh clone
+# while leaving every file visually identical.
+* -text

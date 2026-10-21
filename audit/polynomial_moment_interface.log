@@ -1,0 +1,4 @@
+'Pphi2Clean.Continuum.polynomial_tail_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.weakDual_compact_containment_of_polynomial_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

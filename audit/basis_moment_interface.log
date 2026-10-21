@@ -1,0 +1,1 @@
+'Pphi2Clean.Continuum.basis_moment_bound_of_seminorm_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

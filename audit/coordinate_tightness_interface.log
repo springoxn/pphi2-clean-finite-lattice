@@ -1,0 +1,9 @@
+'Pphi2Clean.Continuum.observableBox' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.observableBox_compl_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.sequence_observableBox_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.sequence_compact_containment_of_tail_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.sequence_compact_containment_of_second_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
