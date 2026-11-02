@@ -172,3 +172,11 @@ constructed fixed-volume finite-source sequence on the weighted Fourier
 $H^{-3}$ carrier. It does not claim an unconditional physical total-carrier
 lift or an interacting-field limit. Author and affiliation placeholders are
 intentionally retained.
+
+The README homepage embeds `docs/figures/lean_atlas_en_portrait.png`, copied from
+the generated English portrait atlas. Its SHA-256 is
+`89fef234080850693e1cd042d367c01865c457c38ea59cb1be4fbe1d537982aa`; the source
+snapshot recorded by the AImath figure manifest has SHA-256
+`0656fb124522bbf0e3d2e740e25976c97ab45bccf5715e67cde2d1f012443d12`. The image
+shows the wider AImath Lean development, not just this standalone repository's
+modules.

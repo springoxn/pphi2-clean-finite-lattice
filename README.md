@@ -1,5 +1,9 @@
 # pphi2-clean-finite-lattice
 
+![English portrait dependency atlas of the AImath Lean development](docs/figures/lean_atlas_en_portrait.png)
+
+*The atlas depicts the wider AImath Lean development, not only the modules in this standalone repository.*
+
 A self-contained Lean 4 development of the **finite periodic-lattice Gaussian
 covariance** and a fixed-physical-volume weak-limit theorem for the periodic
 free field, forming the base layer of constructive constructions of
