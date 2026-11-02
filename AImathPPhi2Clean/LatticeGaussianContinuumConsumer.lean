@@ -46,12 +46,13 @@ structure LatticeGaussianUniformData
   latticeEmbedLift : ι → Ω → WeakDual ℝ E
   lattice_eval : ι → E → Ω → ℝ
   bound : ℝ
+  testSeminorm : Seminorm ℝ E
   embed_measurable : ∀ i, Measurable (latticeEmbedLift i)
   embed_eval_ae : ∀ i f, ∀ᵐ ω ∂latticeGaussianMeasure i,
     latticeEmbedLift i ω f = lattice_eval i f ω
   source_L2_bound : ∀ i f,
     (eLpNorm (lattice_eval i f) (2 : ENNReal)
-      (latticeGaussianMeasure i)).toReal ≤ bound
+      (latticeGaussianMeasure i)).toReal ≤ bound * testSeminorm f
 
 
 /-- A finite lattice field used by the concrete embedding layer.
@@ -392,12 +393,13 @@ theorem latticeCovarianceGJ_uniform_data_eval_L2_norm_le
     [IsTopologicalAddGroup E]
     (D : LatticeGaussianUniformData (ι := ι) (Ω := Ω) (E := E)) (f : E) :
     ∀ i, (eLpNorm (fun ω : WeakDual ℝ E => ω f) (2 : ENNReal)
-      (Measure.map (D.latticeEmbedLift i) (D.latticeGaussianMeasure i))).toReal ≤ D.bound := by
+      (Measure.map (D.latticeEmbedLift i) (D.latticeGaussianMeasure i))).toReal ≤
+      D.bound * D.testSeminorm f := by
   intro i
   exact latticeCovarianceGJ_pushforward_eval_L2_norm_le
     (D.latticeGaussianMeasure i) (D.latticeEmbedLift i) (D.embed_measurable i)
-    f (D.lattice_eval i f) (D.embed_eval_ae i f) D.bound
-    (D.source_L2_bound i f)
+    f (D.lattice_eval i f) (D.embed_eval_ae i f)
+    (D.bound * D.testSeminorm f) (D.source_L2_bound i f)
 
 /-- Uniform version for a family of lattice approximations.  It is the direct
 consumer shape for a uniform `latticeCovarianceGJ` covariance estimate. -/

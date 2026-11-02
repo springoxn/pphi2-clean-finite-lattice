@@ -1,0 +1,14 @@
+\section{Finite Fourier convergence and the target law}
+\label{sec:marginals}
+
+Fix a finite mode list $K$. The finite-source lift sends its paired cosine and sine evaluations to the weighted complex coordinate vector $\mathrm{C}_K$. Before complexification, these evaluations form a centered finite-dimensional Gaussian vector. Its covariance entries are the corresponding finite-lattice covariance pairings.
+
+For each fixed periodic test function, the finite-volume lattice covariance converges to the physical periodic-resolvent pairing $\mathcal{R}_{L,M}$. At the Fourier level, the limiting denominator at mode $k$ is
+\[
+  M^2+\left(\frac{2\pi}{L}\right)^2|k|^2,
+\]
+which is exactly the mass symbol used in the formalized resolvent. The finite-family convergence theorem applies entrywise to the covariance matrix and proves weak convergence of the real Gaussian evaluation law to $G_K$. This argument includes degenerate covariance matrices and does not require a nonsingular density.
+
+The continuous reassembly map $\Psi_K$ multiplies the cosine--sine pair by $\sqrt{w_3(k_j)}$ and forms the complex coefficient. By the continuous mapping theorem, the pushed-forward finite-coordinate law converges to $(\Psi_K)_{\#}G_K$. Since $K$ was arbitrary, this proves the finite-cylinder convergence needed for the infinite-dimensional argument.
+
+No additional universal test-function convergence assumption is inserted at this step: the required cosine/sine family is constructed from the requested mode list, and the covariance limit is proved for that concrete family. The target is specified by the physical resolvent pairing and its Lean-defined mass symbol; no unstated prefactor or Fourier convention is used.

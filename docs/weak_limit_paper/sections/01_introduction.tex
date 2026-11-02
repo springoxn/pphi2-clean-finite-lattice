@@ -1,0 +1,15 @@
+\section{The question and the proof strategy}
+
+A finite-dimensional Gaussian law at each mesh size does not by itself produce a probability law on an infinite-dimensional function space. Nor does convergence of every fixed finite collection of Fourier coefficients, on its own, imply weak convergence of the full laws. The fixed-volume limit therefore has two logically separate obligations: compactness of the sequence as measures on one specified carrier, and identification of every possible limit on a class of sets rich enough to determine a Borel measure.
+
+We address the implication
+\[
+  \mu_n \Longrightarrow \mu_{\mathrm{free}}
+\]
+for a particular two-dimensional periodic lattice sequence, with every object in the statement tied to the formal source. The source fixes $N_n=n+1$ sites per coordinate and spacing $a_n=L/N_n$, so the physical period is exactly $L$ at every stage. Each $\mu_n$ is the pushforward of a finite-source Gaussian configuration law by the explicit weighted Fourier lift into a complete weighted $\ell^2$ space.
+
+The proof has a compactness half and an identification half. A uniform second-moment estimate in the weaker $H^{-2}$ weight, together with compact inclusion into the $H^{-3}$ carrier, gives tightness. Prokhorov's theorem then supplies limits along further subsequences. In parallel, the finite-dimensional covariance matrices converge to those of the periodic massive resolvent, so every finite weighted Fourier cylinder of every extracted limit has the same Gaussian law. Since the carrier is separable and its finite-coordinate cylinders generate its Borel sigma-algebra, these marginals determine the limit measure. The subsequence criterion then yields convergence of the whole sequence. Figure~\ref{fig:proof-spine} summarizes this dependency chain; it is explanatory, while the Lean declarations in Appendix~\ref{app:formal-evidence} are the formal evidence.
+
+The construction is deliberately not reduced to a compatible family of finite-dimensional distributions. Prokhorov extraction constructs a probability measure on the carrier first; the cylinder argument subsequently identifies it. This ordering is what closes the implication from $\mu_n$ to an actual $\mu_{\mathrm{free}}$.
+
+The background compactness and subsequence principles are standard; see, for example, Billingsley~\cite{billingsley}. Our contribution here is the assembled, source-specific theorem with its concrete sequence, moment estimate, covariance limit, carrier topology, and measure-uniqueness step all connected in the Lean development. We make no priority claim.

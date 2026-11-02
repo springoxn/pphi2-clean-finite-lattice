@@ -1,0 +1,53 @@
+\section{Carrier and main theorem}
+\label{sec:theorem}
+
+Let $\mathbb{Z}^{2}$ index Fourier modes. Define
+\[
+ w_3(0)=1,\qquad w_3(k)=|k|^{-6}\quad(k\ne 0).
+\]
+Set $\Hthree=\ell^2(\mathbb{Z}^{2},\mathbb{C})$ in stored coordinates $x(k)=\sqrt{w_3(k)}c(k)$; equivalently, raw Fourier coefficients $c$ have squared norm $\sum_k w_3(k)|c(k)|^2$. The complex carrier is the weighted completion used in Lean and is not restricted by an additional conjugate-symmetry condition. The finite Fourier coordinate map for a mode list $K=(k_1,\ldots,k_r)$ is
+\[
+  \mathrm{C}_K(x)=(x(k_1),\ldots,x(k_r))\in\mathbb{C}^{r}.
+\]
+Each coordinate map is continuous.
+
+For each $n\in\mathbb{N}$ set $N_n=n+1$ and $a_n=L/N_n$. Let $\gamma_n^{L,M}$ denote the finite-dimensional centered Gaussian configuration probability measure with the source's numbered periodic lattice covariance, and let $J_n^{L,M}$ be the explicit finite-source Fourier lift into the weighted coordinates. The sequence studied here is
+\[
+  \mu_n^{L,M}=(J_n^{L,M})_{\#}\gamma_n^{L,M}
+  \in\Pmeas(\Hthree).
+\]
+In particular, it is a finite-source pushforward, not a law defined from the separate physical-Gaussian total-carrier representative.
+
+For a finite mode list $K$, let $f_{j,0}$ and $f_{j,1}$ be the real cosine and sine test functions specified by the formal development for mode $k_j$. Define the real covariance matrix
+\[
+  (\Sigma_K)_{(j,s),(\ell,t)}
+  =\RePart\,\mathcal{R}_{L,M}(f_{j,s},f_{\ell,t}),
+  \qquad s,t\in\{0,1\},
+\]
+where $\mathcal{R}_{L,M}$ is the physical-volume pairing with the weak solution of the massive periodic equation. Its Fourier mass symbol is
+\[
+  \lambda_{L,M}(k)=M^2+\left(\frac{2\pi}{L}\right)^2|k|^2.
+\]
+This definition fixes the physical $L^2$ pairing and avoids an independent Fourier-normalization convention. Let $G_K$ be the centered real Gaussian probability measure on $\mathbb{R}^{2r}$ with covariance $\Sigma_K$, including the possibly degenerate case. Define
+\[
+  \Psi_K(y)_j=\sqrt{w_3(k_j)}\bigl(y_{j,0}+i y_{j,1}\bigr),
+  \qquad y\in\mathbb{R}^{2r}.
+\]
+
+\begin{theorem}[Fixed-volume weak limit and Fourier marginals]
+\label{thm:main}
+For every $L>0$ and $M>0$, there exists a Borel probability measure
+$\mu_{\mathrm{free}}^{L,M}\in\Pmeas(\Hthree)$ such that
+\[
+  \mu_n^{L,M}\Longrightarrow\mu_{\mathrm{free}}^{L,M}
+  \quad\text{as }n\to\infty.
+\]
+Moreover, for every finite mode list $K$,
+\[
+  (\mathrm{C}_K)_{\#}\mu_{\mathrm{free}}^{L,M}
+  =(\Psi_K)_{\#}G_K.
+\]
+These finite weighted Fourier marginals determine $\mu_{\mathrm{free}}^{L,M}$ uniquely among Borel probability measures on $\Hthree$.
+\end{theorem}
+
+Here weak convergence is the probability-measure topology on the Polish carrier, equivalently convergence against bounded continuous real test functions. The assembled theorem and its declaration are documented in Appendix~\ref{app:formal-evidence}.

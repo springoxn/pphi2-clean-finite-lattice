@@ -1,0 +1,17 @@
+\section{Formal evidence and reproducibility}
+\label{app:formal-evidence}
+
+The proof is assembled in the public Lean package \url{AImathPPhi2Clean/}, using toolchain \url{v4.34.0-rc2}. The formal development uses Lean 4 and the community mathematical library~\cite{demoura2021,mathlib2020}. The repository's \url{MANIFEST.sha256} binds the published files byte-for-byte. The principal theorem is declared in \url{AImathPPhi2Clean/PeriodicHMinusThreeWeakLimitMarginal.lean}. The following list identifies the role of each proof stage.
+
+\begin{description}
+\item[Sequence.] The construction gives the finite Gaussian pushforward. Its lattice size is $N=n+1$, with spacing $a=L/(n+1)$.
+\item[Tightness.] A uniform trace bound controls the negative-order-two energy. Compact inclusion into the negative-order-three carrier and Markov's inequality yield tightness.
+\item[Extraction.] The carrier is separable and complete; Prokhorov's theorem gives a Borel subsequential limit.
+\item[Marginals.] Covariance convergence identifies each finite weighted Fourier marginal with the periodic-resolvent Gaussian, including degenerate cases.
+\item[Uniqueness.] Finite-coordinate cylinders generate the carrier Borel sigma-algebra. Thus the marginals determine the measure.
+\item[Conclusion.] Uniqueness makes all subsequential limits equal; hence the sequence converges, proving Theorem~\ref{thm:main}.
+\end{description}
+
+The separate total-carrier lift is not a premise of the assembled theorem: it requires a named measurability and representative-agreement input, as stated in Section~\ref{sec:scope}.
+
+Figure~\ref{fig:proof-spine} was rendered with Matplotlib~\cite{hunter2007}. Procedural visualization guidance used during figure preparation is cited for workflow provenance only, not as evidence for any mathematical claim~\cite{kassis2026}.

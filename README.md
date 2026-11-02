@@ -1,7 +1,8 @@
 # pphi2-clean-finite-lattice
 
 A self-contained Lean 4 development of the **finite periodic-lattice Gaussian
-covariance**, the base layer of every constructive construction of
+covariance** and a fixed-physical-volume weak-limit theorem for the periodic
+free field, forming the base layer of constructive constructions of
 $P(\varphi)_2$.  The covariance is not postulated from a spectral
 representation: it is built from the concrete operator
 $Q=-\Delta_a+m^2$ on $(\mathbb{Z}/N\mathbb{Z})^d$, whose self-adjointness,
@@ -28,10 +29,12 @@ injected.
 | Representation | an explicit coefficient embedding into $\ell^2(\mathbb{N})$ is an isometry, and under it the factor equals the upstream spectral coefficient formula |
 | Interface | the lift to an arbitrary test space is continuous and measurable, equals evaluation on the induced test field, and transports $L^2$ bounds uniformly over a family |
 
-Numbers (recomputed from the sources, never typed by hand): 34 modules,
-3701 lines, 211 declarations of which 149 are theorem-level, 64 declarations in
-the axiom report, 27 per-module interface certificates, 8878 build jobs in the
-archived log.  `PROVENANCE.md` says how each number is obtained.
+Current source-derived totals (recomputed by `python verify.py --count`): 80 core
+modules, 12606 lines, 752 declarations (554 theorem-level); including the two
+post-pin sampling modules, the package totals 82 modules and 766 declarations.
+The axiom-report query count (64), per-module interface certificates (27), and
+build-job count (8878) belong to the pinned archive evidence and are not counts
+of this newer weak-limit extension. `PROVENANCE.md` separates these layers.
 
 ## One step beyond the pinned archive
 
@@ -45,24 +48,47 @@ bound**.
 | Sampled covariance | $\langle T_{\mathrm{GJ}}\varphi_f,T_{\mathrm{GJ}}\varphi_f\rangle\le m^{-2}\lVert f\rVert_{a,N}^2$ for the Riemann sample $\varphi_f=a^d(f(ax))_{x\in\Lambda}$ |
 | Spacing-uniform bound | at fixed physical volume $L=aN$, $\int(\omega f)^2\,\mathrm{d}\mu_{a,N}\le m^{-2}L^d\lVert f\rVert_\infty^2$ — the constant sees neither $a$ nor $N$ |
 
-That is a bound, not a limit: no tightness, no convergence of measures, no
-moments beyond the second, no interacting measure.  The two modules introduce 14
-declarations (279 lines), all with a footprint inside the same allowlist, and
-they are **not** in the audited archive — so they carry their own evidence in
-`docs/extension_evidence.log`, a transcript of a build and axiom run on the build
-host, which `python verify.py --ext` re-binds to the bytes here (module hashes,
-the root's imports, coverage of all 14 declarations, allowlist containment).  The
-companion manuscript's §11 states the results and their scope.
+This bound alone is not a weak-limit theorem. The stronger result now published
+here is the finite-source whole-sequence convergence theorem below; the earlier
+sampling bound remains a distinct ingredient in the package.
+
+## Fixed-volume weak limit
+
+For a positive period $L$ and mass $m$, the package constructs finite periodic
+lattice Gaussian laws $\mu_n$ with lattice size $N=n+1$ and spacing
+$a=L/(n+1)$, and proves their weak convergence on a concrete weighted Fourier
+$H^{-3}$ probability carrier. The theorem combines the uniform $H^{-2}$ energy
+moment, compact sublevels in $H^{-3}$, tightness and Prokhorov extraction,
+convergence of every finite Fourier cylinder to the periodic massive-resolvent
+Gaussian marginal, Borel generation by cylinders, and measure uniqueness. The
+identified limit is an actual Borel probability measure, denoted
+$\mu_{\mathrm{free}}$ in the companion manuscript.
+
+The public Lean entry point is `AImathPPhi2Clean.FixedVolumeWeakLimit`; build it
+with:
+
+```bash
+lake build AImathPPhi2Clean.FixedVolumeWeakLimit
+```
+
+The main declaration is
+`periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders`.
+The formal source is in `AImathPPhi2Clean/PeriodicHMinusThreeWeakLimitMarginal.lean`
+and its transitive project imports are included in this repository. The
+manuscript PDF and modular LaTeX source are in `docs/weak_limit_paper/`.
+
+This theorem concerns the constructed finite-source sequence. It does not
+promote the separate conditional physical total-carrier lift to an unconditional
+claim, and it does not assert an interacting-field limit.
 
 ## What is *not* claimed
 
-This is a **free**, **finite-volume**, **lattice** object.  The repository
-asserts nothing about a continuum limit $a\to0$, an infinite-volume limit
-$N\to\infty$, exponential clustering, an interacting measure, or
-Osterwalder--Schrader reconstruction; and it does not identify this finite
-pushforward law with any infinite-noise Gaussian implementation.  The gates
-below are equally explicit about what a machine check cannot establish: it
-cannot tell you that a formal statement is the intended one.
+This remains a **free**, **fixed finite physical-volume** result. It is not an
+infinite-volume limit, does not construct an interacting measure, and does not
+prove Osterwalder--Schrader reconstruction. The theorem's source and scope are
+explicit in the Lean declaration and companion manuscript. The gates below are
+equally explicit about what a machine check cannot establish: it cannot tell you
+that a formal statement is the intended one.
 
 ## Layout
 
@@ -99,6 +125,7 @@ Toolchain and dependency are pinned:
 
 ```bash
 lake build AImathPPhi2Clean
+lake build AImathPPhi2Clean.FixedVolumeWeakLimit
 ```
 
 Mathlib is a git dependency; the first build fetches and compiles it, which

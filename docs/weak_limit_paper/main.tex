@@ -1,0 +1,39 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\renewcommand{\sfdefault}{\rmdefault}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\Law}{Law}
+\DeclareMathOperator{\RePart}{Re}
+\newcommand{\Torus}{\mathbb{T}^{2}_{L}}
+\newcommand{\Hthree}{H^{-3}_{\mathrm{Fourier}}}
+\newcommand{\Htwo}{H^{-2}_{\mathrm{Fourier}}}
+\newcommand{\Pmeas}{\mathcal{P}}
+
+\title[Fixed-volume weak convergence]{Whole-Sequence Weak Convergence of Fixed-Volume Lattice Free Fields on a Periodic $H^{-3}$ Carrier}
+% AUTHOR_INPUT_NEEDED: supply author names and affiliations before submission.
+\date{}
+
+\begin{document}
+\begin{abstract}
+We prove whole-sequence weak convergence of the concrete fixed-volume periodic lattice free-field laws on a weighted Fourier carrier of negative Sobolev order three. For a positive period and positive mass, the nth law is the pushforward of a finite-dimensional Gaussian measure with lattice size equal to n plus one and spacing equal to the period divided by that size. A uniform negative-order-two energy moment yields tightness in the negative-order-three carrier; fixed-volume covariance convergence identifies every finite weighted Fourier marginal with the periodic massive-resolvent Gaussian law. Separability, Prokhorov extraction, Borel generation by finite-coordinate cylinders, and measure uniqueness identify every subsequential limit and imply convergence of the entire sequence to an actual Borel probability measure. The proof is formalized in Lean in the project's dedicated Pphi2 clean package. We distinguish this finite-source sequence from a separate physical-lattice total-carrier pushforward that still requires a named lift input.
+\end{abstract}
+\maketitle
+
+\input{sections/01_introduction}
+\input{sections/02_carrier_and_theorem}
+\input{sections/03_tightness}
+\input{sections/04_finite_marginals}
+\input{sections/05_identification}
+\input{sections/06_scope}
+\appendix
+\input{sections/07_formal_evidence}
+\input{sections/08_references}
+\end{document}

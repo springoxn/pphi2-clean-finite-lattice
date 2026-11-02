@@ -147,3 +147,28 @@ the axiom report, 27 interface certificates, 8878 build jobs — are read by tha
 command from `audit/finite_lattice_all_declarations_interface.lean`,
 `audit/*_interface.lean` and `audit/finite_lattice_build.log` respectively, so
 the README figures are reproducible from this repository alone.
+
+## Fixed-volume weak-limit extension
+
+This release adds the formalized finite-source weak-limit theorem and its
+companion manuscript. The theorem sources are copied byte-for-byte from the
+AImath local Lean source package at release time. The public wrapper
+`AImathPPhi2Clean/FixedVolumeWeakLimit.lean` imports the final theorem module
+without changing `AImathPPhi2Clean.lean`; preserving that earlier root keeps the
+post-pin extension transcript independently checkable by `verify.py --ext`.
+
+The wrapper's transitive project import closure is included under
+`AImathPPhi2Clean/`. `MANIFEST.sha256` checks every published file after clone,
+including the added Lean modules and paper files. The command
+`lake build AImathPPhi2Clean.FixedVolumeWeakLimit` is the reproducible typecheck
+entry point when the pinned Lean toolchain and Mathlib dependencies are
+available. The existing `verify.py --ext` check continues to validate only the
+separate physical-sampling extension; it is not presented as an axiom audit of
+the newly added weak-limit declarations.
+
+The companion manuscript source, generated proof-spine figure, and compiled
+PDF are in `docs/weak_limit_paper/`. The paper's result is limited to the
+constructed fixed-volume finite-source sequence on the weighted Fourier
+$H^{-3}$ carrier. It does not claim an unconditional physical total-carrier
+lift or an interacting-field limit. Author and affiliation placeholders are
+intentionally retained.

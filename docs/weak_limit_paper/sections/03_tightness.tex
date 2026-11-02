@@ -1,0 +1,27 @@
+\section{Uniform moment control and tightness}
+\label{sec:tightness}
+
+The H$^{-2}$ weight used for the moment estimate is
+\[
+ w_2(0)=1,\qquad w_2(k)=|k|^{-4}\quad(k\ne0).
+\]
+In two dimensions, $\sum_{k\ne0}|k|^{-4}$ is finite. The source proves the explicit fixed-volume trace bound
+\begin{align}
+ \int_{\Hthree} E_{-2}(x)\,d\mu_n^{L,M}(x)&\le C_{L,M},
+ \label{eq:trace-bound}\\
+ C_{L,M}&:=M^{-2}L^2\left(1+2\sum_{k\in\mathbb{Z}^2\setminus\{0\}}|k|^{-4}\right)\\
+       &<\infty,\qquad n\in\mathbb{N}.
+\end{align}
+where $E_{-2}$ is the extended H$^{-2}$ energy on the H$^{-3}$ carrier. The zero mode contributes the separate $M^{-2}L^2$ term. This bound is proved for the actual pushforward probability measures $\mu_n^{L,M}$, not just for a formal covariance trace.
+
+For $R>0$, consider the H$^{-2}$ energy sublevel
+\[
+  K_R=\{x\in\Hthree:E_{-2}(x)\le R^2\}.
+\]
+The weighted inclusion from H$^{-2}$ to H$^{-3}$ is compact: on nonzero modes the ratio of squared weights is $w_3(k)/w_2(k)=|k|^{-2}$, which tends to zero as $|k|\to\infty$; the zero mode is finite-dimensional. The formal development proves compactness of the relevant closed sublevels in the concrete completion. Measurability of the energy and Markov's inequality applied to \eqref{eq:trace-bound} give
+\[
+  \sup_n\mu_n^{L,M}(K_R^c)\le \frac{C_{L,M}}{R^2}.
+\]
+Thus, given any $\varepsilon>0$, a sufficiently large $R$ gives one compact set carrying at least $1-\varepsilon$ of every measure. The family is tight.
+
+The carrier is complete by construction and separable by density of finite-coordinate truncations. It is therefore Polish, so Prokhorov's theorem applies. From every subsequence of $(\mu_n^{L,M})$ one can extract a further subsequence converging weakly to a Borel probability measure on the same carrier~\cite{billingsley}. The extracted measure is not postulated: it is the actual limit delivered by this compactness step.
