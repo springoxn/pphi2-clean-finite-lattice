@@ -129,12 +129,19 @@ representation behind \cref{lem:resolvent}, the Prokhorov extraction of
 \cref{ext:prokhorov}, the convergence of Gaussian laws with convergent
 covariance matrices in \cref{thm:finite-family}, and the definition of weak
 convergence on a metric space in \cref{rem:topology} -- and each is cited at that
-point rather than here.  The remaining eight support nothing: they are cited
+point rather than here.  The remaining nine support nothing: they are cited
 for position, and each of the following relations is a position, not a
-dependency.  Seven of them are named below; the eighth, \cite{gjs1974}, is
+dependency --- with one exception, the first bullet, which is the closest
+published relative of the convergence statement and is compared in its own
+paragraph below.  Eight of them are named below; the ninth, \cite{gjs1974}, is
 named among the exclusions above.
 
 \begin{itemize}
+\item \cite{cipriani2020} prove that the scaling limit of the discrete Gaussian
+  free field on a random graph approximating a compact Riemannian manifold is
+  the manifold continuum Gaussian free field, in law and in the strong Sobolev
+  topology after a Voronoi tessellation.  It is the closest published relative
+  of the convergence statement here, and it is compared below.
 \item \cite{ossier1973,ossier1975} state the axioms: the properties
   (analyticity, reflection positivity, Euclidean invariance, clustering and
   regularity) that a Euclidean measure must satisfy before reconstruction can
@@ -156,14 +163,32 @@ named among the exclusions above.
   the only extraction principle used.
 \end{itemize}
 
-Nothing above is a statement about priority.  The claim this paper makes about
-its own result is structural, and each of its four parts is checked against the
-text rather than against a comparison: the carrier is explicit
-(\cref{def:carrier-hminus3}); the tightness is a single second moment of the norm
-(\cref{thm:uniform-moment}); the limit is of the whole sequence and not of a
-subsequence (\cref{thm:main}(i)); and the statements are formalised
-(\cref{sec:lean-overview}).  Whether a comparable statement exists elsewhere,
-and how it would compare if it did, is not established by anything here.
+The comparison that matters is with \cite{cipriani2020}, because both papers
+take a discrete Gaussian field to its continuum counterpart in a Sobolev
+topology, and both do it by pushing the discrete object into a function space.
+Four differences, each of which states what this paper does and none of which
+states anything about theirs.  \emph{Model:} they use a random graph, because a
+compact manifold has no canonical grid; here the index set is the deterministic
+periodic square lattice at fixed physical volume $aN=L$, and the operator is the
+massive $-\Delta_a+m^2$ with the Glimm--Jaffe normalisation of
+\cref{def:gj-measure}.  \emph{Identification of the limit:} they identify their
+limit as the continuum Gaussian free field on the manifold; here the limit is
+identified by its finite Fourier marginals and by nothing else
+(\cref{thm:cylinder-uniqueness}), so no density against a reference Gaussian is
+ever constructed.  \emph{Topology and mode of convergence:} theirs is
+convergence in law in the strong Sobolev topology; here it is weak convergence of
+Borel probability measures on the carrier, and of the whole sequence rather than
+of a subsequence (\cref{thm:main}(i), \cref{cor:uniqueness}).  \emph{Evidence:}
+Part~II of this paper is a machine-checked counterpart of its own statement, at
+the resolution \cref{sec:lean-boundary} records.
+
+In short, what this paper adds is the fixed-volume massive lattice covariance
+limit, a carrier constructed without Minlos (\cref{sec:carrier}), a
+whole-sequence tightness-to-uniqueness chain, and a formal counterpart of the
+same statement.  Nothing above is a statement about priority: whether a
+comparable theorem exists elsewhere is no longer left as a gesture, since the
+closest one is cited and compared, but a claim of priority would need a search
+this paper has not done and does not make.
 
 Part~II reports the machine-checked layer of the paper: \NumChainTheorems{}
 declarations, from the covariance limit through the whole-sequence limit, with

@@ -1,14 +1,28 @@
 # Figure provenance
 
-Assets in this directory are **copies of rendered artefacts produced by the
-project's own tooling**. No image was edited, cropped, recompressed or
-re-rendered for this paper: each file below is byte-identical to its source.
-Nothing here was drawn from a third-party publication.
+One asset here is **generated from source in this paper's own directory**, so
+it reproduces rather than copies; the other is a **byte-identical copy** of a
+rendered artefact of the project's tooling. No third-party artwork is used, and
+no image was cropped or recompressed.
 
 | Asset | Source path (workspace root) | sha256 | Pixels (W x H) | How produced |
 |---|---|---|---|---|
-| `weak_limit_spine.png` | `paper/PPHI2_FIXED_VOLUME_WEAK_LIMIT/figures/weak_limit_spine.png` | `715ac60e83c56954699e799c3cf88669b7fd61e7fea4dbfbd154e449755ab17d` | 3240 x 2002 | Rendered artwork of the project's weakness-limit / spine diagram family, checked in with the sibling weak-limit manuscript's figure set. Consumed by `figures/fig_spine.tex`. |
+| `weak_limit_spine.png` | generated here: `figures/generate_spine.py` | `36600f4bf506b12ea430e4de24be5cb568b220b03b6468ce73b9277dc2205fe7` | 3240 x 2002 | Drawn by the vendored generator (matplotlib, 450 dpi, 7.2 x 4.45 in) from the eight-step layout of `sec:main`. The generator writes `figures/generated/` and copies the PNG over this file, so figure and caption cannot drift apart. Consumed by `figures/fig_spine.tex`. |
 | `lean_atlas_en_portrait.png` | `frontend/lean_nodes/dist/figures/lean_atlas_en_portrait.png` | `89fef234080850693e1cd042d367c01865c457c38ea59cb1be4fbe1d537982aa` | 2111 x 3277 | Output of the project's `frontend/lean_nodes` graph-render pipeline: the node/edge graph is rendered to vector SVG and rasterised, so each PNG in `dist/figures/` has a matching `.svg` sibling and is registered in `dist/figures/figures_manifest.json`. This is the English, portrait-orientation variant. Consumed by `figures/fig_atlas.tex`. |
+
+## 2026-11-03: regenerated
+
+The copy this file used to record was byte-identical to the sibling draft's
+artwork, and it carried a printed footer --- *the physical-lattice total-carrier
+lift has a separate named input and is not used here* --- that this paper had
+since refuted: `lem:lift-representative` proves that lift total and Borel. The
+caption disclosed the contradiction, but a reader should not have to read a
+caption to unlearn a figure.
+
+The generator now lives beside the figure (`figures/generate_spine.py`, vendored
+from the sibling draft whose provenance this file documents), the footer states
+the boundary `sec:main` actually draws, and the figure writes `m` where the text
+writes `m` instead of making the caption translate `M`.
 
 ## Hashes and dimensions
 

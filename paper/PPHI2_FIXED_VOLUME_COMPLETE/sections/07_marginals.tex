@@ -265,8 +265,13 @@ characteristic functions to a function continuous at the origin implies weak
 convergence --- gives $\mu_N^F\Rightarrow\Lambda_F$. This is the standard fact
 that centred Gaussian laws on $\R^r$ with convergent covariance matrices
 converge weakly \cite{bogachev1998}, and the boundedness of the variances in
-(ii) is its licence: uniformly bounded diagonal entries give tightness, and
-\cref{lem:hC-identification}(iii) says the limit does not degenerate.
+(ii) is its licence: uniformly bounded diagonal entries give tightness.
+The limiting covariance may be \emph{degenerate}, and it is: the zero-mode sine
+slot of \cref{def:cylinder-map} has limit law $\delta_0$
+(\cref{lem:hC-identification}(iii)). That costs nothing here, because
+$\Lambda_F$ is a Gaussian probability measure either way and Levy's theorem does
+not ask for absolute continuity with respect to Lebesgue measure; what the
+theorem asserts is convergence to $\Lambda_F$, not to a density.
 \end{proof}
 
 What \cref{thm:finite-family} establishes is convergence of the pushforwards

@@ -61,11 +61,15 @@ $\sigma(\Pi_F)$, so $\sigma(\pi_k:k\in\Z^2)\subseteq\sigma(\Pi_F)$, and
 $\sigma(\pi_k)=\mathcal B(\mathcal C)$ by \cref{thm:cylinder-borel}; separability
 enters through that last step, via \cref{thm:separable}.
 The second inclusion is the only place where the definition of
-\cref{def:cylinder-map} is used, and it is not decorative: were the family
-restricted to one label per mode, the two probability measures $\delta_{0}$ and
-$\delta_{ie_0}$ on $\mathcal C$ --- where $e_0$ is the unit vector at the zero
-mode --- would have identical marginals over the restricted family and differ in
-the sine slot at $k=0$, so \cref{thm:cylinder-uniqueness} would fail.
+\cref{def:cylinder-map} is used, and it is not decorative. Take the restricted
+family that keeps the cosine label at every mode and drops the sine label at
+$k=0$. The two Dirac measures $\delta_{0}$ and $\delta_{ie_0}$ on
+$\mathcal C$ --- where $e_0$ is the unit vector at the zero mode --- agree on
+every slot of that family ($\Re c_0=0$ at both points, and every $c_k=0$ for
+$k\ne0$) and differ in the dropped slot ($-\Im c_0=0$ against $-1$). So
+\cref{thm:cylinder-uniqueness} would fail. The same construction applies to the
+omission of any single real coordinate: the pair of Dirac masses at two points
+that differ only in that coordinate separates the restricted family.
 
 \emph{(iii) The Dynkin step.} Fix $\mu$ and put
 $\mathcal D:=\{A\in\mathcal B(\mathcal C):\mu(A)=\nu(A)\}$. It contains every
