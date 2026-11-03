@@ -120,6 +120,25 @@ def render(etype: str, key: str, f: dict) -> str:
             tail.append(f["year"])
         if tail:
             bits.append(", ".join(tail))
+    elif etype == "incollection":
+        # a chapter in a collection: title, then "in <booktitle>", then the
+        # series and volume, the publisher and year in parentheses, the pages.
+        bits = [f"{head}\\emph{{{title}}}"]
+        tail = []
+        if f.get("booktitle"):
+            tail.append("in \\emph{%s}" % f["booktitle"])
+        if f.get("series"):
+            s = f["series"]
+            if f.get("volume"):
+                s += f" {f['volume']}"
+            tail.append(s)
+        pub = ", ".join(x for x in (f.get("publisher"), f.get("year")) if x)
+        if pub:
+            tail.append("(%s)" % pub)
+        if tail:
+            bits.append(", ".join(tail))
+        if f.get("pages"):
+            bits[-1] += ", " + f["pages"]
     elif etype in ("misc", "online"):
         bits = [f"{head}\\emph{{{title}}}"]
         if f.get("note"):

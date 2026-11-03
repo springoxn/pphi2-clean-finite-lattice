@@ -71,12 +71,14 @@ its proof.
   measure (\cref{thm:cylinder-uniqueness}).  It is listed here because it is a
   step this paper does not take.
 \item \emph{No rate, no exponential tail, no modulus of continuity.}  Tightness
-  (\cref{thm:tightness}) is Markov's inequality applied to the single first
-  moment of \cref{thm:uniform-moment}, plus compactness of $\HL{2}$ sublevel
+  (\cref{thm:tightness}) is Markov's inequality applied to one second moment of
+  the norm, the bound of \cref{thm:uniform-moment}, plus compactness of
+  $\HL{2}$ sublevel
   sets in the weaker topology (\cref{thm:compact-tail}).  No exponential moment
   and no layer-cake argument enters, so no rate in $N$, no exponential bound on
   tail probabilities and no modulus of continuity for $\mu_{\mathrm{free}}$ is
-  asserted.  A second moment of the norm is what \cref{ext:prokhorov} consumes through tightness, and nothing
+  asserted.  A second moment of the norm is all \cref{ext:prokhorov} consumes
+  through tightness, and nothing
   more.
 \item \emph{The measure limit is two-dimensional.}  The mode lattice $\Z^2$, the
   weights $w_2,w_3$, the cylinder maps, the carrier and the law sequence are all
@@ -123,18 +125,20 @@ cluster.
 
 \subsection{Relation to the literature}
 
-\NumCitedWorks{} works are cited in this paper, in two capacities that must not be
-confused.  Four support a standard fact where it is used -- the Riesz
+\NumCitedWorks{} works are cited in this paper, in three capacities that must not
+be confused.  Four support a standard fact where it is used -- the Riesz
 representation behind \cref{lem:resolvent}, the Prokhorov extraction of
 \cref{ext:prokhorov}, the convergence of Gaussian laws with convergent
 covariance matrices in \cref{thm:finite-family}, and the definition of weak
 convergence on a metric space in \cref{rem:topology} -- and each is cited at that
-point rather than here.  The remaining nine support nothing: they are cited
-for position, and each of the following relations is a position, not a
-dependency --- with one exception, the first bullet, which is the closest
-published relative of the convergence statement and is compared in its own
-paragraph below.  Eight of them are named below; the ninth, \cite{gjs1974}, is
-named among the exclusions above.
+point rather than here.  Three are the closest relatives of what this paper
+does, and they are compared in the paragraphs after the list rather than
+disposed of in a line: \cite{cipriani2020} for the convergence statement,
+\cite{biskup2020,peter2026} for the recipe and the topology, and
+\cite{douglas2026} for the machine-checked layer.  The remaining nine support
+nothing: they are cited for position, and each of the following relations is a
+position, not a dependency.  Eight of them are named below; the ninth,
+\cite{gjs1974}, is named among the exclusions above.
 
 \begin{itemize}
 \item \cite{cipriani2020} prove that the scaling limit of the discrete Gaussian
@@ -142,6 +146,18 @@ named among the exclusions above.
   the manifold continuum Gaussian free field, in law and in the strong Sobolev
   topology after a Voronoi tessellation.  It is the closest published relative
   of the convergence statement here, and it is compared below.
+\item \cite{biskup2020} is the standard account of the discrete Gaussian free
+  field in two dimensions, and of what a scaling limit of it is; it is also where
+  the recipe this paper follows is set out in words -- tightness, then a
+  subsequential limit, then a unique identification of the limit object.
+  \cite{peter2026} obtain convergence of nonlinear functionals in $H^{-s}(D)$ for
+  random conductances.  Both are compared below, because together they fix the
+  standard of comparison for a convergence claim in a negative Sobolev space.
+\item \cite{douglas2026} report a Lean~4 formalisation of the free massive
+  Euclidean field in four dimensions together with the Glimm--Jaffe axioms, and
+  record that the Minlos, nuclearity and Goursat inputs of its first release were
+  subsequently proved or avoided.  It is the nearest machine-checked relative of
+  Part~II, and it is compared below.
 \item \cite{ossier1973,ossier1975} state the axioms: the properties
   (analyticity, reflection positivity, Euclidean invariance, clustering and
   regularity) that a Euclidean measure must satisfy before reconstruction can
@@ -163,9 +179,18 @@ named among the exclusions above.
   the only extraction principle used.
 \end{itemize}
 
-The comparison that matters is with \cite{cipriani2020}, because both papers
-take a discrete Gaussian field to its continuum counterpart in a Sobolev
+The comparison that matters most is with \cite{cipriani2020}, because both
+papers take a discrete Gaussian field to its continuum counterpart in a Sobolev
 topology, and both do it by pushing the discrete object into a function space.
+Two of the differences below do not favour this paper, and are stated first for
+that reason.  Their convergence holds in the \emph{strong} topology of $H^{-s}$;
+ours is weak convergence of probability measures on a carrier that happens to be
+an $H^{-3}$-type sequence space, and a strong-$H^{-s}$ statement is the stronger
+one.  And their model is a random graph on a manifold, which is a harder index
+set than a periodic square lattice.  What this paper adds is elsewhere: an
+explicit carrier with no Minlos step, an identification of the limit by its
+finite Fourier marginals alone, convergence of the whole sequence rather than of
+a subsequence, and a machine-checked counterpart.
 Four differences, each of which states what this paper does and none of which
 states anything about theirs.  \emph{Model:} they use a random graph, because a
 compact manifold has no canonical grid; here the index set is the deterministic
@@ -182,13 +207,42 @@ of a subsequence (\cref{thm:main}(i), \cref{cor:uniqueness}).  \emph{Evidence:}
 Part~II of this paper is a machine-checked counterpart of its own statement, at
 the resolution \cref{sec:lean-boundary} records.
 
-In short, what this paper adds is the fixed-volume massive lattice covariance
-limit, a carrier constructed without Minlos (\cref{sec:carrier}), a
-whole-sequence tightness-to-uniqueness chain, and a formal counterpart of the
-same statement.  Nothing above is a statement about priority: whether a
-comparable theorem exists elsewhere is no longer left as a gesture, since the
-closest one is cited and compared, but a claim of priority would need a search
-this paper has not done and does not make.
+The recipe deserves a sentence of its own, because it is not this paper's.
+\cite{biskup2020} sets out the pattern a scaling limit of this kind is proved by
+-- establish tightness, extract a subsequential limit, identify the limit object
+uniquely -- and every step of \cref{thm:main} has a counterpart there.  What
+differs is the third step: the identification here runs through
+\cref{thm:cylinder-uniqueness} (two measures that agree on every finite Fourier
+marginal coincide), whereas the standard route identifies through
+characteristic functionals or through the Osterwalder--Schrader axioms.  The
+topology is also weaker than the standard output: \cite{peter2026} obtains
+$H^{-s}$ convergence for nonlinear functionals, and a negative Sobolev norm is
+where this literature lives.  In short, what this paper adds is the fixed-volume
+massive lattice covariance limit, a carrier constructed without Minlos
+(\cref{sec:carrier}), a whole-sequence tightness-to-uniqueness chain, and a
+formal counterpart of the same statement -- and none of those four is a new
+method.
+
+The machine-checked layer has a nearest relative too, and it is a larger
+project.  \cite{douglas2026} formalises the free massive Euclidean field in four
+dimensions and the Glimm--Jaffe axioms in Lean~4, using the Schwartz-space route,
+and its release notes record that the Minlos, nuclearity and Goursat inputs of
+the first release were afterwards proved or avoided.  Three things follow, and
+the third is the one a reader should carry away.  First, ``a machine-checked
+lattice-to-continuum limit'' is not new, and Part~II must not be read as claiming
+it.  Second, ``no Minlos'' is not by itself a contribution: Minlos has been
+formalised, and can also be avoided, in that project.  Third, what this paper's
+Part~II does contribute is a different route to a smaller target --- an explicit
+weighted sequence carrier, a whole-sequence limit, and a footprint of
+\lmod{propext}, \lmod{Classical.choice}, \lmod{Quot.sound} for each reported
+theorem without a project axiom anywhere in the chain --- together with an
+evidence chain in which every number and every digest can be recomputed from the
+delivered sources.
+
+Nothing above is a statement about priority: whether a comparable theorem exists
+elsewhere is no longer left as a gesture, since the closest ones are cited and
+compared, but a claim of priority would need a search this paper has not done and
+does not make.
 
 Part~II reports the machine-checked layer of the paper: \NumChainTheorems{}
 declarations, from the covariance limit through the whole-sequence limit, with
