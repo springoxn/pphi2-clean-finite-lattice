@@ -1,0 +1,8 @@
+import AImathPPhi2Clean.WeakDualReconstruction
+#print axioms Pphi2Clean.Continuum.reconstructWeakDual
+#print axioms Pphi2Clean.Continuum.reconstructWeakDual_continuous
+#print axioms Pphi2Clean.Continuum.weakDual_coordinateBox_isCompact
+#print axioms Pphi2Clean.Continuum.weakDual_compact_containment_of_tail_budget
+
+#print axioms Pphi2Clean.Continuum.hilbertVectorConfiguration
+#print axioms Pphi2Clean.Continuum.hilbertVectorConfiguration_continuous

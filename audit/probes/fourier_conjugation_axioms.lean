@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.PeriodicFourierCovarianceLimit
+#print axioms Pphi2Clean.Continuum.torusFourierPhase_star_eq_neg
+#print axioms Pphi2Clean.Continuum.torusFourierCoefficient_star_eq_neg

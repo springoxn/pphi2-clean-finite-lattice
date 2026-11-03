@@ -39,7 +39,8 @@ HERE = Path(__file__).resolve().parent
 PAPER = HERE.parent
 ROOT = PAPER.parent.parent
 OUT = PAPER / "ext" / "axiom_transcript.txt"
-REGISTRY = ROOT / "formal" / "lean" / "challenges" / "_registry.yaml"
+from _layout import registry
+REGISTRY = registry()
 
 CHAIN_CONTRACTS = ("PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT",
                    "PPHI2_FIXED_VOLUME_FREE_FIELD_MEASURE_LIMIT")

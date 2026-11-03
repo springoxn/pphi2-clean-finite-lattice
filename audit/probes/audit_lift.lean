@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.PeriodicComplexFourierLift
+#print axioms Pphi2Clean.Continuum.periodicHMinusTwo_complex_lift_trace_bound
+#print axioms Pphi2Clean.Continuum.periodicComplexFourierLift_norm_sq

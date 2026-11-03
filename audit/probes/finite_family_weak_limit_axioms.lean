@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#print axioms Pphi2Clean.Continuum.physicalFamilyEvalProbabilityMeasure_fixedVolume_weak_tendsto_of_target

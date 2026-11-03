@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.PeriodicHMinusTwoLatticeTrace
+#print axioms Pphi2Clean.Continuum.periodicHMinusTwo_lattice_probe_trace_bound

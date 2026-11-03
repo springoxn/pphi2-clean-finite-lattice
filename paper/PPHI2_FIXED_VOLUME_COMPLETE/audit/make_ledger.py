@@ -36,7 +36,8 @@ sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="repla
 HERE = Path(__file__).resolve().parent
 PAPER = HERE.parent
 ROOT = PAPER.parent.parent
-REGISTRY = ROOT / "formal" / "lean" / "challenges" / "_registry.yaml"
+from _layout import registry
+REGISTRY = registry()
 TRANSCRIPT = PAPER / "ext" / "axiom_transcript.txt"
 
 # (node, [(declaration, module, role)])

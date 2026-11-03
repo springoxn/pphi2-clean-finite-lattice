@@ -1,0 +1,11 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#check ContinuousLinearMap.pi
+#check ContinuousLinearMap.single
+#check ContinuousLinearMap.proj
+#check ContinuousLinearMap.mkPiAlgebra
+#check ContinuousLinearMap.toContinuousLinearMap
+#check WithLp.toLp
+#check WithLp.equiv
+#check PiLp.continuousLinearMap_toLp
+#check EuclideanSpace
+#check ContinuousLinearMap.coe_toContinuousLinearMap

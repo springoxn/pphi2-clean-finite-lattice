@@ -1,0 +1,466 @@
+# 陈述-挑战注册表（statement-challenge registry）
+#
+# 为什么需要这个文件：`theory_graph.yaml` 的 `evidence[].ref` 是**自由文本**
+# （例如 "formal/lean/s6/S1_final.lean（…）"），因此「节点 → Lean 模块/定理」
+# 这条链接目前**没有机器可读的来源**。本注册表补上这一段，是陈述-挑战协议的输入。
+#
+# 维护规则
+#   * 只登记 `lean_provenance: self` 的形式化（`imported:` 的上游形式化由上游负责，
+#     本表只记 provenance 与出处，不参与本地检查）。
+#   * `theorem_names` 必须是**全限定名**。
+#   * 本地契约的 `modules` 必须在 `S6Isserlis_root.lean` 里；`remote_only: true` 的契约显式
+#     指定独立 Lake 项目与远端路径，不属于主 S6 本地构建，`--run` 必须显示 SKIP。
+#   * 改陈述 ⇒ `statement_sha256` 必然变红；这是**故意的**，要用
+#     `python tools/lean_challenge.py --update-hashes --why "..."` 显式接受。
+#   * `unwired:` 段登记「契约为真、但图上无 requires 消费方」的自证节点（每条须带 reason）；
+#     判据见 `verify/formalization_contract_probe.py`（C3），现场读数见
+#     `python tools/formalization_audit.py`。
+version: 1
+permitted_axioms: [propext, Classical.choice, Quot.sound]
+
+challenges:
+  PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT:
+    modules: [AImathPPhi2Clean.PeriodicFourierCovarianceLimit]
+    theorem_names:
+      - Pphi2Clean.Continuum.fixedVolumeCovarianceInner_tendsto_torusFourierGreenPairing
+      - Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_mixedMoment_tendsto_torusFourierGreenPairing
+      - Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_covariance_tendsto_torusFourierGreenPairing
+    remote_only: true
+    project: /home/zhengyj/AImath-lean/AImathPPhi2Clean
+    note: >-
+      This contract targets the separate AImathPPhi2Clean Lake project, not the
+      S6Isserlis root build. The authoritative source is formal/lean/s6/pphi2_clean;
+      verify by SSH on the declared project. Local lean_challenge runs explicitly
+      report SKIP for this contract rather than treating it as a local pass.
+
+  PPHI2_FIXED_VOLUME_FREE_FIELD_MEASURE_LIMIT:
+    modules:
+      - AImathPPhi2Clean.PeriodicHMinusThreeTopologyBorel
+      - AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal
+    theorem_names:
+      - Pphi2Clean.Continuum.periodicHMinusThreeCompletion_separable
+      - Pphi2Clean.Continuum.periodicHMinusThree_probabilityMeasure_ext_of_indexed_cylinder_marginals
+      - Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_subsequential_limit_has_expected_cylinder
+      - Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_exists
+      - Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_has_expected_cylinder
+      - Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_unique
+      - Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders
+    remote_only: true
+    project: /home/zhengyj/AImath-lean/AImathPPhi2Clean
+    note: >-
+      This contract targets the separate AImathPPhi2Clean Lake project, not the
+      S6Isserlis root build. It records concrete separability, finite-cylinder
+      identification, and the whole-sequence weak-limit existence theorem. The
+      candidate free measure is constructed as a Prokhorov subsequential limit
+      and characterized by its finite Fourier marginals.
+
+  S1_DISTRIBUTION_IDENTIFICATION:
+    modules: [S6Isserlis.S1_final]
+    theorem_names:
+      - S6Isserlis.s1_distribution_identity
+      - S6Isserlis.s1_q_growth
+    note: >-
+      S1 分布恒等式 ∫ c_m(x)φ(x)dx = ⟨𝓕⁻[q],φ⟩。红线核对点：不得回灌 S6 green_identity
+      （`hq` 无假设泄漏）；陈述冻结后任何"顺手加强"都会变红。
+
+  S3_GREEN_DISTRIBUTION:
+    modules: [S6Isserlis.S3]
+    theorem_names:
+      - S6Isserlis.green_identity
+    note: >-
+      在 𝓢′(V,ℂ) 上证明 (Δ−m²)G = −δ₀。`hq` 前提 = 乘子 q 的 HasTemperateGrowth。
+
+  GFF_COV_SYMMETRIC:
+    modules: [S6Isserlis.S4]
+    theorem_names:
+      - Schwinger.s4_symmetric
+    note: >-
+      两点函数的交换对称（S 拓扑下的登记）。
+      注意：`S4.lean` 的声明在**顶层** `namespace Schwinger` 里，不是 `S6Isserlis.*`
+      —— 证据散文里写的是"AImath S4.lean"，从散文推不出全限定名，这正是本注册表要
+      消掉的歧义。
+
+  OS1_FREE_SCALAR:
+    modules: [S6Isserlis.OS1]
+    theorem_names:
+      - OS1.integral_weighted_square_nonneg
+      - OS1.os1_quad_factorization
+      - OS1.os1_reflection_positive
+      - OS1.os1_gram_positive
+      - OS1.schwinger_param_rep
+    note: >-
+      OS1 反射正性（有限因子核 + 分析层 + Schwinger 参数表示）。
+      注意：模块名是 `S6Isserlis.OS1`，但声明在 `namespace OS1`（顶层）。
+      **本条的机器价值**：OS1.lean 里有 3 条 `axiom` 声明，历来靠人工断言"是死声明、
+      未被任何定理使用"。公理足迹检查把这句话变成**可核验**的：只要
+      `#print axioms` 对这 5 条定理只返回 kernel trio，死声明即为机器证实。
+
+  WICK_FINITE_DIM_GAUSS_WICK:
+    modules: [S6Isserlis.S7, S6Isserlis.S8, S6Isserlis.S11, S6Isserlis.S12]
+    theorem_names:
+      - Schwinger.polarization
+      - Schwinger.eq_of_diagonal_eq
+      - Schwinger.card_matchings_two_mul
+      - Schwinger.pairingML_isSymm
+      - Schwinger.gauss_wick
+    note: >-
+      有限维 Gauss–Wick（全 n）的代数核心，四项各一条链：极化恒等式（S7）→ 配对计数
+      `#(matchings 2k) = (2k-1)!!`（S8，双射组装）→ 配对型的对称 `MultilinearMap`（S11）→
+      矩恒等式 `E[∏Xᵢ] = Σ_匹配 ∏Σ`（S12）。**`requires` 闭包为空**（只用 Mathlib）——这是本项目
+      第一批"足迹 = 标准三条、且无项目内前提"的形式化链。⚠️ 四个模块的声明都在**顶层
+      `namespace Schwinger`**，故全限定名**不是** `S6Isserlis.*`（与 `GFF_COV_SYMMETRIC`
+      同款陷阱：散文写"AImath S7.lean"推不出全限定名，这正是本注册表要消掉的歧义）。
+
+  OS3_CONVOLUTION_DECAY:
+    modules: [S6Isserlis.S9]
+    theorem_names:
+      - OS3.conv_decay
+      - OS3.div_two_rpow_neg
+    note: >-
+      论文 `lem:conv` 的分布层机械化：多项式衰减函数的卷积仍多项式衰减（一般 Haar 测度版）。
+      声明在顶层 `namespace OS3`。⚠️ Mathlib v4.34 对一般赋范空间 `E` 的 `volume` **没有**
+      `IsAddHaarMeasure` 实例，故 μ 抽为**显式测度参数**（对 `EuclideanSpace ℝ (Fin d)` + `volume`
+      实例齐全）——这是口径上的一处**弱化**，不是等价改写。剩余 = `lem:decay`/`lem:averaged`/
+      `thm:cluster`/`thm:ergodic`。
+
+  OS4_GAUSS_DERIVATIVE:
+    modules: [S6Isserlis.S10]
+    theorem_names:
+      - OS4.hasDerivAt_gaussExp
+      - OS4.deriv_gauss
+      - OS4.deriv2_gauss
+    note: >-
+      论文 `eq:gaussianderiv` 的 `k = 1, 2`（`deriv_gauss`/`deriv2_gauss`）与**归纳步**
+      `hasDerivAt_gaussExp`（"指数前因子在求导下保持"）。声明在顶层 `namespace OS4`。
+      剩余（**未**登记，故本节点不覆盖）= 一般 `k` 归纳 + 参数积分求导 + 径向界 + `thm:os4` 组装。
+
+  GJ_1841_FOREST_BOUND:
+    modules: [S6Isserlis.GJ1841]
+    theorem_names:
+      - GJ1841.card_vert_sub_card_connectedComponent_le_card_edgeSet
+      - GJ1841.IsAcyclic.card_vert_le_card_edgeSet_add_card_connectedComponent
+    note: >-
+      Glimm–Jaffe 2nd ed `(18.4.1)` 的 **L1（森林界）**：有限图 `#V − #连通分量 ≤ #E`，无圈情形
+      **取等**。**纯图论**（与 P(φ)₂ 的具体几何无关）、**Mathlib-only**（`requires` 闭包为空）。
+      ⚠️ 陈述层坑（已实测）：`Fintype.card G.ConnectedComponent` **不能**只从 `[Fintype V]` 推出
+      —— 商类型的 `Fintype` 实例要求 `DecidableRel G.Adj` + `DecidableEq V`，只在
+      `open scoped Classical` 下 elaboration；文件顶部已开，**陈述未削弱**。
+      **不**代表 `PPHI2_ACTIVITY_BOUND`（核 B）已闭合 —— `(18.7.A)` 的合并记账仍 OPEN。
+      L2（角引理）/ L3（分量数上界）/ 装配 T 与单位方块模型已由 `GJ_1841_ASSEMBLY` 覆盖
+      （2026-10-12；见 `formal/lean/M2_keystone18_plan.md` §6–§7）。
+
+  GJ_1841_ASSEMBLY:
+    modules: [S6Isserlis.BlockModel, S6Isserlis.GJ1841Block]
+    theorem_names:
+      - Pphi2Block.glueGraph_reachable_iff_sqGraph_reachable
+      - Pphi2Block.card_linesIn_eq_card_edgeSet
+      - Pphi2Block.sqGraph_reachable_of_glue_component
+      - Pphi2Block.card_connectedComponent_le_card_of_meets
+      - Pphi2Block.card_sub_one_le_two_mul_card
+      - Pphi2Block.gj_1841
+      - Pphi2Block.gj_1841_enhanced
+    note: >-
+      Glimm–Jaffe 2nd ed `(18.4.1)` 的 **L2（角引理）+ L3（分量数上界）+ 装配 T** —— M2 组合层第二/三块。
+      `BlockModel.lean` 给**单位方格模型**（`Sq := ℤ×ℤ`、`Line := ℤ×ℤ×Bool`、`cornerSquares`/`cornerLines`、
+      `sqGraph`/`glueGraph`）与 **L2**：在 (ii) `Γ ⊆ Int X` 下 `glueGraph` 与 `sqGraph` **同可达关系**
+      （角引理 §1.3(a) 的组合内核；角步由"该角四线全在 `Γ` 内"给出，由 (ii) 该角四方格全在 `X` 内，
+      于是它们在方格图中构成四圈）。`GJ1841Block.lean` 给 **L3**（分量数 `≤ |X₀|`）与**装配**
+      `|X| − n ≤ |Γ|`；书中形式 `|X| − n ≤ 2|Γ|` 由 `card_sub_one_le_two_mul_card` 给出。
+      Mathlib-only（唯一 `requires` 是 L1 那块 `GJ_1841_FOREST_BOUND`）。
+      ⚠️ **模型口径**：`glueGraph` **是**（而非**证明等于**）"`X∖Γ^c` 连通分量"的组合模型 ——
+      §1.3(b) 的 **ℝ² 拓扑**未形式化（`M2_keystone18_plan.md` §6 选项 (b) 的登记项）。
+      ⚠️ **不**表示 `PPHI2_ACTIVITY_BOUND`（核 B）已闭合 —— `(18.7.A)` 的合并记账仍 OPEN；
+      书的 §1.6「取等」亦未形式化。
+
+  PPHI2_URSELL_CORE:
+    modules: [S6Isserlis.UrsellCore, S6Isserlis.UrsellSplit, S6Isserlis.UrsellGeneral, S6Isserlis.UrsellConnected, S6Isserlis.UrsellThm32]
+    theorem_names:
+      - Pphi2Ursell.isCompatible_union_iff
+      - Pphi2Ursell.ursell_empty
+      - Pphi2Ursell.ursell_singleton
+      - Pphi2Ursell.ursell_pair_eq_neg_one
+      - Pphi2Ursell.compatInd_eq_sum
+      - Pphi2Ursell.ursell_eq_zero_of_compatible
+      - Pphi2Ursell.compatInd_singleton
+      - Pphi2Ursell.compatInd_union
+      - Pphi2Ursell.ursell_union_singleton_eq_zero
+      - Pphi2Ursell.ursell_union_eq_zero_of_isCompatible_right
+      - Pphi2Ursell.sum_powerset_union
+      - Pphi2Ursell.sdiff_union_sdiff
+      - Pphi2Ursell.compatInd_sdiff_union_sdiff
+      - Pphi2Ursell.ursell_eq_zero_of_split
+      - Pphi2Ursell.edgeWithin
+      - Pphi2Ursell.connSum
+      - Pphi2Ursell.connSum_eq_zero_of_isCompatible
+      - Pphi2Ursell.edgeWithin_eq_empty_iff
+      - Pphi2Ursell.sum_neg_one_pow_card_edgeWithin
+      - Pphi2Ursell.connSum_singleton
+      - Pphi2Ursell.edgeWithin_mono
+      - Pphi2Ursell.edgeWithin_disjoint
+      - Pphi2Ursell.edgeWithin_union_subset
+      - Pphi2Ursell.card_edgeWithin_union
+      - Pphi2Ursell.neg_one_pow_card_union
+      - Pphi2Ursell.compatInd_eq_sum_connSum_of_isCompatible
+      - Pphi2Ursell.edgeWithin_union_eq
+      - Pphi2Ursell.connSum_empty
+      - Pphi2Ursell.reachSet
+      - Pphi2Ursell.mem_reachSet
+      - Pphi2Ursell.reachSet_subset
+      - Pphi2Ursell.subset_edgeWithin_union_of_reachSet
+      - Pphi2Ursell.reachSet_inter_edgeWithin_eq
+      - Pphi2Ursell.connected_induce_reachSet
+      - Pphi2Ursell.connected_induce_inter_edgeWithin
+      - Pphi2Ursell.eq_inter_union_inter_sdiff
+      - Pphi2Ursell.ofComponents_toComponents
+      - Pphi2Ursell.reachSet_ofComponents
+      - Pphi2Ursell.mem_compIndex
+      - Pphi2Ursell.pairingSum_eq_sum_connSum_mul
+      - Pphi2Ursell.sum_neg_one_pow_eq_pairingSum
+      - Pphi2Ursell.compatInd_eq_sum_connSum
+      - Pphi2Ursell.ursell_eq_connSum
+      - Pphi2Ursell.eq_edgeWithin_of_connected_of_isTree
+      - Pphi2Ursell.connSum_eq_neg_one_pow_of_isTree
+      - Pphi2Ursell.connSum_singleton_ne_zero
+      - Pphi2Ursell.sum_with_edge_eq_neg_sum_without
+      - Pphi2Ursell.connected_spanning_insert
+      - Pphi2Ursell.reachable_deleteEdges_iff
+      - Pphi2Ursell.deleteEdges_fromEdgeSet_singleton
+      - Pphi2Ursell.connected_spanning_erase_of_not_isBridge
+      - Pphi2Ursell.union_singleton_roundtrip
+      - Pphi2Ursell.union_singleton_connected_not_bridge
+      - Pphi2Ursell.sum_neg_one_pow_of_not_bridge_eq_zero
+      - Pphi2Ursell.connSum_eq_sum_of_isBridge
+      - Pphi2Ursell.not_reachable_of_isBridge
+      - Pphi2Ursell.not_mem_reachSet_of_isBridge
+      - Pphi2Ursell.mem_of_connected_of_isBridge
+      - Pphi2Ursell.cross_edge_eq_bridge
+      - Pphi2Ursell.sideOf
+      - Pphi2Ursell.sideOf_union_sdiff
+      - Pphi2Ursell.mem_sideOf_self
+      - Pphi2Ursell.not_cross_of_mem_of_connected
+      - Pphi2Ursell.edgeGraph
+      - Pphi2Ursell.sideOf_of_mem_edge
+      - Pphi2Ursell.sideOf_step_same
+      - Pphi2Ursell.not_mem_sideOf_b
+      - Pphi2Ursell.not_iff_sideOf_of_eq
+      - Pphi2Ursell.count_bridge_even_iff_same_side
+      - Pphi2Ursell.bridge_notMem_edges_of_isPath
+      - Pphi2Ursell.reachable_filter_of_walk_aux
+      - Pphi2Ursell.connected_induce_filter_sideOf
+      - Pphi2Ursell.connected_induce_filter_sideOf_b
+      - Pphi2Ursell.disjoint_filter_sideOf
+      - Pphi2Ursell.connected_union_bridge
+      - Pphi2Ursell.card_eq_card_filter_add_card_filter_add_one
+      - Pphi2Ursell.neg_one_pow_card_eq_neg_mul
+      - Pphi2Ursell.sideOf_subset
+      - Pphi2Ursell.sdiff_sideOf_subset
+      - Pphi2Ursell.mem_edgeWithin_sideOf_or_eq
+      - Pphi2Ursell.disjoint_edgeWithin_sideOf
+      - Pphi2Ursell.edgeWithin_union_sideOf_eq
+      - Pphi2Ursell.not_mem_edgeWithin_sideOf_b
+      - Pphi2Ursell.not_mem_edgeWithin_sdiff_sideOf
+      - Pphi2Ursell.edgeWithin_sdiff_eq_union
+      - Pphi2Ursell.mem_filter_sideOf_of_mem_sdiff
+      - Pphi2Ursell.powerset_eq_filter_insert
+      - Pphi2Ursell.subset_sdiff_of_not_mem
+      - Pphi2Ursell.eq_singleton_union_filter_sideOf
+      - Pphi2Ursell.not_connected_of_not_mem_bridge
+      - Pphi2Ursell.connSum_eq_sum_filter_mem_bridge
+      - Pphi2Ursell.filter_sideOf_subset_edgeWithin
+      - Pphi2Ursell.union_filter_sideOf_eq
+      - Pphi2Ursell.filter_union_filter_eq_of_subset
+      - Pphi2Ursell.filter_sdiff_sideOf_subset_edgeWithin
+      - Pphi2Ursell.sideOf_b_subset_sdiff_sideOf_a
+      - Pphi2Ursell.sideOf_a_subset_sdiff_sideOf_b
+      - Pphi2Ursell.mem_sideOf_iff_reachable
+      - Pphi2Ursell.sideOf_b_of_mem_edge
+      - Pphi2Ursell.mem_sideOf_a_or_mem_sideOf_b_of_reachable
+      - Pphi2Ursell.sdiff_sideOf_a_subset_sideOf_b
+      - Pphi2Ursell.sideOf_union_sideOf_eq
+      - Pphi2Ursell.sdiff_sideOf_a_eq_sideOf_b
+      - Pphi2Ursell.connected_induce_edgeGraph_of_connected
+      - Pphi2Ursell.connected_filter_sideOf_of_connected
+      - Pphi2Ursell.connected_of_connected_filter_sideOf
+      - Pphi2Ursell.ite_connected_mul_sign_eq_neg_mul
+      - Pphi2Ursell.filter_pair_union_eq_self
+      - Pphi2Ursell.filter_pair_union_filter_eq_self
+      - Pphi2Ursell.sum_filter_mem_bridge_eq_sum_pairs
+      - Pphi2Ursell.sum_pairs_eq_sum_sum
+      - Pphi2Ursell.connSum_eq_neg_mul_connSum_connSum
+      - Pphi2Ursell.card_sideOf_lt
+      - Pphi2Ursell.card_sdiff_sideOf_lt
+      - Pphi2Ursell.connSum_ne_zero_of_isBridge
+      - Pphi2Ursell.filter_union_filter_eq_sdiff
+      - Pphi2Ursell.mem_sideOf_of_walk
+    note: >-
+      P(φ)₂ 团簇展开**组合核**（节点 `PPHI2_CE_URSELL`）的 Lean 形式化（两块，同一契约）。
+      **第一块** `UrsellCore.lean` = 项目口径 `proofs/pphi2_cluster_expansion.md` 的 **`(2.2)` 递推骨架**：
+      **相容集** `IsCompatible I S`（不可相容图 `I` 的独立集；书中 `𝕀` 含自环，这里取无自环口径）、
+      **Ursell 函数** `ursell I S`（对 `S.card` 良基递归实现 `(2.2)`），以及
+      `ursell_singleton`/`ursell_pair_eq_neg_one`（CE0/CE1 的 `n=2` 读数）、
+      `compatInd_eq_sum`（**更新方程**，CE0 交叉验证那条）、
+      `ursell_eq_zero_of_compatible`（引理 3.1 的"无边 ⇒ `φ=0`"情形）。
+      **第二块** `UrsellSplit.lean` = 引理 3.1 的**单点可剥离**情形：`compatInd_union`（相容性指示子在
+      横向相容的不交并下**可乘**）+ `ursell_union_singleton_eq_zero`（`b ∉ A`、`A` 非空、`b` 与 `A`
+      横向相容 ⇒ `φ(A ∪ {b}) = 0`）。Mathlib-only，`requires = []`（不需要自由场层）。
+      ⚠️ **诚实边界**：`(2.1)` 指数公式的**形式幂级数**路线、引理 3.1 的**另一半**（`𝕀` 连通 ⇒ `φ ≠ 0`）
+      与**一般形式**（`S = A ⊔ B` 横向相容、`|B| ≥ 2`，即 `B` 内部可以有边）、定理 3.2（连通图公式）、
+      定理 3.3（树图界）**都不在本契约内**；因此它**不**使 `PPHI2_CE_URSELL` 达到 `FORMALIZED`
+      （见 `unwired` 登记与节点 `description`）。
+
+  PPHI2_WICK_FINITE_DIM:
+    modules: [S6Isserlis.Wick, S6Isserlis.HermiteDeriv, S6Isserlis.WickBridge]
+    theorem_names:
+      - Wick.wick_zero
+      - Wick.wick_one
+      - Wick.wick_add_two
+      - Wick.wick_two
+      - Wick.wick_three
+      - Wick.wick_four
+      - Wick.natDegree_wick_le
+      - Polynomial.derivative_hermite
+      - WickBridge.wick_eq_hermite
+    note: >-
+      有限维 Wick 幂 `:X^n:` 的代数核（**项目自写 Lean**，Mathlib-only，`requires = []`）——
+      PPHI2 的 Wick 序（`PPHI2_WICK_ORDERING`）的有限维/定义层，2026-10-15 调查时发现
+      `Wick.lean` / `HermiteDeriv.lean` / `WickBridge.lean` **既不在任何 challenge，也不被任何节点
+      evidence 提及**（图中零出现），故补登记为独立节点。
+      `Wick.wick c n` = 相对方差 `c` 的 Wick 幂，由 Hermite 递推定义（`wick_add_two`），
+      显式读数 `wick_zero`/`wick_one`/`wick_two`/`wick_three`/`wick_four` + 次数界 `natDegree_wick_le`；
+      `Polynomial.derivative_hermite` 补 **Mathlib 缺口**（概率论 Hermite `He_{n+1}` 的导数三项递推，
+      Mathlib 只给定义式不给该形式）；`WickBridge.wick_eq_hermite` 是 Wick 幂到 Mathlib Hermite 的桥
+      `wick (s²) n = C (sⁿ) · (H n).comp (qs s)`（`s ≠ 0`）。
+      ⚠️ **诚实边界**：Wick **正交性** `E[:X^n: :X^m:] = δ_nm n! c^n`、单混沌超压缩
+      （`‖He_n‖_p ≤ (p−1)^{n/2}√(n!)`）与**无限维** Wick 幂**都不在本契约内**
+      （见 `formal/lean/pphi2_formalization_plan.md` §3 的 L0-2/L0-3 待做项）；
+      因此它**不**使 `PPHI2_WICK_ORDERING` 达到 `FORMALIZED`（后者的注册陈述含二维 UV 有限性）。
+
+  PPHI2_NELSON_LAYERCAKE:
+    modules: [S6Isserlis.NelsonLayerCake]
+    theorem_names:
+      - Pphi2Nelson.integral_exp_mul_Ioc
+      - Pphi2Nelson.lintegral_exp_Ioc
+      - Pphi2Nelson.exp_neg_le_layercake
+      - Pphi2Nelson.lintegral_exp_neg_le
+      - Pphi2Nelson.lintegral_exp_neg_le_split
+    note: >-
+      Nelson (V) 的**层饼引擎**（**项目自写 Lean**，Mathlib-only，`requires = []`）——
+      2026-10-15 调查时发现 `NelsonLayerCake.lean` **既不在任何 challenge，也不被任何节点
+      evidence 提及**（图中零出现），故补登记为独立节点。
+      内容 = paper `proofs/pphi2_nelson_dynamical_cutoff.md` **引理 6.1** 的抽象测度论内核：
+      `integral_exp_mul_Ioc`（`∫_0^b q e^{qM} dM = e^{qb} − 1`，FTC）与 `lintegral_exp_Ioc`（其 `ℝ≥0∞` 版）、
+      **`exp_neg_le_layercake`**（逐点 `e^{−qx} ≤ 1 + ∫⁻_0^∞ q e^{qM}·1_{M≤−x} dM`）、
+      **`lintegral_exp_neg_le`**（= 引理 6.1：`∫⁻ e^{−qV} dμ ≤ 1 + ∫⁻_0^∞ q e^{qM} μ{V≤−M} dM`）、
+      **`lintegral_exp_neg_le_split`**（= 引理 4.10 的 `t₀`-劈裂抽象形）。
+      ⚠️ **诚实边界（重要）**：**引擎本身正确且可复用**（任何层饼型估计都用它），但
+      paper **引理 4.10 的结论已被数值证伪**（`verify/pphi2_layercake_asymptotics_probe.py`：
+      大 `M` 段 `~ e^{Θ(|Λ|log²|Λ|)}`，见 `PPHI2_NELSON_VOLUME` 的 evidence 与
+      `proof_graph/reviews/pphi2_nelson_volume_review.md` §5–§6）。
+      故本契约只冻结**三条不等式**，**不**主张 (V)、也**不**使 `PPHI2_NELSON_VOLUME` 达到 `FORMALIZED`。
+
+  # ---- imported：只登记 provenance，不参与本地检查 ----------------------------
+  # GFF_MINLOS_APPLICABLE   imported: bochner@58405ec Minlos/Main.lean:58 minlos_theorem
+  #                                  + gaussian-field@1283a27 Nuclear/NuclearSpace.lean
+  # GFF_MEASURE_EXISTS      imported: OSforGFF@fef84a8 Measure/Construct.lean
+  #                                  + bochner@58405ec minlos_theorem
+imported_nodes:
+  GFF_MINLOS_APPLICABLE:
+    provenance: imported
+    upstream: "bochner@58405ec Minlos/Main.lean:58 minlos_theorem; gaussian-field@1283a27 Nuclear/NuclearSpace.lean"
+    lean_version: UNRECORDED
+  GFF_MEASURE_EXISTS:
+    provenance: imported
+    upstream: "OSforGFF@fef84a8 Measure/Construct.lean / GaussianFreeField.lean; bochner@58405ec minlos_theorem"
+    lean_version: UNRECORDED
+
+# ---- unwired：契约为真、但**无 requires 消费方**的自证节点（C3 的登记面）--------
+# 为什么单列：这类节点已有冻结陈述 + 公理足迹（`--run` 可复算），但没有任何节点的
+#   `requires` 指向它 ⇒ 它对**任何主定理的状态没有影响**。这正是「一边积累可编译的
+#   定理、另一边主链仍靠纸面论证」这件事的机器可见形态：把静默变成**登记**。
+# 判据（verify/formalization_contract_probe.py，非本文件）：登记的键集必须**恰好等于**
+#   图上「无消费方的 level≥4 自证节点」集 —— 新孤儿判红（不许静默出现），
+#   登记项拿到消费方后不销账也判红（不许过期）。每条必须带非空 `reason`。
+# 现场读数：`python tools/formalization_audit.py`（§2 列出每个自证节点的消费方）。
+unwired:
+  PPHI2_FIXED_VOLUME_FREE_FIELD_MEASURE_LIMIT:
+    reason: >-
+      This is the concrete fixed-volume periodic free-field weak-limit endpoint.
+      It is not currently a borrowed input to the interacting R^2 construction
+      or another milestone, so it remains a standalone registered theorem rather
+      than being connected to an unrelated dependency closure.
+  GFF_COV_SYMMETRIC:
+    reason: >-
+      **决策（2026-10-15）：长期不接线。** 它是 `GFF_COV_*` 族的**组件**（两点核的交换对称），
+      而该族的消费方（RP / OS2 一线）目前**不以** `requires` 消费任何 `GFF_COV_*` 组件 ——
+      判据：组件不是上位节点的**借用设施**（对照本段 OS3/OS4/Wick 三条的同一判据）。
+      图中无 requires 消费方。本节点登记的是 `S4.lean` 的两点函数交换对称（`Schwinger.s4_symmetric`）；
+      RP/OS 一线上位节点（如 `RP_COVARIANCE`）未以 requires 指向它 ⇒ 该项形式化当前
+      不影响任何里程碑状态。是否需要接线属数学依赖判断，未在审计轮擅自加边。
+  # ---- 2026-10-15 **销账**：`GJ_1841_ASSEMBLY` 的接线决策 = **接线**（不再是本段登记项）----
+  # 同轮一次做完：① `set-requires PPHI2_ACTIVITY_BOUND` 追加 `GJ_1841_FOREST_BOUND,
+  # GJ_1841_ASSEMBLY`（核 B 的装配步 `(18.4.1)`；该节点 requires 里本就有五个同类 GJ 组件
+  # ⇒ 这两条边是**漏接**而非设计）；② 同轮改论文口径（`paper/PPH2_completion` 的
+  # `sections/front.tex` / `sections/comparison.tex` / `sections/lean.tex` + `audit/audit.py`
+  # 的期望）并重跑两篇 `build_all.py`；③ 判据 C3 的「过期登记」当场变红即本销账的机器见证。
+  # 依据：docs/reports/AIMATH_FORMALIZATION_CONTRACT_20261012.md §5.3 / §9。
+  PPHI2_URSELL_CORE:
+    reason: >-
+      **决策（2026-10-15）：长期不接线（子块 ≠ 上位陈述）。** 它覆盖 `PPHI2_CE_URSELL` 的
+      **五块**（`(2.2)` 递推骨架 + 引理 3.1「不连通 ⇒ 0」的**一般形式** + **定理 3.2 本体**
+      `ursell_eq_connSum` + 割边因子化的几何引擎 + 边集簿记），
+      既不足以把 `PPHI2_CE_URSELL` 升到 `FORMALIZED`（该节点的注册陈述含四项：指数公式 `(2.1)`、
+      连通性**双向**引理 3.1、连通图公式 3.2、树图界 3.3 —— 本契约覆盖了 3.2 与 3.1 的一个方向），
+      也不该让闭包误以为核已机器化。**加边在这里是错的**：上位依赖的是**全文**，不是自己的弱化版；
+      故判为**长期不接线**，而不是"待补齐后接线"。
+      仍在的硬缺口（若日后补齐**全文**，则按 FS4D 模式 `OS1_FREE_SCALAR → OS_AXIOMS_FREE_SCALAR`
+      一次接线并销掉本登记）：**引理 3.1 的另一半**（`𝕀(S)` 连通 ⇒ `φ ≠ 0`，即一般连通块的
+      `connSum I S ≠ 0`；路线见 `formal/lean/pphi2_formalization_plan.md`
+      §4.17.13–§4.17.20 的割边因子化归纳）与定理 3.3（树图界）。
+  PPHI2_WICK_FINITE_DIM:
+    reason: >-
+      **决策（2026-10-15）：长期不接线（子块 ≠ 上位陈述）。** 图中无 requires 消费方，且**有意不接线**：它覆盖 `PPHI2_WICK_ORDERING` 的**有限维/定义层**
+      （`Wick.lean` 的 Wick 幂 + `HermiteDeriv.lean` 的 Mathlib 缺口 `Polynomial.derivative_hermite`
+      + `WickBridge.lean` 的 `wick_eq_hermite` 桥），而 `PPHI2_WICK_ORDERING` 的注册陈述是
+      **二维 UV 有限性**（`K₀ ∈ L^p_loc(ℝ²)` + 局部 Wick 幂存在性）—— 本契约既不含正交性、
+      也不含二维局部存在性 ⇒ 不足以把后者升到 `FORMALIZED`。
+      `PPHI2_WICK_ORDERING` 的 scope 逐字记「不主张 S1 的 Lean 片段已建 —— P0（有限维 Wick/Hermite
+      恒等式 + 正交性）只是下一步」：本节点即该 P0 的**已建部分**（正交性仍未做）。
+      ⇒ 同型**建成即登记**；待正交性（`E[:X^n: :X^m:] = δ_nm n! c^n`）与单混沌超压缩补齐后
+      再决定接线，届时同轮处理论文口径。
+  PPHI2_NELSON_LAYERCAKE:
+    reason: >-
+      **决策（2026-10-15）：长期不接线（子块 ≠ 上位陈述，且该路线已被证伪）。** 图中无 requires 消费方，且**有意不接线**：它只冻结**层饼引擎**的三条不等式
+      （引理 6.1 + 引理 4.10 的 `t₀`-劈裂抽象形），而 `PPHI2_NELSON_VOLUME` 的注册陈述是
+      **体积均匀界 (V) 本体**。更关键：**引理 4.10 的结论已被数值证伪**
+      （`verify/pphi2_layercake_asymptotics_probe.py`：大 `M` 段 `~ e^{Θ(|Λ|log²|Λ|)}`），
+      故这条路线**不足以**证明 (V) ⇒ 接线会让闭包误以为 (V) 有 Lean 支撑。
+      引擎本身正确且可复用（任何层饼型估计都用它），故按**建成即登记**保留为独立节点；
+      待 (V) 的**正确**路线（指数矩/超压缩，见 `proofs/pphi2_V_route_analysis.md` §3–§4）
+      形式化后再评估接线。
+  OS3_CONVOLUTION_DECAY:
+    reason: >-
+      **决策（2026-10-15）：长期不接线（组件在节点自身内容之内，不是借用设施）。**
+      `lem:conv` 是 OS3 公理证明**内部**的一步；`OS3_FREE_SCALAR` 的 requires 是 RP / Schur /
+      Wick 这类**独立设施**，不含自身证明内部的步骤 ⇒ 加边会混淆「内部步骤」与「外部输入」。
+      图中无 requires 消费方。本节点是 OS3 链的 `lem:conv` 组件（`OS3.conv_decay` /
+      `OS3.div_two_rpow_neg`，声明的**口径弱化**见其 note）；`OS3_FREE_SCALAR`（PROVED_PAPER）
+      未以 requires 指向它，且该链其余 `lem:decay`/`lem:averaged`/`thm:cluster`/`thm:ergodic`
+      尚未形式化 ⇒ 单接一个组件不改变 OS3 的 Lean 状态。
+  OS4_GAUSS_DERIVATIVE:
+    reason: >-
+      **决策（2026-10-15）：长期不接线（同 OS3：组件在节点自身内容之内）。**
+      `eq:gaussianderiv` 是 OS4 证明**内部**的一步（`OS4_FREE_SCALAR` 的 requires 只列
+      S1/Schwinger/ergodicity/Wick 四个独立设施）。
+      图中无 requires 消费方。本节点是 `eq:gaussianderiv` 的 `k = 1, 2` 与归纳步
+      （`OS4.hasDerivAt_gaussExp` / `deriv_gauss` / `deriv2_gauss`）；一般 `k` 归纳、参数积分
+      求导、径向界与 `thm:os4` 组装**不在**本契约内（见其 note）⇒ 它**不是** `OS4_FREE_SCALAR`
+      的完整形式化，故未接线。
+  WICK_FINITE_DIM_GAUSS_WICK:
+    reason: >-
+      **决策（2026-10-15）：长期不接线（有限维核是桥的**内部情形**，不是借用设施）。**
+      `WICK_INFINITE_DIM_BRIDGE` 的注册陈述是**无限维**桥（其 Lean 前沿 `LEAN_WICK_INFINITE_DIM`
+      仍 open）；有限维 Gauss–Wick 是它在有限维的实例 —— 与 OS3/OS4 同判据。
+      待无限维桥本体形式化后，若契约覆盖上位**全文**，再按 FS4D 模式评估接线。
+      图中无 requires 消费方。本节点是有限维 Gauss–Wick 全 `n` 的代数核心（`requires` 闭包为空、
+      Mathlib-only）；其上位「无限维 Wick 桥」（`WICK_INFINITE_DIM_BRIDGE`）未以 requires 指向它，
+      而该桥本身是 open 前沿（`LEAN_WICK_INFINITE_DIM`）。

@@ -1,0 +1,12 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#check CFC.sq_sqrt
+#check CFC.sqrt_nonneg
+#check CFC.sqrt_eq_cfc
+#check Matrix.PosSemidef.isHermitian
+#check Matrix.mul_apply
+#check Matrix.mulVec
+#check Matrix.toLin
+#check Matrix.toLin_mul
+#check Matrix.dotProduct_mulVec
+#check Matrix.mulVecLin
+#check Matrix.mulVec_mulVec

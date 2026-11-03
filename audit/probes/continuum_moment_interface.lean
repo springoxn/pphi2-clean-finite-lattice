@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.ContinuumMoment
+#print axioms Pphi2Clean.Continuum.uniform_integral_bound_passes_to_weak_limit

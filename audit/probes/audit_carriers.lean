@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.PeriodicNegativeSobolevCarriers
+#print axioms Pphi2Clean.Continuum.summable_periodicHMinusTwoFullWeight
+#print axioms Pphi2Clean.Continuum.summable_periodicHMinusThreeWeight

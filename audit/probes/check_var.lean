@@ -1,0 +1,6 @@
+import AImathPPhi2Clean.PhysicalLatticeGaussianLaw
+open MeasureTheory ProbabilityTheory
+#check variance_eq_integral
+#check integral_finset_sum
+#check inner_pi_L2
+#check EuclideanSpace.inner_eq

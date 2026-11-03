@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.NelsonBridge
+#print axioms Pphi2Clean.Nelson.measure_le_neg_of_smooth_rough_split
+#print axioms Pphi2Clean.Nelson.expSqNeg_lintegral_le_of_dynamical_cutoff

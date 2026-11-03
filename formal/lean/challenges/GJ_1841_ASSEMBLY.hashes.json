@@ -1,0 +1,9 @@
+{
+ "Pphi2Block.card_connectedComponent_le_card_of_meets": "adf38623a01956f6",
+ "Pphi2Block.card_linesIn_eq_card_edgeSet": "45afc5e5e789981f",
+ "Pphi2Block.card_sub_one_le_two_mul_card": "0a0f156b280a3bf0",
+ "Pphi2Block.gj_1841": "68c058f83707e437",
+ "Pphi2Block.gj_1841_enhanced": "b3e68cba00b86d07",
+ "Pphi2Block.glueGraph_reachable_iff_sqGraph_reachable": "f16f014040d4e669",
+ "Pphi2Block.sqGraph_reachable_of_glue_component": "6267bf67680027dc"
+}

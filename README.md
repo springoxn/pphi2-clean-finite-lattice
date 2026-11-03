@@ -34,10 +34,9 @@ injected.
 | Interface | the lift to an arbitrary test space is continuous and measurable, equals evaluation on the induced test field, and transports $L^2$ bounds uniformly over a family |
 
 Current source-derived totals (recomputed by `python verify.py --count`):
-90 modules, 13511 lines and 800 declarations, of which 569 are
-theorem-level.  That is the 89 modules and 13505 lines that the companion
-manuscript counts, plus the six-line release entry point
-`FixedVolumeWeakLimit.lean`.  The axiom-report query count (64), per-module
+89 modules, 13505 lines and 800 declarations, of which 569 are
+theorem-level -- the same numbers the companion manuscript quotes, because the
+build recomputes them rather than typing them.  The axiom-report query count (64), per-module
 interface certificates (27) and build-job count (8878) belong to the pinned
 archive evidence and are not counts of this newer weak-limit extension.
 `PROVENANCE.md` separates these layers.
@@ -70,11 +69,11 @@ Gaussian marginal, Borel generation by cylinders, and measure uniqueness. The
 identified limit is an actual Borel probability measure, denoted
 $\mu_{\mathrm{free}}$ in the companion manuscript.
 
-The public Lean entry point is `AImathPPhi2Clean.FixedVolumeWeakLimit`; build it
-with:
+The public Lean entry point is `AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal`;
+build it with:
 
 ```bash
-lake build AImathPPhi2Clean.FixedVolumeWeakLimit
+lake build AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal
 ```
 
 The main declaration is
@@ -160,7 +159,7 @@ Toolchain and dependency are pinned:
 
 ```bash
 lake build AImathPPhi2Clean
-lake build AImathPPhi2Clean.FixedVolumeWeakLimit
+lake build AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal
 ```
 
 Mathlib is a git dependency; `lake exe cache get` fetches the prebuilt

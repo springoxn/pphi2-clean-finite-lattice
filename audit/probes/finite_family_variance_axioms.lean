@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.FiniteRealFamilyVarianceIdentity
+#print axioms Pphi2Clean.Continuum.physicalFamilyEvalMeasure_projectedVariance_eq_covariance_quadratic

@@ -1,0 +1,5 @@
+import AImathPPhi2Clean
+#print axioms Pphi2Clean.Continuum.fixedVolumeCovarianceInner
+#print axioms Pphi2Clean.Continuum.FixedVolumeFourierInterface
+#print axioms Pphi2Clean.Continuum.fixedVolume_covariance_inner_tendsto_of_fourier_interface
+#print axioms Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_covariance_tendsto_of_fourier_interface

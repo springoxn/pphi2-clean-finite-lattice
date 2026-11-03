@@ -1,0 +1,11 @@
+-- 本文件由 `python tools/lean_challenge.py --init` 生成，请勿手改；要改陈述请改注册表并重跑。
+-- 节点: PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT
+-- 本文件只含「陈述冻结 + 公理足迹」，不含任何证明。
+import AImathPPhi2Clean.PeriodicFourierCovarianceLimit
+
+#check @Pphi2Clean.Continuum.fixedVolumeCovarianceInner_tendsto_torusFourierGreenPairing
+#print axioms Pphi2Clean.Continuum.fixedVolumeCovarianceInner_tendsto_torusFourierGreenPairing
+#check @Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_mixedMoment_tendsto_torusFourierGreenPairing
+#print axioms Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_mixedMoment_tendsto_torusFourierGreenPairing
+#check @Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_covariance_tendsto_torusFourierGreenPairing
+#print axioms Pphi2Clean.Continuum.physicalGJMeasure_fixedVolume_covariance_tendsto_torusFourierGreenPairing

@@ -1,0 +1,5 @@
+import AImathPPhi2Clean.PolynomialCoefficientDecay
+#print axioms Pphi2Clean.Continuum.inverseSquare_summable
+#print axioms Pphi2Clean.Continuum.weighted_coefficient_le
+#print axioms Pphi2Clean.Continuum.weighted_coefficients_summable
+#print axioms Pphi2Clean.Continuum.weighted_coefficients_tsum_le

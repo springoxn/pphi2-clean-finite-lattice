@@ -41,10 +41,12 @@ PAPER = HERE.parent
 ROOT = PAPER.parent.parent          # E:\study\AImath
 OUT = PAPER / "generated" / "metrics.tex"
 
-CLEAN_LIB = ROOT / "formal" / "lean" / "s6" / "pphi2_clean" / "AImathPPhi2Clean"
-CLEAN_AUDIT = ROOT / "formal" / "lean" / "s6" / "pphi2_clean" / "audit"
-ROOT_LEAN = ROOT / "formal" / "lean" / "s6"
-REGISTRY = ROOT / "formal" / "lean" / "challenges" / "_registry.yaml"
+from _layout import package, probe_dir, registry, root_development
+PKG = package()
+CLEAN_LIB = PKG / "AImathPPhi2Clean"
+CLEAN_AUDIT = probe_dir(PKG)
+ROOT_LEAN = root_development()
+REGISTRY = registry()
 
 CHAIN_CONTRACTS = ("PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT",
                    "PPHI2_FIXED_VOLUME_FREE_FIELD_MEASURE_LIMIT")
@@ -122,7 +124,7 @@ def registry_counts():
 
 def toolchain() -> str:
     for cand in (ROOT / ".local-lean" / "S6Isserlis" / "lean-toolchain",
-                 ROOT / "formal" / "lean" / "s6" / "pphi2_clean" / "lean-toolchain"):
+                 PKG / "lean-toolchain"):
         if cand.exists():
             txt = cand.read_text(encoding="utf-8", errors="replace").strip()
             if ":" in txt:
@@ -138,7 +140,7 @@ def unreachable_modules() -> int:
     the number of modules on disk that the traversal never enters.  This is the
     number Part II's boundary section quotes, so it is computed rather than typed.
     """
-    root_file = ROOT / "formal" / "lean" / "s6" / "pphi2_clean" / "AImathPPhi2Clean.lean"
+    root_file = PKG / "AImathPPhi2Clean.lean"
     if not root_file.exists() or not CLEAN_LIB.is_dir():
         return 0
     imp = re.compile(r"^import\s+AImathPPhi2Clean\.([A-Za-z0-9_]+)\s*$", re.M)
@@ -158,7 +160,7 @@ def unreachable_modules() -> int:
 
 def unreachable_module_names() -> set:
     """The same set as ``unreachable_modules``, as names (see that docstring)."""
-    root_file = ROOT / "formal" / "lean" / "s6" / "pphi2_clean" / "AImathPPhi2Clean.lean"
+    root_file = PKG / "AImathPPhi2Clean.lean"
     if not root_file.exists() or not CLEAN_LIB.is_dir():
         return set()
     imp = re.compile(r"^import\s+AImathPPhi2Clean\.([A-Za-z0-9_]+)\s*$", re.M)

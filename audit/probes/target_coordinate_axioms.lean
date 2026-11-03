@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#print axioms Pphi2Clean.Continuum.targetCoordinateMeasure_hasGaussianLaw
+#print axioms Pphi2Clean.Continuum.targetCoordinateMeasure_covariance_entry

@@ -48,7 +48,8 @@ GENERATED = PAPER / "generated"
 MAIN = PAPER / "main.tex"
 BIB = PAPER / "refs.bib"
 TRANSCRIPT = PAPER / "ext" / "axiom_transcript.txt"
-REGISTRY = PAPER.parent.parent / "formal" / "lean" / "challenges" / "_registry.yaml"
+from _layout import package, registry
+REGISTRY = registry()
 
 LEAN_REF = re.compile(r"\\lean\{([^}]*)\}")
 # generated/ledger.tex typesets names with \detokenize (underscores are otherwise
@@ -140,7 +141,7 @@ def lean_declarations() -> set:
     if "v" in _DECL_CACHE:
         return _DECL_CACHE["v"]
     out = set()
-    root = PAPER.parent.parent / "formal" / "lean" / "s6" / "pphi2_clean" / "AImathPPhi2Clean"
+    root = package() / "AImathPPhi2Clean"
     for f in sorted(root.rglob("*.lean")) if root.exists() else []:
         try:
             text = f.read_text(encoding="utf-8", errors="replace")

@@ -1,0 +1,11 @@
+{
+ "Polynomial.derivative_hermite": "ac84d6987259c794",
+ "Wick.natDegree_wick_le": "cf3748cd27a7c557",
+ "Wick.wick_add_two": "287e782900150529",
+ "Wick.wick_four": "2ee5d3b8d2fb91e7",
+ "Wick.wick_one": "0bcd37ca57a377c5",
+ "Wick.wick_three": "33ee3ff210c3f431",
+ "Wick.wick_two": "d81f88435557eac4",
+ "Wick.wick_zero": "cd17d821d8d95d71",
+ "WickBridge.wick_eq_hermite": "14200b6de58964c4"
+}

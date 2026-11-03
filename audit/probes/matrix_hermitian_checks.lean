@@ -1,0 +1,7 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#check Matrix.posSemidef_iff_dotProduct_mulVec
+#check Matrix.isHermitian_iff
+#check Matrix.isHermitian_iff_transpose
+#check Matrix.IsHermitian
+#check Matrix.isHermitian_iff_eq_conjTranspose
+#check Matrix.conjTranspose_apply
