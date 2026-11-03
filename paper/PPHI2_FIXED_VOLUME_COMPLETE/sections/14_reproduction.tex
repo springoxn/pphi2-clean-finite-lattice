@@ -45,6 +45,15 @@ from whatever the generated files currently contain. It is what a reader who
 wants only the document runs, and it proves nothing about the sources: a stale
 generated file compiles as happily as a fresh one.
 
+One property of the build is worth stating because a digest of the output depends
+on it. Tectonic stamps the PDF with the wall clock, so two compiles of unchanged
+sources used to produce two different files, and every recorded digest of the PDF
+went stale for a reason that had nothing to do with the paper.
+\texttt{build\_all.py} therefore pins \texttt{SOURCE\_DATE\_EPOCH}, and the build
+is byte-reproducible: compiling the same sources twice yields the same SHA-256,
+which is what makes the digest in \lmod{build/LAST\_BUILD.txt} a property of the
+sources rather than of the afternoon.
+
 The footprints are reproduced in the separate project, in two steps, using the
 recorded commands. First the declaring module is built, which populates the
 object files that the second step reads. Then a short file is written whose

@@ -153,6 +153,12 @@ def main(argv) -> int:
     seed_cache(cache)
     env = dict(os.environ)
     env["TECTONIC_CACHE_DIR"] = str(cache)
+    # Tectonic stamps the PDF with the wall clock, so two compiles of the same
+    # sources produce different bytes and every recorded digest goes stale for a
+    # reason that has nothing to do with the paper.  Fixing the epoch makes the
+    # build reproducible: same tree, same bytes, same digest.  2026-11-03 UTC is
+    # the date this manuscript was last revised.
+    env["SOURCE_DATE_EPOCH"] = "1793664000"
     # an offline cache is enough; if it is incomplete Tectonic needs a route out
     for var in ("HTTP_PROXY", "HTTPS_PROXY"):
         env.setdefault(var, "http://127.0.0.1:7890")
