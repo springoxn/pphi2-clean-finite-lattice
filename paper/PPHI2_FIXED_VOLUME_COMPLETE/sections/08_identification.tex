@@ -1,0 +1,144 @@
+% ==========================================================================
+%  Section 8 -- Cylinder uniqueness and identification.  Owner: W08.
+%  Frozen labels: sec:identification, thm:cylinder-uniqueness,
+%  lem:subsequence-marginals.
+%
+%  Two statements, kept apart on purpose.  thm:cylinder-uniqueness is about
+%  the carrier alone: two Borel PROBABILITY measures that agree on every
+%  finite cylinder set coincide, and it is the probability hypothesis that
+%  makes the pi-lambda step valid.  lem:subsequence-marginals is about the
+%  sequence alone: a limit point extracted from (mu_N) inherits the target
+%  marginals of thm:finite-family.  Neither is a uniqueness statement about
+%  a filter limit; the characterisation lives in sec:main and is proved
+%  there from these two results.
+% ==========================================================================
+\section{Cylinder uniqueness and identification}\label{sec:identification}
+
+This section supplies the two statements that turn a tight family into one
+identified limit, and it keeps them separate because they answer different
+questions. \Cref{thm:cylinder-uniqueness} is a statement about the carrier
+alone: two Borel probability measures there which agree on every finite cylinder
+set are equal. \Cref{lem:subsequence-marginals} is a statement about the
+sequence alone: a weak limit point extracted from $(\mu_N)$ inherits the finite
+marginals that \cref{thm:finite-family} establishes for the sequence. The first
+says that the target marginal family admits at most one measure; the second says
+that every limit point is a measure admitted by it. Together they say that the
+limit points of the sequence are one point, which is the conclusion
+\cref{sec:main} draws. Neither statement identifies the limit with an operator,
+and neither is used as if it did.
+
+\subsection{Determination by cylinders}
+
+Throughout, a \emph{cylinder set} is a set of the form
+$\Pi_F^{-1}(B)\subseteq\mathcal C$, where $F$ is a finite tuple of modes,
+$\Pi_F$ is the finite-mode coordinate map of \cref{def:cylinder-map} and
+$B$ is a Borel subset of the finite-dimensional target of $\Pi_F$.
+
+\begin{theorem}[Cylinder-to-Borel uniqueness]\label{thm:cylinder-uniqueness}
+Let $\mu$ and $\nu$ be Borel \emph{probability} measures on the carrier
+$\mathcal C$. If $\mu(A)=\nu(A)$ for every cylinder set $A$, then $\mu=\nu$.
+Equivalently: if all finite-coordinate pushforward laws of $\mu$ and $\nu$
+coincide, then $\mu=\nu$.
+\end{theorem}
+
+\begin{proof}
+\emph{(i) The cylinders form a $\pi$-system of Borel sets.} Let
+$A=\Pi_F^{-1}(B)$ and $A'=\Pi_{F'}^{-1}(B')$ be cylinder sets. The map
+$\Pi_{F\cup F'}$ of the concatenated tuple has $\Pi_F$ and $\Pi_{F'}$ among its
+coordinate projections, so $A\cap A'$ is the preimage under $\Pi_{F\cup F'}$ of
+a Borel set, hence a cylinder set. Each cylinder set is Borel, because $\Pi_F$ is
+continuous (\cref{lem:coordinate-embedding}); so this family is a $\pi$-system
+contained in $\mathcal B(\mathcal C)$.
+
+\emph{(ii) It generates the Borel sigma algebra.} Two inclusions.
+\emph{$\subseteq$:} each $\Pi_F$ is continuous (\cref{lem:coordinate-embedding}), so
+$\sigma(\Pi_F)\subseteq\mathcal B(\mathcal C)$.
+\emph{$\supseteq$:} the tuple $((k,\mathrm c))$ is admissible, so
+$\Re c_k=\Pi_{((k,\mathrm c))}$ is $\sigma(\Pi_F)$-measurable; likewise
+$-\Im c_k=\Pi_{((k,\mathrm s))}$, again for every $k$, the zero mode included.
+Hence each coordinate functional $\pi_k=\Re c_k+i\Im c_k$ is measurable for
+$\sigma(\Pi_F)$, so $\sigma(\pi_k:k\in\Z^2)\subseteq\sigma(\Pi_F)$, and
+$\sigma(\pi_k)=\mathcal B(\mathcal C)$ by \cref{thm:cylinder-borel}; separability
+enters through that last step, via \cref{thm:separable}.
+The second inclusion is the only place where the definition of
+\cref{def:cylinder-map} is used, and it is not decorative: were the family
+restricted to one label per mode, the two probability measures $\delta_{0}$ and
+$\delta_{ie_0}$ on $\mathcal C$ --- where $e_0$ is the unit vector at the zero
+mode --- would have identical marginals over the restricted family and differ in
+the sine slot at $k=0$, so \cref{thm:cylinder-uniqueness} would fail.
+
+\emph{(iii) The Dynkin step.} Fix $\mu$ and put
+$\mathcal D:=\{A\in\mathcal B(\mathcal C):\mu(A)=\nu(A)\}$. It contains every
+cylinder set by hypothesis. It contains $\mathcal C$ itself, because
+$\mu(\mathcal C)=\nu(\mathcal C)=1$. It is a $\lambda$-system: if $A\subseteq A'$
+both lie in $\mathcal D$ then
+$\mu(A'\setminus A)=\mu(A')-\mu(A)=\nu(A')-\nu(A)=\nu(A'\setminus A)$, and if
+$A_1,A_2,\dots\in\mathcal D$ are pairwise disjoint then countable additivity of
+both measures gives
+$\mu(\bigcup_jA_j)=\sum_j\mu(A_j)=\sum_j\nu(A_j)=\nu(\bigcup_jA_j)$. By Dynkin's
+$\pi$--$\lambda$ theorem a $\lambda$-system containing a $\pi$-system contains
+the sigma algebra that $\pi$-system generates, so by (i) and (ii)
+$\mathcal D=\mathcal B(\mathcal C)$, that is $\mu=\nu$.
+
+\emph{(iv) Where the word probability is used, and what the conclusion buys.}
+Steps (ii) and (iii) hold for any two finite measures of equal total mass; it is
+the hypothesis that both are probability measures which makes that total mass
+equal, and the hypothesis cannot be dropped. For two infinite measures agreeing
+on every cylinder set, the difference in Step (iii) is undefined at the first
+complement, and equality of total mass is exactly what is missing. From
+$\mu=\nu$ we obtain equality of integrals of every bounded Borel function, and
+every bounded continuous function $\mathcal C\to\R$ is Borel because it is
+continuous. The sigma algebra equality (ii) is what makes ``agrees on every
+cylinder'' and ``has the same law'' the same requirement.
+\end{proof}
+
+\subsection{A subsequential limit inherits the target marginals}
+
+The second statement is the only place where the marginal theorem of
+\cref{sec:marginals} meets the extraction theorem of \cref{sec:tightness}. It
+says nothing about how many limit points there are.
+
+\begin{lemma}[A subsequential limit inherits the target marginals]\label{lem:subsequence-marginals}
+Let $L>0$, let $m>0$, let $(\mu_N)$ be the sequence \eqref{eq:finite-source-law}
+of finite-source Fourier pushforwards, let $(N_j)$ be a strictly increasing
+sequence of indices and suppose that $\mu_{N_j}\Rightarrow\mu$ weakly on
+$\mathcal C$. Then for every finite tuple $F$ of modes the pushforward
+$(\Pi_F)_*\mu$ is the resolvent Gaussian law $\Lambda_F$ that
+\cref{thm:finite-family} records as the limit of the finite-mode laws
+$(\Pi_F)_*\mu_N$.
+\end{lemma}
+
+\begin{proof}
+Fix $F$, and abbreviate $\mu_N^F:=(\Pi_F)_*\mu_N$ and
+$\mu^F:=(\Pi_F)_*\mu$. The map $\Pi_F$ is continuous
+(\cref{lem:coordinate-embedding}), and a continuous image of a weakly convergent
+sequence of Borel probability measures converges weakly to the image of the
+limit: for every bounded continuous $\psi$ on the finite-dimensional target, the
+composition $\psi\circ\Pi_F$ is bounded and continuous on $\mathcal C$, so
+\[
+  \int\psi\,\dd\mu_{N_j}^F
+  =\int(\psi\circ\Pi_F)\,\dd\mu_{N_j}
+  \longrightarrow\int(\psi\circ\Pi_F)\,\dd\mu
+  =\int\psi\,\dd\mu^F .
+\]
+Hence $\mu_{N_j}^F\Rightarrow\mu^F$. For the second limit, note what
+$\mu_N^F$ is: the stored coordinate at a mode is $\sqrt{w_3}$ times the Fourier
+coordinate, so its law is the image of the law of the real cosine and sine
+coefficients of that mode under the fixed reassembly map which multiplies by
+$\sqrt{w_3}$ (\cref{def:cylinder-map}). By \cref{thm:finite-family} the laws of
+those real coefficients converge weakly, for every finite family of test
+functions, to the resolvent Gaussian law; a fixed continuous reassembly carries
+that convergence to $\Lambda_F$, and a subsequence of a convergent sequence has
+the same limit. Hence $\mu_{N_j}^F\Rightarrow\Lambda_F$. The target of $\Pi_F$
+is a metric space, so its Borel probability measures with the weak topology form
+a Hausdorff space, in which a sequence has at most one limit; therefore
+$\mu^F=\Lambda_F$.
+\end{proof}
+
+These two results are the last probabilistic steps of Part~I. What stands
+between them and the theorem is purely topological: at this point one knows that
+every subsequence of $(\mu_N)$ has a further subsequence converging to one and
+the same measure, and the passage from that statement to convergence of the
+whole sequence mentions no measure and no probability at all. \Cref{sec:main}
+makes that passage, as Step~5 of the proof of \cref{thm:main}, and names the
+external fact it uses (\cref{ext:subseq}).

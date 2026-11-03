@@ -1,0 +1,267 @@
+% ==========================================================================
+%  Section 3 -- The lattice free field and its physical-volume law.  Owner: W03.
+%  Frozen labels (CONTRACT section 4): sec:lattice, def:lattice-laplacian,
+%  prop:operator, def:gj-measure, def:finite-source-lift, rem:lattice-input,
+%  lem:haar-lebesgue; added here: lem:finite-parseval and the eq: labels.
+%
+%  Proved in this file: the eigenfunction identity and the positivity bound
+%  (prop:operator), finite Parseval (lem:finite-parseval), the Haar normalisation
+%  (lem:haar-lebesgue).  Defined: the Gaussian operator and its symbol, the
+%  physical lattice Gaussian law, the finite-source Fourier lift and its law.
+%  The lattice covariance is an input (rem:lattice-input).  Nothing here states
+%  a limit; the two limits are named in the closing paragraph.
+% ==========================================================================
+\section{The lattice free field and its physical-volume law}\label{sec:lattice}
+
+This section fixes the two objects that Part~I consumes. \Cref{def:lattice-laplacian} introduces the
+discrete Laplacian and the Gaussian operator; \cref{prop:operator} proves the eigenfunction identity and
+the positivity bound that every later estimate uses. \Cref{lem:finite-parseval} is the one estimate of the
+paper that spends boundedness, \cref{def:gj-measure} is the physical lattice Gaussian law, and
+\cref{def:finite-source-lift} carries that law to the weighted Fourier side. \Cref{lem:haar-lebesgue}
+reconciles the two Fourier normalisations of \cref{rem:v-normalisation}. Two points made in passing matter
+later: the lattice covariance is an input and not derived here (\cref{rem:lattice-input}), and the spacing
+enters more than once, in different powers (\cref{def:gj-measure}).
+
+\subsection{The discrete Laplacian and the Gaussian operator}
+
+\begin{definition}[The discrete Laplacian and the Gaussian operator]\label{def:lattice-laplacian}
+Let $N\ge1$ and $a=L/N$ as in \cref{hyp:volume}. A \emph{configuration} is a real function $\omega$ on the
+lattice $I_N=(\Z/N\Z)^2$ of \cref{def:modes}; the lattice configuration space is $\R^{I_N}$, and we also
+admit complex $u:I_N\to\C$. With $e_1,e_2$ the unit residues, the \emph{discrete Laplacian} is
+\begin{equation}\label{eq:laplacian}
+  (\Delta_au)(x):=a^{-2}\sum_{i=1}^{2}\bigl(u(x+e_i)+u(x-e_i)-2u(x)\bigr),
+\end{equation}
+the two oriented neighbours being subtracted and added exactly once, so that \eqref{eq:laplacian} keeps
+its form even when $N\le2$. The \emph{Gaussian operator} is
+\begin{equation}\label{eq:gaussian-operator}
+  Q:=m^2-\Delta_a ,
+\end{equation}
+and we write $A_N:=Q$ when $Q$ acts on configurations against the \emph{counting} inner product, the one
+attached to the vector space $\R^{I_N}$:
+\begin{equation}\label{eq:counting-inner-product}
+  \ip{u}{v}_{\mathrm{counting}}:=\sum_{x\in I_N}u(x)v(x),
+\end{equation}
+so that $A_N^{-1}$ is the inverse of $Q$. For $p\in I_N$ the \emph{character} at $p$ is the function
+\[
+  \chi_p(x):=\exp\bigl(2\pi i\,p\cdot x/N\bigr),\qquad x\in I_N ,
+\]
+the product $p\cdot x$ being read modulo $N$.
+\end{definition}
+
+\begin{proposition}[Operator facts]\label{prop:operator}
+$\Delta_a$ is a symmetric real matrix, hence self-adjoint, and $Q$ is positive definite with spectrum
+contained in $[m^2,\infty)$. Consequently $Q$ is invertible and has a positive square root $Q^{1/2}$, and
+$\C^{I_N}$ has an orthonormal basis of eigenvectors of $Q$. The eigenfunctions are the characters, with
+eigenvalues the symbol $\lambda_N$ of \eqref{eq:lattice-symbol}:
+\begin{equation}\label{eq:eigen-identity}
+  \Delta_a\chi_p=-4a^{-2}\Bigl(\sum_{i=1}^{2}\sin^2\frac{\pi p_i}{N}\Bigr)\chi_p ,
+  \qquad
+  Q\chi_p=\lambda_N(p)\,\chi_p ,
+\end{equation}
+and $\lambda_N(p)\ge m^2>0$ for every $p\in I_N$.
+\end{proposition}
+
+\begin{proof}
+\emph{The eigenfunction identity.} Translating the argument of a character multiplies it by a scalar: for
+$i=1,2$ and every $x$,
+\[
+  \chi_p(x+e_i)=\zeta_i\chi_p(x),\qquad \chi_p(x-e_i)=\zeta_i^{-1}\chi_p(x),
+  \qquad \zeta_i:=e^{2\pi ip_i/N},
+\]
+because $p_i(x_i+1)\equiv p_ix_i+p_i$ modulo $N$. Inserting this into \eqref{eq:laplacian} gives
+$(\Delta_a\chi_p)(x)=a^{-2}\sum_i(\zeta_i+\zeta_i^{-1}-2)\chi_p(x)$, and Euler's formula gives
+$\zeta_i+\zeta_i^{-1}-2=2\cos(2\pi p_i/N)-2=-4\sin^2(\pi p_i/N)$. Hence the eigenfunction identity of
+\eqref{eq:eigen-identity}; the relation $Q\chi_p=\lambda_N(p)\chi_p$ then follows from the definition
+\eqref{eq:lattice-symbol} of the symbol together with $Q=m^2-\Delta_a$.
+
+\emph{Positivity.} Each summand $4a^{-2}\sin^2(\pi p_i/N)$ of \eqref{eq:lattice-symbol} is a nonnegative
+real number, so $\lambda_N(p)\ge m^2$; and $m>0$ by \cref{hyp:volume}.
+
+\emph{An explicit orthonormal eigenbasis.} Summing the one-coordinate geometric series and using
+$\zeta^N=1$ for $\zeta=e^{2\pi i/N}$,
+\[
+  \sum_{x\in I_N}\chi_{-p}(x)\chi_q(x)
+  =\prod_{i=1}^{2}\sum_{x_i\in\Z/N\Z}e^{2\pi i(q_i-p_i)x_i/N}=N^2\mathbf 1_{p=q} ,
+\]
+so the $N^2$ characters are pairwise orthogonal and nonzero, hence a basis of $\C^{I_N}$; scaled by
+$N^{-1}$ they are orthonormal, and \eqref{eq:eigen-identity} makes each of them an eigenvector.
+
+\emph{Self-adjointness and the spectrum.} The coefficient of $u(y)$ in $(\Delta_au)(x)$ is $-2a^{-2}$ when
+$y=x$, $a^{-2}$ when $y-x=\pm e_i$ for one $i$, and $0$ otherwise; this is symmetric in $x$ and $y$, so
+$\Delta_a$ is a symmetric real matrix, hence self-adjoint, and $Q$ is too. On the basis just exhibited $Q$
+acts diagonally with the real entries $\lambda_N(p)$, so its spectrum is exactly
+$\{\lambda_N(p):p\in I_N\}\subseteq[m^2,\infty)$: the operator is positive definite, hence invertible. A
+positive definite symmetric matrix has a positive definite symmetric square root, and that is the
+finite-dimensional spectral theorem, the only fact named in this proof; the eigenbasis itself is
+exhibited above rather than postulated. Write $Q^{1/2}$ for that root.
+\end{proof}
+
+\begin{lemma}[Finite Parseval]\label{lem:finite-parseval}
+Let $f,g:\R^2\to\R$ be bounded, and for $p\in I_N$ let
+\begin{equation}\label{eq:sampled-coefficient}
+  F_N(p):=a^2\sum_{x\in I_N}f(ax)\,\chi_{-p}(x),\qquad
+  G_N(p):=a^2\sum_{x\in I_N}g(ax)\,\chi_{-p}(x)
+\end{equation}
+be the sampled coefficients at the physical points $ax$ of \cref{hyp:volume}, the factor $a^2$ being the
+area of one cell. Then
+\begin{equation}\label{eq:parseval}
+  \sum_{p\in I_N}\overline{F_N(p)}\,G_N(p)=Va^2\sum_{x\in I_N}f(ax)g(ax),
+  \qquad
+  \sum_{p\in I_N}\abs{F_N(p)}^2=Va^2\sum_{x\in I_N}\abs{f(ax)}^2\le V^2\norm{f}_\infty^2 .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Summing the one-coordinate geometric series over modes instead of over sites gives the dual orthogonality
+relation $\sum_{p\in I_N}\chi_p(x)\chi_{-p}(y)=N^2$ when $x=y$ and $0$ otherwise. Since $f$ is real,
+$\overline{\chi_{-p}(x)}=\chi_p(x)$; inserting \eqref{eq:sampled-coefficient} and interchanging the finite
+sums therefore collapses the cross terms onto the diagonal:
+\[
+  \sum_{p\in I_N}\overline{F_N(p)}\,G_N(p)
+  =a^4\!\!\sum_{x,y\in I_N}\!\!f(ax)g(ay)\sum_{p\in I_N}\chi_p(x)\chi_{-p}(y)
+  =a^4N^2\sum_{x\in I_N}f(ax)g(ax).
+\]
+The bilinear identity of \eqref{eq:parseval} follows from $a^2N^2=a^2\cdot L^2/a^2=V$; the diagonal one is
+the case $g=f$, and $a^2\sum_x\abs{f(ax)}^2\le a^2N^2\norm{f}_\infty^2=V\norm{f}_\infty^2$.
+\end{proof}
+
+This is the only place in Part~I where a test is spent through boundedness rather than through smoothness:
+the bound is $\norm{f}_\infty$ alone, and that is what lets \cref{sec:covariance} work with bounded
+continuous periodic tests and ask for no derivative.
+
+\subsection{The physical lattice Gaussian law}
+
+\begin{definition}[The physical lattice Gaussian law]\label{def:gj-measure}
+With $A_N=Q$ of \eqref{eq:gaussian-operator}, put
+\begin{equation}\label{eq:gj-covariance}
+  C_N:=a^{-1}A_N^{-1/2},\qquad\text{so that}\qquad C_N^2=a^{-2}A_N^{-1};
+\end{equation}
+the squared object $C_N^2$ is the covariance operator. The \emph{physical lattice Gaussian law}
+$\mu^{\mathrm{GJ}}_N$ is the centred Gaussian Borel probability measure on $\R^{I_N}$ that is the law of
+$C_N\xi$ for a standard Gaussian vector $\xi$ on $\R^{I_N}$, so that $C_N^2$ is its covariance operator. Its
+test averages are
+$\omega\mapsto\omega(f):=\sum_{x\in I_N}a^2f(ax)\,\omega(x)$, so that
+$\omega(f)=\ip{b}{\omega}_{\mathrm{counting}}$ with the sampled vector $b_x:=a^2f(ax)$, $x\in I_N$. For
+$b,c\in\R^{I_N}$ the covariance pairing is therefore
+\begin{equation}\label{eq:gj-pairing}
+  \ip{C_Nb}{C_Nc}=a^{-2}\ip{b}{A_N^{-1}c}_{\mathrm{counting}} .
+\end{equation}
+It is the factor $C_N$, not the operator $C_N^2$, that the rest of Part~I calls the lattice covariance.
+\end{definition}
+
+Only two properties of $\mu^{\mathrm{GJ}}_N$ are used later, and they are its operative content here. The
+mean is exactly zero: $\int\omega(f)\,\mu^{\mathrm{GJ}}_N(\dd\omega)=0$ for every bounded $f$, because
+$\omega(f)$ is linear in $\omega$ and the law is centred. The covariance is the inverse-mass identity
+\eqref{eq:gj-pairing} in sampled form: with $b_x=a^2f(ax)$ and $c_x=a^2g(ax)$,
+\begin{equation}\label{eq:sampled-covariance}
+  \operatorname{Cov}\bigl(\omega(f),\omega(g)\bigr)
+  =\ip{C_Nb}{C_Nc}
+  =a^{-2}\ip{b}{A_N^{-1}c}_{\mathrm{counting}}
+  =a^2\ip{f}{A_N^{-1}g}_{\mathrm{counting}} ,
+\end{equation}
+the last equality because the counting sum picks up one factor $a^2$ per sampled vector. No other
+property of $\mu^{\mathrm{GJ}}_N$ enters any estimate below.
+
+Where the powers of $a$ sit is worth stating once, explicitly, because the factors pull in opposite
+directions and a reader who cancels them gets a constant wrong. There are three occurrences and they have
+three different jobs. \emph{(i)} The cell area $a^2$ sits on the \emph{test evaluation}: it is the
+quadrature weight of the sum $\omega(f)=\sum_xa^2f(ax)\omega(x)$, hence part of the sampled vector
+$b_x=a^2f(ax)$ in \eqref{eq:sampled-covariance}. \emph{(ii)} The covariance factor carries
+$(a^2)^{-1/2}=a^{-1}$, and the pairing \eqref{eq:gj-pairing} squares it, so $a^{-2}$ sits on the bilinear
+form. \emph{(iii)} The
+same $a^2$ reappears inside the per-site vector of the lift \eqref{eq:lift}, where it is again the cell
+area and is again a quadrature weight, this time a Fourier one. The cancellation between \emph{(i)} and
+\emph{(ii)} is exact and leaves the single factor $a^2$ of \eqref{eq:sampled-covariance}, since
+$a^{-2}(a^2)^2=a^2$. The $a^2$ of \emph{(iii)} is not the inverse of the $a^{-2}$ of \emph{(ii)}: the two
+belong to different functionals, and neither may be cancelled against the other.
+
+\begin{remark}[The lattice covariance is an input]\label{rem:lattice-input}
+$C_N$ is data: \eqref{eq:gj-covariance} fixes it, and \cref{prop:operator} is what makes that
+specification consistent, since $Q$ is then invertible with a positive square root. It is not derived here
+from any field-theoretic construction, and no property of $C_N$ beyond exact zero mean and
+\eqref{eq:gj-pairing} is used anywhere below. The name GJ attached to this normalisation records which
+power of the spacing is meant --- namely $a^{-1}$ per factor in \eqref{eq:gj-covariance} --- and it is a
+name and not a citation: no step of the proof is taken from a reference.
+\end{remark}
+
+\subsection{The finite-source Fourier lift and its induced law}
+
+\begin{definition}[The finite-source Fourier lift]\label{def:finite-source-lift}
+For a configuration $\omega\in\R^{I_N}$ and a mode $p\in\Z^2$ put
+\begin{equation}\label{eq:lift}
+  (L_N\omega)(p):=\sqrt{w_3(p)}\;a^2\sum_{x\in I_N}\omega(x)\,e^{-2\pi i\,p\cdot(ax)/L},
+\end{equation}
+with $w_3$ the weight of \cref{def:modes}, and let
+\begin{equation}\label{eq:finite-source-law}
+  \mu_N:=(L_N)_*\,\mu^{\mathrm{GJ}}_N
+\end{equation}
+be the image of the law of \cref{def:gj-measure} under $L_N$.
+\end{definition}
+
+The phase in \eqref{eq:lift} is the physical one, $e^{-2\pi i\,p\cdot(ax)/L}$, and since $a/L=1/N$ it
+equals $\chi_{-p}(x)$: the lift is the discrete Fourier transform of the sampled field, not of the residue
+index, and that is what makes $a^2$ the cell area rather than a bookkeeping symbol. Because the phase has
+period $N$ in each component of $p$, the family \eqref{eq:lift} is the $N^2$-periodic repetition over
+$\Z^2$ of its values on $I_N$. Each entry is a finite real-linear combination of the coordinate
+evaluations $\omega\mapsto\omega(x)$, so $L_N$ is Borel as a map into $\C^{\Z^2}$; and $L_N$ lands in the
+carrier of \cref{def:carrier-hs}, not merely in some larger space, because with
+$\norm{\omega}_1:=\sum_x\abs{\omega(x)}$,
+\[
+  \sum_{p\in\Z^2}\abs{(L_N\omega)(p)}^2
+  \le a^4\norm{\omega}_1^2\sum_{p\in\Z^2}w_3(p)
+  =a^4\norm{\omega}_1^2\Bigl(1+\sum_{p\neq0}\norm{p}_\infty^{-6}\Bigr)<\infty
+\]
+by \cref{ext:summability}, and $w_3\le1$ makes every weighted sum of \cref{def:carrier-hs} no larger than
+this one. So \eqref{eq:finite-source-law} is the genuine pushforward of a Borel probability measure by a
+Borel map into the carrier: $\mu_N(A)=\mu^{\mathrm{GJ}}_N(L_N^{-1}A)$ for Borel $A$, and $\mu_N$ is a
+Borel probability measure there for every $N$.
+
+What \eqref{eq:finite-source-law} \emph{is} is a carrier-valued representative of the lattice measure
+itself, and \cref{lem:lift-representative} records this as a lemma: $L_N$ is total on the
+configuration space, Borel, and lands in the carrier. What is \emph{not} claimed anywhere is a
+statement about a total lift specified independently of $L_N$ --- in particular the series-defined
+total lift of the machine development, where the measurability of that chosen function is an input
+of the data structure rather than a construction (\cref{rem:lift-development}). The object of the
+law limit is $L_N$ and the measure $\mu_N$ of \eqref{eq:finite-source-law}.
+
+\subsection{Haar versus physical Lebesgue normalisation}
+
+\begin{lemma}[Haar-to-physical-Lebesgue normalisation]\label{lem:haar-lebesgue}
+Let $f$ be a bounded continuous $L$-periodic test, put $f_L(z):=f(Lz)$ for $z\in[0,1)^2$, and let $\dd z$
+be Lebesgue measure on the unit cell, of total mass $1$. The orthonormal coefficient of $f_L$ at
+$k\in\Z^2$ is
+\begin{equation}\label{eq:haar-coefficient}
+  (Bf_L)(k):=\int_{[0,1)^2}f(Lz)\,e^{-2\pi i\,k\cdot z}\,\dd z=V^{-1}F(k),
+\end{equation}
+with $F$ the integral-normalised coefficient \eqref{eq:fourier-coefficient} of \cref{def:torus}.
+\end{lemma}
+
+\begin{proof}
+Substituting $x=Lz$, so that $\dd x=L^2\dd z$ and $k\cdot z=k\cdot x/L$, three steps give the claim:
+\begin{align*}
+  (Bf_L)(k)
+  &=\int_{(0,1]^2}f(Lz)\,e^{-2\pi i\,k\cdot z}\,\dd z ,\\
+  &=\int_{[0,L]^2}f(x)\,e^{-2\pi i\,k\cdot x/L}\,L^{-2}\,\dd x ,\\
+  &=V^{-1}\int_{[0,L]^2}f(x)\,e^{-2\pi i\,k\cdot x/L}\,\dd x=V^{-1}F(k) .
+\end{align*}
+The half-open cell may be replaced by the closed one because the two differ by a Lebesgue-null set; the
+phase identity $k\cdot(Lz)=L\,(k\cdot z)$ holds for negative $k$ as written, with no conjugation; and
+$L^2=V$.
+\end{proof}
+
+This is the single easiest place in the paper to lose a factor of $L^d$, which in two dimensions is the
+volume $V$: a change of variables pays exactly one Jacobian, and substituting the orthonormal coefficient
+where the integral-normalised one is meant, inside a pairing that already carries its own $V^{-1}$
+(\cref{rem:v-normalisation}), loses that factor if it is done once and injects a spurious one if it is done
+twice.
+
+\subsection{The two limits taken later}
+
+Two limits are taken in what follows, and they are of different kinds. One is the covariance limit of
+\cref{sec:covariance}: the lattice covariance pairings \eqref{eq:sampled-covariance} of bounded continuous
+periodic tests are shown to converge as $N\to\infty$ at fixed $L$ and $m$, against an independently
+constructed resolvent. The other is the law limit of \cref{sec:tightness}--\cref{sec:main}: the object is
+the sequence $(\mu_N)$ of pushforwards \eqref{eq:finite-source-law}, each a Borel probability measure on
+the carrier, and the question is what a limit of that sequence on that carrier is. Which topology carries
+it, and what a limit there means, is fixed in \cref{sec:carrier}; the definitions above are what that
+section and the ones after it take as given.

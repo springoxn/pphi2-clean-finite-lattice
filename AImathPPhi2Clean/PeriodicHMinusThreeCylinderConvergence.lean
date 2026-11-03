@@ -86,11 +86,11 @@ theorem periodicHMinusThreeCylinderLaw_eq_complexifiedFamilyLaw
     (hperiod : 0 < L) (modes : Fin m → PeriodicFourierIndex)
     (hinput : PeriodicHMinusThreeLiftMeasureInput N a mass L ha hmass hperiod) :
     (periodicHMinusThreeLatticeProbabilityMeasure N a mass L ha hmass hperiod hinput).map
-        (periodicHMinusThreeCylinderMap m modes) =
+        (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable) =
       (physicalFamilyEvalProbabilityMeasure 2 N
         (Fintype.card (Fin m × Bool)) a mass ha hmass
         (periodicHMinusThreeCylinderTestFamily m L hperiod modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable) := by
   apply Subtype.ext
   change Measure.map (periodicHMinusThreeCylinderMap m modes)
       (periodicHMinusThreeLatticeMeasure N a mass L ha hmass hperiod) =
@@ -156,12 +156,12 @@ theorem periodicHMinusThreeCylinderProbabilityMeasure_tendsto_of_finite_family
       (fun n : ℕ => let N := n + 1; letI : NeZero N := ⟨Nat.succ_ne_zero n⟩
         (periodicHMinusThreeLatticeProbabilityMeasure N (L / (N : ℝ)) mass L
           (div_pos hL (Nat.cast_pos.mpr (Nat.succ_pos n))) hmass hL (hinput n)).map
-          (periodicHMinusThreeCylinderMap m modes))
+          (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable))
       Filter.atTop
       (nhds ((periodicResolventTargetProbabilityMeasure 2
         (Fintype.card (Fin m × Bool)) L mass hmass
         (periodicHMinusThreeCylinderTestFamily m L hL modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes))) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable))) := by
   have hmap := ProbabilityMeasure.tendsto_map_of_tendsto_of_continuous
     _ _ hfinite (continuous_periodicHMinusThreeComplexifyCylinder m modes)
   apply hmap.congr'
@@ -204,12 +204,12 @@ theorem periodicHMinusThreeCylinderProbabilityMeasure_tendsto_of_covariance_limi
       (fun n : ℕ => let N := n + 1; letI : NeZero N := ⟨Nat.succ_ne_zero n⟩
         (periodicHMinusThreeLatticeProbabilityMeasure N (L / (N : ℝ)) mass L
           (div_pos hL (Nat.cast_pos.mpr (Nat.succ_pos n))) hmass hL (hinput n)).map
-          (periodicHMinusThreeCylinderMap m modes))
+          (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable))
       Filter.atTop
       (nhds ((periodicResolventTargetProbabilityMeasure 2
         (Fintype.card (Fin m × Bool)) L mass hmass
         (periodicHMinusThreeCylinderTestFamily m L hL modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes))) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable))) := by
   apply periodicHMinusThreeCylinderProbabilityMeasure_tendsto_of_finite_family
     m L mass hL hmass modes _ hinput
   exact physicalFamilyEvalProbabilityMeasure_fixedVolume_weak_tendsto_of_any_finite_test_family_indexed
@@ -225,9 +225,9 @@ theorem periodicHMinusThreeFiniteSourceCylinderLaw_eq_latticeCylinderLaw
     (modes : Fin m → PeriodicFourierIndex)
     (hinput : PeriodicHMinusThreeLiftMeasureInput N a mass L ha hmass hperiod) :
     (periodicHMinusThreeFiniteSourceProbabilityMeasure N a mass L ha hmass hperiod).map
-        (periodicHMinusThreeCylinderMap m modes) =
+        (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable) =
       (periodicHMinusThreeLatticeProbabilityMeasure N a mass L ha hmass hperiod hinput).map
-        (periodicHMinusThreeCylinderMap m modes) := by
+        (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable) := by
   apply Subtype.ext
   change Measure.map (periodicHMinusThreeCylinderMap m modes)
       (Measure.map (periodicHMinusThreeFiniteSourceFourierLift N a L hperiod)
@@ -242,11 +242,11 @@ theorem periodicHMinusThreeFiniteSourceCylinderLaw_eq_familyEvalLaw
     (ha : 0 < a) (hmass : 0 < mass) (hperiod : 0 < L)
     (modes : Fin m → PeriodicFourierIndex) :
     (periodicHMinusThreeFiniteSourceProbabilityMeasure N a mass L ha hmass hperiod).map
-        (periodicHMinusThreeCylinderMap m modes) =
+        (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable) =
       (physicalFamilyEvalProbabilityMeasure 2 N
         (Fintype.card (Fin m × Bool)) a mass ha hmass
         (periodicHMinusThreeCylinderTestFamily m L hperiod modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable) := by
   apply Subtype.ext
   change Measure.map (periodicHMinusThreeCylinderMap m modes)
       (Measure.map (periodicHMinusThreeFiniteSourceFourierLift N a L hperiod)
@@ -340,12 +340,12 @@ theorem periodicHMinusThreeFiniteSourceCylinderProbabilityMeasure_tendsto_of_fin
         (periodicHMinusThreeFiniteSourceProbabilityMeasure N
           (L / (N : ℝ)) mass L
           (div_pos hL (Nat.cast_pos.mpr (Nat.succ_pos n))) hmass hL).map
-          (periodicHMinusThreeCylinderMap m modes))
+          (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable))
       Filter.atTop
       (nhds ((periodicResolventTargetProbabilityMeasure 2
         (Fintype.card (Fin m × Bool)) L mass hmass
         (periodicHMinusThreeCylinderTestFamily m L hL modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes))) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable))) := by
   have hmap := ProbabilityMeasure.tendsto_map_of_tendsto_of_continuous
     _ _ hfinite (continuous_periodicHMinusThreeComplexifyCylinder m modes)
   apply hmap.congr'
@@ -420,12 +420,12 @@ theorem periodicHMinusThreeFiniteSourceCylinderProbabilityMeasure_tendsto_fixedV
         (periodicHMinusThreeFiniteSourceProbabilityMeasure N
           (L / (N : ℝ)) mass L
           (div_pos hL (Nat.cast_pos.mpr (Nat.succ_pos n))) hmass hL).map
-          (periodicHMinusThreeCylinderMap m modes))
+          (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable))
       Filter.atTop
       (nhds ((periodicResolventTargetProbabilityMeasure 2
         (Fintype.card (Fin m × Bool)) L mass hmass
         (periodicHMinusThreeCylinderTestFamily m L hL modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes))) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable))) := by
   let fs := periodicHMinusThreeCylinderTestFamily m L hL modes
   let C : BoundedContinuousFunction (Fin 2 → ℝ) ℝ →
       BoundedContinuousFunction (Fin 2 → ℝ) ℝ → ℝ :=
@@ -454,12 +454,12 @@ theorem periodicHMinusThreeFixedVolumeMeasureSequence_cylinder_tendsto
     Filter.Tendsto
       (fun n : ℕ =>
         (periodicHMinusThreeFixedVolumeFreeFieldProbabilityMeasure
-          L mass hL hmass n).map (periodicHMinusThreeCylinderMap m modes))
+          L mass hL hmass n).map (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable))
       Filter.atTop
       (nhds ((periodicResolventTargetProbabilityMeasure 2
         (Fintype.card (Fin m × Bool)) L mass hmass
         (periodicHMinusThreeCylinderTestFamily m L hL modes)).map
-        (periodicHMinusThreeComplexifyCylinder m modes))) := by
+        (f := (periodicHMinusThreeComplexifyCylinder m modes)) ((measurable_periodicHMinusThreeComplexifyCylinder m modes).aemeasurable))) := by
   have hbase := periodicHMinusThreeFiniteSourceCylinderProbabilityMeasure_tendsto_fixedVolume
     m L mass hL hmass modes
   apply hbase.congr'
@@ -472,7 +472,7 @@ theorem periodicHMinusThreeFixedVolumeMeasureSequence_cylinder_tendsto
     apply Subtype.ext
     rfl
   exact congrArg (fun μ : ProbabilityMeasure PeriodicHMinusThreeCompletion =>
-    μ.map (periodicHMinusThreeCylinderMap m modes)) heq
+    μ.map (f := (periodicHMinusThreeCylinderMap m modes)) ((measurable_periodicHMinusThree_cylinderMap m modes).aemeasurable)) heq
 
 end Pphi2Clean.Continuum
 

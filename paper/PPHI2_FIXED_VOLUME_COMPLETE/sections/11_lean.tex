@@ -1,0 +1,208 @@
+% ==========================================================================
+%  Section 11 -- The Lean development: organisation and module map.  Owner: W09.
+%  Frozen label: sec:lean-overview.  This is the first section of Part II.
+%
+%  Counts come from generated/metrics.tex only (CONTRACT section 6); no
+%  structural count is typed here.  Every machine-checked name below is a
+%  declaration of notes/lean_ledger.md section 2 (D12-D14, D30, D32, D42, D48,
+%  D57, D58, D60, D61, D63); module names are set in \texttt, because a module
+%  is not a declaration and must not be dressed as one.
+%
+%  Traps observed.  The root aggregator is not claimed to build every module
+%  (CONTRACT section 11, final paragraph); the appendices are named in words
+%  because their labels live in main.tex, which the paper gate does not scan.
+% ==========================================================================
+\section{The Lean development: organisation and module map}
+\label{sec:lean-overview}
+
+The formalisation is a separate Lake package, \lmod{AImathPPhi2Clean}, whose
+sources live under \lmod{formal/lean/s6/pphi2_clean/}, built against Mathlib on
+Lean \LeanToolchain{}. \lmod{lake-manifest.json} pins the Mathlib commit
+\texttt{85e3a25e}, which is the revision of the tag \lmod{lakefile.lean} names. It has
+\NumCleanModules{} modules and
+\NumCleanLines{} lines of Lean, together with \NumAuditProbes{} audit probe
+files; a comment-stripped count, computed at build time by the paper's own
+script and never typed here, finds \NumCleanSorry{} \texttt{sorry} and
+\NumCleanProjectAxioms{} project axioms in those modules. The library target
+builds: \lmod{lake build AImathPPhi2Clean} elaborates all \NumCleanModules{}
+modules with no error on the pinned revision, including the
+\NumUnreachableModules{} that the root file does not reach
+(\cref{sec:lean-boundary}).  The package sits
+inside a larger development: the surrounding directory
+\lmod{formal/lean/s6/} holds \NumRootFiles{} further modules with
+\NumRootLines{} lines, which this paper does not take as its subject, does not count, and does
+not claim to cover.  Every declaration quoted below lives in the namespace
+\lmod{Pphi2Clean.Continuum}.
+
+The modules are organised in layers, and the layers follow the order of the
+conclusions rather than the order of the proofs: each
+one exposes an interface that the next one consumes, so the map below is also a
+reading order.  The entry module in the right-hand column is the module to open
+first for that layer.
+
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}p{0.225\linewidth}p{0.325\linewidth}p{0.40\linewidth}@{}}
+\toprule
+Layer & What it does & Entry module(s) \\
+\midrule
+(a) periodic torus $L^2$/$H^1$ and the discrete operator &
+  Periodic $H^1$ as a closed value-gradient graph completion; the finite
+  periodic lattice, its discrete Laplacian with spacing $a$, and an eigenbasis
+  of $Q=-\Delta_a+m^2$ &
+  \lmod{PeriodicTorusH1}, \lmod{ConcreteLatticeOperator},
+  \lmod{PeriodicFourierLaplacian} \\
+(b) the massive resolvent and its energy solver &
+  The weak massive resolvent from an energy form and a Riesz adjoint; sampled
+  and continuum Fourier coefficients; the cutoff tail uniform in the mesh; the
+  three covariance limits restated with the resolvent as target &
+  \lmod{PeriodicFourierCovarianceLimit},
+  \lmod{PeriodicTorusResolventLimit} \\
+(c) physical lattice sampling and the Gaussian law &
+  Sampling of a test at physical sites with the cell volume as weight; the
+  normalised finite covariance; zero mean, characteristic function,
+  mixed-moment identity, and the covariance-to-weak-convergence transfer &
+  \lmod{PhysicalLatticeGaussianLaw},
+  \lmod{PhysicalLatticeSampling} \\
+(d) negative-Sobolev carriers, topology and Borel structure &
+  The $\HL{2}$ and $\HL{3}$ weights, the completion as $\ell^2$ with its weight
+  and deweight maps, the compact-tail comparison, the coordinate embeddings,
+  second countability, separability, and the cylinder sigma algebra equal to
+  the Borel one &
+  \lmod{PeriodicHMinusThreeCompletion},
+  \lmod{PeriodicHMinusThreeTopologyBorel} \\
+(e) uniform $\HL{2}$ moment and $\HL{3}$ tightness &
+  The trace of the squared $\HL{2}$ norm under the finite Gaussian source and
+  its mesh-uniform bound; the extended energy, its compact sublevels, the Markov
+  tail, and tightness of the law sequence &
+  \lmod{PeriodicHMinusTwoUniformTightness},
+  \lmod{PeriodicHMinusThreeFixedVolumeTightness} \\
+(f) finite real families, characteristic functions and covariance convergence &
+  The resolvent covariance matrix, its positive semidefiniteness and Gram
+  factor, the canonical target Gaussian, and unconditional weak convergence for
+  every finite family of tests &
+  \lmod{FiniteRealFamilyWeakLimitInterface},
+  \lmod{FiniteFourierCoordinateConvergence} \\
+(g) cylinder convergence &
+  All the lift maps, the finite-source measure, the paired cosine and sine
+  cylinder family, and convergence of every finite Fourier marginal &
+  \lmod{PeriodicHMinusThreeCylinderConvergence},
+  \lmod{PeriodicHMinusThreeFourierMeasure} \\
+(h) Prokhorov subsequence &
+  Tightness in the form Prokhorov consumes, and a strictly monotone subsequence
+  converging to a Borel probability measure on the carrier &
+  \lmod{PeriodicHMinusThreeProkhorovSubsequence} \\
+(i) cylinder-to-Borel uniqueness &
+  Finite-coordinate cylinders as a $\pi$-system, the Borel-generation step
+  discharged from separability, and equality of two Borel probability measures
+  with equal indexed cylinder marginals &
+  \lmod{PeriodicHMinusThreeCylinderBorelUniqueness} \\
+(j) final assembly &
+  Inheritance of the target marginals by any subsequential limit, existence and
+  uniqueness of the whole-sequence limit, and the packaged
+  existence-with-cylinders statement &
+  \lmod{PeriodicHMinusThreeWeakLimitMarginal} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Layers (a) and (b) are analysis on the torus, layers (c) to (e) are the lattice
+laws together with the carrier and the single moment, layers (f) to (i) are the
+convergence and identification steps, and layer (j) applies them in order.
+
+The correspondence with Part~I is by result, not by proof step.  Every name in
+the right-hand column lives in the namespace \lmod{Pphi2Clean.Continuum} and
+the namespace is omitted there.  \Cref{app:ledger} lists the
+\NumChainTheorems{} declarations frozen in the two statement contracts, with the
+module that declares each of them; the remaining names of the table below are
+declarations of the same package whose role is described here rather than
+frozen, and their existence is checked against the Lean sources by the paper's
+own gate rather than against the registry.
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.16\linewidth}p{0.82\linewidth}@{}}
+\toprule
+Result in Part~I & Declaration(s) in \lmod{Pphi2Clean.Continuum} \\
+\midrule
+\cref{thm:covariance-limit} &
+  \lean{fixedVolumeCovarianceInner_tendsto_torusFourierGreenPairing}\newline
+  \lean{physicalGJMeasure_fixedVolume_mixedMoment_tendsto_torusFourierGreenPairing}\newline
+  \lean{physicalGJMeasure_fixedVolume_covariance_tendsto_torusFourierGreenPairing} \\
+\cref{thm:separable} & \lean{periodicHMinusThreeCompletion_separable} \\
+\cref{thm:cylinder-borel} &
+  \lean{periodicHMinusThree_cylinder_sigma_eq_borel_of_polish} \\
+\cref{thm:tightness} &
+  \lean{periodicHMinusThree_fixedVolume_freeField_tight} \\
+\cref{thm:finite-family} &
+  \lean{physicalFamilyEvalProbabilityMeasure_fixedVolume_weak_tendsto_of_periodic_fourier_canonical} \\
+\cref{thm:cylinder-uniqueness} &
+  \lean{periodicHMinusThree_probabilityMeasure_ext_of_indexed_cylinder_marginals} \\
+\cref{lem:subsequence-marginals} &
+  \lean{periodicHMinusThree_weak_limit_has_expected_cylinder_marginal}\newline
+  \lean{periodicHMinusThree_fixedVolume_subsequential_limit_has_expected_cylinder} \\
+\cref{cor:uniqueness} &
+  \lean{periodicHMinusThree_fixedVolume_weak_limit_unique} \\
+\cref{thm:main} &
+  \lean{periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders}\newline
+  \lean{periodicHMinusThree_fixedVolume_weak_limit_exists}\newline
+  \lean{periodicHMinusThree_fixedVolume_weak_limit_has_expected_cylinder} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For the \NumChainTheorems{} declarations of the chain the correspondence is
+statement by statement: each of the nine results in the left-hand column has at
+least one declaration on its right whose conclusion is that statement, and the
+three limits inside \cref{thm:covariance-limit} are the three declarations of the
+first row, one per line of that theorem.  Two rows carry a qualification, and
+they are the two the reader is most likely to overread.
+The finite-family declaration consumes the entrywise covariance identification as
+a hypothesis --- that is, the very statement \cref{lem:hC-identification} derives
+from the covariance limit --- so what the machine closes there is the passage from
+that identification to weak convergence of the finite families, with the target
+supplied by the Fourier-constructed factor.  The covariance input is exactly
+what \cref{thm:finite-family} does not assume, because Part~I spends
+\cref{sec:covariance} proving it.
+The cylinder-Borel declaration is stated under a Polishness input rather than
+unconditionally, and the same module derives that input from separability of the
+carrier (\lmod{periodicHMinusThreeCompletion_separable}), which is how the chain
+that consumes it discharges it; Part~I's version is unconditional because
+\cref{sec:carrier} proves separability before stating it.  Neither qualification
+makes a row claim more than Part~I does.
+That is the precise
+sense in which Part~II mirrors
+Part~I, and it is what the table lets a reader check without reading Lean: the
+paper's statement on the left, the declaration that carries it in the middle
+column, and the module that declares it in Appendix~A.  The row for
+\cref{cor:uniqueness} is the weakest entry in the table and must be read as
+such: the declaration it names says that two limits of one filter coincide,
+which is Hausdorff uniqueness of a filter limit, and not that the limit is
+characterised.  The characterisation is the cylinder rows of the table, as it is
+in Part~I.  What the table does not
+say is anything about the three parts of \cref{thm:main} separately: existence
+and the marginal statement are carried by the three declarations of the last row,
+while part~(iii), the uniqueness of the limit, is carried by the
+cylinder-uniqueness row above it --- that row's declaration is the formal
+counterpart of Part~I's part~(iii), though Part~I states no Lean name.
+
+Two qualifications belong here rather than in a footnote, because a reader who
+misses either will overread the table.  First, the formal development is a
+separate unit from this paper's prose: it has its own module structure, its own
+definitions and its own conventions for normalisation, so the package is not the
+paper transcribed, and the paper does not claim that the Lean code follows the
+proof of Part~I line by line.  Statement identity is what is on offer here, and
+it is all that is on offer.  Second, coverage is not uniform across the layers,
+and \cref{sec:lean-boundary} collects the five places where the development
+diverges from a maximally favourable reading of it: which modules the package
+root reaches, a final-theorem-shaped wrapper that assumes its own conclusion,
+the total-lift measurability input that is not proved, the two-dimensional
+restriction of the measure chain while the covariance theorems are stated for
+general dimension, and what a complete build does and does not establish.
+
+Part~II's two appendices are ordered accordingly.  Appendix~A
+(\cref{app:ledger}) is the declaration ledger and Appendix~B
+(\cref{app:axioms}) the axiom-footprint transcript, and both are generated on
+every build from the statement registry and from the recorded transcript rather
+than typed, because a hand-maintained list of declaration names is exactly the
+kind of object that goes stale without anyone noticing.

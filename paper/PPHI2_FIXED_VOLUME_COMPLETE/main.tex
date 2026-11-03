@@ -1,0 +1,213 @@
+% ==========================================================================
+%  Whole-sequence weak convergence of fixed-physical-volume lattice free
+%  fields on a periodic H^{-3} carrier.
+%
+%  Two parts: (I) the mathematics, (II) the machine verification.
+%  Amsart + Tectonic.  Body files live in sections/, generated numbers in
+%  generated/, figures in figures/.  This file holds the preamble and the
+%  assembly order only; it must stay free of prose.
+%
+%  Build:  python build_all.py      (preferred: regenerates numbers first)
+%          tectonic -C main.tex     (bare compile)
+% ==========================================================================
+\documentclass[11pt]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue!60!black,
+            urlcolor=blue!60!black,
+            pdftitle={Fixed-volume lattice free fields and their H^{-3} weak limit},
+            pdfauthor={The AImath Project}]{hyperref}
+\usepackage[capitalize]{cleveref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{external}[theorem]{External theorem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\crefname{external}{external theorem}{external theorems}
+\Crefname{external}{External theorem}{External theorems}
+
+% The build runs offline from a seeded Tectonic cache, and that cache carries the
+% Latin Modern families only at the sizes the other papers happened to need.  Two
+% variants are absent and each aborts the compile rather than warning:
+%   * sans at 9pt (OT1/cmss/m/n/9), and bold at 8pt (TU/lmr/bx/n/8).
+% Map the sans family onto roman -- this paper uses no sans-serif typography --
+% and the first class cannot arise anywhere, including from a stray \mathsf in a
+% table set at \footnotesize or a \textsf inside a caption.
+\renewcommand{\sfdefault}{\rmdefault}
+
+% amsart renders top-level enumerate items as (1), (2), ... ; the body refers to
+% steps as (i), (ii), ..., and one proposition's clauses are cited as (i)-(iii).
+% Rendering them in roman makes the two agree, so neither has to be rewritten.
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+% ---- notation ------------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ip}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\sS}{\mathcal{S}}
+\newcommand{\sSp}{\mathcal{S}'}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\ie}{\emph{i.e.}\ }
+\newcommand{\eg}{\emph{e.g.}\ }
+\newcommand{\HL}[1]{H^{-#1}}
+\newcommand{\Torus}{T_L^2}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+% ---- machine-checked artefacts ------------------------------------------
+% \lean{<fully qualified Lean name>} typesets a name verbatim (underscores
+% are safe).  Use it in body text only -- never inside \caption or \section.
+%
+% These identifiers are long: an unbroken 41-character word is wider than a
+% table column and, in prose, runs through the page edge and is clipped (the
+% 2026-11-03 audit found eight such boxes, one of them 249pt over).  The names
+% have no natural break points, so each character is walked and a zero-width
+% penalty is emitted after an underscore or a slash and before every capital.
+% The change is in the macro only: the source argument stays verbatim, so the
+% gate that reads \lean{...} still sees exactly the name.
+% \lmod{...} does the same for module, contract and path names, which are not
+% declarations and must not be validated as such.
+\ExplSyntaxOn
+\NewDocumentCommand \IdentityTypeset { m }
+  {
+    \tl_clear:N \l_tmpa_tl
+    \tl_map_inline:nn {#1}
+      {
+        \str_case:nnF {##1}
+          {
+            {_} { \tl_put_right:Nn \l_tmpa_tl { \_\allowbreak{} } }
+            {/} { \tl_put_right:Nn \l_tmpa_tl { /\allowbreak{} } }
+            {A} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}A } }
+            {B} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}B } }
+            {C} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}C } }
+            {D} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}D } }
+            {E} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}E } }
+            {F} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}F } }
+            {G} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}G } }
+            {H} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}H } }
+            {I} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}I } }
+            {J} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}J } }
+            {K} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}K } }
+            {L} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}L } }
+            {M} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}M } }
+            {N} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}N } }
+            {O} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}O } }
+            {P} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}P } }
+            {Q} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}Q } }
+            {R} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}R } }
+            {S} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}S } }
+            {T} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}T } }
+            {U} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}U } }
+            {V} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}V } }
+            {W} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}W } }
+            {X} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}X } }
+            {Y} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}Y } }
+            {Z} { \tl_put_right:Nn \l_tmpa_tl { \allowbreak{}Z } }
+          }
+          { \tl_put_right:Nn \l_tmpa_tl {##1} }
+      }
+    \texttt{ \tl_use:N \l_tmpa_tl }
+  }
+\NewDocumentCommand \lean { m } { \IdentityTypeset {#1} }
+\NewDocumentCommand \lmod { m } { \IdentityTypeset {#1} }
+\ExplSyntaxOff
+
+% ---- numbers -------------------------------------------------------------
+% All structural counts are macros defined in generated/metrics.tex, which is
+% rewritten on every build by audit/count_lean.py.  Never type a count.
+\input{generated/metrics}
+
+\title[Fixed-volume lattice free fields and their H$^{-3}$ weak limit]
+       {Whole-Sequence Weak Convergence of Fixed-Physical-Volume\\ Lattice Free
+        Fields on a Periodic $H^{-3}$ Carrier}
+\author{The AImath Project}
+\date{\today}
+
+\begin{document}
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\maketitle
+
+% Plain page style, deliberately.  amsart's default `headings' style typesets the
+% running head for a \part in 9pt sans (OT1/cmss/m/n/9), which the seeded offline
+% Tectonic cache does not carry; the compile then aborts at the first page of
+% Part II rather than warning, so the failure surfaces far from its cause.
+% Numbered pages without running heads are the cost, and no content is lost.
+\pagestyle{plain}
+
+\tableofcontents
+
+\bigskip
+
+\noindent\textbf{How to read this paper.}  Part~\ref{part:math} is mathematics:
+it fixes the lattice model, constructs the carrier, and proves that the
+finite-source Fourier pushforwards of the fixed-volume lattice laws converge
+weakly, as a \emph{whole sequence}, to a Borel probability measure determined by
+their finite Fourier marginals, with every estimate proved in full.
+Part~\ref{part:lean} reports the Lean~4/\texttt{Mathlib} development of the
+same conclusions and states precisely which layer is machine-checked and which
+is not.  A reader interested only in the mathematics may stop at
+\cref{sec:scope}; a reader interested only in the machine verification may read
+\cref{sec:lean-overview} first.  Structural counts quoted in the text are
+macros regenerated from the sources at build time, not typed values.
+
+\part{The Mathematics}\label{part:math}
+
+\input{sections/01_intro}
+\input{sections/02_setting}
+\input{sections/03_lattice}
+\input{sections/04_covariance}
+\input{sections/05_carrier}
+\input{sections/06_tightness}
+\input{sections/07_marginals}
+\input{sections/08_identification}
+\input{sections/09_main}
+\input{sections/10_scope}
+
+\part{The Machine Verification}\label{part:lean}
+
+\input{sections/11_lean}
+\input{sections/12_contracts}
+\input{sections/13_boundary}
+\input{sections/14_reproduction}
+
+\appendix
+
+\section{Declaration ledger}\label{app:ledger}
+\input{generated/ledger}
+
+\section{Axiom-footprint transcript}\label{app:axioms}
+\input{generated/axioms}
+
+% The bibliography is rendered from refs.bib by audit/make_bib.py into an
+% explicit thebibliography environment.  Reason: the offline Tectonic cache
+% contains no .bst files, and BibTeX' failure is swallowed by the driver, which
+% would leave every citation as [?] in a green build.  refs.bib stays the single
+% source of truth and audit/verify_paper.py checks the two cannot drift.
+\input{generated/bibliography}
+
+\end{document}

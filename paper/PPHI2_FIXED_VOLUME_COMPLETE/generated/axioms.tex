@@ -1,0 +1,35 @@
+% ===== generated/axioms.tex -- DERIVED, DO NOT EDIT =====================
+% Built by audit/make_ledger.py from ext/axiom_transcript.txt.
+
+The transcript below was produced by \texttt{\#print axioms} inside the
+delivered Lake project, after the library target was built: the command
+\texttt{lake build AImathPPhi2Clean} elaborates every module of the
+package, including the ones the root aggregator does not reach.  The
+commands and the engine output are in
+\texttt{ext/axiom\_transcript.txt} of the source tree; nothing here is
+paraphrased.
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.60\linewidth}p{0.34\linewidth}@{}}
+\toprule
+Declaration (prefix \texttt{Pphi2Clean.Continuum} omitted) & Axiom footprint \\
+\midrule
+\texttt{\detokenize{fixedVolumeCovarianceInner}\_\allowbreak{}\detokenize{tendsto}\_\allowbreak{}\detokenize{torusFourierGreenPairing}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{physicalGJMeasure}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{mixedMoment}\_\allowbreak{}\detokenize{tendsto}\_\allowbreak{}\detokenize{torusFourierGreenPairing}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{physicalGJMeasure}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{covariance}\_\allowbreak{}\detokenize{tendsto}\_\allowbreak{}\detokenize{torusFourierGreenPairing}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThreeCompletion}\_\allowbreak{}\detokenize{separable}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{probabilityMeasure}\_\allowbreak{}\detokenize{ext}\_\allowbreak{}\detokenize{of}\_\allowbreak{}\detokenize{indexed}\_\allowbreak{}\detokenize{cylinder}\_\allowbreak{}\detokenize{marginals}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{subsequential}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{has}\_\allowbreak{}\detokenize{expected}\_\allowbreak{}\detokenize{cylinder}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{exists}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{has}\_\allowbreak{}\detokenize{expected}\_\allowbreak{}\detokenize{cylinder}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{unique}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{exists}\_\allowbreak{}\detokenize{with}\_\allowbreak{}\detokenize{expected}\_\allowbreak{}\detokenize{cylinders}} & \texttt{propext,\allowbreak{} Classical.choice,\allowbreak{} Quot.sound} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The permitted set of the development is \texttt{Classical.choice}, \texttt{Quot.sound}, \texttt{propext}, i.e.\ exactly the three
+axioms of the Lean kernel and \texttt{Mathlib}.  In particular no
+declaration above depends on an axiom introduced by the project, and none
+depends on \texttt{sorryAx}.

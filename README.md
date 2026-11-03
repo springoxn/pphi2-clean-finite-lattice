@@ -33,12 +33,14 @@ injected.
 | Representation | an explicit coefficient embedding into $\ell^2(\mathbb{N})$ is an isometry, and under it the factor equals the upstream spectral coefficient formula |
 | Interface | the lift to an arbitrary test space is continuous and measurable, equals evaluation on the induced test field, and transports $L^2$ bounds uniformly over a family |
 
-Current source-derived totals (recomputed by `python verify.py --count`): 80 core
-modules, 12606 lines, 752 declarations (554 theorem-level); including the two
-post-pin sampling modules, the package totals 82 modules and 766 declarations.
-The axiom-report query count (64), per-module interface certificates (27), and
-build-job count (8878) belong to the pinned archive evidence and are not counts
-of this newer weak-limit extension. `PROVENANCE.md` separates these layers.
+Current source-derived totals (recomputed by `python verify.py --count`):
+90 modules, 13511 lines and 800 declarations, of which 569 are
+theorem-level.  That is the 89 modules and 13505 lines that the companion
+manuscript counts, plus the six-line release entry point
+`FixedVolumeWeakLimit.lean`.  The axiom-report query count (64), per-module
+interface certificates (27) and build-job count (8878) belong to the pinned
+archive evidence and are not counts of this newer weak-limit extension.
+`PROVENANCE.md` separates these layers.
 
 ## One step beyond the pinned archive
 
@@ -79,11 +81,39 @@ The main declaration is
 `periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders`.
 The formal source is in `AImathPPhi2Clean/PeriodicHMinusThreeWeakLimitMarginal.lean`
 and its transitive project imports are included in this repository. The
-manuscript PDF and modular LaTeX source are in `docs/weak_limit_paper/`.
+The manuscript PDF, its modular LaTeX source, its build script and its
+axiom transcript are in `paper/PPHI2_FIXED_VOLUME_COMPLETE/`.
 
-This theorem concerns the constructed finite-source sequence. It does not
-promote the separate conditional physical total-carrier lift to an unconditional
-claim, and it does not assert an interacting-field limit.
+This theorem concerns the constructed finite-source sequence.  Its
+carrier-valued lift is the finite-source Fourier lift, whose total range
+and Borel measurability the manuscript proves outright; what the
+*development* carries as an input is a different, coordinatewise lift
+together with its almost-everywhere agreement, and the manuscript's §13
+says which of the two is which.  No interacting-field limit is asserted.
+
+## The paper
+
+`paper/PPHI2_FIXED_VOLUME_COMPLETE/` holds the current manuscript: 43 pages,
+Part I mathematics and Part II the Lean development above.
+
+```bash
+cd paper/PPHI2_FIXED_VOLUME_COMPLETE
+python build_all.py                 # numbers, ledger, transcript gate, PDF
+python build_all.py --check-only    # the gates alone, no TeX
+```
+
+The build recomputes every structural number from these sources, renders
+Appendices A and B from the recorded transcript and the registry, and then
+fails on any overfull box or undefined reference — Tectonic exits 0 on both,
+so a green exit is not enough.  It needs Python 3.10+ and Tectonic 0.17.0
+(`$env:TECTONIC`, or on `PATH`); the first run fetches the TeX bundle unless
+`$env:TECTONIC_CACHE_DIR` points at a seeded cache.
+
+Expected: `4/4` paper checks, `13/13` negative controls, `overfull 0 /
+undefined 0`, and a 43-page `main.pdf`.
+
+Two independent audits of this manuscript are in `docs/`; the second was
+written by referees who were not shown the first.
 
 ## What is *not* claimed
 
@@ -125,16 +155,20 @@ migration begins at `ConcreteLatticeOperator.lean`.
 Toolchain and dependency are pinned:
 
 - Lean `leanprover/lean4:v4.34.0-rc2` (see `lean-toolchain`)
-- Mathlib commit `852d20a84581aeba8527bd01d0be361d8c0e71c0` (see `lake-manifest.json`)
+- Mathlib commit `85e3a25e006c35636f0e53b0e9296caca2685bc0`, which is the
+  revision of the `v4.34.0-rc2` tag named in `lakefile.lean`
 
 ```bash
 lake build AImathPPhi2Clean
 lake build AImathPPhi2Clean.FixedVolumeWeakLimit
 ```
 
-Mathlib is a git dependency; the first build fetches and compiles it, which
-takes a while.  Nothing else is required — no other dependency, no generated
-code.
+Mathlib is a git dependency; `lake exe cache get` fetches the prebuilt
+Mathlib for this exact revision, after which the build is local.  Building
+Mathlib from source instead takes hours and is not required.  Nothing else
+is needed — no other dependency, no generated code.  On Lean
+`v4.34.0-rc2` with this Mathlib revision the library target elaborates all
+89 modules with no error.
 
 ## Verify
 
@@ -171,6 +205,21 @@ delta are listed in `PROVENANCE.md`, and `verify.py` re-checks the manifest.
 Definitions in `AImathPPhi2Clean/ConcreteLatticeOperator.lean` are adapted from
 `mrdouglasny/GaussianField`; the correspondence is checked textually against
 the pinned commit.  See `NOTICE`.
+
+### The 2026-11-03 repair
+
+An independent audit of the companion manuscript found that the tree this
+repository published was not elaborable: one module had lost the header of
+a declaration, and the lakefile required Mathlib with no revision while the
+manifest pinned a different commit.  The header is restored, the dependency
+is pinned, and ten modules were migrated to the APIs of the pinned Mathlib
+revision; eight modules of the weak-limit extension are new here.  The
+interface certificates and the build log under `audit/` are the **previous**
+snapshot's records and are kept as such; the current evidence for the
+repaired tree is the transcript in `paper/PPHI2_FIXED_VOLUME_COMPLETE/ext/`,
+which records the toolchain, the Mathlib commit, the `#print axioms` output
+for the ten chain theorems, and the digest of every module that declares
+one of them.
 
 ## License
 

@@ -1,0 +1,298 @@
+% ==========================================================================
+%  Section 7 -- Finite Fourier marginals.  Owner: W07.  Target 1100 words.
+%  Frozen labels (CONTRACT section 4): sec:marginals, def:cylinder-map,
+%  thm:char-function, thm:finite-family, lem:hC-identification.  Added here:
+%  the eq: labels and rem:index-dictionary.
+%
+%  What this file does.  Section 4 proves a limit of PAIRINGS,
+%  \mathcal Q_N(probe,probe) -> Real Q(probe,probe); the sources then assert that the
+%  covariance MATRIX of the paired cosine/sine family is the resolvent
+%  matrix without deriving it (ledger GAP R2).  That passage is derived here,
+%  entry by entry, in lem:hC-identification: no new limit theorem is needed,
+%  because thm:covariance-limit already identifies the limit of exactly these
+%  pairings.  The section keeps apart the two things a reader tends to merge,
+%  the finite-N matrix (built from Q_N) and the target matrix (built from Q).
+%
+%  Evidence: everything is (M), except two standard facts named inside the
+%  proof of thm:finite-family.  No (F) tag appears: the finite-family
+%  interface declarations are not in the generated ledger, so no \lean{}
+%  name may be printed here (audit check N).
+% ==========================================================================
+\section{Finite Fourier marginals}\label{sec:marginals}
+
+This section takes the covariance limit of \cref{sec:covariance} from pairings
+to matrices. \Cref{def:cylinder-map} fixes the finite coordinate maps and
+records that they are continuous; \cref{thm:char-function} observes that every
+finite coordinate law of the lattice sequence is centred Gaussian, and is
+therefore nothing but its covariance matrix; \cref{lem:hC-identification}
+computes that matrix from the Green pairing of \cref{thm:covariance-limit}; and
+\cref{thm:finite-family} concludes convergence of the finite-dimensional laws
+for every finite family. The order of the argument is what needs care, and
+\cref{lem:hC-identification} is where it sits.
+
+\subsection{Coordinates on the carrier}
+
+\begin{definition}[Cylinder maps]\label{def:cylinder-map}
+Let $r\ge1$. A \emph{finite family} is a tuple
+$F=((k_1,\varepsilon_1),\dots,(k_r,\varepsilon_r))$ with $k_j\in\Z^2$ and a
+label $\varepsilon_j\in\{\mathrm c,\mathrm s\}$ at each slot; \emph{both labels
+are allowed at every mode, the zero mode included}. Put $\psi_j:=\cos_{k_j}$ if
+$\varepsilon_j=\mathrm c$ and $\psi_j:=\sin_{k_j}$ if
+$\varepsilon_j=\mathrm s$, with the cosine and sine tests of
+\cref{sec:tightness}. The \emph{cylinder map} of $F$ is
+$\Pi_F:\mathcal C\to\R^r$,
+\begin{equation}\label{eq:cylinder-map}
+  (\Pi_Fc)_j:=
+  \begin{cases}
+    \Re c_{k_j}, & \varepsilon_j=\mathrm c,\\[2pt]
+    -\Im c_{k_j}, & \varepsilon_j=\mathrm s .
+  \end{cases}
+\end{equation}
+The sign in the second line is the one carried by the phase of the lift
+\eqref{eq:lift}, and it is bookkeeping: for every configuration $\omega$ and
+every slot $j$,
+\begin{equation}\label{eq:cylinder-lift}
+  \bigl(\Pi_F(L_N\omega)\bigr)_j=\sqrt{w_3(k_j)}\;\omega(\psi_j),
+\end{equation}
+because that phase is $e^{-2\pi i\,k\cdot(ax)/L}$, whose real part is the
+cosine test and whose negative imaginary part is the sine test. So a cylinder
+coordinate is $\sqrt{w_3(k_j)}$ times the value of the corresponding real
+test, and $R_F:=\operatorname{diag}\bigl(\sqrt{w_3(k_1)},\dots,
+\sqrt{w_3(k_r)}\bigr)$ is the fixed diagonal scaling from real-test
+coordinates to cylinder coordinates.
+
+Each coordinate in \eqref{eq:cylinder-map} is a scalar multiple of one of the
+coordinate functionals of \cref{lem:coordinate-embedding}, hence continuous,
+and $\Pi_F$ is continuous into $\R^r$. A continuous map is Borel, so for a
+Borel probability measure $\mu$ on $\mathcal C$ the image
+$\mu^F:=\mu\circ\Pi_F^{-1}$ is a Borel probability measure on $\R^r$, the
+\emph{$F$-marginal} of $\mu$. The family carrying both labels at each of the
+modes $k_1,\dots,k_r$ is the complex tuple $(c_{k_1},\dots,c_{k_r})$ read slot
+by slot.
+
+The sine test at the zero mode is identically zero, and its slot is retained
+deliberately rather than discarded as empty: the coordinate it records is
+$-\Im c_0$, and
+\eqref{eq:cylinder-map} shows that no other slot sees that coordinate. The
+family is therefore a determining class, which is what
+\cref{thm:cylinder-uniqueness} consumes; dropping the slot would leave the
+cylinder sigma algebra strictly smaller than $\mathcal B(\mathcal C)$ and the
+characterisation of \cref{thm:main} would fail. The slot costs nothing
+elsewhere: \eqref{eq:entries} gives it covariance entry $0$ and
+\cref{thm:char-function} therefore gives it the degenerate law $\delta_0$,
+which is the truth, since $(\mathcal L_N\omega)(0)=a^{2}\sum_{x}\omega(x)$ is
+real for every configuration.
+\end{definition}
+
+\subsection{The finite-mode laws and their covariance matrix}
+
+\begin{theorem}[Characteristic functions of the finite-mode laws]\label{thm:char-function}
+Let $F$ be a finite family with $r$ slots and let $\mu_N$ be the law
+\eqref{eq:finite-source-law}. Then:
+\begin{enumerate}
+\item[(i)] for every $N$ the marginal $\mu_N^F$ is a centred Gaussian measure on
+  $\R^r$, possibly degenerate, with covariance matrix
+  \begin{equation}\label{eq:sigma-N}
+    \Sigma_{F,N}(j,j'):=\sqrt{w_3(k_j)w_3(k_{j'})}\;\Real \mathcal Q_N(\psi_j,\psi_{j'}),
+  \end{equation}
+  and hence with characteristic function
+  $t\mapsto\exp\bigl(-\tfrac12t^{\mathrm T}\Sigma_{F,N}t\bigr)$;
+\item[(ii)] replacing $Q_N$ in \eqref{eq:sigma-N} by the Green pairing $Q$ of
+  \eqref{eq:pairings} gives the matrix
+  \begin{equation}\label{eq:sigma-F}
+    \Sigma_F(j,j'):=\sqrt{w_3(k_j)w_3(k_{j'})}\;\Real\mathcal Q(\psi_j,\psi_{j'})
+    =\sqrt{w_3(k_j)w_3(k_{j'})}\;\Real V\ip{(\psi_j)_L}{R(\psi_{j'})_L}_E ,
+  \end{equation}
+  which is a limit of the matrices \eqref{eq:sigma-N} entrywise
+  (\cref{lem:hC-identification}), hence positive semidefinite as an entrywise
+  limit of covariance matrices, hence the covariance matrix of a centred Gaussian
+  measure $\Lambda_F$ on $\R^r$, with characteristic function
+  $t\mapsto\exp\bigl(-\tfrac12t^{\mathrm T}\Sigma_Ft\bigr)$.
+\end{enumerate}
+Both matrices are written down here and identified in
+\cref{lem:hC-identification}; this theorem asserts neither that they agree nor
+that either of them is a limit.
+\end{theorem}
+
+\begin{proof}
+(i) By \cref{def:gj-measure} the physical lattice law $\mu^{\mathrm{GJ}}_N$ is a
+centred Gaussian measure on $\R^{I_N}$ with covariance $C_N$, and
+$\omega\mapsto(\omega(\psi_1),\dots,\omega(\psi_m))$ is linear there; a linear
+image of a centred Gaussian vector is a centred Gaussian vector, and by
+\eqref{eq:cylinder-lift} with \eqref{eq:finite-source-law} that image is
+$\mu_N^F$. For the entries: by \eqref{eq:sampled-covariance} with
+\cref{lem:resolvent-pairing} the second moment
+$\E_{\mu^{\mathrm{GJ}}_N}[\omega(\psi_j)\omega(\psi_{j'})]$ is
+$\mathcal Q_N(\psi_j,\psi_{j'})$, a real number for real tests (\cref{sec:covariance}),
+and \eqref{eq:cylinder-lift} contributes the factor
+$\sqrt{w_3(k_j)w_3(k_{j'})}$; this is \eqref{eq:sigma-N}. The characteristic
+function of a centred Gaussian vector with covariance $K$ is
+$t\mapsto\exp(-\tfrac12t^{\mathrm T}Kt)$, the finite-dimensional Gaussian
+formula, quoted and not derived. (ii) is a definition, and its second equality
+is the identification $(Q=R)$ proved in \cref{thm:covariance-limit}.
+\end{proof}
+
+\begin{lemma}[The covariance entries]\label{lem:hC-identification}
+In the notation of \cref{thm:char-function}:
+\begin{enumerate}
+\item[(i)] $\Sigma_{F,N}\to\Sigma_F$ entrywise as $N\to\infty$;
+\item[(ii)] the unweighted matrix $\bigl(\Real\mathcal Q(\psi_j,\psi_{j'})\bigr)_{j,j'}$
+  is the paired cosine/sine periodic-resolvent covariance matrix, and in closed
+  form, for a slot pair drawn from the modes $k,l$,
+  \begin{equation}\label{eq:entries}
+    \begin{gathered}
+      \Real\mathcal Q(\cos_k,\cos_l)=\frac{V}{2\lambda(k)}\bigl(\delta_{k,l}+\delta_{k,-l}\bigr),
+      \qquad
+      \Real\mathcal Q(\sin_k,\sin_l)=\frac{V}{2\lambda(k)}\bigl(\delta_{k,l}-\delta_{k,-l}\bigr),\\[2pt]
+      \Real\mathcal Q(\cos_k,\sin_l)=0 ;
+    \end{gathered}
+  \end{equation}
+\item[(iii)] for every $N$ and every slot,
+  \[
+    0\le\Real \mathcal Q_N(\psi_j,\psi_j)\le V/m^{2},
+    \qquad\text{and}\qquad
+    \Real\mathcal Q(\psi_j,\psi_j)\ge0 ,
+  \]
+  the second bound being an equality with $V/\bigl(2\lambda(k_j)\bigr)$ at every
+  slot whose mode is non-zero, with $V/m^{2}$ at the zero-mode cosine and with
+  $0$ at the zero-mode sine.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) and the first half of (ii) are one computation, worth isolating because it
+is where the order of the argument can be reversed.
+
+\emph{Step 1 (the entry is a lattice second moment).} By
+\eqref{eq:cylinder-lift} the coordinate $(\Pi_Fc)_j$ is
+$\sqrt{w_3(k_j)}\,\omega(\psi_j)$, and $\mu^{\mathrm{GJ}}_N$ has mean zero
+exactly (\cref{def:gj-measure}), so
+\[
+  \Sigma_{F,N}(j,j')
+  =\sqrt{w_3(k_j)w_3(k_{j'})}\;\E_{\mu^{\mathrm{GJ}}_N}
+     \bigl[\omega(\psi_j)\omega(\psi_{j'})\bigr],
+\]
+and by \eqref{eq:sampled-covariance} with \cref{lem:resolvent-pairing} the
+expectation equals $\mathcal Q_N(\psi_j,\psi_{j'})$. This is \eqref{eq:sigma-N} again,
+and it shows that the matrix has no source other than the lattice covariance
+and the weight.
+
+\emph{Step 2 (the limit along a fixed mode pair).} Each $\psi_j$ is a real
+bounded continuous periodic test, so \cref{thm:covariance-limit} applies to
+each pair: its centred-covariance line in \eqref{eq:three-limits} gives
+\[
+  \mathcal Q_N(\psi_j,\psi_{j'})\longrightarrow
+  \Real V\ip{(\psi_j)_L}{R(\psi_{j'})_L}_E=\Real\mathcal Q(\psi_j,\psi_{j'}),
+\]
+the last equality being the identification $(Q=R)$ of its Step~5. Multiplying by
+the fixed factor $\sqrt{w_3(k_j)w_3(k_{j'})}$ gives
+$\Sigma_{F,N}\to\Sigma_F$ entrywise, which is (i) and the first half of (ii).
+
+\emph{Step 3 (the entries, as half-sums of exponentials).} Let
+$e_k(x):=e^{2\pi i\,k\cdot x/L}$, so that $\cos_k=(e_k+e_{-k})/2$ and
+$\sin_k=(e_k-e_{-k})/(2i)$. The coefficient $f\mapsto F(f)$ of
+\eqref{eq:fourier-coefficient} is complex linear in $f$, and at the mode $j$
+the coefficient of $e_k$ is exactly $V\delta_{j,k}$: the phase is
+$e^{2\pi i(k-j)\cdot x/L}$, whose integral over the physical cell vanishes
+unless $k=j$ and equals $V$ when $k=j$. Inserting the half-sums into
+\eqref{eq:pairings} leaves only the modes $\pm k$ and $\pm l$ of the two
+coefficient vectors, and $\overline{F(e_a)}=F(e_a)$ because those coefficients
+are real; summing the four surviving terms and using $\lambda(-k)=\lambda(k)$
+gives the first two identities of \eqref{eq:entries}. For the mixed pair the
+summand pairs the even coefficient of the cosine with the odd coefficient of
+the sine, so it is odd under $p\mapsto-p$ and the total vanishes.
+
+\emph{Step 4 (where a reader can go wrong).} \Cref{thm:covariance-limit}
+already identifies the limit of precisely the pairings of Step~2, and Step~3
+evaluates those pairings, so the identification is a short computation and not
+a new limit theorem: no summability, tail estimate or mode-uniform envelope is
+spent, because every test is a single mode. The argument can be silently
+reversed here. The matrix \eqref{eq:sigma-F} must be obtained from the limit,
+as in Step~2; postulating it from the symbol $\lambda^{-1}$ while invoking
+\cref{thm:covariance-limit} only for the diagonal entries would be a second,
+unproved assertion, and it is exactly this identification that the machine
+development carries as a hypothesis on its finite-family theorem rather than
+deriving from the covariance limit. The two conventions for the sign of the
+imaginary part in \eqref{eq:cylinder-map} give the same matrix
+\eqref{eq:sigma-F}: only the mixed entries see that sign, and
+\eqref{eq:entries} makes them zero.
+
+\emph{Step 5 (bounds).} For a real test $\psi$, Cauchy--Schwarz in
+\eqref{eq:pairings}, the finite Parseval bound \eqref{eq:parseval} and the
+bound $\lambda_N\ge m^{2}$ give
+\[
+  \mathcal Q_N(\psi,\psi)=V^{-1}\sum_{p}\frac{\abs{F_N(p)}^{2}}{\lambda_N(p)}
+  \le V^{-1}\frac{V^{2}\norm{\psi}_\infty^{2}}{m^{2}}
+  =\frac{V\norm{\psi}_\infty^{2}}{m^{2}},
+\]
+and the summands are non-negative; with $\norm{\cos_k}_\infty\le1$ and
+$\norm{\sin_k}_\infty\le1$ this is the first claim of (iii). The second is
+\eqref{eq:entries} read on the diagonal: it gives $V/(2\lambda(k_j))$ at every
+slot whose mode is non-zero, $V/m^{2}$ at the zero-mode cosine, and $0$ at the
+zero-mode sine --- the last because $\delta_{0,0}-\delta_{0,-0}=0$, which is the
+right answer for a slot whose test is identically zero.
+\end{proof}
+
+\begin{theorem}[Convergence for every finite family]\label{thm:finite-family}
+Let $L>0$, let $m>0$, and let $F$ be a finite family. Then
+$\mu_N^F\Rightarrow\Lambda_F$ weakly on $\R^r$: for every bounded continuous
+$\psi:\R^r\to\R$, $\int\psi\,\dd\mu_N^F\to\int\psi\,\dd\Lambda_F$ as
+$N\to\infty$.
+\end{theorem}
+
+\begin{proof}
+Three steps, none of which mentions the carrier.
+
+\emph{(i) The matrices converge.} This is \cref{lem:hC-identification}(i).
+
+\emph{(ii) The family is tight in $\R^r$, uniformly in $N$.} By
+\cref{lem:hC-identification}(iii) each diagonal entry satisfies
+$0\le\Sigma_{F,N}(j,j)\le V/m^{2}=L^{2}/m^{2}$, so the second moment
+$\E_{\mu_N^F}\abs{x}^{2}=\operatorname{tr}\Sigma_{F,N}$ is at most
+$rL^{2}/m^{2}$ for every $N$. Markov's inequality gives
+$\mu_N^F\{x:\abs{x}>R\}\le rL^{2}/(m^{2}R^{2})\to0$ as $R\to\infty$, and
+closed balls in $\R^r$ are compact, so the family is tight. A single Gaussian
+law on $\R^r$ needs no estimate for this; what the bound supplies is tightness
+of the whole family at once.
+
+\emph{(iii) The characteristic functions converge.} By
+\cref{thm:char-function} the characteristic function of $\mu_N^F$ is
+$t\mapsto\exp(-\tfrac12t^{\mathrm T}\Sigma_{F,N}t)$, which by (i) converges for
+each fixed $t$ to $\exp(-\tfrac12t^{\mathrm T}\Sigma_Ft)$, that of $\Lambda_F$.
+The limit is continuous at the origin and is the characteristic function of a
+probability measure, so Levy's continuity theorem --- pointwise convergence of
+characteristic functions to a function continuous at the origin implies weak
+convergence --- gives $\mu_N^F\Rightarrow\Lambda_F$. This is the standard fact
+that centred Gaussian laws on $\R^r$ with convergent covariance matrices
+converge weakly \cite{bogachev1998}, and the boundedness of the variances in
+(ii) is its licence: uniformly bounded diagonal entries give tightness, and
+\cref{lem:hC-identification}(iii) says the limit does not degenerate.
+\end{proof}
+
+What \cref{thm:finite-family} establishes is convergence of the pushforwards
+under every finite coordinate map; by \cref{def:cylinder-map} these are the laws
+of the paired cosine/sine coordinates, with the resolvent matrix as limit. What
+it does not establish is anything about measures on the carrier $\mathcal C$. A
+family of finite-dimensional limits does not by itself produce a measure on
+$\mathcal C$, and convergence of every marginal would not imply weak
+convergence on $\mathcal C$ without a tightness hypothesis; hence the reliance
+on the uniform moment and compact tails of \cref{sec:tightness} and on the
+identification of the two sigma algebras in \cref{thm:cylinder-borel}. The
+passage runs: tightness supplies a limit point (\cref{thm:tightness}), continuity
+of $\Pi_F$ transfers \cref{thm:finite-family} to that limit point, and
+\cref{thm:cylinder-uniqueness} says two Borel probability measures with the same
+finite marginals agree. Nothing here produces a measure on the carrier.
+
+\begin{remark}[The index dictionary, once]\label{rem:index-dictionary}
+The family $F$ of \cref{def:cylinder-map} does not depend on $N$: its modes are
+integers, fixed once and for all, and only the mesh varies. This is where the
+two indexing conventions of \cref{hyp:volume} meet, and the dictionary is stated
+here once, with $N=n+1$ and $a=a_n=L/(n+1)$: the law
+\eqref{eq:finite-source-law} at index $n$ is $\mu_{n+1}$, and
+\cref{thm:finite-family} is the statement that these laws converge as
+$n\to\infty$. Taking the finite family \emph{before} the mesh limit is what
+makes \eqref{eq:sigma-F} mesh-free, and it is why the theorem concerns a
+sequence of laws on one and the same space $\R^r$. By \cref{hyp:volume} the
+spacing is a function of the index and not a free parameter, so no double limit
+occurs in this section.
+\end{remark}

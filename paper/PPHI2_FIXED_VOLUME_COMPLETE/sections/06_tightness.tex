@@ -1,0 +1,319 @@
+% ==========================================================================
+%  Section 6 -- Uniform moment bound and tightness.  Owner: W06.
+%  Frozen label: sec:tightness.
+%
+%  Contents: the probe notation and the H^{-2} energy; the uniform trace
+%  constant (lem:trace-constant), derived here in the four steps (i)--(iv)
+%  of its proof and quoted from nowhere -- this closes ledger GAP R1; the
+%  uniform moment (thm:uniform-moment); the two zero-mode devices
+%  (lem:zero-mode); compactness of H^{-2}-bounded sets inside the carrier
+%  (thm:compact-tail); tightness (thm:tightness); the external extraction
+%  theorem (ext:prokhorov).  Nothing here concerns the marginals of mu_N,
+%  the identification of a limit, or any measure other than mu_N.
+% ==========================================================================
+\section{Uniform moment bound and tightness}\label{sec:tightness}
+
+This section supplies the compactness input that Prokhorov's theorem
+consumes, and it derives the uniform trace constant rather than quoting it.
+The constant is \cref{lem:trace-constant}, the moment it feeds is
+\cref{thm:uniform-moment}, the compactness of the sets that moment controls
+is \cref{thm:compact-tail}, and Markov's inequality combines the two into
+tightness in \cref{thm:tightness}; \cref{lem:zero-mode} separates the two
+weight conventions the argument needs. Nothing here concerns the marginals
+of $\mu_N$ or a limit.
+
+Fix $L>0$, $m>0$ and $N\in\N$, $a>0$ with $aN=L$ (\cref{hyp:volume});
+along the sequence $N=n+1$ and $a=L/N$. Let
+$\cos_k(x)=\cos(2\pi\,k\cdot x/L)$ and
+$\sin_k(x)=\sin(2\pi\,k\cdot x/L)$ be the cosine and sine tests of mode
+$k\in\Z^2$, and extend the test pairing $\varphi(f)$ of a lattice field,
+which is real for real $f$, to complex tests by complex linearity. The
+\emph{probe} of the field at $k$ is
+\begin{equation}\label{eq:probe}
+  \widehat\varphi(k):=\varphi(\cos_k)-i\,\varphi(\sin_k)\in\C ,
+\end{equation}
+that is, the field paired with the complex exponential of mode $k$ in the
+normalisation \eqref{eq:fourier-coefficient}. Only
+$\abs{\widehat\varphi(k)}^2=\varphi(\cos_k)^2+\varphi(\sin_k)^2$ enters
+below. The hat records the mode; it is not the weighted family
+$\widehat c$ of \cref{def:carrier-hminus3}, which records the weight. At
+$k=0$, $\cos_0\equiv1$ and $\sin_0\equiv0$, so $\widehat\varphi(0)
+=\varphi(1)$. The stored coordinate of a carrier point at $k$ is
+$\sqrt{w_3(k)}$ times the probe (\cref{eq:lift}), while the $\HL{2}$ norm below
+is written in the coefficient family of \cref{rem:two-families} and carries the
+$\widetilde w_2$ weight itself, so the two weights are never both applied; it is
+the $\widetilde w_2$-weighted sum of squared probe moduli,
+\begin{equation}\label{eq:energy}
+  \norm{\varphi}^2_{\HL{2}}
+  =\sum_{k\in\Z^2}\widetilde w_2(k)\abs{\widehat\varphi(k)}^2
+  \in[0,\infty],
+\end{equation}
+finite on the $\HL{2}$ subspace and $+\infty$ outside it: the norm of
+\cref{def:carrier-hs} with the full weight.
+
+The lattice covariance is an input object here, and the only property of it
+that this section uses is its sampled covariance form
+\cref{eq:sampled-covariance}. For bounded continuous tests $f,g$ it reads
+$\E_{\mu_N}[\varphi(f)\varphi(g)]
+=a^{2}\ip{f}{A_N^{-1}g}_{\mathrm{counting}}$, in the counting inner product
+\eqref{eq:counting-inner-product} and with $A_N=Q$ the operator of
+\cref{def:lattice-laplacian}. Its symbol is at least $m^2$
+(\cref{prop:operator}), so $A_N\ge m^{2}$, and for every such $f$
+\begin{equation}\label{eq:per-test}
+  \E_{\mu_N}\bigl[\varphi(f)^2\bigr]
+  \le a^{2}m^{-2}\sum_{x\in I_N}f(ax)^2
+  \le m^{-2}(aN)^{2}\norm{f}_\infty^{2}
+  =m^{-2}L^{2}\norm{f}_\infty^{2},
+\end{equation}
+the last identity being \eqref{eq:fixed-volume}.
+
+\subsection{The uniform trace constant}
+
+\begin{lemma}[The uniform $\HL{2}$ trace constant]\label{lem:trace-constant}
+Let $L>0$, $m>0$ and
+\begin{equation}\label{eq:trace-constant}
+  C(L,m):=m^{-2}L^{2}+2\,m^{-2}L^{2}\sum_{k\in\Z^2}w_2(k).
+\end{equation}
+Then $C(L,m)$ is a finite real number with
+$m^{-2}L^{2}\le C(L,m)\le 25\,m^{-2}L^{2}$, and for every $N$, $a$ with
+$aN=L$,
+\begin{equation}\label{eq:trace-bound}
+  \sum_{k\in\Z^2}\widetilde w_2(k)\,
+  \E_{\mu_N}\bigl[\abs{\widehat\varphi(k)}^{2}\bigr]\le C(L,m).
+\end{equation}
+The summand of \eqref{eq:trace-bound} at $k=0$ equals $m^{-2}L^{2}$
+exactly; each summand with $k\ne0$ is at most $2\,m^{-2}L^{2}w_2(k)$.
+\end{lemma}
+
+\begin{proof}
+\emph{(i) The per-mode second moment.} For $k\ne0$ the tests $\cos_k$ and
+$\sin_k$ are bounded by $1$ in sup norm, so \eqref{eq:per-test} gives
+$\E[\varphi(\cos_k)^2]\le m^{-2}L^{2}$ and
+$\E[\varphi(\sin_k)^2]\le m^{-2}L^{2}$; by \eqref{eq:probe} and linearity
+in each real coordinate,
+\[
+  \E\bigl[\abs{\widehat\varphi(k)}^{2}\bigr]
+  =\E\bigl[\varphi(\cos_k)^2\bigr]+\E\bigl[\varphi(\sin_k)^2\bigr]
+  \le 2\,m^{-2}L^{2}=2Vm^{-2}.
+\]
+The factor $2$ is exactly the pair of real coordinates: the squared modulus
+of a complex random variable is the sum of the squares of its real and
+imaginary parts, and each part is a real Gaussian image of the field with
+variance at most $Vm^{-2}$, because $\lambda_N\ge m^{2}$.
+
+\emph{(ii) The zero mode, exactly.} At $k=0$ the sine test vanishes and the
+cosine test is the constant $1$, so
+$\E[\abs{\widehat\varphi(0)}^{2}]=\E[\varphi(1)^2]
+=a^{2}\ip{1}{A_N^{-1}1}_{\mathrm{counting}}$ by \eqref{eq:sampled-covariance}.
+Constants are annihilated by the discrete Laplacian
+(\cref{def:lattice-laplacian}), so $A_N1=m^{2}1$ and $A_N^{-1}1=m^{-2}1$,
+while the counting inner product of $1$ with itself is the number of sites
+$N^{2}$. Hence
+\[
+  \E\bigl[\abs{\widehat\varphi(0)}^{2}\bigr]
+  =a^{2}m^{-2}N^{2}=m^{-2}(aN)^{2}=m^{-2}L^{2}=V/m^{2},
+\]
+an equality and not an estimate: it is the covariance pairing of the
+constant test with itself. Only the cosine coordinate survives at $k=0$,
+which is why this term carries no factor $2$.
+
+\emph{(iii) Summability, with a value.} The shell
+$\{\norm{k}_\infty=q\}$ carries $8q$ modes, on which $w_2=q^{-4}$
+(\cref{ext:summability}), hence
+\[
+  \sum_{k\in\Z^2}w_2(k)=\sum_{q\ge1}8q\cdot q^{-4}
+  =8\sum_{q\ge1}q^{-3}
+  \le 8\Bigl(1+\int_1^\infty t^{-3}\,\dd t\Bigr)=12 ,
+\]
+the summand at $k=0$ contributing nothing. So the series in
+\eqref{eq:trace-constant} converges, and only positivity of $m$ and $L$
+enters this step.
+
+\emph{(iv) Assembly.} Since $\widetilde w_2(0)=1$ and
+$\widetilde w_2(k)=w_2(k)$ for $k\ne0$ (\cref{def:modes}) and probe moments
+are nonnegative, splitting at the zero mode and using (ii) on the first
+piece and (i) termwise on the second,
+\[
+  \sum_{k\in\Z^2}\widetilde w_2(k)\E\bigl[\abs{\widehat\varphi(k)}^{2}\bigr]
+  =\E\bigl[\abs{\widehat\varphi(0)}^{2}\bigr]
+   +\sum_{k\neq0}w_2(k)\E\bigl[\abs{\widehat\varphi(k)}^{2}\bigr]
+  \le m^{-2}L^{2}+2\,m^{-2}L^{2}\sum_{k\neq0}w_2(k)=C(L,m),
+\]
+the last sum being the one in \eqref{eq:trace-constant} because $w_2(0)=0$.
+The series on the left converges because its majorant does, which is (iii).
+\end{proof}
+
+\begin{theorem}[Uniform $\HL{2}$ moment]\label{thm:uniform-moment}
+Let $L>0$, $m>0$ and let $C(L,m)$ be the constant
+\eqref{eq:trace-constant}. For every $N$, $a$ with $aN=L$, with $\mu_N$ the
+law \eqref{eq:finite-source-law} of the finite-source lift,
+\[
+  \E_{\mu_N}\norm{\varphi_N}^2_{\HL{2}}\le C(L,m),
+  \qquad\text{hence}\qquad
+  \sup_{N}\E_{\mu_N}\norm{\varphi_N}^2_{\HL{2}}\le C(L,m).
+\]
+The constant is independent of $N$: it is a function of $L$ and $m$ alone.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:energy} the left side is the expectation of a countable sum of
+nonnegative continuous functions of the carrier point, a probe being the
+stored coordinate divided by the fixed positive number $\sqrt{w_3(k)}$
+(\cref{eq:lift}). Tonelli's theorem interchanges sum and expectation, and
+\eqref{eq:trace-bound} bounds the result by $C(L,m)$. For the uniformity,
+$aN=L$ holds at every index by \cref{hyp:volume} and
+\eqref{eq:trace-constant} contains neither $N$ nor $a$ nor $n$, so the
+bound is the same at every index and the supremum leaves it unchanged.
+\end{proof}
+
+\subsection{The zero mode}
+
+\begin{lemma}[The zero mode]\label{lem:zero-mode}
+Let $Z:=\{\varphi:\widehat\varphi(k)=0 \text{ for every } k\neq0\}$ be the
+zero-mode line and $p(\varphi):=\sum_k w_2(k)\abs{\widehat\varphi(k)}^2$.
+\emph{(i)} For every carrier point $\varphi$,
+\[
+  \sum_{k\in\Z^2}\widetilde w_2(k)\abs{\widehat\varphi(k)}^2
+  =\abs{\widehat\varphi(0)}^{2}
+   +\sum_{k\in\Z^2}w_2(k)\abs{\widehat\varphi(k)}^{2}.
+\]
+\emph{(ii)} $p$ annihilates $Z$ and is not a norm; for every $R\ge0$ the
+set $\{p\le R\}$ contains $Z$, whose closure in the carrier is not compact.
+\emph{(iii)} The energy \eqref{eq:energy} restricted to $Z$ equals
+$\abs{\widehat\varphi(0)}^{2}$.
+\end{lemma}
+
+\begin{proof}
+(i) is $\widetilde w_2=w_2+\mathbf 1_{\{0\}}$ read termwise, the two cases
+being $w_2(0)=0$ and $\widetilde w_2(0)=1$. For (ii): if $\varphi\in Z$
+every summand of $p$ vanishes, so $p$ has non-trivial kernel and is only a
+seminorm; $Z$ is a closed unbounded line contained in $\{p\le R\}$, and no
+closed subset of the carrier containing an unbounded line is compact. For
+(iii): on $Z$ only the $k=0$ summand survives, with weight
+$\widetilde w_2(0)=1$.
+\end{proof}
+
+The lemma forces the two usages. The energy that defines the sets of
+\cref{thm:compact-tail} must be \eqref{eq:energy}, with the full weight: by
+(ii) a sublevel set of the seminorm $p$ contains the unbounded line $Z$, so
+its closure cannot be compact, and tightness built on $p$ would have no
+compact set to offer. The zero mode is therefore paid for by the energy, and
+the value $\widetilde w_2(0)=1$ is that payment.
+
+The trace in \cref{lem:trace-constant} is the opposite case: the seminorm
+weight is used there because the zero mode is settled separately and
+exactly. By (i) the full weighted trace splits into the zero-mode moment
+plus a $w_2$-weighted remainder, and by step (ii) of
+\cref{lem:trace-constant} that moment equals $m^{-2}L^{2}$ rather than
+merely being bounded by $2Vm^{-2}$. Writing the constant with $w_2$ and
+adding $m^{-2}L^{2}$ back is thus the exact decomposition of the full trace,
+with the zero mode counted once and without a factor $2$; applying the
+uniform per-mode bound at $k=0$ as well would have lost the sharp value
+$V/m^{2}$. So the zero mode is included in the energy, which is what makes
+the sets of \cref{thm:compact-tail} compact, and excluded from the weighted
+trace, whose first term accounts for it.
+
+\subsection{Compact tails and tightness}
+
+\begin{theorem}[Compact tails]\label{thm:compact-tail}
+Let $S\subseteq\HL{2}$ with $\sup_{\varphi\in S}\norm{\varphi}_{\HL{2}}
+\le B<\infty$. \emph{(i)} For every $\delta>0$ there is a finite set
+$K=K(\delta)\subset\Z^2$ with, termwise,
+\[
+  \sum_{k\notin K}w_3(k)\abs{\widehat\varphi(k)}^{2}
+  \le\delta\sum_{k\notin K}\widetilde w_2(k)\abs{\widehat\varphi(k)}^{2}
+  \le\delta B^{2}
+\]
+for every $\varphi\in S$. \emph{(ii)} The closure of $S$ in the carrier is
+compact. In particular this holds for every sublevel set
+$\{\varphi:\norm{\varphi}_{\HL{2}}\le R\}$ with $R\ge0$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1: the weight comparison.} For $k\ne0$ the ratio
+$w_3(k)/\widetilde w_2(k)=\norm{k}_\infty^{-2}$ tends to $0$ along the mode
+lattice, and that is \cref{prop:completion}(ii). For $\delta>0$ put
+$K:=\{k:\norm{k}_\infty\le\lceil\delta^{-1/2}\rceil\}$, a box of finitely
+many integer vectors containing $0$; for $k\notin K$ the ratio is at most
+$\delta$. So the first inequality of (i) is termwise and the second is
+\eqref{eq:energy}: a tail bound of
+$\delta\norm{\varphi}^2_{\HL{2}}\le\delta B^{2}$ that mentions neither
+$\varphi$ nor $N$, one finite mode set serving all of $S$. The quantitative
+form of the same estimate is \cref{prop:completion}(iii).
+
+\emph{Step 2: a diagonal extraction.} Let $(\varphi_j)\subset S$. For each
+$k$, $\widetilde w_2(k)\abs{\widehat\varphi_j(k)}^2\le B^{2}$ with
+$\widetilde w_2(k)>0$, so every coordinate sequence is bounded. Exhaust
+$\Z^2$ by increasing finite boxes $K_1\subset K_2\subset\cdots$. On $K_1$
+the coordinates lie in a compact subset of $\C^{K_1}$, so a subsequence
+converges there; a subsequence of that one converges on $K_2$; and so on.
+The diagonal subsequence converges at every $k$: the diagonal argument. Let
+$c=(c_k)$ be the coordinate limit.
+
+\emph{Step 3: convergence in the carrier.} Fix $\delta>0$ and $K=K(\delta)$.
+Along the diagonal subsequence,
+\[
+  \norm{\varphi_j-\varphi_{j'}}^2_{\mathcal C}
+  =\sum_{k\in K}w_3(k)\abs{\widehat\varphi_j(k)-\widehat\varphi_{j'}(k)}^{2}
+   +\sum_{k\notin K}w_3(k)\abs{\widehat\varphi_j(k)-\widehat\varphi_{j'}(k)}^{2},
+\]
+where the first sum tends to $0$, being a finite sum of convergent
+coordinates, and the second is at most $2\delta B^{2}+2\delta B^{2}
+=4\delta B^{2}$ by step 1 and $\abs{u-v}^{2}\le2\abs u^{2}+2\abs v^{2}$. As
+$\delta$ is arbitrary the subsequence is Cauchy, and the carrier is complete
+(\cref{prop:completion}(i)), so it converges to a point of the closure of
+$S$. Every sequence in $S$ thus has a subsequence converging in the carrier,
+so $S$ is totally bounded, and the closure of a totally bounded set in a
+complete metric space is compact: that is (ii).
+\end{proof}
+
+\begin{theorem}[Tightness]\label{thm:tightness}
+Let $L>0$, $m>0$, and let $\mu_N$ be the law \eqref{eq:finite-source-law}
+at $N=n+1$, $a=L/N$. The family $(\mu_N)$ is tight on the carrier: for
+every $\epsilon>0$ there is a compact set $K_\epsilon$ in the carrier with
+$\mu_N(K_\epsilon)\ge1-\epsilon$ for every $N$.
+\end{theorem}
+
+\begin{proof}
+Let $C:=C(L,m)$ be \eqref{eq:trace-constant} and put $T:=C/\epsilon+1$,
+$K_\epsilon:=\overline{\{\varphi:\norm{\varphi}^2_{\HL{2}}\le T\}}$, the
+closure being taken in the carrier; $K_\epsilon$ is compact by
+\cref{thm:compact-tail}(ii), applied with $B=\sqrt{T}$. Its complement lies
+where the energy exceeds $T$, so Markov's inequality applied to the
+extended-valued energy, which is measurable as a countable sum of continuous
+functions, with $\E\norm{\varphi_N}^2_{\HL{2}}\le C$ by
+\cref{thm:uniform-moment}, gives
+\[
+  \mu_N(K_\epsilon^{\mathrm c})
+  \le\frac{1}{T}\,\E_{\mu_N}\norm{\varphi_N}^2_{\HL{2}}
+  \le\frac{C}{T}<\epsilon ,
+\]
+the last inequality because $T>C/\epsilon$. The set $K_\epsilon$ therefore
+satisfies $\mu_N(K_\epsilon)\ge1-\epsilon$, it depends on $\epsilon$, $L$
+and $m$ only, and the $+1$ in the cutoff is used exactly here: it makes the
+Markov tail strictly smaller than $\epsilon$.
+\end{proof}
+
+\begin{external}[Prokhorov]\label{ext:prokhorov}
+Let $X$ be a Polish space and $(\mu_N)$ a sequence of Borel probability
+measures on $X$. If $(\mu_N)$ is tight, then there are a strictly increasing
+sequence $N_1<N_2<\cdots$ and a Borel probability measure $\mu$ on $X$ with
+$\int h\,\dd\mu_{N_j}\to\int h\,\dd\mu$ for every bounded continuous
+$h:X\to\R$ \cite{prokhorov1956}.
+\end{external}
+
+\Cref{ext:prokhorov} produces a subsequence and nothing about the original
+sequence: the whole-sequence statement is \cref{thm:main}, reached in
+\cref{sec:main} by a separate step and not as a consequence of this
+theorem. Its Polish hypothesis is met, the carrier being complete
+(\cref{prop:completion}(i)) and separable (\cref{thm:separable}).
+
+One honest limitation closes the section. The only input to
+\cref{thm:tightness} is Markov's inequality applied to the second moment of
+\cref{thm:uniform-moment}: no exponential moment, no layer-cake
+decomposition and no quantitative modulus enters, so the tail bound is
+$C/T$ and no better. Consequently this paper asserts no rate of weak
+convergence, no exponential tail bound and no modulus of continuity in the
+limit, and a reader who wants one must supply an exponential moment for the
+family $\mu_N$, which is not proved here. \Cref{sec:scope} records this
+among the other boundaries of the result.

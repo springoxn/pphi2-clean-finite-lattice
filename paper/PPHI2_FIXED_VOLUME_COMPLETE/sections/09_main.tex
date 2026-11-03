@@ -1,0 +1,150 @@
+% ==========================================================================
+%  Section 9 -- The main theorem.  Owner: W08.
+%  Frozen labels: sec:main, thm:main, cor:uniqueness, ext:subseq.
+%
+%  Trap (CONTRACT section 11, item 3): the characterisation of mu_free by its
+%  finite marginals is what thm:cylinder-uniqueness supplies, applied in
+%  Step 4 below.  It is NOT a consequence of "the limit is unique": a
+%  Hausdorff uniqueness statement about a filter limit says that two limits
+%  of one filter agree, and nothing about which measure has which marginals.
+%  cor:uniqueness is exactly that weaker statement and is stated as such.
+%
+%  Trap (CONTRACT section 1, GAP R4): what is proved is that the finite
+%  marginals of mu_free are the paired cosine/sine resolvent Gaussians.  No
+%  covariance operator on the carrier is constructed here.
+% ==========================================================================
+\section{The main theorem}\label{sec:main}
+
+The content of this section is the order in which the ingredients are applied.
+Let $L>0$ and $m>0$, let
+$(\mu_N)$ be the sequence \eqref{eq:finite-source-law} of finite-source Fourier
+pushforwards, indexed as in \cref{hyp:volume} by $N=n+1$ with $a=L/(n+1)$, so
+that $aN=L$ at every index, and let $\mathcal C$ be the carrier of
+\cref{def:carrier-hminus3}.
+
+\begin{theorem}[Main theorem]\label{thm:main}
+Let $L>0$ and $m>0$.
+\begin{enumerate}
+\item[(i)] \emph{Existence.} There is a Borel probability measure
+  $\mu_{\mathrm{free}}$ on $\mathcal C$ such that $\mu_N\Rightarrow
+  \mu_{\mathrm{free}}$ weakly on $\mathcal C$, for the whole sequence and not
+  only along a subsequence.
+\item[(ii)] \emph{Marginals.} For every finite tuple $F$ of modes the pushforward
+  $(\Pi_F)_*\mu_{\mathrm{free}}$ is the resolvent Gaussian law $\Lambda_F$ of
+  \cref{thm:finite-family}: the paired cosine/sine Gaussian law whose covariance
+  entries are the periodic-resolvent pairings identified in
+  \cref{thm:covariance-limit,lem:hC-identification}.
+\item[(iii)] \emph{Characterisation.} $\mu_{\mathrm{free}}$ is the only Borel
+  probability measure on $\mathcal C$ all of whose finite-mode marginals are the
+  laws $\Lambda_F$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1 (a relatively compact family).} Each $\mu_N$ is a Borel probability
+measure on $\mathcal C$ (\cref{eq:finite-source-law}, \cref{lem:lift-representative}),
+so the family to which the compactness theorem is applied lives where it must. By
+\cref{thm:uniform-moment} the expected \emph{square} of the $\HL{2}$ norm of
+$\mu_N$ is bounded by the constant $C(L,m)$ of
+\cref{lem:trace-constant}, uniformly in $N$; \cref{thm:tightness} converts that
+second moment of the norm, through Markov's inequality and the compactness of
+\cref{thm:compact-tail}, into tightness of the family $\{\mu_N\}$ in $\mathcal C$.
+Tightness is the hypothesis under which \cref{ext:prokhorov} turns that family
+into a relatively compact one, in the weak topology of \cref{rem:topology}.
+
+\emph{Step 2 (extraction along any subsequence).} The carrier is a complete
+separable metric space (\cref{thm:separable}), so \cref{ext:prokhorov} applies:
+for every strictly increasing sequence $(N_j)$ of indices there are a strictly
+increasing subsequence $(N_{j_l})$ of $(N_j)$ and a Borel probability measure
+$\mu$ on $\mathcal C$ with $\mu_{N_{j_l}}\Rightarrow\mu$. Nothing is claimed yet
+about which measure $\mu$ is.
+
+\emph{Step 3 (that limit has the target marginals).} By
+\cref{lem:subsequence-marginals}, $(\Pi_F)_*\mu=\Lambda_F$ for every finite tuple
+$F$ of modes.
+
+\emph{Step 4 (that limit is the only one admissible).} Let $\mu$ and $\mu'$ be
+two measures obtained as in Steps 2 and 3, possibly from different starting
+subsequences. By Step 3 both have marginals $\Lambda_F$, hence $\mu$ and $\mu'$
+agree on every cylinder set, and \cref{thm:cylinder-uniqueness} gives
+$\mu=\mu'$. The cylinder families of \cref{def:cylinder-map} include the sine
+slot at the zero mode, whose test is identically zero and whose coordinate is
+$-\Im c_{0}$; that slot is what makes the families separate every coordinate of
+the carrier, and without it the cylinder sigma algebra would be strictly
+smaller than $\mathcal B(\mathcal C)$ and this step would not close. This is the
+characterisation of (iii):
+\cref{thm:cylinder-uniqueness} says that the family $\Lambda_F$ admits at most
+one Borel probability measure, and \cref{lem:subsequence-marginals} says that
+every extracted limit is such a measure. Statement (ii) is Step 3 applied to one
+such limit.
+
+\emph{Step 5 (from subsequences to the whole sequence).} Extract one limit
+$\mu_{\mathrm{free}}$ from the identity subsequence as in Step 2; by Step 4 the
+choice of extraction does not matter. Let $(N_j)$ be any strictly increasing
+sequence of indices. By Steps 2 to 4 the sequence $(\mu_{N_j})$ has a further
+subsequence converging to $\mu_{\mathrm{free}}$, which is the hypothesis of
+\cref{ext:subseq}; its conclusion is
+$\mu_N\Rightarrow\mu_{\mathrm{free}}$ for the whole sequence, that is (i).
+\end{proof}
+
+\begin{external}[Subsequence criterion for whole-sequence convergence]\label{ext:subseq}
+Let $(x_N)$ be a sequence in a topological space $X$ and $x\in X$. Suppose that
+every strictly increasing sequence of indices has a further strictly increasing
+subsequence $(N_l)$ along which $x_{N_l}\to x$. Then $x_N\to x$.
+\end{external}
+
+The criterion is the standard subsequence characterisation of convergence, and
+its proof is two lines; it needs no metric space. If $x_N$ did not converge to
+$x$, an open neighbourhood $U$ of $x$ would be missed infinitely often; the
+indices where it is missed form a subsequence with no term in $U$, and by
+hypothesis that subsequence has a further subsequence converging to $x$, hence
+eventually inside $U$, a contradiction. This is the only use of
+\cref{ext:subseq} in the paper.
+
+\begin{corollary}[Uniqueness]\label{cor:uniqueness}
+Let $(N_j)$ be a subsequence of the index sequence and let $\nu$ be a Borel
+probability measure on $\mathcal C$ with $\mu_{N_j}\Rightarrow\nu$. Then
+$\nu=\mu_{\mathrm{free}}$.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:main}(i) the subsequence converges to $\mu_{\mathrm{free}}$, so
+$\nu$ and $\mu_{\mathrm{free}}$ are two limits of one sequence in the space of
+Borel probability measures on a metric space, which is Hausdorff. Hence they
+coincide: this is uniqueness of the limit, not the characterisation of it.
+\end{proof}
+
+Four things are deliberately not claimed, and each is a boundary of this paper
+rather than a weakness of the proof; \cref{sec:scope} develops them.
+\begin{itemize}
+\item \emph{No identity beyond the law of the Fourier coefficients.} \Cref{thm:main}
+  concerns the pushforwards $\mu_N$, and \cref{lem:lift-representative} identifies
+  them as the laws of a Borel carrier-valued map of the lattice field, so the
+  convergence proved here \emph{is} a statement about the lattice field laws in
+  exactly that sense. What is not asserted is any statement about a total lift
+  specified independently of $\mathcal L_N$ --- in particular the series-defined
+  total lift of the development, whose measurability is an input there
+  (\cref{rem:lift-development}) --- and no statement about the field as a
+  distribution on $\Torus$ rather than as its sequence of Fourier coefficients.
+\item \emph{No covariance operator on the carrier.} What is proved is that the
+  finite marginals of $\mu_{\mathrm{free}}$ are the target laws of
+  \cref{thm:finite-family}, the paired cosine/sine Gaussian laws whose
+  characteristic functions are computed in \cref{thm:char-function}. The
+  resolvent of \cref{lem:resolvent} is constructed on the unit-mass $L^2$ space
+  of the torus, not on $\mathcal C$, and no covariance operator is constructed on
+  $\mathcal C$ here. The distinction is between a construction and a consequence:
+  saying that $\mu_{\mathrm{free}}$ \emph{is} the Gaussian measure with covariance
+  operator $(m^2-\Delta)^{-1}$ as an object on the carrier requires that operator
+  on the carrier, which is not built; saying which measure it is requires only
+  \cref{thm:cylinder-uniqueness}, and that is what is proved. What this paper
+  proves is the marginal statement, not the operator statement
+  (\cref{sec:scope}).
+\item \emph{No rate.} No rate of convergence, no exponential tail and no
+  quantitative modulus is asserted. The tightness of Step 1 is Markov's
+  inequality applied to one second moment of the norm, which is sufficient for
+  \cref{ext:prokhorov} and supplies nothing quantitative beyond it.
+\item \emph{Free field only.} The theory constructed is the free (Gaussian)
+  one. Neither an interacting ultraviolet limit nor an Osterwalder--Schrader
+  reconstruction is proved, and \cref{thm:main} asserts nothing about the
+  interacting model.
+\end{itemize}

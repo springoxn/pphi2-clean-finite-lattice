@@ -1,0 +1,112 @@
+% ==========================================================================
+%  Section 14 -- Reproduction.  Owner: W10.
+%  Frozen label: sec:lean-reproduction.
+%
+%  Sources read for this section: build_all.py (steps 1-7), audit/count_lean.py,
+%  audit/make_ledger.py, audit/make_bib.py, audit/verify_paper.py (the four checks
+%  N/E/L and their negative controls, the docstring "known limits"), main.tex
+%  (the two documented build commands) and ext/axiom_transcript.txt lines 8-18
+%  (the two recorded commands).
+%
+%  Traps observed here.  (a) No build-job count and no wall-clock time is stated:
+%  both are environment-dependent and would rot.  (b) The reproducibility claim is
+%  limited to declaration names and frozen digests; the correspondence of a paper
+%  sentence with a Lean statement is not machine-checked and is said so.
+% ==========================================================================
+\section{Reproduction}\label{sec:lean-reproduction}
+
+Two entry points are supported and they are not equivalent. The paper's own gate
+is \texttt{python build\_all.py}, run from the paper directory. In order it
+regenerates the structural counts and both appendices -- the declaration ledger
+from the sources, the axiom transcript from the recorded engine output -- runs the
+negative controls of the paper checks and then the checks themselves, compiles
+with Tectonic \TectonicVersion{}, refuses a PDF older than any source, and stamps
+the digest of every source and of the output into \lmod{build/LAST_BUILD.txt}.
+The four checks are: that every Lean name quoted in the body is a name the
+generated ledger lists, or else a declaration of the package found in the Lean
+sources; that the large structural counts in the body are macros rather than
+typed values; that labels, cross-references, citations and bibliography
+keys close and every section carries a label; and that the axiom story is
+self-consistent, in the sense of \cref{sec:lean-contracts}. Stated precisely: the
+count check rejects a typed literal only when the macro it should have used has
+at least three digits or a value of at least forty, so a hand-typed
+\texttt{two} would pass it, and the discipline for small numbers is editorial
+rather than mechanical; the check also fails when a macro that the build computes
+is quoted nowhere, which is the failure mode a typed count leaves behind. The
+reference check covers every reference command the document uses, \verb|\eqref|
+included. The compile step is followed by a scan of the log: a build that reports
+success while leaving an overfull box or an undefined reference is a failed build
+here, because the engine treats both as warnings and the reader sees both as
+defects. The project around the paper carries \NumProofDocs{} proof documents,
+\NumProbes{} verification probes and \NumFailureCards{} failure cards; none is
+shipped with this paper and none is an input to any claim above. The second entry
+point is the bare compile, \texttt{tectonic -C main.tex}, which builds the PDF
+from whatever the generated files currently contain. It is what a reader who
+wants only the document runs, and it proves nothing about the sources: a stale
+generated file compiles as happily as a fresh one.
+
+The footprints are reproduced in the separate project, in two steps, using the
+recorded commands. First the declaring module is built, which populates the
+object files that the second step reads. Then a short file is written whose
+imports are the modules under audit and whose body is one
+\texttt{\#print axioms <name>} line per declaration, and that file is elaborated
+with \texttt{lake env lean}. The toolchain is Lean \LeanToolchain{}, the same one
+the transcript header records. This is exactly the command whose output
+\lmod{ext/axiom_transcript.txt} transcribes. The transcript was regenerated on
+2026-11-03 by \lmod{audit/make_transcript.py}, on the sources in this repository,
+and it is the artefact to compare against.  The digests of the statement contracts are in a different position and must not
+be confused with the transcripts: they are recorded values in the per-node files
+held beside the registry entries described in \cref{sec:lean-contracts}, and
+because both contracts are marked remote-only the runner reports \lmod{SKIP}
+before it computes a digest at all.  That flag governs the digest runner, which
+points at the project holding the recorded values; it does not say that the
+package cannot be elaborated here, and \cref{sec:lean-overview} and the paragraph
+below record that it can.  Nothing shipped with this paper exercises the digest,
+but a reader can run the build.
+
+A reproducer should expect the following, and should treat any deviation as a
+finding. The package builds on the revision it pins --- Lean \LeanToolchain{}
+with Mathlib \texttt{85e3a25e}, the commit \lmod{lake-manifest.json} pins for the
+tag \lmod{lakefile.lean} names --- and the toolchain it reports is the one
+the transcript header records: the footprints are valid on that toolchain, and
+comparing them across toolchains is not a comparison. Each
+\texttt{\#print axioms} line prints the permitted set --- all
+\NumChainTheorems{} of them do, in Appendix~B; a line carrying a name outside it,
+or an empty footprint in place of a set, would be a finding, and the appendix
+contains none. The paper's gate exits zero. And the compiled document carries no
+unresolved reference or citation: two independent mechanisms enforce that, since
+the third check refuses a document whose cross-references, citation keys or
+section labels do not close, and the log scan refuses an output on which the
+engine reported one.
+
+One thing is deliberately not automated, and it is the limit of the audit. The
+correspondence between a sentence of this paper and a Lean statement is checked
+at the level of declaration names and of the frozen digests, never at the level
+of the statement's meaning: the name check confirms that a quoted name exists in
+the delivered development, and the digest confirms that the statement behind a
+frozen name has not changed since it was accepted, but no script compares the
+prose of a theorem environment with the type of a declaration, so a sentence
+that misdescribes the statement it cites would pass every check we run. That
+residual gap is why \cref{sec:lean-boundary} exists as a list of facts rather
+than as a claim of completeness.
+
+One episode belongs in this section because it bears on how much a reproducer should
+trust the apparatus. An audit of this paper, carried out after it was first
+assembled, found that one module of the package was missing the header of a
+declaration --- the body survived, the signature did not --- so the sources as
+delivered could not have been elaborated, and every claim resting on a build would
+have been unreproducible. The header is restored, and the sources have since been
+migrated to the Mathlib revision the toolchain pins; the whole package now
+elaborates, on that revision, with no error. The transcript in Appendix~B was
+\emph{regenerated} afterwards, by \lmod{audit/make_transcript.py}, from the Lean
+run on these sources: it therefore records a command that was executed on the
+delivered tree, not a transcription of an earlier session. The script also writes
+the digest of each declaring module into the transcript header, so a change to any
+of them invalidates the record visibly rather than silently.
+
+What that does not buy is stated in the same breath. A footprint is evidence about
+the proof term of one declaration; it is not evidence that the declaration says
+what the corresponding theorem of Part~I says, and it is not evidence about the
+mathematics of any hypothesis in the statement. Those two gaps are the subject of
+\cref{sec:lean-boundary} and of the paragraph above, and neither is closed by a
+green build.

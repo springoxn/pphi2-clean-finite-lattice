@@ -1,0 +1,128 @@
+% ==========================================================================
+%  Section 12 -- Statement contracts and the axiom firewall.  Owner: W10.
+%  Frozen label: sec:lean-contracts.
+%
+%  Sources read for this section: formal/lean/challenges/_registry.yaml (the
+%  two entries PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT and
+%  PPHI2_FIXED_VOLUME_FREE_FIELD_MEASURE_LIMIT, and permitted_axioms),
+%  the per-node <NODE>.hashes.json digest files, tools/lean_challenge.py
+%  (the runner), and ext/axiom_transcript.txt.
+%
+%  Traps observed here.  (a) CONTRACT section 11: a SKIP is not a pass, so
+%  the remote_only paragraph says so in its first sentence and again at its
+%  end.  (b) A footprint is a statement about dependence, never about the
+%  intended statement; the last subsection keeps the two roles apart.
+%  (c) The appendix labels are declared in main.tex, which the paper gate
+%  does not scan for labels, so the appendices are named in words rather
+%  than cross-referenced with \cref.
+% ==========================================================================
+\section{Statement contracts and the axiom firewall}\label{sec:lean-contracts}
+
+Two devices carry the discipline of the formal side, and neither of them is a
+proof: a \emph{statement contract}, which fixes what is to be proved, and an
+\emph{axiom firewall}, which bounds what the proof of it may assume. This
+section describes both, and separates what each establishes from what it leaves
+open; the divergences that remain are the subject of \cref{sec:lean-boundary}.
+
+A statement contract is an entry of the statement registry of the development,
+\lmod{formal/lean/challenges/_registry.yaml}. For one node of the development
+it freezes three things: the modules of the delivered package that declare the
+results, the theorem names in fully qualified form, and a digest of each
+statement, held beside the entry in a per-node file. The registry carries
+\NumContracts{} contracts. The two this paper reports are
+\lmod{PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT} and
+\lmod{PPHI2_FIXED_VOLUME_FREE_FIELD_MEASURE_LIMIT}. The first freezes
+the covariance declarations, among them
+\lean{fixedVolumeCovarianceInner_tendsto_torusFourierGreenPairing}; the second
+freezes the measure-limit declarations, among them
+\lean{periodicHMinusThree_fixedVolume_weak_limit_exists}. ``Fully qualified''
+means that the namespace is part of the frozen string: each of the
+\NumChainTheorems{} names this paper reports lives in
+\lmod{Pphi2Clean.Continuum}, and the ledger of Appendix~A omits that prefix
+only because the omission is itself performed mechanically.
+
+\subsection{What freezing buys}
+
+The digest is taken of what Lean prints for \texttt{\#check @} of a name, that
+is, of the elaborated type with all implicit and instance binders, not of the
+source text as typed. A later strengthening, weakening or reparametrisation of a
+statement therefore produces a different digest. The runner reports the mismatch
+and refuses the statement; it does not overwrite the recorded value, so the
+contract stays red across runs, and the only way past it is to record the new
+statement together with a written reason. That is what freezing buys: a
+statement cannot change quietly, and a change accepted once cannot become
+invisible afterwards.
+
+\subsection{Both contracts are remote-only}
+
+Both entries are marked remote-only and name the separate Lake project that hosts
+the recorded digests, \lmod{/home/zhengyj/AImath-lean/AImathPPhi2Clean}. The
+runner reads that field before it does anything else, and reports \lmod{SKIP} with
+the declared project as the reason. \textbf{A \lmod{SKIP} is not a pass.} It
+records that the digest was neither confirmed nor refuted locally, because the
+recorded values live beside that project; a reader who takes the absence of a
+failure for a success reads the output backwards. The flag is about \emph{where
+the digest runner points}, not about whether the package can be elaborated: the
+package is in this repository and, as \cref{sec:lean-overview} and the
+reproduction section record, it builds in place. The evidence standing behind
+these two contracts is therefore two-part: the digests and the registry entry on
+the project side, and, on this side, the transcript of Appendix~B, produced by
+building the modules that declare the \NumChainTheorems{} theorems and elaborating one audit file
+against them.
+
+
+\subsection{The axiom firewall}
+
+The permitted set of the development is \NumPermittedAxioms{} names, the axioms
+of the Lean kernel and of \lmod{Mathlib}:
+\[
+  \lmod{propext},\qquad \lmod{Classical.choice},\qquad \lmod{Quot.sound}.
+\]
+Every declaration this paper reports has
+been checked with \texttt{\#print axioms}; each contract's check file issues that
+command once per frozen name, next to the \texttt{\#check} that produces the
+digest, so one file exercises both devices. This paper reports
+\NumChainTheorems{} declarations, and the footprint of every one of them is equal
+to the permitted set: no axiom introduced by the project appears, and no
+placeholder standing for an omitted proof appears. Two thresholds are in force
+and they are not the same one. The contract runner refuses a footprint that
+contains any name outside the permitted set. The generator of Appendix~B applies
+two further rules of its own: it refuses a transcript that is empty, that is not
+tab-separated, whose rows are not all equal to one another, or any of whose rows
+leaves the permitted set. The equality with the permitted set \emph{as a set} is
+enforced one step later, by the paper's own gate, which is why a footprint that
+merely stayed inside the permitted set would not reach this paper.
+
+\subsection{The negative control}
+
+A test that has never failed has not been shown to be able to fail. The package
+therefore ships a probe, \lmod{audit/negative_axiom.lean},
+\NumNegativeControlLines{} lines long: it injects
+\texttt{axiom injectedAxiom : False}, derives
+\texttt{theorem polluted : False := injectedAxiom}, and prints the footprint of
+the derived theorem, and one line of its run output records a footprint carrying
+the injected axiom and none of the permitted three. What that
+establishes is that the footprint test has a case in which it must fail, so a
+green run of it is not an artefact of a check that can only say yes. What it does
+not establish is anything about any particular declaration: the probe is a
+separate file, it is not a perturbation of the frozen names, its recorded output
+is a bare measured line rather than a transcribed session with commands and a
+date, and it exercises the footprint test only, not the digest. The control is
+therefore attested textually -- the file is in the tree and its output line is
+committed beside it -- and not by a transcript of the standard of Appendix~B.
+
+\subsection{Two roles: dependence and intent}
+
+A footprint is a statement about dependence, and dependence is not content.
+Equality with the permitted set says that the proof term of the declaration uses
+no axiom outside that set; it says nothing about whether the statement is the
+intended one, because the footprint is read off the proof term and the shape of
+the statement is not part of what it records. A declaration that proves a weaker
+proposition, or a different one, has the same footprint as a declaration that
+proves the intended proposition. What addresses intent is the other two devices.
+The digest of the contract detects a change in a statement over time, and the
+ledger of Appendix~A fixes, for every reported declaration, its module and its
+role in the argument. The division of labour is therefore: the firewall reports
+what was assumed, the digest reports what was frozen, the ledger reports where
+the declaration sits. All three are necessary, none is sufficient, and what the
+three together still leave unchecked is stated in \cref{sec:lean-reproduction}.

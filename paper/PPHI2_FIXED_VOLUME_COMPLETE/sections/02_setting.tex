@@ -1,0 +1,282 @@
+% ==========================================================================
+%  Section 2 -- Setting.  Owner: W02.  Frozen label: sec:setting.
+%
+%  This file fixes, and proves nothing: the torus and its test space
+%  (def:torus), the pairing normalisation (rem:v-normalisation), the index
+%  sets and the three weights (def:modes), the norm the weights are built
+%  from (def:weight-supnorm), the negative-Sobolev carriers (def:carrier-hs),
+%  the fixed-volume regime and the N/n dictionary (hyp:volume), the lattice
+%  configuration space and the two symbols (eq:lattice-symbol,
+%  eq:continuum-symbol), the two borrowed facts (ext:fourier-basis,
+%  ext:summability), the dimensional caveat (rem:dimension) and the four
+%  conventions a reader can get wrong (rem:conventions).
+% ==========================================================================
+\section{Setting}\label{sec:setting}
+
+This section fixes the objects and the conventions that the rest of the paper
+uses, and it proves nothing substantive. \Cref{def:torus} fixes the torus, its
+test space and the Fourier coefficient; \cref{rem:v-normalisation} the
+normalisation of the pairings; \cref{def:modes,def:weight-supnorm} the index
+sets and the three weights; \cref{def:carrier-hs} the negative-Sobolev sequence
+spaces that carry the measures and the energy. \Cref{hyp:volume} fixes the
+fixed-volume regime and the dictionary between the two ways of indexing it. Two
+background fact is borrowed and stated as an external
+theorem (\cref{ext:fourier-basis}), and one is proved outright (\cref{ext:summability}). No probabilistic object is
+introduced here: the lattice laws belong to \cref{sec:lattice}.
+
+\subsection{The torus, its test space, and the Fourier coefficient}
+
+\begin{definition}[The periodic torus and its test space]\label{def:torus}
+Let $L>0$. The \emph{periodic torus} is $\Torus:=\R^2/(L\Z)^2$, identified
+throughout with the half-open cell $[0,L)^2$; its volume is $V:=L^2$. A
+\emph{test function} is a bounded continuous $f:\R^2\to\R$ that is
+$L$-periodic in each coordinate,
+\[
+  f(x+Le_i)=f(x)\qquad\text{for } i=1,2 \text{ and all } x\in\R^2 ,
+\]
+where $e_1,e_2$ are the standard unit vectors, so a test function is a bounded
+continuous real function on $\Torus$. The
+trigonometric polynomials are uniformly dense in the set of test functions ---
+a standard fact, recorded here for orientation; no step below spends it, because
+every approximation in this paper is a finite-mode truncation of a series whose
+terms are already explicit. The \emph{Fourier coefficient} of
+a test function $f$ at the mode $k\in\Z^2$ is
+\begin{equation}\label{eq:fourier-coefficient}
+  F(k):=\int_{[0,L]^2} f(x)\,e^{-2\pi i\,k\cdot x/L}\,\dd x ,
+\end{equation}
+the integral being taken over the physical cell of Lebesgue measure $V$, so that
+$F(k)$ carries the dimension of $f$ times volume. There is deliberately no
+factor $V^{-1}$ in \eqref{eq:fourier-coefficient}.
+\end{definition}
+
+\begin{remark}[The pairings carry $V^{-1}$]\label{rem:v-normalisation}
+The coefficient \eqref{eq:fourier-coefficient} is the \emph{integral-normalised}
+one. Every Fourier pairing written later has the shape
+$V^{-1}\sum_k\overline{F(k)}\,G(k)\,\rho(k)$ with a symbol $\rho$: the factor
+$V^{-1}$ belongs to the pairing, never to the coefficient. The competing
+convention is the orthonormal one attached to the basis of
+\cref{ext:fourier-basis}, whose coefficient at $k$ is $V^{-1}F(k)$; the change of
+variables between the two is \cref{lem:haar-lebesgue}. Both conventions occur
+below, and interchanging them loses exactly one factor of $V=L^2$.
+\end{remark}
+
+\subsection{Modes, weights, and which norm enters them}
+
+\begin{definition}[Fourier index set and weights]\label{def:modes}
+The \emph{continuum index set} is $\Z^2$; the \emph{lattice index set} is
+$I_N:=(\Z/N\Z)^2$, with $N\in\N$ as in \cref{hyp:volume}. For $k\in\Z^2$ put
+$\norm{k}_\infty:=\max\{\abs{k_1},\abs{k_2}\}$. The weights of this paper are
+functions of this sup norm and of nothing else; the Euclidean norm enters only
+the symbols \eqref{eq:lattice-symbol}--\eqref{eq:continuum-symbol}. The weights
+are
+\begin{equation}\label{eq:weights}
+  w_3(k)=
+  \begin{cases}
+    1, & k=0,\\[2pt]
+    \norm{k}_\infty^{-6}, & k\neq0,
+  \end{cases}
+  \qquad
+  w_2(k)=
+  \begin{cases}
+    0, & k=0,\\[2pt]
+    \norm{k}_\infty^{-4}, & k\neq0,
+  \end{cases}
+\end{equation}
+together with the \emph{full} weight $\widetilde w_2$, which agrees with $w_2$
+at every $k\neq0$ and takes the value $\widetilde w_2(0)=1$. Thus $w_3$ and
+$\widetilde w_2$ are positive at every mode, the origin included, whereas $w_2$
+is not.
+\end{definition}
+
+The three weights are not interchangeable, and everything below depends on
+keeping them apart. The seminorm weight $w_2$ annihilates the zero mode and
+enters only where that mode is restored by a separate additive term --- the split
+that makes the weighted trace finite
+(\cref{thm:uniform-moment,lem:trace-constant}). The full
+weight $\widetilde w_2$ is positive everywhere, so the weighted sum it defines
+is an honest norm and its sublevel sets are the compact sets of the argument
+(\cref{thm:compact-tail}). The weight $w_3$ is positive everywhere for the same
+reason as $\widetilde w_2$, and its weighted space carries the measures
+(\cref{def:carrier-hs}).
+
+\begin{definition}[The sup norm on the mode lattice]\label{def:weight-supnorm}
+For $k\in\Z^2$ the symbol $\norm{k}_\infty$ denotes the sup norm
+$\max_i\abs{k_i}$ of \eqref{eq:weights}, and $\abs{k}$ the Euclidean norm
+$(\sum_ik_i^2)^{1/2}$. Every weight of this paper is a function of
+$\norm{k}_\infty$ alone, every symbol of
+\cref{eq:lattice-symbol,eq:continuum-symbol} a function of $\abs{k}$. The two
+are equivalent, $\norm{k}_\infty\le\abs{k}\le 2^{1/2}\norm{k}_\infty$ in two
+dimensions, and they give the same summability threshold
+(\cref{ext:summability}); they are not interchangeable inside an estimate,
+because for $k$ with $\abs{k_1}\neq\abs{k_2}$ the two differ and
+$\norm{k}_\infty^{-4}\neq\abs{k}^{-4}$.
+\end{definition}
+
+\subsection{Negative-Sobolev carriers}
+
+\begin{definition}[Negative-Sobolev sequence spaces]\label{def:carrier-hs}
+Let $\mathcal W=(\mathcal W(k))_{k\in\Z^2}$ be a weight with $\mathcal W(k)>0$
+for every $k$, and put
+\begin{equation}\label{eq:ell2s}
+  \ell^2(\Z^2;\mathcal W):=
+  \Bigl\{c=(c_k)_{k\in\Z^2}\in\C^{\Z^2}:
+  \sum_{k\in\Z^2}\mathcal W(k)\abs{c_k}^2<\infty\Bigr\},
+\end{equation}
+a Hilbert space for the inner product
+$\ip{c}{d}_{\mathcal W}=\sum_k\mathcal W(k)\overline{c_k}d_k$. For $s>0$ let
+\begin{equation}\label{eq:full-weight-family}
+  \widetilde w_s(k)=
+  \begin{cases}
+    1, & k=0,\\[2pt]
+    \norm{k}_\infty^{-2s}, & k\neq0,
+  \end{cases}
+  \qquad\text{and set}\qquad
+  \HL{s}:=\ell^2(\Z^2;\widetilde w_s).
+\end{equation}
+The two exponents of \eqref{eq:weights} are the cases $\widetilde w_2$ and
+$\widetilde w_3=w_3$ of this family. This is a definition and not a theorem: no
+separately defined distribution space is identified here, in keeping with
+\cref{sec:scope}. The letter $s$ is the Sobolev order, so the weight of
+$\HL{s}$ decays like $\norm{k}_\infty^{-2s}$; where the \emph{decay exponent}
+itself is meant below, it is written out rather than denoted by $s$, because the
+two differ by a factor of two and the summability threshold is stated in the
+decay exponent.
+\end{definition}
+
+Two of these spaces occur, with two different jobs, and neither exponent may be
+relabelled. The \emph{carrier} is $\HL{3}$: the lattice laws of
+\cref{sec:lattice} are Borel probability measures on its completion, and the weak
+convergence asserted in \cref{sec:main} is weak convergence there. The
+\emph{energy} is $\HL{2}$: the uniform moment of \cref{thm:uniform-moment} is an
+$\HL{2}$ quantity. The inclusion $\HL{2}\subseteq\HL{3}$ is
+\cref{prop:completion}, and it is the ratio $w_3/\widetilde w_2=\norm{k}_\infty^{-2}$
+that tends to zero --- the $\HL{3}$ weight decays \emph{faster}, not the $\HL{2}$ one ---
+which is what makes an $\HL{2}$-sublevel set have small $\HL{3}$-tails, hence
+relatively compact closure (\cref{thm:compact-tail}).
+
+A point of $\HL{3}$ may be written as its family of Fourier coefficients, with
+the weighted norm \eqref{eq:full-weight-family}, or as the family of
+\emph{stored coordinates} obtained by applying $\sqrt{\widetilde w_3(k)}$ to
+each coefficient; the two differ by the diagonal isometry of
+\cref{def:carrier-hminus3}, and \cref{rem:two-families} says which one each
+formula below is written in. The deweighting is defined on all of $\HL{3}$
+precisely because $\widetilde w_3(k)>0$ at every $k$, the zero mode included
+(\cref{eq:weights}) --- which is why the zero mode of the $\HL{3}$ weight is $1$
+and not $0$. Computing an $\HL{2}$ norm in coordinates that already carry the
+$\HL{3}$ weight multiplies it by a mode-dependent factor, which is the trap
+\cref{rem:conventions} warns about.
+
+\subsection{Fixed volume, the two symbols, and a borrowed fact}
+
+\begin{hypothesis}[Fixed physical volume]\label{hyp:volume}
+Throughout, $L>0$ and the mass $m>0$ are fixed. The lattice spacing $a>0$ and
+the lattice size $N\in\N$ satisfy
+\begin{equation}\label{eq:fixed-volume}
+  aN=L,
+\end{equation}
+and the sequence of lattices is indexed by $n\in\N$ through
+\begin{equation}\label{eq:index-dictionary}
+  N=n+1,\qquad a=a_n=\frac{L}{n+1}\ .
+\end{equation}
+\end{hypothesis}
+
+\Cref{hyp:volume} also fixes the bookkeeping that the two halves of the paper
+index differently. The mathematics below writes $N$ for the lattice size and
+passes to $N\to\infty$; the machine development of \cref{sec:lean-overview}
+indexes its statements by $n$ and derives $N=n+1$, $a=L/(n+1)$.
+\Cref{eq:index-dictionary} is the whole dictionary, with one consequence: the
+mesh is never a free parameter, so only $L$, $m$ and $n$ are free below.
+
+Fixed volume buys one thing, and the argument rests on it: a symbol limit.
+Because \eqref{eq:fixed-volume} forces $a=L/N\to0$ at fixed $L$, the lattice
+symbol below approaches the continuum symbol mode by mode at each fixed $k$, and
+it is exactly because the spacing vanishes while $L$ is held fixed that the limit
+is not a rescaling of the field. Fixed volume buys no modulus: no rate, no
+exponential tail and no quantitative convergence statement is proved here
+(\cref{sec:scope}), and the limit is not asserted to be an $L^2$ function.
+
+Two symbols are used from here on, and neither identity is proved here: the
+first is the symbol of the operator of
+\cref{def:lattice-laplacian,prop:operator}, the second that of the resolvent of
+\cref{lem:resolvent}. The lattice configuration space is
+$\R^{I_N}$: a configuration assigns a real number to each site $x\in I_N$, and
+the site $x$ has the physical representative $ax\in[0,L)^2$. The lattice symbol
+and the continuum symbol are
+\begin{equation}\label{eq:lattice-symbol}
+  \lambda_N(p):=m^2+4a^{-2}\sum_{i=1}^{2}\sin^2\Bigl(\frac{\pi p_i}{N}\Bigr),
+  \qquad p\in I_N ,
+\end{equation}
+\begin{equation}\label{eq:continuum-symbol}
+  \lambda(k):=m^2+\Bigl(\frac{2\pi}{L}\Bigr)^{2}\abs{k}^2 ,
+  \qquad k\in\Z^2 .
+\end{equation}
+The expression \eqref{eq:lattice-symbol} is well defined on the residue class
+$p_i\in\Z/N\Z$ because $\sin^2(\pi t)$ is $1$-periodic in $t$. Both symbols are
+real and at least $m^2>0$, so no denominator formed from them vanishes.
+
+\begin{external}[Torus Fourier basis]\label{ext:fourier-basis}
+Let $z=x/L\in[0,1)^2$ and let $\dd z$ be Lebesgue measure on the unit cell, whose
+total mass is $1$. The family $z\mapsto e^{2\pi i\,k\cdot z}$, $k\in\Z^2$, is a
+complete orthonormal basis of $L^2([0,1)^2,\dd z;\C)$.
+\end{external}
+
+\Cref{ext:fourier-basis} is used as a black box, and no other completeness
+statement is needed below. It is quoted in this orthonormal form because that is
+the form in which tests are paired with the resolvent in \cref{sec:covariance};
+the factor that reconciles it with \eqref{eq:fourier-coefficient} is the
+$V^{-1}$ of \cref{rem:v-normalisation}, whose proof is \cref{lem:haar-lebesgue}.
+
+\begin{lemma}[Summability of the weights]\label{ext:summability}
+In two dimensions both of the following series converge:
+\begin{equation}\label{eq:summability}
+  \sum_{k\ne0}\norm{k}_\infty^{-4}<\infty,
+  \qquad
+  \sum_{k\ne0}\norm{k}_\infty^{-6}<\infty .
+\end{equation}\end{lemma}
+
+\begin{proof}
+The two sums are explicit. The shell $\norm{k}_\infty=q$, $q\ge1$, carries
+$(2q+1)^2-(2q-1)^2=8q$ modes, and on that shell $\norm{k}_\infty^{-r}=q^{-r}$, so
+each sum is $8\sum_{q\ge1}q^{1-r}$ with $r=4$ respectively $r=6$; such a series
+converges exactly when $r>2$. The inequality that matters is therefore $2<4$ and
+$2<6$: \emph{the decay exponent of the weight must exceed the dimension}.
+\end{proof}
+
+The two values are worth naming, because the constants below carry them:
+\[
+  \sum_{k\ne0}\norm{k}_\infty^{-4}=8\zeta(3),
+  \qquad
+  \sum_{k\ne0}\norm{k}_\infty^{-6}=8\zeta(5).
+\]
+
+\begin{remark}[The exponents are the two-dimensional ones]\label{rem:dimension}
+The threshold just computed is that the decay exponent exceeds $d$, and here
+$d=2$. In $d=4$ the decay exponent $4$ of $\widetilde w_2$ would be critical
+rather than summable, so the pair $w_2,w_3$ of \eqref{eq:weights} is a
+two-dimensional pair; the paper claims nothing about dimension four and offers
+no general one. The source of
+\cref{sec:covariance} is registered for a general dimension $d$, but this paper
+writes it in two dimensions, like everything else here: the test functions are
+functions on $\R^2$, and the shell count in the last step of its proof uses
+$d=2$. The measure chain therefore uses $d=2$ throughout, with no statement and
+no object of this paper claimed in another dimension (\cref{sec:scope}).
+\end{remark}
+
+\begin{remark}[Four conventions a reader can get wrong]\label{rem:conventions}
+Each of the following is settled above, and each is easy to reverse by accident.
+\emph{(i) Integral versus orthonormal normalisation:} \eqref{eq:fourier-coefficient}
+carries no $V^{-1}$, the pairing carries it, and the probability-torus form
+appears only where a test is paired with the resolvent in \cref{sec:covariance}
+(\cref{rem:v-normalisation,lem:haar-lebesgue}). \emph{(ii) Sup norm versus
+Euclidean norm:} the weights are stated for $\norm{k}_\infty$ and the symbols
+for $\abs{k}$, and the two must not be exchanged inside an estimate
+(\cref{def:weight-supnorm}). \emph{(iii) Seminorm versus full weight:} $w_2$
+vanishes at the zero mode and is usable only where that mode is supplied
+separately, while $\widetilde w_2$ and $w_3$ are positive everywhere and are
+what the norm and the compactness argument use
+(\cref{def:modes,def:carrier-hs}). \emph{(iv) Carrier versus energy exponent:}
+$\HL{3}$ is the carrier of the laws and the topology of weak convergence,
+$\HL{2}$ the exponent of the energy and of the uniform moment, and neither may
+stand in for the other
+(\cref{def:carrier-hs,thm:uniform-moment,sec:tightness}).
+\end{remark}

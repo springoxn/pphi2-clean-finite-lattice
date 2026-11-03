@@ -98,10 +98,14 @@ theorem periodicHMinusThree_probabilityMeasure_ext_of_finite_marginals
     (hgen : PeriodicHMinusThreeCylinderBorelGenerationInput)
     (μ ν : ProbabilityMeasure PeriodicHMinusThreeCompletion)
     (hmarg : ∀ (s : Finset PeriodicFourierIndex),
-      μ.map (fun x : PeriodicHMinusThreeCompletion =>
-        s.restrict (x : PeriodicFourierIndex → ℂ)) =
-      ν.map (fun x : PeriodicHMinusThreeCompletion =>
-        s.restrict (x : PeriodicFourierIndex → ℂ))) :
+      μ.map (f := (fun x : PeriodicHMinusThreeCompletion =>
+        s.restrict (x : PeriodicFourierIndex → ℂ)))
+        ((Finset.measurable_restrict s).comp
+          measurable_periodicHMinusThree_coordinate_inclusion).aemeasurable =
+      ν.map (f := (fun x : PeriodicHMinusThreeCompletion =>
+        s.restrict (x : PeriodicFourierIndex → ℂ)))
+        ((Finset.measurable_restrict s).comp
+          measurable_periodicHMinusThree_coordinate_inclusion).aemeasurable) :
     μ = ν := by
   apply Subtype.ext
   apply periodicHMinusThree_measure_ext_of_cylinder hgen

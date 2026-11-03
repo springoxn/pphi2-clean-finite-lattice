@@ -1,0 +1,105 @@
+% ==========================================================================
+%  Section 13 -- What is machine-checked and what is not.  Owner: W10.
+%  Frozen label: sec:lean-boundary.
+%
+%  Architecture: a numbered list of divergences, each a fact about the sources,
+%  with no qualifier that softens it.  Every item is backed by notes/lean_ledger.md
+%  sections 4 and 5; the counts that exist as macros are macros, the reachability
+%  count is the word "eight" (CONTRACT section 11, final paragraph), and the direct
+%  import count is deliberately not stated (it would be a typed structural count).
+%
+%  Traps observed here.  (1) The root aggregator does not build every module, and
+%  the footprints of six registered theorems rest on the transcript, not a build.
+%  (2) The final-theorem wrapper proves nothing; it may be named, and must be
+%  called vacuous in the same breath.  (3) The total-lift zero convention is not a
+%  null-set assertion; the chain avoids it.  (4) The measure chain is 2-dimensional
+%  while the covariance theorems are general-d.
+% ==========================================================================
+\section{What is machine-checked and what is not}\label{sec:lean-boundary}
+
+The formal side of this paper is easier to overstate than to state, so the
+divergences between the sources and a maximally favourable reading are collected
+here as numbered facts. Each is a property of the sources, not a hedge on a
+result: the declarations asserted below are the declarations that exist, and the
+sentences below say how far the evidence for them extends. The influence of each
+item on the mathematics is none; the influence on what a reader may conclude is
+total.
+
+\begin{enumerate}
+
+\item \emph{Reachability.} \NumCleanModules{} modules exist in the package, and
+  the package root aggregator imports a subset of them directly.
+  \NumUnreachableModules{} modules are not reachable from the root file even
+  transitively. Two of them are load-bearing:
+  \lmod{PeriodicHMinusThreeWeakLimitMarginal}, which declares
+  \NumUnreachableChainTheorems{} of the \NumMeasureContractTheorems{} registered
+  measure-limit theorems, and
+  \lmod{PeriodicHMinusThreeProkhorovSubsequence}, which declares the Prokhorov
+  extraction step of the argument. Consequently a build of the \emph{root file}
+  does not evidence the axiom footprints of those declarations: nothing reachable
+  from it contains them, so a claim that the root covers the development is a
+  claim about a subset of the package. What does evidence them is a build of the
+  library target, which elaborates every module including the unreachable ones,
+  and that is the build Appendix~B records. The distinction matters to a reader
+  who builds the aggregator and stops: the result is green and says nothing about
+  \NumUnreachableModules{} modules, \NumUnreachableChainTheorems{} of whose
+  declarations are on this paper's chain.
+
+\item \emph{A vacuous wrapper.} The development contains a
+  final-theorem-shaped interface,
+  \lmod{latticeFreeFieldMeasure_tendsto_periodicFreeGaussian}, whose proof is
+  \texttt{exact hfinal}: it assumes its own conclusion. This paper does not use
+  it, and no result on these pages depends on it. It exists as a contract-shaped
+  interface, listing the data that a completed assembly would have to supply --
+  tightness, the finite marginals, the cylinder-to-Borel input and the
+  subsequential identification -- and a reader who found it by its name and its
+  shape would take it for the paper's theorem. It is not, and citing it as such
+  would be filing an empty citation.
+
+\item \emph{The formalisation's lift is not the paper's}. The development's
+  carrier-valued lift is a total function, defined coordinatewise with the
+  series appearing only in the $\ell^2$ side condition, together with the
+  convention that it is $0$ off the convergence set; its measurability is one
+  conjunct of an input of the formal development, the other conjunct asserting
+  almost-everywhere agreement with the raw weighted lift. That convention is
+  \emph{weaker} than a range statement and must not be read as one: the function
+  is total at the price of the convention, not of a theorem about it. Nothing in
+  the mathematics turns on it. The paper's carrier-valued representative is $L_N$
+  of \cref{def:finite-source-lift}, whose total range, Borel measurability and
+  entry formula are proved outright (\cref{lem:lift-representative}), and the
+  chain of \cref{sec:main} runs through $L_N$, not through the development's
+  lift; on the finite-source route the development moreover proves the two
+  pushforwards equal without using the input. So a
+  reader comparing the two sources should read the development's input as a fact
+  about one implementation choice, not as a gap in \cref{thm:main}. What is
+  genuinely absent on both sides is stated in \cref{sec:scope}.
+
+\item \emph{Dimension.} The measure chain is hard-wired to two dimensions: the
+  carrier, the Fourier index set, the cylinder maps and the law sequence are all
+  built over the two-dimensional index set, and no parameter for the dimension
+  occurs in them. The registered covariance theorems are stated for a general
+  dimension $d$. The two statements are therefore not the same statement
+  generalised differently: the covariance statements are \emph{registered} for
+  general $d$ (that is how the Lean declarations quantify), this paper writes
+  them in $d=2$, and the measure limit, as formalized, is available in $d=2$
+  only. No dimension other than two is claimed anywhere in Part~I
+  (\cref{rem:dimension}).
+
+\item \emph{What a green build proves.} A complete build proves the Lean
+  declarations that the sources state, under the hypotheses that the sources
+  attach to them, on the toolchain recorded in the transcript; a complete build
+  of this package exists and is recorded in \cref{sec:lean-reproduction}. It
+  proves nothing
+  about the mathematics of a hypothesis: a hypothesis is an input, and a build
+  that consumes it is not evidence for it. It proves nothing about statements
+  outside the library target of Item~1. And the count of \NumCleanSorry{}
+  occurrences of \texttt{sorry} is a statement about the text of the sources,
+  obtained by a scan that strips comments, rather than a statement about the
+  mathematics: a source file free of placeholders can still formalize a
+  proposition weaker than the one a reader has in mind, which is why Item~3 and
+  Item~4 are stated here rather than absorbed into the count. The mathematical
+  boundary of this paper -- the coverage comparison between these ten
+  declarations and the rest of the development, and the absence of a rate -- is a
+  different boundary, and \cref{sec:scope} draws it.
+
+\end{enumerate}

@@ -74,8 +74,12 @@ theorem periodicHMinusThree_weight_ratio_tendsto_zero :
     have hinv : ‖k‖⁻¹ ≤ δ := by
       rw [inv_le_iff_one_le_mul₀' hx]
       exact hmul.le
-    exact (Real.rpow_le_rpow_of_exponent_le (by linarith) (by norm_num)).trans
-      (by rw [Real.rpow_neg_one]; exact hinv)
+    have h1 : (1 : ℝ) ≤ ‖k‖ := by linarith
+    have hmono : ‖k‖ ^ (-2 : ℝ) ≤ ‖k‖ ^ (-1 : ℝ) :=
+      Real.rpow_le_rpow_of_exponent_le h1 (by norm_num)
+    calc ‖k‖ ^ (-2 : ℝ) ≤ ‖k‖ ^ (-1 : ℝ) := hmono
+      _ = ‖k‖⁻¹ := Real.rpow_neg_one ‖k‖
+      _ ≤ δ := hinv
   have hpow : ‖k‖ ^ (-6 : ℝ) =
       ‖k‖ ^ (-4 : ℝ) * ‖k‖ ^ (-2 : ℝ) := by
     rw [← Real.rpow_add hx]
@@ -243,11 +247,32 @@ theorem periodicHMinusThreeNorm_le_periodicHMinusTwoNorm
         (sq_nonneg ‖c k‖)) hc
   unfold periodicHMinusThreeNorm periodicHMinusTwoNorm
   apply Real.sqrt_le_sqrt
-  exact h3sum.tsum_le_tsum
-    (fun k => mul_le_mul_of_nonneg_right
-      (periodicHMinusThreeWeight_le_periodicHMinusTwoFullWeight k)
-      (sq_nonneg ‖c k‖)) hc
+  have hle : ∀ k : Fin 2 → ℤ,
+      periodicHMinusThreeWeight k * ‖c k‖ ^ 2
+        ≤ periodicHMinusTwoFullWeight k * ‖c k‖ ^ 2 :=
+    fun k => mul_le_mul_of_nonneg_right
+      (periodicHMinusThreeWeight_le_periodicHMinusTwoFullWeight k) (sq_nonneg ‖c k‖)
+  have hnn₃ : ∀ k : Fin 2 → ℤ, 0 ≤ periodicHMinusThreeWeight k * ‖c k‖ ^ 2 :=
+    fun k => mul_nonneg (periodicHMinusThreeWeight_nonneg k) (sq_nonneg _)
+  have hnn₂ : ∀ k : Fin 2 → ℤ, 0 ≤ periodicHMinusTwoFullWeight k * ‖c k‖ ^ 2 :=
+    fun k => mul_nonneg
+      (le_trans (periodicHMinusThreeWeight_nonneg k)
+        (periodicHMinusThreeWeight_le_periodicHMinusTwoFullWeight k)) (sq_nonneg _)
+  -- Compare in `ℝ≥0∞`, where monotonicity of `tsum` needs no summability input,
+  -- then come back down through `ofReal_le_ofReal_iff`.
+  have hE : (∑' k : Fin 2 → ℤ,
+      ENNReal.ofReal (periodicHMinusThreeWeight k * ‖c k‖ ^ 2))
+      ≤ ∑' k : Fin 2 → ℤ,
+          ENNReal.ofReal (periodicHMinusTwoFullWeight k * ‖c k‖ ^ 2) :=
+    ENNReal.tsum_le_tsum (fun k => ENNReal.ofReal_le_ofReal (hle k))
+  rw [← ENNReal.ofReal_tsum_of_nonneg hnn₃ h3sum,
+      ← ENNReal.ofReal_tsum_of_nonneg hnn₂ hc] at hE
+  exact (ENNReal.ofReal_le_ofReal_iff (tsum_nonneg hnn₂)).mp hE
 
+/-- The finite Fourier projection onto the modes of `K`, read in the H^-3
+completion.  Its graph is a finite union of one-dimensional subspaces, which is
+what makes the bounded-ball image below compact. -/
+def periodicHMinusThreeFiniteFourierProjection (K : Finset (Fin 2 → ℤ))
     (z : {k // k ∈ K} → ℂ) : PeriodicHMinusThreeCompletion :=
   ∑ k : {k // k ∈ K}, lp.single (E := fun _ : Fin 2 → ℤ => ℂ)
     2 (k : Fin 2 → ℤ) (z k)

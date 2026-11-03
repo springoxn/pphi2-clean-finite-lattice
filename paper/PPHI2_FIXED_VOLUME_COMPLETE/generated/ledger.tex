@@ -1,0 +1,52 @@
+% ===== generated/ledger.tex -- DERIVED, DO NOT EDIT =====================
+% Built by audit/make_ledger.py from formal/lean/challenges/_registry.yaml
+% and the role table in that script.  Every name here is a name the
+% audit transcript reports a footprint for.
+
+Every declaration frozen in the two statement contracts is listed
+below with its fully
+qualified Lean~4 name, the module of the delivered package that declares
+it, and its role in the argument.  The names are reproduced mechanically
+from the statement registry of the development, so that the reader can
+locate each claim in the sources without transcribing an underscore.
+Declarations that the body quotes but that are not frozen in a contract
+are named in the correspondence table of the Lean overview section,
+which is where their role is described; this appendix does not claim to
+list them, and the paper's gate checks them against the Lean sources.
+
+\medskip\noindent\textbf{PPHI2\_FIXED\_VOLUME\_COVARIANCE\_LIMIT}\par\smallskip
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.47\linewidth}p{0.49\linewidth}@{}}
+\toprule
+Declaration & Module, and its role in the argument \\
+\midrule
+\texttt{\detokenize{fixedVolumeCovarianceInner}\_\allowbreak{}\detokenize{tendsto}\_\allowbreak{}\detokenize{torusFourierGreenPairing}} & \texttt{PeriodicFourierCovarianceLimit}\newline fixed-volume convergence of the lattice covariance pairing to the torus Green pairing \\
+\texttt{\detokenize{physicalGJMeasure}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{mixedMoment}\_\allowbreak{}\detokenize{tendsto}\_\allowbreak{}\detokenize{torusFourierGreenPairing}} & \texttt{PeriodicFourierCovarianceLimit}\newline the same limit for the mixed second moment of the physical lattice law \\
+\texttt{\detokenize{physicalGJMeasure}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{covariance}\_\allowbreak{}\detokenize{tendsto}\_\allowbreak{}\detokenize{torusFourierGreenPairing}} & \texttt{PeriodicFourierCovarianceLimit}\newline the same limit for the centred covariance; this is the input the weak-limit theorem consumes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip\noindent\textbf{PPHI2\_FIXED\_VOLUME\_FREE\_FIELD\_MEASURE\_LIMIT}\par\smallskip
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.47\linewidth}p{0.49\linewidth}@{}}
+\toprule
+Declaration & Module, and its role in the argument \\
+\midrule
+\texttt{\detokenize{periodicHMinusThreeCompletion}\_\allowbreak{}\detokenize{separable}} & \texttt{PeriodicHMinusThreeTopologyBorel}\newline the carrier is separable, and complete by the completion; separable and complete gives Polish, which is what carries the Prokhorov machinery \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{probabilityMeasure}\_\allowbreak{}\detokenize{ext}\_\allowbreak{}\detokenize{of}\_\allowbreak{}\detokenize{indexed}\_\allowbreak{}\detokenize{cylinder}\_\allowbreak{}\detokenize{marginals}} & \texttt{PeriodicHMinusThreeWeakLimitMarginal}\newline two Borel probability measures agreeing on every indexed cylinder agree \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{subsequential}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{has}\_\allowbreak{}\detokenize{expected}\_\allowbreak{}\detokenize{cylinder}} & \texttt{PeriodicHMinusThreeWeakLimitMarginal}\newline the finite-mode limits pass to any subsequential limit extracted by Prokhorov \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{exists}} & \texttt{PeriodicHMinusThreeWeakLimitMarginal}\newline existence of a weak limit point of the whole sequence \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{has}\_\allowbreak{}\detokenize{expected}\_\allowbreak{}\detokenize{cylinder}} & \texttt{PeriodicHMinusThreeWeakLimitMarginal}\newline that limit point has the prescribed finite Fourier marginals \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{unique}} & \texttt{PeriodicHMinusThreeWeakLimitMarginal}\newline any two limit points coincide, so the limit is independent of the subsequence \\
+\texttt{\detokenize{periodicHMinusThree}\_\allowbreak{}\detokenize{fixedVolume}\_\allowbreak{}\detokenize{weak}\_\allowbreak{}\detokenize{limit}\_\allowbreak{}\detokenize{exists}\_\allowbreak{}\detokenize{with}\_\allowbreak{}\detokenize{expected}\_\allowbreak{}\detokenize{cylinders}} & \texttt{PeriodicHMinusThreeWeakLimitMarginal}\newline the main theorem: whole-sequence weak convergence to the uniquely determined law \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The prefix \texttt{Pphi2Clean.Continuum} is common to all ten names
+and is omitted in the table.

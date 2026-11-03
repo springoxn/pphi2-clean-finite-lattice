@@ -1,0 +1,29 @@
+Constructive Euclidean field theory builds a theory from a sequence of
+regularised measures and must pass to a limit of those measures.
+
+At fixed physical volume the regularisation is constrained, because a lattice of
+$N$ sites at spacing $a$ covers the torus only when $aN = L$.  The limit is
+therefore genuinely infinite-dimensional, and the classical route to it runs
+through nuclearity of a test space and the Minlos theorem \cite{minlos1959},
+which together deliver a measure on a space of distributions.
+
+This paper takes that limit without either device.  The carrier is built as an
+explicit weighted sequence space over the Fourier modes of the torus; a uniform
+moment bound yields tightness in the weaker of two negative Sobolev topologies;
+the finite Fourier marginals are identified in the limit; and cylinder sets
+generate the Borel sigma-algebra, so Borel probability measures that agree on
+marginals agree.
+
+In two dimensions, for every period $L > 0$ and mass $m > 0$, the finite-source
+Fourier pushforwards of the lattice Gaussian laws are tight with a uniform
+$\HL{2}$ moment, and their finite Fourier marginals converge to paired cosine and
+sine Gaussian laws.  The whole sequence, not merely a subsequence, then converges
+weakly to a Borel probability measure determined by those marginals, and the
+lattice covariance integrals converge to the pairing with an independently
+constructed periodic massive resolvent.
+
+The theory constructed is the free (Gaussian) layer; no rate is claimed.
+Part~II reports a Lean~4 development of the same conclusions ---
+\NumCleanModules{} modules, \NumCleanSorry{} sorry and \NumCleanProjectAxioms{}
+project axioms --- and states which layer is machine-checked and which is not
+(\cref{sec:lean-boundary}).

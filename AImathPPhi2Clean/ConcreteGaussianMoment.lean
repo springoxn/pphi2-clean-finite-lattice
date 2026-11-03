@@ -154,7 +154,9 @@ instance finiteCovarianceGaussianMeasure_probability {ι : Type*} [Fintype ι]
     (T : (ι → ℝ) →L[ℝ] EuclideanSpace ℝ ι) :
     IsProbabilityMeasure (finiteCovarianceGaussianMeasure T) := by
   unfold finiteCovarianceGaussianMeasure
-  infer_instance
+  -- named rather than `infer_instance`: which instance
+  -- supplies this has moved between Mathlib revisions.
+  exact Measure.isProbabilityMeasure_map (covarianceConfiguration_measurable T).aemeasurable
 
 theorem finiteCovarianceGaussianMeasure_covariance {ι : Type*} [Fintype ι]
     (T : (ι → ℝ) →L[ℝ] EuclideanSpace ℝ ι) (f g : ι → ℝ) :

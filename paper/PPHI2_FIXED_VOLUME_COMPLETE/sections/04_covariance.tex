@@ -1,0 +1,356 @@
+% ==========================================================================
+%  Section 4 -- The physical-volume covariance limit.  Owner: W04.
+%  Frozen label: sec:covariance.  Target 1200 words.
+%
+%  Contents: the two pairings (eq:pairings); the periodic massive resolvent
+%  built from an energy form and a Riesz adjoint (lem:resolvent); the
+%  physical-cell Riemann-sum theorem (ext:boxintegral); the lattice
+%  covariance as a counting pairing with the inverse of the Gaussian operator
+%  (lem:resolvent-pairing); the fixed-volume limit in five labelled steps
+%  (thm:covariance-limit); and the absence of a Bessel kernel (rem:no-bessel).
+%
+%  Naming: the pairings are written Qcal_N, Qcal, because the letter Q is the
+%  Gaussian operator m^2 - Delta_a of def:lattice-laplacian (section 3).
+% ==========================================================================
+\section{The physical-volume covariance limit}\label{sec:covariance}
+
+This section proves the one analytic limit of Part~I that is not measure theory:
+the covariance integrals of the physical lattice laws converge, and their limit
+is a pairing with a resolvent constructed before any Fourier series is written.
+\Cref{lem:resolvent} builds that resolvent from an energy form and a Riesz
+representation \cite{yosida1980}, \cref{lem:resolvent-pairing} rewrites the
+lattice covariance of
+\cref{def:gj-measure} as a counting pairing with the inverse of the Gaussian
+operator $A_N=m^2-\Delta_a$, and \cref{thm:covariance-limit} combines the two.
+The objects are the pairings
+\begin{equation}\label{eq:pairings}
+  \mathcal Q_N(f,g):=\frac1V\sum_{p\in I_N}
+    \frac{\overline{F_N(p)}\,G_N(p)}{\lambda_N(p)},
+  \qquad
+  \mathcal Q(f,g):=\frac1V\sum_{k\in\Z^2}
+    \frac{\overline{F(k)}\,G(k)}{\lambda(k)},
+\end{equation}
+where $F$ is \eqref{eq:fourier-coefficient}, $F_N$ the sampled coefficient
+\eqref{eq:sampled-coefficient}, and $\lambda_N,\lambda$ the symbols
+\eqref{eq:lattice-symbol}--\eqref{eq:continuum-symbol}. The calligraphic letter
+keeps $Q$ for the Gaussian operator of \cref{def:lattice-laplacian}, and no
+other letter is free. Since
+$\overline{F_N(p)}=F_N(-p)$ and both symbols are even, the sums are real for
+real $f,g$; the computation is dimension-blind except in one shell count,
+flagged in Step~5 below, and we write the two-dimensional case that
+\cref{sec:setting} fixes.
+
+\begin{lemma}[The periodic massive resolvent]\label{lem:resolvent}
+Let $\nu$ be Lebesgue measure on $[0,1)^2$, of total mass $1$, and
+$E:=L^2([0,1)^2,\nu;\C)$ with $\ip{u}{v}_E=\int\overline{u}\,v\,\dd\nu$,
+conjugate-linear in the first argument. Write $b_k(z)=e^{2\pi i\,k\cdot z}$ for
+the basis of \cref{ext:fourier-basis} and $B:E\to H$ for the induced isometry
+onto $H:=\ell^2(\Z^2;\C)$. Put $\lambda(k)=m^2+\sum_i(2\pi k_i/L)^2$ and
+$w(k):=\lambda(k)^{-1/2}$, and let $J$ and the gradient multipliers $D_i$ act
+diagonally by $(Jh)(k)=w(k)h(k)$ and
+$(D_ih)(k)=i\,(2\pi k_i/L)\,w(k)h(k)$; the value and gradient maps are
+$jh:=B^{-1}Jh$ and $B^{-1}D_ih$. Then:
+\begin{enumerate}
+\item[(i)] the sesquilinear form
+  \begin{equation}\label{eq:energy-form}
+    \mathcal E(h,v):=m^2\ip{jh}{jv}_E+\sum_{i=1}^2\ip{D_ih}{D_iv}_E
+  \end{equation}
+  is the energy form of $H^1(\Torus)$ and satisfies
+  $\mathcal E(h,v)=\ip{h}{v}_H$ for all $h,v\in H$, and the physical-volume
+  inner product on the torus of period $L$ is $V\ip{\cdot}{\cdot}_E$;
+\item[(ii)] $\{(jh,(D_ih)_i):h\in H\}$ is the closure in $E\times E^2$ of the
+  pairs formed by finite trigonometric polynomials on $\Torus$ and their
+  classical physical-coordinate derivatives; this is the periodic
+  $H^1(\Torus)$ graph completion of the energy form in (i);
+\item[(iii)] for $g\in E$ the vector $h_g:=J^*Bg$, $Rg:=jh_g$, is the unique
+  element of $E$ satisfying
+  \begin{equation}\label{eq:weak-equation}
+    m^2\ip{Rg}{jv}_E+\sum_{i=1}^2\ip{D_ih_g}{D_iv}_E=\ip{g}{jv}_E
+  \end{equation}
+  for every $v\in H$, and $\norm{Rg}_E\le m^{-2}\norm{g}_E$;
+\item[(iv)] $B(Rg)(k)=\lambda(k)^{-1}Bg(k)$, and
+  $\ip{f}{Rg}_E=\sum_k\overline{Bf(k)}\,Bg(k)/\lambda(k)$, the series being
+  absolutely convergent.
+\end{enumerate}
+The construction is carried out on the unit-mass $L^2$ of the torus. No
+distribution-defined Sobolev space is invoked: the completion in (ii) is an
+explicit graph closure of polynomials.
+\end{lemma}
+
+\begin{proof}
+(i) The multipliers are diagonal in the basis $b_k$, and
+\[
+  m^2w(k)^2+\sum_i(2\pi k_i/L)^2w(k)^2=\lambda(k)w(k)^2=1
+\]
+gives
+\eqref{eq:energy-form}. The identity concerns the mixed sesquilinear form, not
+only its diagonal; physical volume enters only through $\dd x=V\dd\nu$.
+(ii) $J$ is bounded and injective because $0<w(k)\le m^{-1}$, and
+finite-support vectors are dense in $H$. A finite-support $h$ gives the
+polynomial $\sum_ka(k)b_k$ with $a(k)=w(k)h(k)$, whose coordinate derivative is
+$\sum_ki\,(2\pi k_i/L)\,a(k)b_k$; conversely every finite-support polynomial
+arises this way, as $w(k)\ne0$. If value-gradient pairs are Cauchy in
+$E\times E^2$, \eqref{eq:energy-form} makes the energy vectors Cauchy,
+completeness of $H$ supplies their limit, and continuity of $j$ and $D_i$
+identifies the graph limit; the range is closed.
+(iii) Since $\norm{jv}_E\le m^{-1}\norm{v}_H$, the functional
+$v\mapsto\ip{g}{jv}_E$ is bounded on $H$ and represented by $h_g=J^*Bg$, and
+$\ip{h_g}{v}_H=\ip{g}{jv}_E$ with \eqref{eq:energy-form} gives
+\eqref{eq:weak-equation}. Two solutions differ by $u$ with
+$\mathcal E(u,v)=0$ for every $v$; testing $v=u$ gives $u=0$, and injectivity of
+$j$ fixes the $E$-value. Testing \eqref{eq:weak-equation} with $v=h_g$ and
+taking real parts gives
+$m^2\norm{Rg}_E^2\le\Real\ip{g}{Rg}_E\le\norm{g}_E\norm{Rg}_E$, and we divide
+when $\norm{Rg}_E\ne0$.
+(iv) The adjoint identity on a single basis vector gives $(J^*c)(k)=w(k)c(k)$
+because $w$ is real, so $B(Rg)(k)=w(k)^2Bg(k)=\lambda(k)^{-1}Bg(k)$;
+Cauchy--Schwarz and $\lambda\ge m^2$ make the coefficient series absolutely
+convergent.
+\end{proof}
+
+\begin{external}[Physical-cell Riemann sums converge]\label{ext:boxintegral}
+Let $g:[0,L]^2\to\C$ be continuous, with sup-norm modulus of continuity
+$\omega_g$, and partition $[0,L]^2$ into the $N^2$ cubes of side $a=L/N$. The
+sum of the lower-corner sample times $a^2$ over all cubes differs from
+$\int_{[0,L]^2}g\,\dd x$ by at most $V\omega_g(a)$, so these Riemann sums
+converge; half-open cells give the same value, the shared boundaries being
+Lebesgue null. This is the Henstock--Kurzweil box-integral theory of the
+standard library, quoted and not re-proved.
+\end{external}
+
+\begin{lemma}[Lattice covariance versus resolvent pairing]\label{lem:resolvent-pairing}
+Let $b,c\in\R^{I_N}$ and let $f,g$ be real $L$-periodic. Then
+\begin{equation}\label{eq:counting-pairing}
+  \ip{C_Nb}{C_Nc}=a^{-2}\ip{b}{A_N^{-1}c}_{\mathrm{counting}},
+  \qquad
+  a^2\ip{f}{A_N^{-1}g}_{\mathrm{counting}}=\mathcal Q_N(f,g).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The first identity is \eqref{eq:gj-pairing} of \cref{def:gj-measure}, the
+inverse-mass form in which the lattice covariance is used: $C_N$ is an input
+object (\cref{rem:lattice-input}), and the power $a^{-2}$ sits in the pairing,
+not in a rescaling of the field. For the second identity, use the
+character eigenbasis of \cref{prop:operator}: a real lattice function $u$ has
+$u(x)=V^{-1}\sum_pF_N(p)\chi_p(x)$ because $N^2a^2=L^2=V$, and
+$Q\chi_p=\lambda_N(p)\chi_p$ is \eqref{eq:eigen-identity}, with $A_N=Q$ acting
+in the counting inner product. Substituting both expansions into the
+bilinear counting pairing and using the orthogonality
+$\sum_{x\in I_N}\chi_p(x)\chi_q(x)=N^2\mathbf 1_{p+q\equiv0}$ together with
+$G_N(-p)=\overline{G_N(p)}$ for real $g$ gives
+\[
+  a^2\ip{f}{A_N^{-1}g}_{\mathrm{counting}}
+  =a^2V^{-2}N^2\sum_pF_N(p)\,\overline{G_N(p)}\,\lambda_N(p)^{-1}
+  =\overline{\mathcal Q_N(f,g)}=\mathcal Q_N(f,g),
+\]
+the last equality because $\mathcal Q_N$ is real for real $f,g$. The powers of
+$a$ are not cancelled by hand: each sampled vector carries $a^2$ against the
+$a^{-2}$ of the pairing, and $N^2a^2=V$ turns the counting sum into the
+normalised pairing. Together with \eqref{eq:sampled-covariance}, this writes the
+covariance pairing in the symbol form the limit needs.
+\end{proof}
+
+The measure below is the physical lattice law $\mu^{\mathrm{GJ}}_N$ of
+\cref{def:gj-measure}, not the finite-source pushforward $\mu_N$ whose laws
+converge in \cref{sec:tightness}--\cref{sec:main}: what is proved here is a
+statement about pairings, and it enters \cref{sec:marginals} as the pairwise
+covariance input, since every finite cylinder coordinate of the lift is a finite
+linear combination of lattice source coordinates (\cref{def:finite-source-lift});
+the entrywise identification is separate (\cref{lem:hC-identification}).
+
+\begin{theorem}[Fixed-volume covariance limit]\label{thm:covariance-limit}
+Let $L>0$ and $m>0$, and let $f,g:\R^2\to\R$ be bounded continuous and
+$L$-periodic. Let $a=L/N$, let $\mu^{\mathrm{GJ}}_N$ be the physical lattice law
+of \cref{def:gj-measure}, write $f_L\in E$ for $z\mapsto f(Lz)$ as in
+\cref{lem:haar-lebesgue}, and let $b,c\in\R^{I_N}$ be the sampled vectors
+$b_x=a^2f(ax)$, $c_x=a^2g(ax)$. Then, as $N\to\infty$ with $L$ and $m$ fixed,
+\begin{equation}\label{eq:three-limits}
+  \begin{aligned}
+    \ip{C_Nb}{C_Nc}&\longrightarrow\Real V\ip{f_L}{Rg_L}_E,\\
+    \int\omega(f)\,\omega(g)\,\mu^{\mathrm{GJ}}_N(\dd\omega)
+      &\longrightarrow\Real V\ip{f_L}{Rg_L}_E,\\
+    \int\bigl(\omega(f)-\E\omega(f)\bigr)
+         \bigl(\omega(g)-\E\omega(g)\bigr)\,\mu^{\mathrm{GJ}}_N(\dd\omega)
+      &\longrightarrow\Real V\ip{f_L}{Rg_L}_E,
+  \end{aligned}
+\end{equation}
+where $\omega(f)$ is the test average of \cref{def:gj-measure} and $\E$ is the
+expectation under $\mu^{\mathrm{GJ}}_N$. Both means vanish identically in $N$, so
+the second and third limits coincide.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:resolvent-pairing} the first line of \eqref{eq:three-limits} is
+$\mathcal Q_N(f,g)$, and the other two are the mixed second moment and the
+centred covariance of the same Gaussian family. It suffices to prove
+$\mathcal Q_N(f,g)\to\mathcal Q(f,g)$ and to identify $\mathcal Q$ with the
+resolvent pairing, in five labelled steps.
+
+\textbf{Step 1 (fixed-mode Riemann sums).} Let $k\in\Z^2$ and let
+$p_N(k)\in I_N$ be its residue class. At the sampled physical point $t=a x$ the
+phase is exactly $e^{-2\pi i\,k\cdot t/L}=e^{-2\pi i\,k\cdot x/N}$, for either
+representative of the residue class, and
+$t\mapsto f(t)e^{-2\pi i\,k\cdot t/L}$ is uniformly continuous on the compact
+cell with sup-norm modulus of continuity $\omega_k$. \Cref{ext:boxintegral}
+applied to that function gives
+\begin{equation}\label{eq:fixed-mode}
+  \abs{F_N(p_N(k))-F(k)}\le V\omega_k(a),
+  \qquad \omega_k(a)\longrightarrow0.
+\end{equation}
+Continuity on the compact cell is what produces $\omega_k(a)\to0$; boundedness
+alone would not, since a bounded function may oscillate across every cube of
+every mesh.
+
+\textbf{Step 2 (dispersion).} The limit $\sin t/t\to1$ gives
+$4(N/L)^2\sin^2(\pi k_i/N)\to(2\pi k_i/L)^2$, hence
+$\lambda_N(p_N(k))\to\lambda(k)$. Both symbols are at least $m^2>0$, so their
+products and quotients converge; and the residue map is injective on
+$\{k:\norm{k}_\infty\le K\}$ once $N>2K$, so for fixed $K$ the sum over the
+cutoff converges term by term, real parts included.
+
+\textbf{Step 3 (uniform denominators and tails).} Choose for each residue its
+centered representative in
+$\{-\lfloor N/2\rfloor,\dots,\lceil N/2\rceil-1\}^2$, which represents the
+even-$N$ Nyquist frequency once. The chord bound $\sin t\ge2t/\pi$ on
+$[0,\pi/2]$ gives, for centered $k$,
+\begin{equation}\label{eq:uniform-denominator}
+  \lambda_N(k)\ge m^2+\frac{16\norm{k}_\infty^2}{L^2},
+  \qquad\text{so that}\qquad
+  R_K:=m^2+\frac{16K^2}{L^2}
+\end{equation}
+bounds $\lambda_N$ once $\norm{k}_\infty>K$. Write $\mathcal Q_{N,K}$ and
+$\mathcal Q_K$ for the sums \eqref{eq:pairings} restricted to
+$\norm{k}_\infty\le K$. Cauchy--Schwarz with the finite Parseval identity
+(\cref{lem:finite-parseval}) --- where boundedness of $f$ enters, and the only
+place where it does --- gives
+\begin{equation}\label{eq:discrete-tail}
+  \abs{\mathcal Q_N-\mathcal Q_{N,K}}\le\frac{1}{VR_K}
+    \Bigl(\sum_p\abs{F_N(p)}^2\Bigr)^{1/2}
+    \Bigl(\sum_p\abs{G_N(p)}^2\Bigr)^{1/2}
+  \le\frac{V\norm{f}_\infty\norm{g}_\infty}{R_K}
+\end{equation}
+uniformly in $N$ and $K\ge0$; when no modes remain outside the cutoff the left
+side is zero. On the continuum side $\norm{k}_\infty\ge K+1$ gives
+$\lambda(k)\ge D_K:=m^2+(2\pi/L)^2(K+1)^2$, and the same Cauchy--Schwarz
+estimate on the annuli between symmetric boxes gives
+\begin{equation}\label{eq:continuum-tail}
+  \abs{\mathcal Q-\mathcal Q_K}
+  \le\frac{V\norm{f}_\infty\norm{g}_\infty}{D_K}\longrightarrow0 .
+\end{equation}
+Because $4\pi^2>16$ the constant $D_K$ is at least $R_K$, so
+\eqref{eq:continuum-tail} yields the tail with the constant of the discrete
+estimate; that inequality is what lets one cutoff serve both sides.
+
+\textbf{Step 4 (eventual Bessel bound).} Fix the box
+$S_K=\{k:\norm{k}_\infty\le K\}$. For $N>2K$ reduction modulo $N$ is injective
+on $S_K$ and identifies $S_K$ with the discrete cutoff, so nonnegativity and
+\cref{lem:finite-parseval} give
+\begin{equation}\label{eq:bessel-eventual}
+  \sum_{k\in S_K}\abs{F_N(p_N(k))}^2\le V^2\norm{f}_\infty^2
+  \qquad (N>2K).
+\end{equation}
+The restriction $N>2K$ is not a convenience. The bound is \emph{false} as a
+statement about all $N$: a small grid aliases distinct integer modes onto one
+residue, so the left side counts one coefficient several times and can exceed
+the right side without bound. Since every finite $S\subseteq\Z^2$ lies in some
+$S_K$, the fixed-mode limits \eqref{eq:fixed-mode} in
+\eqref{eq:bessel-eventual} give
+$\sum_{k\in S}\abs{F(k)}^2\le V^2\norm{f}_\infty^2$ for every finite $S$, and
+bounded finite sums of a nonnegative series give square summability of
+$k\mapsto F(k)$. No continuous Bessel theorem and no Fourier completeness is
+assumed: this is the Bessel \emph{inequality}, and it is finite-dimensional.
+
+\textbf{Step 5 (closed form, summability, envelope, assembly).} By (iii)--(iv)
+of \cref{lem:resolvent} and the Haar-to-Lebesgue normalisation
+$Bf_L(k)=V^{-1}F(k)$ of \cref{lem:haar-lebesgue},
+\begin{equation}\label{eq:closed-form}
+  V\ip{f_L}{Rg_L}_E
+  =V\sum_k\overline{V^{-1}F(k)}\;\frac{V^{-1}G(k)}{\lambda(k)}
+  =V^{-1}\sum_k\frac{\overline{F(k)}\,G(k)}{\lambda(k)}
+  =\mathcal Q(f,g).
+\end{equation}
+So the Fourier Green pairing already carries the physical factor $L^{-2}$, and
+the identification of $\mathcal Q$ with the resolvent pairing is a computation,
+not a definition of $\mathcal Q$ as an operator. Absolute summability follows
+from Young's inequality and $\lambda\ge m^2$,
+\begin{equation}\label{eq:young}
+  \abs{\frac{\overline{F(k)}\,G(k)}{\lambda(k)}}
+  \le\frac{\abs{F(k)}^2+\abs{G(k)}^2}{m^2},
+\end{equation}
+so the series in \eqref{eq:pairings} converges, and exhaustion by symmetric
+boxes gives $\mathcal Q_K\to\mathcal Q$.
+
+A modewise majorant independent of $N$ needs more than continuity. Fix $r=d+1$,
+which is $r=3$ for the case $d=2$ treated here, and
+$D_r(f):=\max_i\norm{\partial_i^r f}_\infty$. The $r$-fold forward difference at
+spacing $a$ is bounded by $a^rD_r(f)$ and multiplies the sampled sum by
+$(\chi-1)^r$; on a nonzero centered frequency with $\norm{k}_\infty=q$ the chord
+bound gives $\abs{e^{2\pi i k_i/N}-1}\ge4q/N$, and
+$1/\lambda_N,1/\lambda\le L^2/(16q^2)$ yields the common envelope
+\begin{equation}\label{eq:envelope}
+  \abs{F_N(k)}\le V\Bigl(\frac L4\Bigr)^{r}D_r(f)\,q^{-r},
+  \qquad
+  \frac1V\abs{\frac{\overline{F_N(k)}\,G_N(k)}{\lambda_N(k)}}
+  \le\frac{VL^2}{16}\Bigl(\frac L4\Bigr)^{2r}D_r(f)D_r(g)\,q^{-2r-2}.
+\end{equation}
+The sup-norm shell $\norm{k}_\infty=q$ carries $(2q+1)^d-(2q-1)^d$ modes, at
+most $2d(2q+1)^{d-1}$; in $d=2$ the count is $8q$ (\cref{ext:summability}).
+Since $2r+2>d$, the shell majorant is summable, and the zero mode is bounded by
+$m^{-2}$ and $V\norm{f}_\infty\norm{g}_\infty$. The envelope \eqref{eq:envelope}
+is a statement about $C^{r}$ periodic tests. It is \emph{not} available for all
+continuous tests, and no such statement is claimed: the limit below uses no
+envelope, which is why \cref{thm:covariance-limit} concerns bounded continuous
+periodic tests and is not a modewise convergence theorem.
+
+Choose $K$ so that both tails \eqref{eq:discrete-tail} and
+\eqref{eq:continuum-tail} are below $\epsilon/3$; Step~2 then bounds the
+fixed-cutoff error by $\epsilon/3$ for all large $N$. The triangle inequality
+gives
+\begin{equation}\label{eq:epsilon-three}
+  \abs{\Real\mathcal Q_N(f,g)-\Real\mathcal Q(f,g)}
+  \le\abs{\Real\mathcal Q_N-\Real\mathcal Q_{N,K}}
+   +\abs{\Real\mathcal Q_{N,K}-\Real\mathcal Q_K}
+   +\abs{\Real\mathcal Q_K-\Real\mathcal Q}
+  <\epsilon,
+\end{equation}
+with one $K$ serving all $N$, and with no caller supplying summability, a tail
+estimate or a convergence hypothesis. Transferring \eqref{eq:epsilon-three} to
+the measures uses only that $\mu^{\mathrm{GJ}}_N$ is Gaussian with covariance
+$C_N$ (\cref{def:gj-measure}) and has mean zero exactly at every mesh: then the
+mixed second moment and the centred covariance integral both equal
+$\Real\mathcal Q_N$ and hence converge to $\Real V\ip{f_L}{Rg_L}_E$ by
+\eqref{eq:closed-form}. This proves \eqref{eq:three-limits}.
+\end{proof}
+
+\begin{remark}[Why no Bessel kernel appears]\label{rem:no-bessel}
+The proof of \cref{thm:covariance-limit} introduces no lattice Green function
+$G_a(x-y)$, no Bessel function, no modified Bessel function $K_0$, no constant
+$1/(2\pi)$ or $1/(4\pi)$, and no logarithmic divergence. Every estimate is an
+estimate on symbols: $\lambda_N^{-1}$ on $I_N$ and $\lambda^{-1}$ on $\Z^2$,
+compared in \eqref{eq:uniform-denominator}--\eqref{eq:continuum-tail} and
+controlled by \eqref{eq:bessel-eventual} and \eqref{eq:young}. Nothing is lost
+by staying in the symbol domain: what is proved is a convergence statement
+about pairings of bounded continuous periodic tests with the resolvent, and such
+a pairing is determined by the spectral data of the resolvent on the Fourier
+basis, which is exactly $\lambda^{-1}$; a positional kernel is that same data
+written in another coordinate system, and producing it in closed form is a
+special-function computation the argument neither performs nor needs. A text
+that wrote the two-dimensional kernel $C_m(x)=K_0(m\abs{x})/(2\pi)$ here would be
+naming the $x$-space representative of the \emph{same} operator on the same torus ---
+the two are equal by the classical Green-function identity, and evaluating
+\eqref{eq:pairings} against that kernel reproduces $\Real Q$ --- but that
+identity is neither used above nor proved above, and this paper does not prove
+it; what is proved is the limit of the pairings, in the symbol domain, with the
+constants of this section.
+Nor is a logarithmic divergence at issue: at fixed volume
+$\lambda_N(0)=\lambda(0)=m^2$, and the high-frequency behaviour is absorbed by
+\eqref{eq:young} through the test coefficients rather than by a kernel.
+\end{remark}
+
+With \cref{thm:covariance-limit} the analysis of the lattice symbol is finished.
+Every later step of Part~I is measure theory on the carrier of
+\cref{sec:carrier}: the uniform moment and compact tail of
+\cref{sec:tightness}, the finite marginals of \cref{sec:marginals}, and the
+assembly in \cref{sec:main}. No further symbol estimate occurs, and none is
+needed.
