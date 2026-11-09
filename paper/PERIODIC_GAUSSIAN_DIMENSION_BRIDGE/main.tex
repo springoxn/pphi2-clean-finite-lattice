@@ -1,0 +1,67 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue]{hyperref}
+\renewcommand{\sfdefault}{\rmdefault}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}\newcommand{\N}{\mathbb N}
+\newcommand{\E}{\mathbb E}\newcommand{\T}{\mathbb T}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\ip}[2]{\langle#1,#2\rangle}
+\newcommand{\HS}[1]{\mathcal H^{-#1}}
+\newcommand{\ev}{\operatorname{ev}}
+\newcommand{\Law}{\operatorname{Law}}
+\newcommand{\supp}{\operatorname{supp}}
+\ExplSyntaxOn
+\NewDocumentCommand \code { m }
+ {\texttt{\tl_map_inline:nn {#1}
+   {\str_if_eq:nnTF {##1}{_}{\_\allowbreak}
+     {\str_if_in:nnTF {ABCDEFGHIJKLMNOPQRSTUVWXYZ.}{##1}
+       {\allowbreak{}##1}{##1}}}}}
+\ExplSyntaxOff
+\newcommand{\evidence}[1]{\par\smallskip\noindent\emph{Evidence boundary.} #1\par\smallskip}
+\title[Periodic Gaussian limits in two and four dimensions]{Periodic Gaussian lattice limits in two and four dimensions:\\a common proof mechanism and its Lean realization}
+\author{Yj Zheng}
+\date{November 2026}
+\subjclass[2020]{60G15, 60B10, 81T08, 68V15}
+\keywords{Gaussian free field, lattice approximation, negative Sobolev space, weak convergence, Lean 4, formal verification}
+\begin{document}
+\begin{abstract}
+We connect two Lean developments of fixed-volume periodic Gaussian lattice
+limits: a two-dimensional limit on a Fourier realization of $H^{-3}$ and a
+four-dimensional raw atomic-lift limit on a Fourier realization of $H^{-4}$.
+Their common mechanism is a spacing-uniform bound on Fourier-mode moments,
+a compact inclusion between negative Sobolev carriers, convergence of finite
+Gaussian marginals, and uniqueness from countably many Fourier coordinates.
+We give a dimension-independent paper proof for raw lifts in $H^{-s}$ whenever
+$s>d/2$, and distinguish it from the two formally verified instantiations.
+The comparison makes explicit the site-covariance normalization, lattice
+aliases, the zero and Nyquist modes, real support, and the difference between
+stored weighted coordinates and physical coefficients. It also explains why
+the raw atomic approximation requires a rougher space than the limiting free
+field itself. The accompanying sources include typed theorem contracts,
+source and dependency hashes, axiom transcripts, symbolic scale checks, and
+an audit of the compiled article.
+\end{abstract}
+\maketitle
+\tableofcontents
+\input{sections/introduction}
+\input{sections/model}
+\input{sections/compactness}
+\input{sections/identification}
+\input{sections/comparison}
+\input{sections/verification}
+\clearpage
+\appendix
+\input{sections/ledger}
+\clearpage
+\input{bibliography}
+\end{document}

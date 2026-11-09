@@ -1,0 +1,91 @@
+\section{Fourier carriers, atoms, and the common compactness argument}\label{sec:carrier}
+Let $R(k)=\max_{1\leq j\leq d}\abs{k_j}$, and put
+$w_s(k)=(1+R(k))^{-2s}$. We use the real Hilbert space
+\[
+ \HS{s}=\left\{z:\Z^d\longrightarrow\C:
+ z(-k)=\overline{z(k)},\quad
+ \norm z_{-s}^2:=\sum_kw_s(k)\abs{z(k)}^2<\infty\right\}.
+\]
+It is the closed real part of a complex weighted sequence Hilbert space.
+Writing $x(k)=\sqrt{w_s(k)}z(k)$ gives an isometry to a closed real subspace
+of $\ell^2(\Z^d;\C)$. This last space is the concrete form used in Lean:
+its stored coordinate is $x(k)$, not $z(k)$. A physical evaluation is
+$z(k)=x(k)/\sqrt{w_s(k)}$, a continuous map for each fixed $k$.
+
+These sequences are periodic distributions. Smooth tests have rapidly
+decaying Fourier coefficients; Cauchy--Schwarz makes
+$L^{-d}\sum_kz(k)\overline{Ff(k)}$ a continuous distributional pairing.
+Conversely the pairing recovers all coefficients. Equivalence with the usual
+Fourier Sobolev topology follows from
+\[
+ R(k)^2\leq\abs{k}_2^2\leq dR(k)^2,\qquad
+ (1+R(k))^2\leq2(1+\abs{k}_2^2)
+ \leq2d(1+R(k))^2.
+\]
+Fixed $L>0$ also makes the Bessel weight involving $(2\pi/L)^2\abs{k}_2^2$
+equivalent. This is an analytic identification of topologies. It is not a
+claim that the published Lean types come with a separately proved isomorphism
+to a pre-existing distribution-library Sobolev type.
+
+\begin{lemma}[Summability and compact inclusion]\label{lem:compact}
+If $r>d/2$, then $S_{d,r}:=\sum_kw_r(k)<\infty$.
+If $s>r$, every closed bounded ball of $\HS{r}$ has compact closure in
+$\HS{s}$.
+\end{lemma}
+\begin{proof}
+The number of indices with $R(k)=q\geq1$ is
+$(2q+1)^d-(2q-1)^d=O_d(q^{d-1})$. Thus the weighted sum is bounded by a
+constant plus a convergent series of order $q^{d-1-2r}$.
+For the compactness assertion, let $P_M$ retain the coordinates $R(k)\leq M$.
+On the radius-$B$ ball in $\HS{r}$,
+\begin{equation}\label{eq:tail}
+ \norm{z-P_Mz}_{-s}^2
+ \leq(1+M)^{-2(s-r)}\norm z_{-r}^2
+ \leq(1+M)^{-2(s-r)}B^2.
+\end{equation}
+The projected ball is bounded in a finite-dimensional space and is therefore
+totally bounded. The tail tends uniformly to zero, so the full ball is totally
+bounded in the complete space $\HS{s}$ and has compact closure there.
+\end{proof}
+
+For fixed finite $N$, each atomic lift belongs to $\HS{r}$ when $r>d/2$:
+$\abs{\widehat X_N(k)}\leq a^d\sum_x\abs{\phi_N(x)}$ uniformly in $k$,
+and the sum of weights is finite. The map from the finite configuration to
+this carrier is a finite sum of carrier-valued Dirac coefficients, hence is
+continuous and Borel measurable. There is no need to define it by an
+arbitrary fallback value outside a set of finite configurations.
+
+\begin{proposition}[Uniform tightness]\label{prop:tight}
+For $d/2<r<s$, the atomic laws are uniformly tight in $\HS{s}$.
+\end{proposition}
+\begin{proof}
+Tonelli's theorem and Lemma~\ref{lem:aliases} give
+\begin{equation}\label{eq:trace-moment}
+ \sup_N\E\norm{X_N}_{-r}^2
+ =\sup_N\sum_kw_r(k)\E\abs{\widehat X_N(k)}^2
+ \leq L^dm^{-2}S_{d,r}=:C_{d,r,L,m}<\infty.
+\end{equation}
+By Markov's inequality the probability of leaving the radius-$B$ stronger
+ball is at most $C_{d,r,L,m}/B^2$. Its weaker-space closure is compact by
+Lemma~\ref{lem:compact}. Choosing $B$ large proves the claim.
+A bound with an extra factor two proves exactly the same tightness statement.
+\end{proof}
+
+\subsection{Why the approximation has a different regularity threshold}
+An individual Dirac mass has coefficients of modulus one and lies in
+$\HS{s}$ exactly when $s>d/2$. The same obstruction applies almost surely
+to a nonzero finite raw lattice lift. Indeed its Fourier coefficients are
+periodic modulo $N$. A nonzero configuration has a nonzero discrete Fourier
+coefficient, so on at least one residue class its coefficient has fixed
+positive modulus. The sum of $(1+R(k))^{-2s}$ over that class diverges when
+$s\leq d/2$, for $s\geq0$. The Gaussian configuration is nonzero almost
+surely, because its covariance is positive definite.
+
+The continuum covariance decays as $\lambda(k)^{-1}\asymp\abs{k}_2^{-2}$
+at high frequency. Its expected squared $H^{-s}$ norm is therefore finite
+already for $s>d/2-1$. The limiting field can live on a smoother carrier than
+the atomic approximations. This improvement does not permit a weak-limit
+claim for the raw lifts on a space where those lifts are not random elements.
+Spectral truncation or interpolation changes the approximation and needs a
+separate theorem. Our formal choices deliberately lie on the safe atomic
+side: $(r,s)=(2,3)$ in dimension two and $(3,4)$ in dimension four.

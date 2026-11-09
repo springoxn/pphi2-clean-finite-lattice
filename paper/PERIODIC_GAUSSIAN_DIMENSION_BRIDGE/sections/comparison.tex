@@ -1,0 +1,77 @@
+\section{What is shared, and what changes in Lean}\label{sec:comparison}
+The common proof does not make the two native theorem statements identical.
+Table~\ref{tab:comparison} records the relevant distinctions.
+\begin{table}[ht]
+\caption{The two verified instantiations. The weights refer to physical coefficients.}\label{tab:comparison}
+\centering
+\begin{tabular}{@{}p{0.27\textwidth}p{0.31\textwidth}p{0.31\textwidth}@{}}
+\toprule
+Component & Two dimensions & Four dimensions\\
+\midrule
+Physical site covariance & $a^{-2}G_N$ & $a^{-4}G_N$\\
+Raw lift & $a^2\sum_x\phi_x\delta_{ax}$ & $a^4\sum_x\phi_x\delta_{ax}$\\
+Moment / limit spaces & $H^{-2}$ / $H^{-3}$ & $H^{-3}$ / $H^{-4}$\\
+Native limit weight & $1$ at zero; $R(k)^{-6}$ otherwise & $(1+R(k))^{-8}$\\
+Limit construction & Prokhorov existence plus identified cylinders & Named explicit Gaussian-series law\\
+Identification & All finite weighted complex cylinders & Canonical real cylinders and real support\\
+Sequence & $N=n+1$, $a=L/N$ & $N=n+1$, $a=L/N$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The native two-dimensional theorem}
+The final two-dimensional result asserts existence of a Borel probability
+measure on the concrete completion, convergence of the full lattice sequence
+to it, and equality of each finite Fourier cylinder with the corresponding
+periodic-resolvent Gaussian marginal. In the source, the main declaration is
+\begin{quote}\raggedright
+\code{periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders}.
+\end{quote}
+The finite cylinder reads the stored weighted complex coordinates. Its target
+is consequently obtained by complexifying cosine/sine Gaussian evaluations
+and multiplying each by the square root of the native weight. Dividing by
+that nonzero square root recovers physical Fourier marginals. The theorem
+has no caller-supplied measurability or tightness input.
+
+Here the native stronger and weaker weights are
+\[
+ v_r(k)=\begin{cases}1,&k=0,\\R(k)^{-2r},&k\ne0,\end{cases}
+ \qquad r=2,3.
+\]
+For integer frequencies, $w_r\leq v_r\leq2^{2r}w_r$. Thus the native carrier
+is topologically equivalent to our common convention, but the norms are
+not literally equal. The full $H^{-2}$ energy includes the zero mode; a
+zero-mode-free seminorm would not control the stated Gaussian family.
+
+\subsection{The native four-dimensional theorem}
+The four-dimensional statement has the more explicit form
+\begin{quote}\ttfamily\raggedright
+fs4PeriodicFixedVolume\_weak\_tendsto\_free.
+\end{quote}
+It proves convergence to the named law of a measurable Gaussian series on
+the full weighted completion. Positivity of $L$ and $m$ are its only explicit
+model hypotheses. The proof identifies every finite injective family of
+canonical real coordinates with actual periodic-resolvent Gaussian targets,
+passes real support to weak sublimits, and invokes real-supported cylinder
+uniqueness. The arbitrary-complex-carrier extensionality claim would be
+false for that reduced coordinate set and is not used.
+
+The rank-four summability argument splits the integer lattice into two
+rank-two blocks. Mathlib's norm on a finite function type is a supremum norm:
+$\norm{(1,1)}_\infty=1$, not $\sqrt2$. The block expression in the weight
+therefore equals the coordinate maximum $R(k)$. This is compatible with a
+Euclidean covariance symbol because equivalent carrier norms do not change
+the topology. They must not be confused with equality of norms or rotation
+isometries.
+
+\subsection{Reuse at the level of mathematical contracts}
+Both developments use the same concrete finite-lattice covariance layer,
+physical test evaluations and periodic covariance limit. They then prove their
+own carrier membership, stronger-energy bound and compactness instance.
+The reusable contract is: construct actual probability laws on a Polish
+carrier, establish a stronger compactly embedded moment bound, identify all
+finite Gaussian evaluations, and prove those evaluations determine the law.
+The article abstracts this contract in Theorem~\ref{thm:main}; the current
+Lean library proves its two specified realizations. A generic Lean theorem
+for arbitrary dimension would require additional parametrized carrier and
+summability work.

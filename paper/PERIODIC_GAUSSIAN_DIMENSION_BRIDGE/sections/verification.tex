@@ -1,0 +1,78 @@
+\section{Formal verification and reproducible artifacts}\label{sec:verification}
+The source release contains two kinds of evidence. First, the Lean library is
+compiled with Lean~4.34.0-rc2 and Mathlib commit
+\code{852d20a84581aeba8527bd01d0be361d8c0e71c0}. Second, a portable release
+checker records the four exact four-dimensional declarations, their elaborated
+signatures, their axiom footprints, all source hashes, the dependency lock and
+the raw build and query logs. The checker has an offline mode and an isolated
+Lean replay mode. It rejects missing theorem names, changed signatures,
+custom axioms, \code{sorryAx}, source-hash drift and dependency revisions that
+do not match the lock file. The historical two-dimensional extension is
+checked against its preserved historical source bytes, rather than against
+the later expanded library root.
+
+For the source snapshot cited in the bibliography, the module census is
+94 modules, 18,475 module lines, 1,090 declarations, and 780 theorem/lemma
+declarations. The import-only library root is excluded from the line total.
+The source census contains no \code{sorry} and no project \code{axiom}
+declarations. These are reproducible engineering counts, not proof-strength
+metrics; the theorem contracts and their dependency footprints carry the
+mathematical evidence. The article's own
+\code{audit/bridge_contract.lean} additionally queries both native final
+theorems and type-checks examples of their convergence conclusions.
+Its executed transcript \code{audit/bridge_contract.log} and provenance record
+\code{audit/bridge_contract.json} bind that query to the release source hashes
+and exact dependency versions. Both final theorems have only the three
+foundational axioms listed below.
+
+\begin{table}[ht]
+\caption{Lean components used by the comparison.}\label{tab:lean-components}
+\centering
+\begin{tabular}{@{}p{0.37\textwidth}p{0.47\textwidth}@{}}
+\toprule
+Component & Role\\
+\midrule
+\code{PeriodicHMinusThreeFixedVolumeTightness.lean} & Actual two-dimensional lattice laws, $H^{-2}$ moment control and tightness\\
+\code{PeriodicHMinusThreeWeakLimitMarginal.lean} & Two-dimensional whole-sequence limit, Fourier cylinders and uniqueness\\
+\code{PeriodicFS4DSobolevWeights.lean} & Four-dimensional max-coordinate weights and summability\\
+\code{PeriodicFS4DCompactEmbedding.lean} & Compact inclusion from the stronger to weaker four-dimensional carrier\\
+\code{PeriodicFS4DRealCarrier.lean} & Closed conjugate-symmetric carrier and compact real slice\\
+\code{PeriodicFS4DProbeMoment.lean} & Actual lift, Gaussian target, real-coordinate encoding, marginals and final weak convergence\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The final four-dimensional contract queries four declarations: the physical
+finite-marginal resolvent identity, probability-measure extensionality from
+finite real marginals, subsequential-limit identification, and the whole
+sequence theorem. The source transcript reports only
+the foundational axioms \code{propext}, \code{Classical.choice}, and
+\code{Quot.sound} for each.
+These are the ordinary foundational axioms used by Lean and Mathlib. The
+contract does not infer a mathematical theorem from a zero-\code{sorry} census:
+it checks the theorem names, types, dependencies and footprints explicitly.
+
+The finite symbolic probe is complementary. It verifies character
+orthogonality, aliasing, the $L^d$ normalization, zero and Nyquist cases, the
+correct $L^{-4}$ dispersion factor, and finite rational instances of the
+shell estimates. It is a finite computation and cannot replace an all-$N$
+proof. The proof guide and release metadata preserve this distinction.
+
+\subsection{A reproducible article build}
+The article itself is built by Tectonic from a seeded cache or an online
+bundle. The companion audit checks the source anchors, bibliography keys,
+compiled PDF page count, text extraction, unresolved references, and the
+presence of the main theorem and evidence-boundary phrases. It also recomputes
+the small-volume scale counterexample for the corrected dispersion estimate.
+The audit exits nonzero on any failed assertion.
+
+\begin{verbatim}
+python audit/audit.py --source-only
+python build.py
+python audit/audit.py --pdf build/main.pdf --repo ../..
+\end{verbatim}
+
+\evidence{The metadata and file names above are public release artifacts,
+not hidden assumptions about a reader's local AImath checkout. The article
+uses code names only where they identify a file or a fully qualified Lean
+declaration; the mathematical statements are written independently.}

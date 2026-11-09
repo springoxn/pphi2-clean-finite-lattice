@@ -1,0 +1,34 @@
+\section{Evidence ledger}\label{sec:ledger}
+This appendix records the provenance level of the article's principal claims.
+\begin{table}[!ht]
+\caption{Claim-to-check ledger.}\label{tab:ledger}
+\centering
+\begin{tabular}{@{}p{0.28\textwidth}p{0.25\textwidth}p{0.33\textwidth}@{}}
+\toprule
+Claim & Status & Independent check or boundary\\
+\midrule
+Finite character orthogonality and $L^d$ factor & CONFIRMED & Symbolic probe and Lemma~\ref{lem:aliases}\\
+Correct physical-scale dispersion bound & CONFIRMED & Lemma~\ref{lem:dispersion}; small-$L$ negative control\\
+Uniform stronger-space moment bound & CONFIRMED & Paper Tonelli/Markov argument; Lean instantiations\\
+Compact inclusion and tightness & CONFIRMED & Explicit tail estimate; dimension-specific Lean modules\\
+Finite Gaussian covariance convergence & CONFIRMED & Exact Gaussian covariance calculation\\
+Full arbitrary-$d$ theorem in Lean & UNVERIFIED & Paper synthesis only; no generic Lean declaration\\
+Two-dimensional whole-sequence limit & CONFIRMED & Typed theorem contract and axiom transcript\\
+Four-dimensional named-target whole-sequence limit & CONFIRMED & Typed theorem contract and axiom transcript\\
+Exact all-mode complex identity in Lean & QUALIFIED & Paper identity; formal proof uses weaker real-probe bound\\
+Infinite-volume or interacting four-dimensional limit & OUT OF SCOPE & No claim made\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The distinction between CONFIRMED and QUALIFIED is deliberate. A finite
+symbolic test can check a formula on rational instances but cannot prove its
+all-$N$ version. A Lean theorem can certify a fully elaborated declaration
+and its dependency footprint, but its scope is still the type that Lean
+checks. The article never promotes a source census or a successful PDF build
+into mathematical evidence.
+
+The public release includes the exact source hashes, dependency lock, theorem
+transcript and build logs used for the Lean statements. Rebuilding the article
+is a separate artifact check. The ledger itself is therefore a guide to what
+each check establishes, not a replacement for the check.

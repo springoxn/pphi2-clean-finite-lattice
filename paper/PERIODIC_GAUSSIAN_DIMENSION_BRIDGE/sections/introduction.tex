@@ -1,0 +1,73 @@
+\section{Introduction and the connection between the proofs}\label{sec:intro}
+The continuum limit of a lattice Gaussian field is conceptually elementary:
+its finite-dimensional laws are Gaussian and its covariance has a Fourier
+symbol. A proof on a space of distributions nevertheless needs more than
+pointwise convergence of that symbol. It must place every lattice law on a
+common measurable carrier, prove tightness there, and show that Fourier data
+determine every possible limit. These requirements are especially visible
+when the embedding is a sum of Dirac masses rather than an interpolation.
+
+This article compares two completed instances of that problem. In two
+spatial dimensions the formal construction controls an $H^{-2}$ energy and
+proves weak convergence on a concrete $H^{-3}$ carrier. In four dimensions
+it controls an $H^{-3}$ energy and proves convergence on an $H^{-4}$ carrier
+to an explicitly constructed Gaussian-series law. These are related proofs,
+not a claim that changing a dimension parameter in the first Lean theorem
+produces the second. The four-dimensional summability, carrier maps and
+real-coordinate reconstruction have their own proofs.
+
+Our main mathematical synthesis is the following statement. We use a Fourier
+Sobolev realization defined precisely in Section~\ref{sec:carrier}.
+\begin{theorem}[Common paper theorem]\label{thm:main}
+Let $d\geq1$ be an integer, $L>0$, and $m>0$. Put $a=L/N$ for positive
+integers $N$. On $(\Z/N\Z)^d$ let $\phi_N$ be the centered real Gaussian with
+site covariance $a^{-d}(m^2-\Delta_a)^{-1}$, and define
+\begin{equation}\label{eq:lift}
+ X_N=a^d\sum_x\phi_N(x)\delta_{[ax]}.
+\end{equation}
+For every $s>d/2$, the laws of $X_N$ converge weakly on $\HS{s}(\T_L^d)$
+to the unique centered real periodic Gaussian field with covariance
+\begin{equation}\label{eq:target-cov}
+ Q(f,g)=L^{-d}\sum_{k\in\Z^d}
+ \frac{\overline{Ff(k)}Fg(k)}{m^2+(2\pi/L)^2\abs{k}_2^2},\qquad
+ Ff(k)=\int_{\T_L^d}f(x)e^{-2\pi i k\cdot x/L}\dd x
+\end{equation}
+for real smooth periodic $f,g$.
+\end{theorem}
+\evidence{Theorem~\ref{thm:main} is a paper theorem proved below for arbitrary
+$d$ and admissible $s$. The public Lean library verifies the fixed choices
+$(d,r,s)=(2,2,3)$ and $(4,3,4)$, where $r$ denotes the stronger moment space.
+It does not contain an arbitrary-dimensional formalization of this theorem.}
+
+The useful connection is the chain
+\begin{equation}\label{eq:architecture}
+\begin{gathered}
+\text{finite lattice covariance and raw Fourier coefficients}\\
+\Downarrow\\
+\text{uniform stronger-space moment and compact weaker-space balls}\\
+\Downarrow\\
+\text{tightness, finite Gaussian marginal limits, and cylinder uniqueness}\\
+\Downarrow\\
+\text{weak convergence of the full sequence}.
+\end{gathered}
+\end{equation}
+Dimension enters the summability threshold and the compact carrier estimates.
+The final probability argument has the same structure in both cases.
+
+\subsection{Context and scope}
+Fourier and nearest-neighbour descriptions of Gaussian free fields are
+classical; Sheffield's introduction provides background~\cite{Sheffield}.
+Discrete-to-continuous limits on tori in arbitrary dimension also occur for
+grounded polyharmonic fields and associated random measures~\cite{DSHKS}.
+Those models have different covariance powers and grounding conventions.
+Our subject is the positive-mass resolvent and the unmodified atomic lift.
+We make no priority claim for its classical convergence mechanism.
+The contribution here is a comparison of two concrete formal proof chains,
+a self-contained normalization and tightness argument, and reproducible
+evidence that identifies precisely which statements the Lean kernel checks.
+
+All volumes and masses in the article remain fixed and positive. Neither an
+infinite-volume limit nor an interacting four-dimensional field follows from
+this result. An interacting two-dimensional construction requires additional
+renormalization and uniform integrability arguments. Osterwalder--Schrader
+reconstruction is outside the present claims.

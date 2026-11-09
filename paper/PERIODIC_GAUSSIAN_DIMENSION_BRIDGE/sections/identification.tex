@@ -1,0 +1,106 @@
+\section{Gaussian identification and full-sequence convergence}\label{sec:identify}
+Choose one representative from each pair $\{k,-k\}$ of nonzero integer
+frequencies by requiring the first nonzero coordinate to be positive; call
+the resulting countable set $K_+$. Let $\xi_0$ and
+$(\xi_k,\eta_k)_{k\in K_+}$ be independent standard real Gaussians. Define
+\begin{equation}\label{eq:series}
+ Z(0)=\frac{L^{d/2}}{m}\xi_0,\qquad
+ Z(k)=\frac{L^{d/2}}{\sqrt{2\lambda(k)}}(\xi_k+i\eta_k),\qquad
+ Z(-k)=\overline{Z(k)}.
+\end{equation}
+There is one real zero coordinate, not a further independent zero sine
+coordinate. Tonelli and the mode variances give
+\[
+ \E\sum_kw_s(k)\abs{Z(k)}^2
+ =L^d\sum_k\frac{w_s(k)}{\lambda(k)}<\infty\qquad(s>d/2).
+\]
+The weighted series thus lies in the real carrier almost surely; finite
+partial sums converge there and define a measurable carrier-valued random
+element. Its law, denoted $\mu_{\mathrm{free}}$, is a Borel probability measure.
+The same summability argument, with the high-frequency mass symbol, gives
+finite expected norm for the broader range $s>d/2-1$ described above.
+
+For a real smooth test, the pairing series converges in $L^2$; independence
+and conjugate symmetry show that it is centered real Gaussian. Its variance
+and polarized covariance are exactly~\eqref{eq:target-cov}. Equivalently, the
+characteristic functional is
+\[
+ \E e^{i\ip{Z}{f}}=\exp\bigl(-Q(f,f)/2\bigr).
+\]
+In particular, with $c_k(x)=\cos(2\pi k\cdot x/L)$ and
+$s_k(x)=\sin(2\pi k\cdot x/L)$ for $k\ne0$,
+\[
+ Q(1,1)=L^d/m^2,\qquad
+ Q(c_k,c_k)=Q(s_k,s_k)=L^d/(2\lambda(k)),\qquad Q(c_k,s_k)=0.
+\]
+These are physical pairings. They acquire an additional factor $w_s(k)$ if
+one takes variances of stored weighted coordinates instead.
+
+\begin{lemma}[Finite Gaussian limits]\label{lem:finite}
+For each finite collection of real and imaginary Fourier evaluations, the
+joint law of those evaluations of $X_N$ converges to that of $Z$.
+\end{lemma}
+\begin{proof}
+Both collections are centered real Gaussian vectors. The two complex second
+moments in Lemma~\ref{lem:aliases} determine all real cross-covariances by
+polarization. For fixed labels the only eventual collisions are the genuine
+identities $k=\ell$ and $k=-\ell$. Moreover
+$\lambda_N(p_N(k))\to\lambda(k)$ by Lemma~\ref{lem:dispersion}.
+The covariance matrices therefore converge to those of~\eqref{eq:series}.
+Their characteristic functions, $\exp(-t^\mathsf{T}C_Nt/2)$, converge to the
+target Gaussian characteristic function, proving weak convergence in the
+finite-dimensional real space.
+\end{proof}
+
+\begin{lemma}[Fourier coordinates determine the law]\label{lem:unique}
+Borel probability measures on $\HS{s}$ are determined by all finite joint
+laws of the real coordinate at zero and the real and imaginary coordinates
+at labels in $K_+$.
+\end{lemma}
+\begin{proof}
+Those coordinates are continuous and reconstruct the negative labels by
+conjugation. They determine every finite projection in the real Hilbert space.
+The coordinate sigma-algebra equals its Borel sigma-algebra: coordinates are
+continuous in one direction; in the other, squared distances are countable
+sums of measurable coordinate functions, so balls are measurable. Separability
+makes all open sets countable unions of balls from a fixed countable base.
+Finite-dimensional cylinders form a generating intersection-stable family.
+The uniqueness theorem for probability measures on a generating family then
+proves the assertion.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Choose $d/2<r<s$. The carrier is a separable complete real Hilbert space.
+Proposition~\ref{prop:tight} and Prokhorov's theorem give a weakly convergent
+subsequence inside every subsequence of the atomic laws; see, for example,
+Billingsley~\cite{Billingsley}. The continuous mapping theorem passes each
+finite coordinate projection to such a limit. Lemma~\ref{lem:finite} fixes
+those projected laws, and Lemma~\ref{lem:unique} identifies the weak limit as
+$\mu_{\mathrm{free}}$.
+
+For completeness, uniqueness of subsequential limits alone is not the entire
+last step: tightness is also used. If the full sequence failed to converge,
+some neighbourhood of $\mu_{\mathrm{free}}$ would omit a subsequence. That
+subsequence has a further weakly convergent subsequence by tightness, whose
+limit must be $\mu_{\mathrm{free}}$, a contradiction. Hence the whole sequence
+converges.
+\end{proof}
+
+\subsection{Working on the full complex carrier}
+The mathematical presentation took the closed real subspace as carrier.
+The four-dimensional Lean theorem is formulated on the full complex weighted
+$\ell^2$ completion, with the laws supported on its closed conjugate-symmetric
+subset. This requires an explicit support step. If $\mu_n(A)=1$ for a closed
+set $A$ and $\mu_n\Rightarrow\mu$, Portmanteau applied to the open complement
+gives $\mu(A^c)\leq\liminf_n\mu_n(A^c)=0$.
+Canonical real coordinates are injective only on $A$; a measure comparison
+must therefore use this support information, not assert injectivity on all
+complex sequences. The published proof establishes support passage,
+measurable coordinate encoding and the resulting real-supported measure
+extensionality before identifying arbitrary subsequential limits.
+
+Both formal chains use the positive complex probe $C+iS$. Our negative
+exponential uses $C-iS$. The continuous map $z(k)\mapsto z(-k)$ converts the
+entire coordinate system, and the even symbol preserves both cross-moment
+identities. This is a joint coordinate transformation, not an inference of
+joint-law invariance from symmetry of separate sine marginals.

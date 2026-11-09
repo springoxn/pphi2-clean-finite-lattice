@@ -1,0 +1,45 @@
+{
+  "source_sha256": {
+    "main.tex": "2f960f46429aa4a7e3d470f530df2847b165f291b051860e058bc3e3f69e7e45",
+    "bibliography.tex": "040948b661d6947f4bed56deeab2e91686582f13f9972b5f5c79cc07b3891c00",
+    "sections/compactness.tex": "08d54132cd4e08727921f6e0f2e37d2d43a785737035d28804eeb32780a2e577",
+    "sections/comparison.tex": "c76a4d3e0322a84a3a9f11d975deae45074ff28e56167b5b3c05c2f37305d47e",
+    "sections/identification.tex": "2cc37e4380b4d3873e0111eb3f2449c779deda86ea098d4b23cafa91e9cd1d80",
+    "sections/introduction.tex": "73dff71323d3d1e9ea95d8392488e515a039273e4557c23cd42266430758f1e2",
+    "sections/ledger.tex": "1f85619cda767f4257fafc3ab3e67da0aafe67909043c6c34e4126936ced96f4",
+    "sections/model.tex": "ccb096b4774c32b4d5b9933ae2625aa025effad3e28139b1d93a421baab83783",
+    "sections/verification.tex": "f28c8d85ee80a6e81412c10af8c4415cdab366e7ee5956ccabfaccee1d336986"
+  },
+  "finite_symbolic_checks": {
+    "old_guide_counterexample": {
+      "L": "1/10",
+      "N": 100,
+      "gap": "1.2986169788673522074",
+      "incorrect_upper_bound": "0.00012987878804533658298",
+      "correct_upper_bound": "1.2987878804533658298"
+    }
+  },
+  "joint_Lean_contract": {
+    "two_native_theorems": [
+      "periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders",
+      "fs4PeriodicFixedVolume_weak_tendsto_free"
+    ],
+    "only_foundational_axioms": true,
+    "actual_release_hashes_checked": true,
+    "census": {
+      "modules": 94,
+      "module_lines": 18475,
+      "declarations": 1090,
+      "sorry": 0
+    }
+  },
+  "artifact": {
+    "pages": 11,
+    "table_captions": [
+      "1",
+      "2",
+      "3"
+    ],
+    "sha256": "90ca1dc7bdd56b5b59a8f8fdaab9b2ee5a9212728ae0c7b15c6f076b3ccd1391"
+  }
+}

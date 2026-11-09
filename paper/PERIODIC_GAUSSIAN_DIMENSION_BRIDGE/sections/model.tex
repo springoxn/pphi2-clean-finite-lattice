@@ -1,0 +1,103 @@
+\section{The lattice model and its exact Fourier data}\label{sec:model}
+Write $\Lambda_N=(\Z/N\Z)^d$ and choose any complete set of residues for its
+sites. For a real configuration $u$, define
+\[
+ (\Delta_a u)(x)=a^{-2}\sum_{j=1}^d
+ \bigl(u(x+e_j)+u(x-e_j)-2u(x)\bigr).
+\]
+With the counting inner product on configurations, translation and reindexing
+give
+\[
+ \sum_xu(x)(-\Delta_a u)(x)
+ =a^{-2}\sum_{j,x}\bigl(u(x+e_j)-u(x)\bigr)^2\geq0.
+\]
+Consequently $Q_N=m^2-\Delta_a$ is symmetric positive definite. Its inverse
+$G_N=Q_N^{-1}$ defines the site covariance $a^{-d}G_N$. The same law is the
+normalized density proportional to
+\[
+ \exp\left(-\frac{a^d}{2}\sum_xu(x)(Q_Nu)(x)\right)\prod_x\dd u(x).
+\]
+This specifies both the physical covariance normalization and the finite
+probability law, without a continuum limit assumption.
+
+For $p\in\Lambda_N$, characters diagonalize $Q_N$, with eigenvalues
+\begin{equation}\label{eq:discrete-symbol}
+ \lambda_N(p)=m^2+4a^{-2}\sum_{j=1}^d\sin^2(\pi p_j/N).
+\end{equation}
+The continuum symbol is $\lambda(k)=m^2+(2\pi/L)^2\sum_jk_j^2$.
+We use unnormalized physical coefficients
+\begin{equation}\label{eq:raw-coeff}
+ \widehat X_N(k)=a^d\sum_{x\in\Lambda_N}\phi_N(x)e^{-2\pi i k\cdot x/N}.
+\end{equation}
+For a distribution $u$ this convention means
+$\widehat u(k)=\ip{u}{e^{-2\pi i k\cdot(\cdot)/L}}$. For a smooth real test,
+$\ip{u}{f}=L^{-d}\sum_k\widehat u(k)\overline{Ff(k)}$ whenever this pairing
+is defined.
+
+\begin{lemma}[Aliases and the physical volume factor]\label{lem:aliases}
+Let $p_N(k)$ denote the residue class of $k$. Then
+\begin{align}
+ \E[\widehat X_N(k)\overline{\widehat X_N(\ell)}]
+ &=\frac{L^d\,\mathbf1_{p_N(k)=p_N(\ell)}}{\lambda_N(p_N(k))},\label{eq:alias-conj}\\
+ \E[\widehat X_N(k)\widehat X_N(\ell)]
+ &=\frac{L^d\,\mathbf1_{p_N(k)=-p_N(\ell)}}{\lambda_N(p_N(k))}.\label{eq:alias-noconj}
+\end{align}
+In particular $\E\abs{\widehat X_N(k)}^2\leq L^d/m^2$ uniformly in $N,k$.
+\end{lemma}
+\begin{proof}
+The inverse kernel is
+\[
+ G_N(x,y)=N^{-d}\sum_{p\in\Lambda_N}
+ \lambda_N(p)^{-1}e^{2\pi i p\cdot(x-y)/N}.
+\]
+Insert this and the factor $a^{-d}$ into the covariance of the sums in
+\eqref{eq:raw-coeff}. Each character sum equals $N^d$ when its frequency
+vanishes modulo $N$ and zero otherwise. The overall factor is
+$a^{2d}a^{-d}N^{-d}N^{2d}=(aN)^d=L^d$.
+Conjugating a coefficient reverses its frequency, proving both identities.
+The bound follows from $\lambda_N\geq m^2$.
+\end{proof}
+
+The zero frequency is a real variable with variance $L^d/m^2$.
+At even $N$, self-opposite residues also occur: a residue is self-opposite
+precisely when each coordinate is $0$ or $N/2$. Its sine coefficient vanishes.
+Thus nonzero continuum labels are not all independent at a fixed lattice
+size, and treating every one of them as a separate complex Gaussian is
+incorrect. Formulas~\eqref{eq:alias-conj}--\eqref{eq:alias-noconj} retain these
+cases automatically. For any fixed finite set of integer labels, all
+unintended sum and difference collisions disappear for sufficiently large $N$.
+
+\begin{lemma}[Fixed-mode error with physical scale]\label{lem:dispersion}
+For every $k\in\Z^d$ and every $N\geq1$,
+\begin{align}
+0\leq\lambda(k)-\lambda_N(p_N(k))
+ &\leq \frac{4\pi^4a^2}{3L^4}\sum_jk_j^4,\label{eq:dispersion}\\
+0\leq\frac{L^d}{\lambda_N(p_N(k))}-\frac{L^d}{\lambda(k)}
+ &\leq\frac{4\pi^4a^2L^{d-4}}{3m^4}\sum_jk_j^4.\label{eq:variance-error}
+\end{align}
+\end{lemma}
+\begin{proof}
+For real $t$, $\abs{\sin t}\leq\abs t$ and
+$\abs{t-\sin t}\leq\abs t^3/6$, so
+$0\leq t^2-\sin^2t\leq t^4/3$.
+The squared sine is independent of the residue representative. Set
+$t=\pi k_j/N=\pi ak_j/L$ and multiply the bound by $4a^{-2}$.
+Summing proves~\eqref{eq:dispersion}. The difference of reciprocals has
+numerator $\lambda-\lambda_N$ and denominator at least $m^4$; multiplication
+by $L^d$ proves~\eqref{eq:variance-error}.
+\end{proof}
+\begin{remark}[A scale correction recorded by the article]\label{rem:correction}
+An earlier accompanying proof guide omitted $L^{-4}$ in the dispersion
+bound and consequently retained a spurious $L^4$ in the four-dimensional
+variance-error bound. Equations~\eqref{eq:dispersion}--\eqref{eq:variance-error}
+correct those paper constants. In dimension four the factor $L^{d-4}$ is one.
+The final Lean weak-convergence theorem uses its own proved moment and
+covariance convergence results and is unaffected by this guide error.
+The article's audit includes a small-volume counterexample to the omitted
+factor, rather than checking only $L=1$ where the defect is invisible.
+\end{remark}
+\evidence{Lemma~\ref{lem:aliases} is the exact paper Fourier calculation.
+The formal four-dimensional proof uses the weaker bound
+$\E\abs{\widehat X_N(k)}^2\leq2L^4/m^2$, obtained from separate real
+cosine/sine moment bounds. The stronger exact complex formula is not asserted
+to be a separately packaged all-$N$ Lean theorem.}

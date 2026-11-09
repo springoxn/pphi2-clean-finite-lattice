@@ -5,6 +5,20 @@ continuum limits in **two and four dimensions**. The repository name retains
 its original two-dimensional history; the four-dimensional result is a massive
 **free-field** limit, not an interacting four-dimensional construction.
 
+## Article connecting the two- and four-dimensional proofs
+
+**[Read the PDF](paper/PERIODIC_GAUSSIAN_DIMENSION_BRIDGE/periodic_gaussian_dimension_bridge.pdf)** ·
+[LaTeX source and build instructions](paper/PERIODIC_GAUSSIAN_DIMENSION_BRIDGE/) ·
+[Download source archive](paper/PERIODIC_GAUSSIAN_DIMENSION_BRIDGE/periodic_gaussian_dimension_bridge_sources.zip)
+
+*Periodic Gaussian lattice limits in two and four dimensions: a common proof
+mechanism and its Lean realization* compares the native formal results,
+gives a common paper proof, and explains carrier conventions, aliases,
+compactness and real-supported measure uniqueness. It includes a newly executed
+joint Lean contract for both final theorems and an audit of the compiled PDF.
+The article also records and corrects a physical-scale factor in the earlier
+four-dimensional proof guide; the Lean sources are unchanged.
+
 ## New: the four-dimensional periodic raw-lift limit
 
 For every `L > 0` and `mass > 0`, let `N = n+1`, `a = L/N` and take the centered

@@ -64,11 +64,13 @@ The prefactor follows from `a^8 a^-4 N^-4 N^4 N^4=(aN)^4=L^4`. These formulas re
 
 The inequality `0 <= t^2-sin(t)^2 <= t^4/3` gives the paper dispersion estimate
 
-`0 <= lambda(k)-lambda_N(p_N(k)) <= (4*pi^4*a^2/3) sum_j k_j^4`,
+`0 <= lambda(k)-lambda_N(p_N(k)) <= (4*pi^4*a^2/(3*L^4)) sum_j k_j^4`,
 
 and the mass gap gives
 
-`0 <= L^4/lambda_N(p_N(k))-L^4/lambda(k) <= (4*pi^4*a^2*L^4/(3*mass^4)) sum_j k_j^4`.
+`0 <= L^4/lambda_N(p_N(k))-L^4/lambda(k) <= (4*pi^4*a^2/(3*mass^4)) sum_j k_j^4`.
+
+Correction recorded with the dimensional-bridge article: the earlier guide omitted `L^-4` in the dispersion error and retained a spurious `L^4` in the variance-error bound. The corrected formulas follow by substituting `pi*k_j/N = pi*a*k_j/L`. The article audit includes a small-volume negative control; the Lean sources and formal convergence theorem are unchanged.
 
 This is an analytic fixed-mode estimate. Finite-grid checks validate bounded instances and scale bookkeeping, not the all-N statement. The exact raw complex moment formula remains a paper identity unless separately instantiated as a Lean theorem; the completed weak-limit proof does not require that stronger raw identity as an assumption.
 
