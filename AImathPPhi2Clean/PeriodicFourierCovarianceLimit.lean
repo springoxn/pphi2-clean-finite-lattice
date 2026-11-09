@@ -218,6 +218,22 @@ theorem fixedVolumeMassSymbolReal_ge_radius
     (L mass : ℝ) : fixedVolumeMassSymbol d N L mass 0 = (mass : ℂ) ^ 2 := by
   norm_num [fixedVolumeMassSymbol, periodicFourierEigenvalue]
 
+
+/-- The finite nearest-neighbor mass symbol is invariant under frequency negation. -/
+theorem fixedVolumeMassSymbol_neg (d N : ℕ) [NeZero N] (L mass : ℝ)
+    (p : FinLatticeSites d N) :
+    fixedVolumeMassSymbol d N L mass (-p) =
+      fixedVolumeMassSymbol d N L mass p := by
+  have hev (i : Fin d) :
+      periodicFourierEigenvalue d N (L / (N : ℝ)) (-p) i =
+        periodicFourierEigenvalue d N (L / (N : ℝ)) p i := by
+    simp only [periodicFourierEigenvalue, Pi.neg_apply, neg_neg]
+    ring
+  unfold fixedVolumeMassSymbol
+  congr 1
+  exact Finset.sum_congr rfl (fun i hi => hev i)
+
+
 /-- Exact finite Fourier resolvent pairing with integral-normalized coefficients.
 Equality with the actual GJ covariance is proved below. -/
 def discreteFourierGreenPairing (d N : ℕ) [NeZero N] (L mass : ℝ)

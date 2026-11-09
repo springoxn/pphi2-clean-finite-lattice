@@ -103,7 +103,7 @@ noncomputable def periodicHMinusThreeFixedVolumeFreeFieldProbabilityMeasure
         (numberedLatticeCovarianceGJ 2 N a mass ha hmass), by infer_instance⟩ :
       ProbabilityMeasure (FiniteLatticeConfiguration
         (Fintype.card (FinLatticeSites 2 N))))
-    (f := periodicHMinusThreeFiniteSourceFourierLift N a L hL) (measurable_periodicHMinusThreeFiniteSourceFourierLift N a L hL).aemeasurable
+    (f := periodicHMinusThreeFiniteSourceFourierLift N a L hL)
 
 /-- The fixed-physical-volume sequence of Borel probability measures, indexed
 by n with lattice size N = n + 1 and spacing a_n = L / (n + 1). -/

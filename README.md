@@ -1,225 +1,135 @@
 # pphi2-clean-finite-lattice
 
-![English portrait dependency atlas of the AImath Lean development](docs/figures/lean_atlas_en_portrait.png)
+Lean 4 proofs of finite periodic-lattice Gaussian fields and their fixed-volume
+continuum limits in **two and four dimensions**. The repository name retains
+its original two-dimensional history; the four-dimensional result is a massive
+**free-field** limit, not an interacting four-dimensional construction.
 
-*The atlas depicts the wider AImath Lean development, not only the modules in this standalone repository.*
+## New: the four-dimensional periodic raw-lift limit
 
-A self-contained Lean 4 development of the **finite periodic-lattice Gaussian
-covariance** and a fixed-physical-volume weak-limit theorem for the periodic
-free field, forming the base layer of constructive constructions of
-$P(\varphi)_2$.  The covariance is not postulated from a spectral
-representation: it is built from the concrete operator
-$Q=-\Delta_a+m^2$ on $(\mathbb{Z}/N\mathbb{Z})^d$, whose self-adjointness,
-negative semidefiniteness, positive definiteness, Hermitian matrix form and
-positive eigenvalues are all proved, and whose eigenbasis then yields the
-covariance $Q^{-1/2}$ with the Glimm--Jaffe normalization $a^{-d/2}$.
+For every `L > 0` and `mass > 0`, let `N = n+1`, `a = L/N` and take the centered
+Gaussian on `(Z/NZ)^4` with site covariance `a^-4 (mass^2 - Delta_a)^-1`.
+The laws of its raw atomic lifts
 
-The development has **zero `sorry`**, **zero project axioms**, and a declared
-footprint inside `{propext, Classical.choice, Quot.sound}` — the three standard
-axioms of Lean and Mathlib — for every declaration the audit asks Lean about.
-The audit that establishes this is in the repository, together with its logs
-and a negative control showing that the firewall fires when an axiom is
-injected.
+```text
+X_N = a^4 sum_x phi_x delta_[a x]
+```
 
-## What is proved
+converge weakly on the concrete weighted Fourier `H^-4(T_L^4)` carrier to the
+explicit real-supported periodic Gaussian law with covariance symbol
 
-| Layer | Result |
+```text
+(mass^2 + (2*pi/L)^2 * sum_i k_i^2)^(-1).
+```
+
+The final theorem is
+[`Pphi2Clean.Continuum.fs4PeriodicFixedVolume_weak_tendsto_free`](AImathPPhi2Clean/PeriodicFS4DProbeMoment.lean).
+Its only explicit hypotheses are positivity of `L` and `mass`. It uses the
+actual lattice lift laws and a constructed target law, without caller-supplied
+tightness, target-marginal or sublimit-identification hypotheses.
+
+| Step | Published Lean source |
 |---|---|
-| Operator | $\Delta_a$ is self-adjoint; $\langle f,\Delta_a f\rangle=-a^{-2}\sum_i\sum_x(f(x+e_i)-f(x))^2\le0$; $Q=-\Delta_a+m^2$ is positive definite |
-| Spectral data | the operator equals its matrix in the delta basis, so the finite-dimensional spectral theorem applies; orthonormal eigenbasis, real eigenvalues $>0$, Parseval, quadratic form $\langle f,Qf\rangle=\sum_k\lambda_k\langle e_k,f\rangle^2$ |
-| Covariance | $Tf=\sum_k\lambda_k^{-1/2}\langle e_k,f\rangle e_k$ with $\langle Tf,Tg\rangle=\sum_k\lambda_k^{-1}\langle e_k,f\rangle\langle e_k,g\rangle$; the $a^{-d/2}$ normalization scales the bilinear form by $a^{-d}$ |
-| Measure | the pushforward of finitely many independent standard Gaussians into the cylindrical weak dual; a probability measure; measurable; $L^2$; exact covariance $\int\omega(f)\omega(g)=\langle Tf,Tg\rangle$ |
-| Exact moments | closed form in the mass eigenbasis, $a^{-d}\sum_k\lambda_k^{-1}\bigl(\sum_x e_k(x)f(x)\bigr)\bigl(\sum_x e_k(x)g(x)\bigr)$; and the same for the lifted configuration $\int(\eta_\omega(f))^2$ with **arbitrary** continuous linear evaluation functionals |
-| Representation | an explicit coefficient embedding into $\ell^2(\mathbb{N})$ is an isometry, and under it the factor equals the upstream spectral coefficient formula |
-| Interface | the lift to an arbitrary test space is continuous and measurable, equals evaluation on the induced test field, and transports $L^2$ bounds uniformly over a family |
+| Four-dimensional summable Sobolev weights | [PeriodicFS4DSobolevWeights](AImathPPhi2Clean/PeriodicFS4DSobolevWeights.lean) |
+| Weighted Fourier carrier and conjugate-symmetric real support | [PeriodicFS4DWeightedCarrier](AImathPPhi2Clean/PeriodicFS4DWeightedCarrier.lean), [PeriodicFS4DRealCarrier](AImathPPhi2Clean/PeriodicFS4DRealCarrier.lean) |
+| Compact `H^-3` balls in `H^-4` | [PeriodicFS4DCompactEmbedding](AImathPPhi2Clean/PeriodicFS4DCompactEmbedding.lean) |
+| Actual raw-lift moment bound, explicit Gaussian series, finite marginals, tightness, uniqueness and full weak convergence | [PeriodicFS4DProbeMoment](AImathPPhi2Clean/PeriodicFS4DProbeMoment.lean) |
+| Model-matched lattice covariance limit | [PeriodicFourierCovarianceLimit](AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean) |
 
-Current source-derived totals (recomputed by `python verify.py --count`):
-89 modules, 13505 lines and 800 declarations, of which 569 are
-theorem-level -- the same numbers the companion manuscript quotes, because the
-build recomputes them rather than typing them.  The axiom-report query count (64), per-module
-interface certificates (27) and build-job count (8878) belong to the pinned
-archive evidence and are not counts of this newer weak-limit extension.
-`PROVENANCE.md` separates these layers.
+The [proof guide](docs/fs4/proof.md) explains the normalization, aliases,
+zero/Nyquist modes, real cosine/sine coordinates and theorem assembly. The
+[typed contract](audit/fs4_periodic_raw_lift_interface.lean) independently checks
+the final statement and queries the signatures and axiom footprints of four
+core theorems. The [release evidence](docs/fs4/release_evidence.json) binds the
+entire current Lean library, root, toolchain, dependency lock and contract to a
+fresh build and its raw [theorem transcript](docs/fs4/theorems.log).
 
-## One step beyond the pinned archive
+The carrier uses max-norm Fourier weights equivalent to ordinary Sobolev
+weights. The covariance symbol uses the Euclidean sum of squares. The norm
+equivalence is explained in the proof guide; no separately packaged Lean
+isomorphism to a distribution-library Bessel-potential space is asserted.
+The stronger exact raw complex mode identities and sharp trace constant are
+paper calculations; the formal tightness proof uses its proved all-N bound.
 
-The repository also publishes a single step taken *after* the archive was
-pinned: the **physical sampling convention** and the **UV-uniform second-moment
-bound**.
+## Preserved two-dimensional development
 
-| Post-pin result | Statement |
-|---|---|
-| Spectral floor | $m^2\le\lambda_k$ for every eigenvalue of the mass operator, with the *same* $m^2$ for every lattice spacing — constant functions attain it |
-| Sampled covariance | $\langle T_{\mathrm{GJ}}\varphi_f,T_{\mathrm{GJ}}\varphi_f\rangle\le m^{-2}\lVert f\rVert_{a,N}^2$ for the Riemann sample $\varphi_f=a^d(f(ax))_{x\in\Lambda}$ |
-| Spacing-uniform bound | at fixed physical volume $L=aN$, $\int(\omega f)^2\,\mathrm{d}\mu_{a,N}\le m^{-2}L^d\lVert f\rVert_\infty^2$ — the constant sees neither $a$ nor $N$ |
+The earlier finite-lattice and two-dimensional work remains in this same
+library and history:
 
-This bound alone is not a weak-limit theorem. The stronger result now published
-here is the finite-source whole-sequence convergence theorem below; the earlier
-sampling bound remains a distinct ingredient in the package.
+- The discrete Laplacian is self-adjoint and negative semidefinite;
+  `Q = -Delta_a + mass^2` is positive definite. A proved eigenbasis and Parseval
+  identity produce its inverse square root and the Glimm--Jaffe normalization.
+- The finite Gaussian pushforward is measurable and probabilistic, with exact
+  sampled covariance and second-moment identities.
+- Physical sampling and the spacing-uniform moment bound supply the lift input.
+- The periodic two-dimensional `H^-3` Fourier-pushforward weak-limit chain is in
+  [PeriodicHMinusThreeWeakLimitMarginal](AImathPPhi2Clean/PeriodicHMinusThreeWeakLimitMarginal.lean),
+  including `periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders`.
 
-## Fixed-volume weak limit
+The original [finite-lattice manuscript](docs/pphi2_clean_finite_lattice.pdf),
+archive audit logs and historical extension transcript remain available.
+They document earlier stages, not the later four-dimensional result.
+[PROVENANCE.md](PROVENANCE.md) separates the archive, historical extensions,
+later two-dimensional repairs and the current four-dimensional release.
 
-For a positive period $L$ and mass $m$, the package constructs finite periodic
-lattice Gaussian laws $\mu_n$ with lattice size $N=n+1$ and spacing
-$a=L/(n+1)$, and proves their weak convergence on a concrete weighted Fourier
-$H^{-3}$ probability carrier. The theorem combines the uniform $H^{-2}$ energy
-moment, compact sublevels in $H^{-3}$, tightness and Prokhorov extraction,
-convergence of every finite Fourier cylinder to the periodic massive-resolvent
-Gaussian marginal, Borel generation by cylinders, and measure uniqueness. The
-identified limit is an actual Borel probability measure, denoted
-$\mu_{\mathrm{free}}$ in the companion manuscript.
+## Reproduce the current release
 
-The public Lean entry point is `AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal`;
-build it with:
-
-```bash
-lake build AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal
-```
-
-The main declaration is
-`periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders`.
-The formal source is in `AImathPPhi2Clean/PeriodicHMinusThreeWeakLimitMarginal.lean`
-and its transitive project imports are included in this repository. The
-The manuscript PDF, its modular LaTeX source, its build script and its
-axiom transcript are in `paper/PPHI2_FIXED_VOLUME_COMPLETE/`.
-
-This theorem concerns the constructed finite-source sequence.  Its
-carrier-valued lift is the finite-source Fourier lift, whose total range
-and Borel measurability the manuscript proves outright; what the
-*development* carries as an input is a different, coordinatewise lift
-together with its almost-everywhere agreement, and the manuscript's §13
-says which of the two is which.  No interacting-field limit is asserted.
-
-## The paper
-
-`paper/PPHI2_FIXED_VOLUME_COMPLETE/` holds the current manuscript: 43 pages,
-Part I mathematics and Part II the Lean development above.
+Install [elan](https://github.com/leanprover/elan), Git and Python 3.10 or newer.
+The package pins Lean `leanprover/lean4:v4.34.0-rc2` and the exact upstream
+Mathlib revision `852d20a84581aeba8527bd01d0be361d8c0e71c0`; the committed
+lockfile also pins inherited dependencies. This exact Mathlib revision is the
+one used by the current release evidence; it is not the older tag named by
+some historical instructions.
 
 ```bash
-cd paper/PPHI2_FIXED_VOLUME_COMPLETE
-python build_all.py                 # numbers, ledger, transcript gate, PDF
-python build_all.py --check-only    # the gates alone, no TeX
-```
-
-The build recomputes every structural number from these sources, renders
-Appendices A and B from the recorded transcript and the registry, and then
-fails on any overfull box or undefined reference — Tectonic exits 0 on both,
-so a green exit is not enough.  It needs Python 3.10+ and Tectonic 0.17.0
-(`$env:TECTONIC`, or on `PATH`); the first run fetches the TeX bundle unless
-`$env:TECTONIC_CACHE_DIR` points at a seeded cache.
-
-Expected: `4/4` paper checks, `13/13` negative controls, `overfull 0 /
-undefined 0`, and a 43-page `main.pdf`.
-
-Two independent audits of this manuscript are in `docs/`; the second was
-written by referees who were not shown the first.
-
-## What is *not* claimed
-
-This remains a **free**, **fixed finite physical-volume** result. It is not an
-infinite-volume limit, does not construct an interacting measure, and does not
-prove Osterwalder--Schrader reconstruction. The theorem's source and scope are
-explicit in the Lean declaration and companion manuscript. The gates below are
-equally explicit about what a machine check cannot establish: it cannot tell you
-that a formal statement is the intended one.
-
-## Layout
-
-```
-AImathPPhi2Clean.lean                  root module (imports the library)
-AImathPPhi2Clean/
-  ConcreteLatticeOperator.lean         Δ_a, Q, matrix bridge, spectral data
-  ConcreteLatticeCovariance.lean       Q^{-1/2}, Glimm–Jaffe normalization
-  ConcreteGaussianMoment.lean          the measure, exact moments, the lift
-  NumberedLatticeGaussianMoment.lean   the Fin n (numbered) interface
-  LatticeCovarianceRepresentation.lean ℓ² coefficient embedding, isometry
-  LatticeGaussianContinuumConsumer.lean consumer interface, L² transfer
-  PhysicalLatticeGaussianBound.lean    post-pin: eigenvalue floor, sampled bound
-  PhysicalLatticeSampling.lean         post-pin: the sampling convention
-  ...                                  further clean interfaces (Wick,
-                                       Nelson layer cake, tightness, positivity)
-audit/                                 the gates and their logs (the evidence)
-docs/                                  companion manuscript, archived README,
-                                       the post-pin evidence transcript
-verify.py                              portable verification entry point
-PROVENANCE.md                          archive hash, delta policy, upstream pin
-MANIFEST.sha256                        SHA-256 of every published file
-```
-
-Module-level documentation is in each file's header; the finite-lattice
-migration begins at `ConcreteLatticeOperator.lean`.
-
-## Build
-
-Toolchain and dependency are pinned:
-
-- Lean `leanprover/lean4:v4.34.0-rc2` (see `lean-toolchain`)
-- Mathlib commit `85e3a25e006c35636f0e53b0e9296caca2685bc0`, which is the
-  revision of the `v4.34.0-rc2` tag named in `lakefile.lean`
-
-```bash
+git clone https://github.com/springoxn/pphi2-clean-finite-lattice.git
+cd pphi2-clean-finite-lattice
+lake exe cache get
 lake build AImathPPhi2Clean
-lake build AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal
+lake env lean audit/fs4_periodic_raw_lift_interface.lean
 ```
 
-Mathlib is a git dependency; `lake exe cache get` fetches the prebuilt
-Mathlib for this exact revision, after which the build is local.  Building
-Mathlib from source instead takes hours and is not required.  Nothing else
-is needed — no other dependency, no generated code.  On Lean
-`v4.34.0-rc2` with this Mathlib revision the library target elaborates all
-89 modules with no error.
-
-## Verify
+Portable checks without a Lean installation:
 
 ```bash
-python verify.py          # every published file against MANIFEST.sha256
-python verify.py --ext    # the post-pin extension: hashes, coverage, axioms
-python verify.py --count  # the numbers in this README, recomputed
-python verify.py --lean   # additionally re-run the axiom gates (needs lake)
+python verify.py --manifest --count --ext --fs4
+python audit/check_fs4_release.py --self-test
 ```
 
-The full delivered gate, including the textual provenance check against the
-upstream commit, is:
+`--ext` checks the historical two-module extension against its preserved
+historical source bytes. `--fs4` checks the current source/configuration hashes,
+exact theorem signatures, dependency revisions and foundational axiom allowlist.
+To rebuild and replay the current contract and legacy gates:
 
 ```bash
-bash audit/run_finite_lattice_checks.sh /path/to/GaussianField
+python verify.py --all
+# or replay just the current full build and four-theorem contract:
+python audit/check_fs4_release.py --lean
 ```
 
-where the argument is a checkout of `mrdouglasny/GaussianField` at commit
-`d63a28568a75d99f6cb27af1f888a49a69855a66`.  The scripts discover `lake` from
-`$LAKE`, then `PATH`, then elan's default location, and the interpreter from
-`$PYTHON` or `python3`; nothing is hard-coded to a particular machine.
+Set `LAKE` if the executable is not on PATH. Fresh replay output goes to ignored
+build directories or temporary copies; verification preserves published evidence.
+The source census is a separate check: zero `sorry` alone is not evidence that
+the intended theorem has been proved. The current four core dependency cones
+are checked against `{propext, Classical.choice, Quot.sound}`.
 
-What each gate establishes, and what it cannot, is documented in the companion
-manuscript (in `docs/`), §9, and summarised in `PROVENANCE.md`.
+Optional bounded exact checks need SymPy:
 
-## Provenance
+```bash
+python -m pip install sympy
+python audit/fs4d_periodic_gaussian_limit_probe.py
+```
 
-The Lean sources here are **byte-identical** to a registered, audited archive
-except for three audit scripts that carried machine-specific absolute paths and
-were made portable, plus the library root, which gained two `import` lines for
-the post-pin modules.  The exclusions (the upstream axiom-census tooling, which
-depends on a private baseline checkout), the two post-pin modules and the full
-delta are listed in `PROVENANCE.md`, and `verify.py` re-checks the manifest.
-Definitions in `AImathPPhi2Clean/ConcreteLatticeOperator.lean` are adapted from
-`mrdouglasny/GaussianField`; the correspondence is checked textually against
-the pinned commit.  See `NOTICE`.
+These finite checks exercise character orthogonality, alias/Nyquist cases,
+normalization, dispersion bounds and negative controls. They do not prove the
+infinite-family theorem.
 
-### The 2026-11-03 repair
+## Scope and license
 
-An independent audit of the companion manuscript found that the tree this
-repository published was not elaborable: one module had lost the header of
-a declaration, and the lakefile required Mathlib with no revision while the
-manifest pinned a different commit.  The header is restored, the dependency
-is pinned, and ten modules were migrated to the APIs of the pinned Mathlib
-revision; eight modules of the weak-limit extension are new here.  The
-interface certificates and the build log under `audit/` are the **previous**
-snapshot's records and are kept as such; the current evidence for the
-repaired tree is the transcript in `paper/PPHI2_FIXED_VOLUME_COMPLETE/ext/`,
-which records the toolchain, the Mathlib commit, the `#print axioms` output
-for the ten chain theorems, and the digest of every module that declares
-one of them.
+All continuum limits above are at fixed positive physical volume and mass.
+This release does not establish an infinite-volume limit, an interacting
+four-dimensional field, or Osterwalder--Schrader reconstruction.
 
-## License
-
-Apache-2.0 (`LICENSE`).  Attribution for the adapted definitions: `NOTICE`.
+Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). No third-party literature
+PDFs, local credentials, private checkouts or compiled dependency caches are
+part of the release.

@@ -484,5 +484,5 @@ noncomputable def periodicHMinusThreeFiniteSourceProbabilityMeasure
         (numberedLatticeCovarianceGJ 2 N a mass ha hmass), by infer_instance⟩ :
       ProbabilityMeasure (FiniteLatticeConfiguration
         (Fintype.card (FinLatticeSites 2 N))))
-    (f := periodicHMinusThreeFiniteSourceFourierLift N a L hperiod) (measurable_periodicHMinusThreeFiniteSourceFourierLift N a L hperiod).aemeasurable
+    (f := periodicHMinusThreeFiniteSourceFourierLift N a L hperiod)
 

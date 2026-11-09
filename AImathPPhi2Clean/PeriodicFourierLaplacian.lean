@@ -112,6 +112,24 @@ theorem periodicFourierCharacter_orthogonality (d N : ℕ) [NeZero N]
       subst q
       simp)
 
+ /-- A finite Fourier kernel with arbitrary spectral weights diagonalizes by
+ two applications of character orthogonality. -/
+theorem periodicFourierCharacter_weighted_kernel_pairing
+    (d N : ℕ) [NeZero N]
+    (k l : FinLatticeSites d N) (w : FinLatticeSites d N → ℂ) :
+    ∑ p : FinLatticeSites d N, w p *
+      (∑ x : FinLatticeSites d N,
+        periodicFourierCharacter d N (-k) x * periodicFourierCharacter d N p x) *
+      (∑ y : FinLatticeSites d N,
+        periodicFourierCharacter d N (-p) y * periodicFourierCharacter d N l y) =
+      if k = l then (N : ℂ) ^ (2 * d) * w k else 0 := by
+  simp_rw [periodicFourierCharacter_orthogonality]
+  by_cases h : k = l
+  · subst l
+    simp
+    rw [show (2 * d) = d + d by omega, pow_add]
+    ring
+  · simp [h]
 /-- Symmetry of the finite Fourier pairing. -/
 theorem periodicFourierCharacter_swap (d N : ℕ) [NeZero N]
     (p x : FinLatticeSites d N) :
@@ -333,3 +351,129 @@ theorem tendsto_of_cutoff_tail
   have hresult : dist (full n) target < ε := by
     linarith
   simpa using hresult
+
+/-- The Fourier coefficient of a real part of a finite character is supported
+at the two opposite frequencies, with their contributions merging when they
+coincide (for example at zero or a Nyquist residue). -/
+theorem finiteFourierCoefficient_character_re (d N : ℕ) [NeZero N]
+    (k p : FinLatticeSites d N) :
+    finiteFourierCoefficient d N
+      (fun x => (periodicFourierCharacter d N k x).re) p =
+      ((if p = k then (N : ℂ)^d else 0) +
+        (if p = -k then (N : ℂ)^d else 0)) / 2 := by
+  unfold finiteFourierCoefficient
+  have hre (x : FinLatticeSites d N) :
+      ((periodicFourierCharacter d N k x).re : ℂ) =
+        (periodicFourierCharacter d N k x +
+          starRingEnd ℂ (periodicFourierCharacter d N k x)) / 2 := by
+    rw [Complex.add_conj]
+    push_cast
+    ring
+  have hstar (x : FinLatticeSites d N) :
+      starRingEnd ℂ (periodicFourierCharacter d N k x) =
+        periodicFourierCharacter d N (-k) x := by
+    simpa only [Complex.star_def] using periodicFourierCharacter_star d N k x
+  calc
+    (∑ x : FinLatticeSites d N,
+      (↑(periodicFourierCharacter d N k x).re) * periodicFourierCharacter d N (-p) x) =
+        (∑ x : FinLatticeSites d N,
+          (periodicFourierCharacter d N k x * periodicFourierCharacter d N (-p) x +
+            periodicFourierCharacter d N (-k) x * periodicFourierCharacter d N (-p) x) / 2) := by
+      apply Finset.sum_congr rfl
+      intro x hx
+      rw [hre, hstar]
+      ring
+    _ = ((∑ x : FinLatticeSites d N, periodicFourierCharacter d N (k + -p) x) +
+          (∑ x : FinLatticeSites d N, periodicFourierCharacter d N (-k + -p) x)) / 2 := by
+      rw [← Finset.sum_div, Finset.sum_add_distrib]
+      apply congrArg (fun z : ℂ => z / 2)
+      apply congrArg₂ (fun a b : ℂ => a + b)
+      · apply Finset.sum_congr rfl
+        intro x hx
+        rw [periodicFourierCharacter_mul]
+      · apply Finset.sum_congr rfl
+        intro x hx
+        rw [periodicFourierCharacter_mul]
+    _ = _ := by
+      rw [periodicFourierCharacter_sum_delta, periodicFourierCharacter_sum_delta]
+      have h1 : k + -p = 0 ↔ p = k := by
+        constructor
+        · intro h
+          have hh := congrArg (fun q : FinLatticeSites d N => q + p) h
+          simpa [add_assoc] using hh.symm
+        · intro h
+          subst p
+          simp
+      have h2 : -k + -p = 0 ↔ p = -k := by
+        constructor
+        · intro h
+          have hn : -(k + p) = 0 := by simpa only [neg_add] using h
+          have hh : k + p = 0 := neg_eq_zero.mp hn
+          exact eq_neg_of_add_eq_zero_right hh
+        · intro h
+          subst p
+          simp
+      simp [h1, h2]
+
+/-- Imaginary character coefficients have opposite signs at opposite frequencies. -/
+theorem finiteFourierCoefficient_character_im (d N : ℕ) [NeZero N]
+    (k p : FinLatticeSites d N) :
+    finiteFourierCoefficient d N
+      (fun x => (periodicFourierCharacter d N k x).im) p =
+      ((if p = k then (N : ℂ)^d else 0) -
+        (if p = -k then (N : ℂ)^d else 0)) / (2 * Complex.I) := by
+  unfold finiteFourierCoefficient
+  have him (x : FinLatticeSites d N) :
+      ((periodicFourierCharacter d N k x).im : ℂ) =
+        (periodicFourierCharacter d N k x -
+          starRingEnd ℂ (periodicFourierCharacter d N k x)) / (2 * Complex.I) := by
+    rw [Complex.sub_conj]
+    push_cast
+    field_simp
+  have hstar (x : FinLatticeSites d N) :
+      starRingEnd ℂ (periodicFourierCharacter d N k x) =
+        periodicFourierCharacter d N (-k) x := by
+    change star (periodicFourierCharacter d N k x) = _
+    rw [periodicFourierCharacter_star]
+  calc
+    (∑ x : FinLatticeSites d N,
+      (↑(periodicFourierCharacter d N k x).im) * periodicFourierCharacter d N (-p) x) =
+        (∑ x : FinLatticeSites d N,
+          (periodicFourierCharacter d N k x * periodicFourierCharacter d N (-p) x -
+            periodicFourierCharacter d N (-k) x * periodicFourierCharacter d N (-p) x) / (2 * Complex.I)) := by
+      apply Finset.sum_congr rfl
+      intro x hx
+      rw [him, hstar]
+      ring
+    _ = ((∑ x : FinLatticeSites d N, periodicFourierCharacter d N (k + -p) x) -
+          (∑ x : FinLatticeSites d N, periodicFourierCharacter d N (-k + -p) x)) / (2 * Complex.I) := by
+      rw [← Finset.sum_div, Finset.sum_sub_distrib]
+      apply congrArg (fun z : ℂ => z / (2 * Complex.I))
+      apply congrArg₂ (fun a b : ℂ => a - b)
+      · apply Finset.sum_congr rfl
+        intro x hx
+        rw [periodicFourierCharacter_mul]
+      · apply Finset.sum_congr rfl
+        intro x hx
+        rw [periodicFourierCharacter_mul]
+    _ = _ := by
+      rw [periodicFourierCharacter_sum_delta, periodicFourierCharacter_sum_delta]
+      have h1 : k + -p = 0 ↔ p = k := by
+        constructor
+        · intro h
+          have hh := congrArg (fun q : FinLatticeSites d N => q + p) h
+          simpa [add_assoc] using hh.symm
+        · intro h
+          subst p
+          simp
+      have h2 : -k + -p = 0 ↔ p = -k := by
+        constructor
+        · intro h
+          have hh : k + p = 0 := by
+            have hn := neg_eq_zero.mpr (show -k + -p = 0 from h)
+            simpa only [neg_add, neg_neg, neg_zero] using hn
+          exact eq_neg_of_add_eq_zero_right hh
+        · intro h
+          subst p
+          simp
+      simp [h1, h2]

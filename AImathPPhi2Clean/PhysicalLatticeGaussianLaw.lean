@@ -52,7 +52,7 @@ theorem covarianceConfiguration_hasGaussianLaw {ι : Type*} [Fintype ι]
     (measurable_pi_apply f).comp (comap_measurable _)
   have hXmeas : Measurable (fun z => covarianceConfiguration T z f) :=
     hproj.comp (covarianceConfiguration_measurable T)
-  exact hG.hasGaussianLaw
+  exact hG.hasGaussianLaw hXmeas.aemeasurable
 
 /-- The finite Gaussian configuration is centered in every test direction. -/
 theorem covarianceConfiguration_mean_zero {ι : Type*} [Fintype ι]
@@ -194,7 +194,7 @@ theorem finiteCovarianceGaussianMeasure_eval_hasGaussianLaw {ι : Type*} [Fintyp
       (fun ω : WeakDual ℝ (ι → ℝ) => ω f)) := by
     rw [hmap]
     exact (covarianceConfiguration_hasGaussianLaw T f).isGaussian_map
-  exact hG.hasGaussianLaw
+  exact hG.hasGaussianLaw heval.aemeasurable
 
 theorem physicalGJMeasure_eval_mean_zero (d N : ℕ) [NeZero N]
     (a mass : ℝ) (ha : 0 < a) (hmass : 0 < mass)
@@ -250,7 +250,7 @@ theorem physicalGJMeasure_eval_hasGaussianLaw (d N : ℕ) [NeZero N]
     rw [hpush]
     exact (finiteCovarianceGaussianMeasure_eval_hasGaussianLaw T
       (latticeTestField eval f)).isGaussian_map
-  exact hG.hasGaussianLaw
+  exact hG.hasGaussianLaw heval.aemeasurable
 private def covarianceConfigurationFamilyCLM {ι : Type*} [Fintype ι] {m : ℕ}
     (T : (ι → ℝ) →L[ℝ] EuclideanSpace ℝ ι) (fs : Fin m → ι → ℝ) :
     EuclideanSpace ℝ (Fin (Fintype.card ι)) →L[ℝ] EuclideanSpace ℝ (Fin m) := by
@@ -291,7 +291,7 @@ theorem covarianceConfiguration_family_hasGaussianLaw {ι : Type*} [Fintype ι] 
       (fun j => covarianceConfiguration T z (fs j))) := by
     rw [hfun]
     fun_prop
-  exact hG.hasGaussianLaw
+  exact hG.hasGaussianLaw hmeas.aemeasurable
 
 theorem finiteCovarianceGaussianMeasure_family_hasGaussianLaw {ι : Type*} [Fintype ι]
     {m : ℕ} (T : (ι → ℝ) →L[ℝ] EuclideanSpace ℝ ι) (fs : Fin m → ι → ℝ) :
@@ -316,7 +316,7 @@ theorem finiteCovarianceGaussianMeasure_family_hasGaussianLaw {ι : Type*} [Fint
       (fun ω : WeakDual ℝ (ι → ℝ) => WithLp.toLp 2 (fun j => ω (fs j)))) := by
     rw [hmap]
     exact (covarianceConfiguration_family_hasGaussianLaw T fs).isGaussian_map
-  exact hG.hasGaussianLaw
+  exact hG.hasGaussianLaw hvector.aemeasurable
 
 theorem physicalGJMeasure_family_hasGaussianLaw (d N : ℕ) [NeZero N]
     {m : ℕ} (a mass : ℝ) (ha : 0 < a) (hmass : 0 < mass)
@@ -360,7 +360,7 @@ theorem physicalGJMeasure_family_hasGaussianLaw (d N : ℕ) [NeZero N]
     rw [hpush]
     exact (finiteCovarianceGaussianMeasure_family_hasGaussianLaw T
       (fun j => latticeTestField eval (fs j))).isGaussian_map
-  exact hG.hasGaussianLaw
+  exact hG.hasGaussianLaw hvector.aemeasurable
 
 theorem physicalGJMeasure_family_mean_zero (d N : ℕ) [NeZero N]
     {m : ℕ} (a mass : ℝ) (ha : 0 < a) (hmass : 0 < mass)

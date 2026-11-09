@@ -80,13 +80,9 @@ structure PeriodicHMinusThreeProkhorovIdentificationData where
       Tendsto (fun k => μ (ns (ms k))) atTop (𝓝 ν) →
       ∀ s : Finset PeriodicFourierIndex,
         ν.map (f := (fun x : PeriodicHMinusThreeCompletion =>
-          s.restrict (x : PeriodicFourierIndex → ℂ)))
-        ((Finset.measurable_restrict s).comp
-          measurable_periodicHMinusThree_coordinate_inclusion).aemeasurable =
+          s.restrict (x : PeriodicFourierIndex → ℂ))) =
         μfree.map (f := (fun x : PeriodicHMinusThreeCompletion =>
           s.restrict (x : PeriodicFourierIndex → ℂ)))
-        ((Finset.measurable_restrict s).comp
-          measurable_periodicHMinusThree_coordinate_inclusion).aemeasurable
 
 /-- Finite-marginal uniqueness identifies every extracted Prokhorov limit with
 `μfree`. -/
@@ -95,13 +91,9 @@ theorem periodicHMinusThree_identified_limit_eq_free
     (ν : ProbabilityMeasure PeriodicHMinusThreeCompletion)
     (hν : ∀ s : Finset PeriodicFourierIndex,
       ν.map (f := (fun x : PeriodicHMinusThreeCompletion =>
-          s.restrict (x : PeriodicFourierIndex → ℂ)))
-        ((Finset.measurable_restrict s).comp
-          measurable_periodicHMinusThree_coordinate_inclusion).aemeasurable =
+          s.restrict (x : PeriodicFourierIndex → ℂ))) =
       I.μfree.map (f := (fun x : PeriodicHMinusThreeCompletion =>
-          s.restrict (x : PeriodicFourierIndex → ℂ)))
-        ((Finset.measurable_restrict s).comp
-          measurable_periodicHMinusThree_coordinate_inclusion).aemeasurable) :
+          s.restrict (x : PeriodicFourierIndex → ℂ)))) :
     ν = I.μfree := by
   exact periodicHMinusThree_probabilityMeasure_ext_of_finite_marginals
     I.cylinder_borel_generation ν I.μfree hν

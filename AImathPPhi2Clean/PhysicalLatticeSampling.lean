@@ -52,7 +52,8 @@ instance physicalGJMeasure_probability (d N : ℕ) [NeZero N] (a mass : ℝ)
   unfold physicalGJMeasure
   -- named rather than `infer_instance`: which instance
   -- supplies this has moved between Mathlib revisions.
-  exact Measure.isProbabilityMeasure_map (latticeEmbedLift_measurable (physicalTestEval d N a)).aemeasurable
+  exact (Measure.isProbabilityMeasure_map_iff
+    (latticeEmbedLift_measurable (physicalTestEval d N a)).aemeasurable).2 inferInstance
 
 /-- Concrete second-moment estimate for the physically sampled GJ field. -/
 theorem physicalGJMeasure_second_moment_le (d N : ℕ) [NeZero N]

@@ -62,8 +62,8 @@ instance periodicInfiniteGaussianMeasure_isProbability
   unfold periodicInfiniteGaussianMeasure gaussianWeakDualMeasure
   -- named rather than `infer_instance`: the probability-measure instance for a
   -- `Measure.map` became an explicit argument in this Mathlib revision.
-  exact Measure.isProbabilityMeasure_map
-    (gaussianSeriesConfiguration_measurable D.J D.coefficientVector).aemeasurable
+  exact (Measure.isProbabilityMeasure_map_iff
+    (gaussianSeriesConfiguration_measurable D.J D.coefficientVector).aemeasurable).2 inferInstance
 
 theorem periodicInfiniteGaussianConfiguration_measurable
     (D : PeriodicInfiniteGaussianSeriesData) :

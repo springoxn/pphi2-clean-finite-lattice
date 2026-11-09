@@ -6,7 +6,8 @@
     python verify.py --count    # the counts claimed in README.md, recomputed
     python verify.py --lean     # additionally re-run the axiom gates (needs lake)
     python verify.py --ext      # the post-pin extension: hashes, coverage, axioms
-    python verify.py --all      # manifest + counts + extension + gates
+    python verify.py --fs4      # current four-dimensional release evidence
+    python verify.py --all      # manifest + counts + historical extension + FS4 + Lean replay
 
 Why: the claims of this repository are claims about *bytes* and about *Lean
 declarations*.  A reader should not have to trust the prose: the manifest can be
@@ -17,12 +18,14 @@ Exit codes: 0 all requested checks passed, 1 an assertion failed, 2 the tool
 could not run (missing file, missing toolchain).
 
 Known limits: the manifest proves that the tree is the one that was published,
-not that it is correct; --lean re-runs the gates but not a full `lake build`
-(that needs Mathlib and takes a long time -- see README).
+not that it is correct; --lean rebuilds the current release and replays
+its typed contract plus the legacy gates (requires Lean and Mathlib).
 """
 from __future__ import annotations
 
 import hashlib
+import os
+import tempfile
 import re
 import shutil
 import subprocess
@@ -177,12 +180,12 @@ def check_counts() -> tuple[bool, str]:
 
     a_lines, a_decls, a_sorry = _census(arch)
     e_lines, e_decls, e_sorry = _census(ext)
-    print("  archive core            %d modules, %d lines, %d declarations"
+    print("  other current sources   %d modules, %d lines, %d declarations"
           % (len(arch), a_lines, a_decls))
-    print("  library root            %d lines (the archive's root + the %d "
+    print("  library root            %d lines (including %d historical "
           "extension imports)" % (root_mod.read_text(encoding="utf-8").count("\n"),
                                   len(ext)))
-    print("  post-pin extension      %d modules, %d lines, %d declarations"
+    print("  current extension files %d modules, %d lines, %d declarations"
           % (len(ext), e_lines, e_decls))
     print("  whole package           %d modules, %d declarations (theorem-level %d)"
           % (len(core), decls, thm))
@@ -201,7 +204,7 @@ ALLOW = re.compile(r"ALLOW = \{([^}]*)\}")
 
 
 def check_extension() -> tuple[bool, str]:
-    """The post-pin step: same bytes, same declarations, same allowlist.
+    """Historical post-pin evidence, checked against preserved historical files.
 
     What this establishes: the two extension modules are the ones the published
     evidence transcript describes (by hash), the library root is the root that
@@ -229,14 +232,15 @@ def check_extension() -> tuple[bool, str]:
     if not recorded:
         return False, "the transcript records no module hashes"
 
+    history = ROOT / "docs" / "historical-extension"
     problems = []
     for rel, digest in recorded.items():
-        p = ROOT / rel
+        p = history / rel
         if not p.exists():
-            problems.append("missing %s" % rel)
+            problems.append("missing historical %s" % rel)
         elif sha256(p) != digest:
-            problems.append("hash mismatch for %s" % rel)
-    root_mod = ROOT / "AImathPPhi2Clean.lean"
+            problems.append("historical hash mismatch for %s" % rel)
+    root_mod = history / "AImathPPhi2Clean.lean"
     root_text = root_mod.read_text(encoding="utf-8")
     for rel in recorded:
         name = rel[:-5].replace("/", ".")
@@ -247,7 +251,7 @@ def check_extension() -> tuple[bool, str]:
 
     declared = []
     for rel in recorded:
-        body = strip_comments((ROOT / rel).read_text(encoding="utf-8"))
+        body = strip_comments((history / rel).read_text(encoding="utf-8"))
         declared += [m.group(2) for line in body.splitlines()
                      if (m := DECL.match(line)) and m.group(2) != "_"]
     missing = [n for n in declared if n not in reports]
@@ -265,41 +269,57 @@ def check_extension() -> tuple[bool, str]:
         problems.append("footprint outside the allowlist: %s" % ", ".join(sorted(outside)))
     if problems:
         return False, "; ".join(problems)
-    return True, ("%d modules, %d declarations, %d clean footprints, root == the "
-                  "built root" % (len(recorded), len(declared), len(reports)))
+    return True, ("%d modules, %d declarations, %d clean footprints, historical root == the "
+                  "historical built root" % (len(recorded), len(declared), len(reports)))
+
+
+def check_fs4() -> tuple[bool, str]:
+    r = subprocess.run([sys.executable, str(ROOT / "audit/check_fs4_release.py")],
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
+                       errors="replace")
+    return r.returncode == 0, (r.stdout + r.stderr).strip()
 
 
 def check_lean() -> tuple[bool, str]:
-    lake = (shutil.which("lake")
-            or str(Path.home() / ".elan" / "toolchains"
-                   / "leanprover--lean4---v4.34.0-rc2" / "bin" / "lake"))
-    if not Path(lake).exists() and not shutil.which(lake):
-        # a missing toolchain is a tool error (exit 2), not a failed assertion
-        raise RuntimeError("no `lake` found: set LAKE, or install the pinned "
-                           "toolchain (see lean-toolchain)")
-    env = dict(**__import__("os").environ, LAKE=lake)
-    py = shutil.which("python3") or sys.executable
-    for script in ("audit/run_firewall.sh", "audit/run_interface_gate.py"):
-        cmd = (["bash", str(ROOT / script)] if script.endswith(".sh")
-               else [py, str(ROOT / script)])
-        r = subprocess.run(cmd, cwd=str(ROOT), env=env, capture_output=True,
-                           text=True, encoding="utf-8", errors="replace")
-        tail = (r.stdout or "").strip().splitlines()[-1:] or [""]
-        print("  %-32s exit %d  %s" % (script, r.returncode, tail[0][:90]))
-        if r.returncode != 0:
-            return False, "%s failed" % script
-    return True, "axiom firewall and interface gate both passed"
+    lake = os.environ.get("LAKE") or shutil.which("lake")
+    if not lake:
+        raise RuntimeError("no lake found: set LAKE or install elan")
+    r = subprocess.run([sys.executable, str(ROOT / "audit/check_fs4_release.py"), "--lean"],
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
+                       errors="replace")
+    print(r.stdout + r.stderr)
+    if r.returncode:
+        return False, "current release Lean replay failed"
+    env = dict(os.environ, LAKE=lake, PYTHON=sys.executable,
+               LEAN=str(Path(lake).with_name("lean")))
+    # Legacy gates overwrite logs: run on a disposable copy only. The firewall
+    # already invokes the interface gate; do not invoke it a second time.
+    with tempfile.TemporaryDirectory(prefix="pphi2-legacy-gates-") as td:
+        target = Path(td) / "package"
+        shutil.copytree(ROOT, target, ignore=shutil.ignore_patterns(
+            ".git", ".lake", "build", "__pycache__"))
+        (target / ".lake").symlink_to(ROOT / ".lake", target_is_directory=True)
+        r = subprocess.run(["bash", "audit/run_firewall.sh"], cwd=target, env=env,
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace")
+        print(r.stdout + r.stderr)
+        if r.returncode:
+            return False, "legacy firewall/interface gate failed"
+    return True, "current release replay and legacy gates passed; frozen evidence unchanged"
+
 
 
 def main() -> int:
     args = sys.argv[1:]
-    explicit = {"--manifest", "--count", "--lean", "--ext"} & set(args)
+    explicit = {"--manifest", "--count", "--lean", "--ext", "--fs4"} & set(args)
     do_all = "--all" in args
     checks = []
     if do_all or "--count" in args:
         checks.append(("counts", check_counts))
     if do_all or "--ext" in args:
-        checks.append(("extension", check_extension))
+        checks.append(("historical extension", check_extension))
+    if do_all or "--fs4" in args:
+        checks.append(("FS4 release", check_fs4))
     if do_all or "--lean" in args:
         checks.append(("lean gates", check_lean))
     if do_all or "--manifest" in args or not explicit:

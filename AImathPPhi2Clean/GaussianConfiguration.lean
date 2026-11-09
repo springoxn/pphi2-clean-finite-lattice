@@ -71,7 +71,8 @@ instance gaussianWeakDualMeasure_isProbability (J : E →L[ℝ] H) (v : ℕ → 
   unfold gaussianWeakDualMeasure
   -- named rather than `infer_instance`: which instance
   -- supplies this has moved between Mathlib revisions.
-  exact Measure.isProbabilityMeasure_map (gaussianSeriesConfiguration_measurable J v).aemeasurable
+  exact (Measure.isProbabilityMeasure_map_iff
+    (gaussianSeriesConfiguration_measurable J v).aemeasurable).2 inferInstance
 
 
 theorem gaussianHilbertSeriesLimit_eq_tsum_ae (v : ℕ → H)
