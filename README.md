@@ -1,7 +1,7 @@
 # pphi2-clean-finite-lattice
 
 Lean 4 proofs of finite periodic-lattice Gaussian fields and their fixed-volume
-continuum limits in **two and four dimensions**. The repository name retains
+continuum limits in **two, three and four dimensions**. The repository name retains
 its original two-dimensional history; the four-dimensional result is a massive
 **free-field** limit, not an interacting four-dimensional construction.
 
@@ -64,6 +64,31 @@ equivalence is explained in the proof guide; no separately packaged Lean
 isomorphism to a distribution-library Bessel-potential space is asserted.
 The stronger exact raw complex mode identities and sharp trace constant are
 paper calculations; the formal tightness proof uses its proved all-N bound.
+
+## New: the three-dimensional periodic raw-lift limit
+
+For every `L > 0` and `mass > 0`, let `N = n+1` and `a = L/N`. The actual
+centered Gaussian source on `(Z/NZ)^3` is sent to the weighted Fourier carrier
+by its raw atomic lift with the physical-volume factor `a^3`. These laws
+converge weakly on the concrete weighted Fourier `H^-4(T_L^3)` carrier to the
+explicit real-supported periodic Gaussian law.
+
+The exported theorem is
+[`Pphi2Clean.Continuum.periodic3DFixedVolume_weak_tendsto_gaussianTarget`](AImathPPhi2Clean/Periodic3DGaussianWeakLimit.lean).
+The proof includes the actual three-dimensional source, moment and compactness
+estimates, finite real Fourier marginals, subsequential uniqueness and full
+weak convergence. The target is built by restricting the existing 4D Gaussian
+Fourier carrier to fourth frequency zero and applying the `(sqrt L)^(-1)`
+normalization; no 4D raw lattice source is substituted for the 3D source.
+
+The zero-mode variance is `L^3 / mass^2`; nonzero canonical cosine/sine
+coordinates have variance `L^3 / (2 * torusMassSymbol 3 L mass k)`. Alias and
+Nyquist coincidences are excluded eventually for each fixed finite frequency
+family, not asserted away on exceptional finite meshes. The proof guide
+[`docs/fs3/proof.md`](docs/fs3/proof.md) records the normalization, exceptional
+modes, real support, and theorem scope. The result is a free, fixed-volume
+limit in the weighted Fourier `H^-4` realization, not an interacting,
+infinite-volume, or OS-reconstruction theorem.
 
 ## Preserved two-dimensional development
 

@@ -1,0 +1,7 @@
+import AImathPPhi2Clean.Periodic3DGaussianWeakLimit
+import AImathPPhi2Clean.Periodic3DGaussianFourierMarginals
+
+#print axioms Pphi2Clean.Continuum.periodic3DFixedVolume_weak_tendsto_gaussianTarget
+#print axioms Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_marginal
+#print axioms Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_hasGaussianLaw
+#print axioms Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_mean
