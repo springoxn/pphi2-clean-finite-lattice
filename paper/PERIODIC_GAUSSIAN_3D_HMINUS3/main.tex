@@ -1,0 +1,232 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue]{hyperref}
+\renewcommand{\sfdefault}{\rmdefault}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}\newcommand{\E}{\mathbb E}
+\newcommand{\HH}[1]{\mathcal H^{-#1}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\Law}{\operatorname{Law}}
+\ExplSyntaxOn
+\NewDocumentCommand \code { m }
+ {\texttt{\tl_map_inline:nn {#1}
+   {\str_if_eq:nnTF {##1}{_}{\_\allowbreak}
+     {\str_if_in:nnTF {ABCDEFGHIJKLMNOPQRSTUVWXYZ.}{##1}
+       {\allowbreak{}##1}{##1}}}}}
+\ExplSyntaxOff
+\emergencystretch=3em
+\title[The three-dimensional H-minus-three endpoint]{A stronger carrier for the actual three-dimensional periodic Gaussian source: the $H^{-3}$ endpoint}
+\author{Yj Zheng}
+\date{November 11, 2026}
+\subjclass[2020]{60G15, 60B10, 68V15}
+\keywords{periodic Gaussian field, negative Sobolev space, lattice approximation, weak convergence, Lean 4}
+\begin{document}
+\begin{abstract}
+We supplement the three-dimensional periodic Gaussian companion with its stronger weighted Fourier $H^{-3}$ Lean endpoint. A uniform $H^{-2}$ second-moment estimate for the actual three-dimensional raw lattice lift supplies compact containment in $H^{-3}$. Tightness, the continuous injective inclusion into the earlier $H^{-4}$ carrier, and the existing $H^{-4}$ limit identify a unique $H^{-3}$ target and yield whole-sequence weak convergence. Physical finite Fourier marginals and measure uniqueness are proved with the correct $H^{-3}$ weighting. The finite source remains three-dimensional; the target is identified as the unique lift of the previously constructed normalized four-dimensional frequency-slice Gaussian. We state exactly what is formalized and what is not.
+\end{abstract}
+\maketitle
+\tableofcontents
+
+\section{Source, weights, and strengthened endpoint}
+This supplement is appended to the preserved November 10 three-dimensional companion. Its statements about the new formal endpoint supersede only that companion's description of the strongest available Lean topology. The preceding article remains an unchanged historical document: in particular, its claim that the then-current endpoint was only $H^{-4}$ describes the earlier release.
+
+Fix $L>0$ and mass $m>0$. For $N=n+1$ set $a=L/N$ and $\Lambda_N=(\Z/N\Z)^3$. The actual finite source is the centered real Gaussian field $\phi_N$ on $\Lambda_N$ with site covariance
+\[
+ a^{-3}(m^2-\Delta_a)^{-1},\qquad
+ (\Delta_a u)(x)=a^{-2}\sum_{j=1}^3
+ \bigl(u(x+e_j)+u(x-e_j)-2u(x)\bigr).
+\]
+Its raw atomic lift and physical coefficient are
+\begin{equation}\label{eq:raw}
+ X_N=a^3\sum_{x\in\Lambda_N}\phi_N(x)\delta_{[ax]},
+ \qquad c_N(k)=a^3\sum_{x\in\Lambda_N}\phi_N(x)e^{-2\pi i k\cdot x/N}.
+\end{equation}
+The finite source in Lean is built from \code{numberedLatticeCovarianceGJ 3 N}. No four-dimensional lattice field is used to replace this source.
+
+For $k\in\Z^3$, let $r(k)=\max_j|k_j|$ and set
+\begin{equation}\label{eq:weights}
+ w_s(k)=(1+r(k))^{-2s},\qquad
+ \norm{c}_{-s}^2=\sum_{k\in\Z^3}w_s(k)|c(k)|^2.
+\end{equation}
+These are the precise weights induced by the sup norm in the finite function types used in the Lean carrier. They define norms equivalent to the usual Fourier Sobolev norms at fixed $L$, but equation~\eqref{eq:weights} is the convention used here. The physical Laplacian symbol still uses the Euclidean sum of squares:
+\[
+ \lambda_3(k)=m^2+(2\pi/L)^2\sum_{j=1}^3k_j^2.
+\]
+Do not infer a Euclidean norm from the notation for a finite function type.
+
+Write $J_s c=(\sqrt{w_s(k)}c(k))_k\in\ell^2(\Z^3;\C)$. Thus each weighted carrier $\HH{s}$ is represented by the common completion $\ell^2$, with a different interpretation of its coordinates. Its norm is the ordinary $\ell^2$ norm of $J_sc$. Let $\mu_N^{(s)}=\Law(J_s c_N)$.
+
+\begin{theorem}[Actual-source $H^{-3}$ endpoint]\label{thm:endpoint}
+There is a unique probability measure $\gamma^{(3)}$ on the $H^{-3}$ weighted Fourier carrier whose image under the natural inclusion into $H^{-4}$ is the earlier normalized frequency-slice Gaussian target $\gamma^{(4)}$. Moreover,
+\[
+ \mu_N^{(3)}\Longrightarrow\gamma^{(3)}\qquad(N=n+1\longrightarrow\infty).
+\]
+Every finite family of physical real and imaginary Fourier evaluations has the three-dimensional periodic-resolvent Gaussian target law in the limit. These finite-family laws determine $\gamma^{(3)}$ uniquely.
+\end{theorem}
+The theorem has no caller-supplied tightness or target-identification hypothesis. The construction and identification of $\gamma^{(3)}$ are separated in Sections~3 and~4.
+
+\section{Uniform H-minus-two energy and compact containment}
+The bound needed for tightness is a statement about the actual raw lift, including all finite-mesh aliases. Write $p_N(k)$ for the residue of $k$ modulo $N$. The exact lattice character covariance gives
+\[
+ \E|c_N(k)|^2=\frac{L^3}{m^2+4a^{-2}\sum_j\sin^2(\pi k_j/N)}
+ \leq \frac{L^3}{m^2}.
+\]
+This sharper analytic inequality explains the normalization. The proved Lean energy route uses the following sufficient, deliberately weaker constant:
+\begin{equation}\label{eq:energy}
+ \E\norm{c_N}_{-2}^2\leq C_{L,m},\qquad
+ C_{L,m}=2m^{-2}L^3\sum_{k\in\Z^3}w_2(k)<\infty.
+\end{equation}
+The factor $2$ is part of the verified bound; the sharper exact covariance estimate is not being substituted for the statement of that Lean theorem.
+
+\begin{lemma}[Summability and actual-lift energy]
+The series $\sum_kw_2(k)$ converges. Every finite raw atomic lift belongs to $\HH{2}$, its squared $\HH{2}$ norm is integrable under the actual finite-source Gaussian law, and equation~\eqref{eq:energy} holds uniformly in $N$.
+\end{lemma}
+\begin{proof}
+The shell $r(k)=q\geq1$ has
+$(2q+1)^3-(2q-1)^3=24q^2+2$ points. Its contribution to the weight series is $(24q^2+2)(1+q)^{-4}$, which is summable. For every fixed finite configuration, the triangle inequality bounds $|c_N(k)|$ by the finite constant $a^3\sum_x|\phi_N(x)|$, uniformly in $k$, so the lift belongs to $\HH{2}$. Nonnegative summation and integration justify the moment sum. The Lean proof independently establishes the weighted norm identity, integrability, and uniform estimate~\eqref{eq:energy}; its weight summability argument uses a two-dimensional-block and one-dimensional-axis majorant rather than this shell count.
+\end{proof}
+
+For $R>0$ define the stronger-energy ball inside the $H^{-3}$ coordinate carrier by
+\[
+ B_R=\{J_3c:\norm{c}_{-2}\leq R\}.
+\]
+It is the $H^{-3}$ closure $K_R=\overline{B_R}$ that we use as a compact set. No claim that an arbitrary bounded $H^{-3}$ ball is compact is needed.
+
+\begin{lemma}[Compact stronger-energy balls]\label{lem:compact}
+The set $K_R$ is compact in $\HH{3}$. For every finite-frequency box $F_M=\{k:r(k)\leq M\}$ and every $c$ with $\norm{c}_{-2}\leq R$,
+\begin{equation}\label{eq:tail}
+ \sum_{k\notin F_M}w_3(k)|c(k)|^2
+ \leq R^2\sup_{k\notin F_M}\frac{w_3(k)}{w_2(k)},
+ \qquad \frac{w_3(k)}{w_2(k)}=(1+r(k))^{-2}\longrightarrow0.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Multiply the pointwise ratio bound by $w_2(k)|c(k)|^2$ and sum. For a prescribed error, choose $M$ so that the right side of~\eqref{eq:tail} is small. The finite-coordinate projections of $B_R$ form a bounded subset of a finite-dimensional space and admit finite nets. Extending these nets by zero and using the uniform tail estimate proves total boundedness of $B_R$. Completeness of the carrier makes its closure compact.
+\end{proof}
+
+\begin{proposition}[Uniform compact containment]\label{prop:tight}
+The family $\{\mu_N^{(3)}:N\geq1\}$ is tight. In particular it has weakly convergent subsequences.
+\end{proposition}
+\begin{proof}
+If $J_3c_N\notin K_R$, then $\norm{c_N}_{-2}>R$. Markov's inequality and~\eqref{eq:energy} give
+\[
+ \mu_N^{(3)}(K_R^c)\leq \frac{C_{L,m}}{R^2}.
+\]
+Given any positive error, choose $R$ large enough. Lemma~\ref{lem:compact} supplies the compact set, uniformly in the mesh. Prokhorov's theorem applies because the weighted completion is a separable complete metric space.
+\end{proof}
+
+\section{The inclusion and the unique target lift}
+In weighted coordinates, the natural inclusion is
+\begin{equation}\label{eq:inclusion}
+ I:\HH{3}\longrightarrow\HH{4},\qquad
+ (Ix)_k=\frac{\sqrt{w_4(k)}}{\sqrt{w_3(k)}}x_k.
+\end{equation}
+Every multiplier is positive and at most one, hence $I$ is a continuous injective linear contraction. For the actual finite lifts it satisfies the exact identity
+\[
+ I(J_3c_N)=J_4c_N,\qquad I_*\mu_N^{(3)}=\mu_N^{(4)}.
+\]
+The earlier companion proves $\mu_N^{(4)}\Longrightarrow\gamma^{(4)}$.
+
+The measure $\gamma^{(4)}$ is the earlier target constructed from the four-dimensional Gaussian Fourier series by restricting to frequencies $(k_1,k_2,k_3,0)$ and multiplying by $L^{-1/2}$. The squared scale $L^{-1}$ converts its $L^4$ covariance normalization to $L^3$. Its physical Fourier covariance is
+\[
+ \E[\widehat Z(k)\overline{\widehat Z(\ell)}]
+ =\frac{L^3\mathbf1_{k=\ell}}{\lambda_3(k)},\qquad
+ \widehat Z(-k)=\overline{\widehat Z(k)}.
+\]
+This is a frequency-slice target construction, not a spatial trace and not the law of a four-dimensional finite lattice source.
+
+\begin{lemma}[Uniqueness of a lifted law]\label{lem:embedding}
+If $\nu$ and $\eta$ are Borel probability measures on $\HH{3}$ and $I_*\nu=I_*\eta$, then $\nu=\eta$.
+\end{lemma}
+\begin{proof}
+A continuous injective map between Polish spaces is a measurable embedding. Each Borel set in its domain is therefore the inverse image of a measurable set in its codomain. Equality of the pushed-forward measures gives equality on every Borel set of the domain. This is the measurable-embedding argument used in Lean; it does not require a continuous inverse defined on all of $\HH{4}$.
+\end{proof}
+
+\begin{proof}[Proof of convergence and target identification in Theorem~\ref{thm:endpoint}]
+By Proposition~\ref{prop:tight}, choose a weak subsequential limit $\nu$ of the actual $H^{-3}$ laws. Continuity of $I$ and the exact source intertwining imply
+\[
+ I_*\nu=\lim I_*\mu_{N_j}^{(3)}
+ =\lim\mu_{N_j}^{(4)}=\gamma^{(4)}.
+\]
+Thus a lift exists. Lemma~\ref{lem:embedding} makes it unique; call it $\gamma^{(3)}$. Every subsequence has a further weakly convergent subsequence by tightness, and every such limit is the same lift. The standard subsequence criterion therefore proves full-sequence convergence. In Lean the target is defined by choosing the limit supplied by the existence theorem, then proving this unique-lift characterization. This construction is noncircular: tightness supplies existence before injectivity identifies the law.
+\end{proof}
+
+\section{Exact physical projections and finite marginals}
+Let $k_1,\ldots,k_q\in\Z^3$, and for each $i$ choose either a real or an imaginary coordinate. Define the physical $H^{-3}$ projection by
+\begin{equation}\label{eq:projection}
+ P_3(x)_i=
+ \begin{cases}
+ \operatorname{Re}\bigl(x_{k_i}/\sqrt{w_3(k_i)}\bigr),&\text{real choice},\\
+ \operatorname{Im}\bigl(x_{k_i}/\sqrt{w_3(k_i)}\bigr),&\text{imaginary choice}.
+ \end{cases}
+\end{equation}
+This is continuous for each fixed finite family. If $P_4$ denotes the corresponding physical projection in the old carrier, then
+\[
+ P_3=P_4\circ I,\qquad
+ \frac{(Ix)_k}{\sqrt{w_4(k)}}
+ =\frac{x_k}{\sqrt{w_3(k)}}.
+\]
+Applying an $H^{-4}$ unweighting formula directly to an $H^{-3}$ coordinate would give the wrong physical normalization. The Lean definition explicitly composes the old projection with $I$.
+
+Let $G_{k,\varepsilon}$ be the centered joint Gaussian law specified by the three-dimensional periodic resolvent and the selected real/imaginary Fourier test family. Then
+\begin{equation}\label{eq:marginals}
+ (P_3)_*\gamma^{(3)}=G_{k,\varepsilon},\qquad
+ (P_3)_*\mu_N^{(3)}\Longrightarrow G_{k,\varepsilon}.
+\end{equation}
+Indeed, the unique-lift identity transports the already identified $H^{-4}$ physical marginals to $H^{-3}$; the second statement follows by the continuous mapping theorem. Repeated labels, zero coordinates and degenerate finite families are permitted. These are joint laws, not merely equal coordinate variances.
+
+If two probability laws on $\HH{3}$ have the same laws for all these finite families, their images under $I$ have the same $H^{-4}$ physical Fourier marginals. The earlier marginal-separation theorem identifies those images; Lemma~\ref{lem:embedding} identifies the original laws. This completes the finite-marginal and uniqueness assertions of Theorem~\ref{thm:endpoint}.
+
+\begin{remark}[Formal evidence boundary]
+The endpoint identifies a Gaussian law by its separating joint Gaussian Fourier-coordinate laws and by its unique lift to the named previous target. The new development does \emph{not} assert a standalone Mathlib \code{IsGaussian} predicate for the infinite-dimensional $H^{-3}$ measure. It also does not construct the $H^{-3}$ target by a new direct four-dimensional series map. Neither statement is being claimed as machine-checked here. The established measure-level endpoint and its unique-lift characterization are the formal result.
+\end{remark}
+
+\section{Lean theorem map and reproducible evidence}
+All theorem names below are in \code{Pphi2Clean.Continuum}. The verified release is
+\begin{quote}\raggedright
+\code{leanprover/lean4:v4.34.0-rc2}.
+\end{quote}
+The source overlay records its base commit in \code{BASE_COMMIT.txt}; it is an overlay for the existing Lean project, not a standalone replacement for Mathlib or the historical dependency tree.
+
+\begin{description}
+\item[Raw-lift moment.]
+\code{periodic3DRawAtomicLift_integral_energy_hminusTwo_le} is the actual raw $H^{-2}$ energy bound. The finite-source carrier form is \code{periodic3DFiniteSourceFourierLiftH2_integral_norm_sq_le}.
+\item[Compactness.]
+\code{isCompact_closure_periodic3DHminusTwoBall} proves the compact closure of the stronger-energy ball in the $H^{-3}$ carrier. The vanishing ratio is \code{periodic3D_hminusThree_to_hminusTwo_weight_ratio_tendsto_zero}.
+\item[Tightness.]
+\code{periodic3DFiniteSourceGaussianMeasureH3_compactTail} and \code{periodic3DFixedVolumeProbabilityMeasureH3Set_tight} establish actual-source compact containment and fixed-volume tightness.
+\item[Inclusion and source compatibility.]
+\code{periodic3DH3ToH4CLM}, \code{periodic3DH3ToH4_injective}, and \code{periodic3DH3ToH4_finiteSource} implement equation~\eqref{eq:inclusion} and the exact lift identity.
+\item[Whole-sequence limit.]
+\code{periodic3DFixedVolumeH3_weak_tendsto_gaussianTarget} is the final weak-convergence endpoint. \code{periodic3DGaussianTargetH3_map_inclusion} identifies its target image; \code{periodic3DFixedVolumeH3_weak_limit_existsUnique} proves unique existence.
+\item[Finite marginals and separation.]
+\code{periodic3DGaussianTargetH3_fourierFamily_law} and \code{periodic3DFixedVolumeH3_fourierFamilyMarginal_tendsto} prove equation~\eqref{eq:marginals}; \code{periodic3DH3_probability_ext_of_fourierFamily_marginals} proves measure separation. \code{periodic3DGaussianTargetH3_unique_lift} exports the unique-lift characterization.
+\end{description}
+
+\subsection{Verification ledger}
+\begin{center}
+\begin{tabular}{p{0.24\textwidth}p{0.64\textwidth}}
+\toprule
+Claim & Evidence and qualification\\
+\midrule
+$H^{-2}$ moment and $H^{-3}$ convergence & Confirmed by the pinned Lean declarations above; source in the endpoint archive.\\
+Physical projection weights & Confirmed by the exact multiplier cancellation in equation~\eqref{eq:projection} and the archived projection definition.\\
+Gaussian target identification & Confirmed as unique lift with separating finite Gaussian laws; a standalone \code{IsGaussian} predicate is not asserted.\\
+Axiom footprint & Reported kernel audit of the principal endpoints: \code{[propext, Classical.choice, Quot.sound]}; these are foundational axioms, not an empty axiom set.\\
+PDF/source production & Checked separately by the reproducible build and PDF artifact audit shipped with this supplement. This is not a new execution of the Lean kernel.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The mathematical evidence sources are the delivered endpoint source overlay and its proof/audit record, dated November 11. The principal endpoint build command is
+\begin{quote}\raggedright
+\code{lake build AImathPPhi2Clean.Periodic3DHminusThreeMarginals}.
+\end{quote}
+The focused source audit found no \code{sorry}, declared \code{axiom}, or \code{admit}. The recorded principal endpoint axiom audits contain only \code{propext}, \code{Classical.choice}, and \code{Quot.sound}. Those statements describe the recorded focused checks; this supplement does not claim to have freshly audited the entire historical dependency cone.
+
+\end{document}

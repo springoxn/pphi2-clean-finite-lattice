@@ -5,6 +5,38 @@ continuum limits in **two, three and four dimensions**. The repository name reta
 its original two-dimensional history; the four-dimensional result is a massive
 **free-field** limit, not an interacting four-dimensional construction.
 
+## Three-dimensional H-minus-three endpoint and combined article
+
+**[Read the combined 3D PDF](paper/PERIODIC_GAUSSIAN_3D_HMINUS3/periodic_gaussian_3d_hminus3_complete.pdf)** ·
+[LaTeX sources and reproducible build](paper/PERIODIC_GAUSSIAN_3D_HMINUS3/) ·
+[Download source bundle](paper/PERIODIC_GAUSSIAN_3D_HMINUS3/periodic_gaussian_3d_hminus3_complete_sources.zip)
+
+The combined article preserves the historical 3D companion and appends the H^-3
+extension. For `L > 0`, `mass > 0`, `N = n+1` and `a = L/N`, the actual 3D raw
+lattice lift laws converge weakly in weighted Fourier H^-3. The proof establishes
+a uniform H^-2 second moment and compact containment in H^-3. The H^-3 target is
+the unique probability lift of the existing normalized 4D frequency-slice target
+through the continuous injective H^-3-to-H^-4 inclusion; the lattice source stays
+three-dimensional. Joint physical Fourier-family Gaussian laws and marginal
+uniqueness are proved. A separate infinite-dimensional `IsGaussian` predicate
+is not asserted.
+
+- [Weak convergence and target identification](AImathPPhi2Clean/Periodic3DHminusThreeWeakLimit.lean)
+- [Finite marginal laws and uniqueness](AImathPPhi2Clean/Periodic3DHminusThreeMarginals.lean)
+- [Uniform H^-2 source energy](AImathPPhi2Clean/Periodic3DHminusTwoSourceEnergy.lean)
+- [Executed endpoint contract](audit/periodic3d_hminus3_endpoint.lean) and [transcript](audit/periodic3d_hminus3_endpoint.log)
+
+Reproduce at the pinned release:
+
+```sh
+lake build AImathPPhi2Clean.Periodic3DHminusThreeMarginals
+lake env lean audit/periodic3d_hminus3_endpoint.lean
+python verify.py
+```
+
+The endpoint contract was executed with Lean `v4.34.0-rc2`; its queried theorem
+axioms are exactly `propext`, `Classical.choice`, and `Quot.sound`.
+
 ## Article connecting the two- and four-dimensional proofs
 
 **[Read the PDF](paper/PERIODIC_GAUSSIAN_DIMENSION_BRIDGE/periodic_gaussian_dimension_bridge.pdf)** ·

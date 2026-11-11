@@ -1,0 +1,26 @@
+{
+  "archived_declaration_references": [
+    "isCompact_closure_periodic3DHminusTwoBall",
+    "periodic3DFiniteSourceFourierLiftH2_integral_norm_sq_le",
+    "periodic3DFiniteSourceGaussianMeasureH3_compactTail",
+    "periodic3DFixedVolumeH3_fourierFamilyMarginal_tendsto",
+    "periodic3DFixedVolumeH3_weak_limit_existsUnique",
+    "periodic3DFixedVolumeH3_weak_tendsto_gaussianTarget",
+    "periodic3DFixedVolumeProbabilityMeasureH3Set_tight",
+    "periodic3DGaussianTargetH3_fourierFamily_law",
+    "periodic3DGaussianTargetH3_map_inclusion",
+    "periodic3DGaussianTargetH3_unique_lift",
+    "periodic3DH3ToH4CLM",
+    "periodic3DH3ToH4_finiteSource",
+    "periodic3DH3ToH4_injective",
+    "periodic3DH3_probability_ext_of_fourierFamily_marginals",
+    "periodic3DRawAtomicLift_integral_energy_hminusTwo_le",
+    "periodic3D_hminusThree_to_hminusTwo_weight_ratio_tendsto_zero"
+  ],
+  "shell_count": "PASS",
+  "weight_ratio": "PASS",
+  "projection_cancellation": "PASS",
+  "target_volume_scaling": "PASS",
+  "IsGaussian_limitation": "PRESENT",
+  "role": "symbolic subset/source evidence cross-check, not Lean re-execution"
+}

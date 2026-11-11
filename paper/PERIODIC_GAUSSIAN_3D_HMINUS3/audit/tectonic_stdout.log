@@ -1,0 +1,29 @@
+note: using only cached resource files
+note: Running TeX ...
+Fontconfig error: Cannot load default config file: No such file: (null)
+warning: main.tex:199: Underfull \hbox (badness 3118) in paragraph at lines 198--199
+warning: main.tex:205: Underfull \hbox (badness 10000) in paragraph at lines 204--205
+warning: main.tex:207: Underfull \hbox (badness 10000) in paragraph at lines 206--207
+warning: main.tex:209: Underfull \hbox (badness 10000) in paragraph at lines 208--209
+warning: main.tex:209: Underfull \hbox (badness 6412) in paragraph at lines 208--209
+warning: main.tex:209: Underfull \hbox (badness 10000) in paragraph at lines 208--209
+warning: main.tex:218: Underfull \hbox (badness 10000) in paragraph at lines 218--218
+note: Rerunning TeX because "main.toc" changed ...
+warning: main.tex:199: Underfull \hbox (badness 3118) in paragraph at lines 198--199
+warning: main.tex:205: Underfull \hbox (badness 10000) in paragraph at lines 204--205
+warning: main.tex:207: Underfull \hbox (badness 10000) in paragraph at lines 206--207
+warning: main.tex:209: Underfull \hbox (badness 10000) in paragraph at lines 208--209
+warning: main.tex:209: Underfull \hbox (badness 6412) in paragraph at lines 208--209
+warning: main.tex:218: Underfull \hbox (badness 10000) in paragraph at lines 218--218
+note: Rerunning TeX because "main.toc" changed ...
+warning: main.tex:199: Underfull \hbox (badness 3118) in paragraph at lines 198--199
+warning: main.tex:205: Underfull \hbox (badness 10000) in paragraph at lines 204--205
+warning: main.tex:207: Underfull \hbox (badness 10000) in paragraph at lines 206--207
+warning: main.tex:209: Underfull \hbox (badness 10000) in paragraph at lines 208--209
+warning: main.tex:209: Underfull \hbox (badness 6412) in paragraph at lines 208--209
+warning: main.tex:218: Underfull \hbox (badness 10000) in paragraph at lines 218--218
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.
+note: Running xdvipdfmx ...
+note: Writing `E:\study\AImath\paper\PERIODIC_GAUSSIAN_3D_HMINUS3\build\main.log` (14.9599609375 KiB)
+note: Writing `E:\study\AImath\paper\PERIODIC_GAUSSIAN_3D_HMINUS3\build\main.pdf` (96.6630859375 KiB)
+note: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)
