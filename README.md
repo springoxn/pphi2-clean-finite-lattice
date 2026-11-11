@@ -39,7 +39,8 @@ axioms are exactly `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## Five-dimensional actual-source H-minus-three limit
 
-**[Download the complete pinned Lean project and audit bundle](paper/PERIODIC_GAUSSIAN_5D_HMINUS3/periodic_gaussian_5d_hminus3_endpoint.zip)** ·
+**[GitHub Release page](https://github.com/springoxn/pphi2-clean-finite-lattice/releases/tag/v2026.11.11-5d-hminus3)** ·
+[Download the complete pinned Lean project and audit bundle](paper/PERIODIC_GAUSSIAN_5D_HMINUS3/periodic_gaussian_5d_hminus3_endpoint.zip) ·
 [Proof and scope notes](paper/PERIODIC_GAUSSIAN_5D_HMINUS3/inputs/periodic5d_hminus3_endpoint.md) ·
 [Typed theorem and axiom transcript](audit/periodic5d_hminus3_endpoint.lean)
 
