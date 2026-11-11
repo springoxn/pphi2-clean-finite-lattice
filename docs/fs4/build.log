@@ -333,7 +333,45 @@ Hint: Omit it from the simp argument list.
   [apply] simp [frequencyBoxMode]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8882/8952] Replayed AImathPPhi2Clean.PeriodicFourierCovarianceLimit
+⚠ [8883/8952] Replayed AImathPPhi2Clean.RealFourierTestFunctions
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:11:56: Variable name `hL` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hL
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:35:54: Variable name `hL` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hL
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:68:15: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:76:15: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8884/8952] Replayed AImathPPhi2Clean.FiniteRealFamilyMeasure
+warning: AImathPPhi2Clean/FiniteRealFamilyMeasure.lean:7:18: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/FiniteRealFamilyMeasure.lean:7:31: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8885/8952] Replayed AImathPPhi2Clean.PeriodicFourierCovarianceLimit
 warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:112:20: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
 
 Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
@@ -437,7 +475,7 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
   [apply] _hg
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [8883/8952] Replayed AImathPPhi2Clean.PeriodicTorusL2
+⚠ [8886/8952] Replayed AImathPPhi2Clean.PeriodicTorusL2
 warning: AImathPPhi2Clean/PeriodicTorusL2.lean:76:77: This simp argument is unused:
   div_one
 
@@ -451,7 +489,7 @@ Note: This linter can be disabled with `set_option linter.unreachableTactic fals
 warning: AImathPPhi2Clean/PeriodicTorusL2.lean:86:6: Unused tactic linter: `ring` does nothing
 
 Note: This linter can be disabled with `set_option linter.unusedTactic false`
-⚠ [8885/8952] Replayed AImathPPhi2Clean.PeriodicTorusH1
+⚠ [8888/8952] Replayed AImathPPhi2Clean.PeriodicTorusH1
 warning: AImathPPhi2Clean/PeriodicTorusH1.lean:89:63: This simp argument is unused:
   Ne.symm hj
 
@@ -473,32 +511,7 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [lp.coeFn_sum, lp.coeFn_single]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8888/8952] Replayed AImathPPhi2Clean.RealFourierTestFunctions
-warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:11:56: Variable name `hL` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _hL
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:35:54: Variable name `hL` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _hL
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:68:15: Variable name `ha` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _ha
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:76:15: Variable name `ha` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _ha
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [8889/8952] Replayed AImathPPhi2Clean.RealFourierSecondMoment
+⚠ [8890/8952] Replayed AImathPPhi2Clean.RealFourierSecondMoment
 warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:172:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
 warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:172:31: `if_pos` has been deprecated: Use `ite_eq_left` instead
 warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:187:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
@@ -603,14 +616,14 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
   [apply] _hmass
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [8890/8952] Replayed AImathPPhi2Clean.PeriodicHMinusTwoLatticeTrace
+⚠ [8891/8952] Replayed AImathPPhi2Clean.PeriodicHMinusTwoLatticeTrace
 warning: AImathPPhi2Clean/PeriodicHMinusTwoLatticeTrace.lean:10:5: Variable name `hL` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
   [apply] _hL
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [8892/8952] Replayed AImathPPhi2Clean.PeriodicComplexFourierLift
+⚠ [8893/8952] Replayed AImathPPhi2Clean.PeriodicComplexFourierLift
 warning: AImathPPhi2Clean/PeriodicComplexFourierLift.lean:38:31: Variable name `L` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
@@ -624,24 +637,11 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
   [apply] _hL
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [8893/8952] Replayed AImathPPhi2Clean.PeriodicFullHMinusTwoTrace
+⚠ [8894/8952] Replayed AImathPPhi2Clean.PeriodicFullHMinusTwoTrace
 warning: AImathPPhi2Clean/PeriodicFullHMinusTwoTrace.lean:18:5: Variable name `hC` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
   [apply] _hC
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-⚠ [8896/8952] Replayed AImathPPhi2Clean.FiniteRealFamilyMeasure
-warning: AImathPPhi2Clean/FiniteRealFamilyMeasure.lean:7:18: Variable name `ha` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _ha
-
-Note: This linter can be disabled with `set_option linter.unusedVariables false`
-warning: AImathPPhi2Clean/FiniteRealFamilyMeasure.lean:7:31: Variable name `hmass` is not explicitly referenced.
-
-Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
-  [apply] _hmass
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
 ⚠ [8897/8952] Replayed AImathPPhi2Clean.FiniteRealFamilyCovarianceConvergence
@@ -1299,7 +1299,13 @@ info: AImathPPhi2Clean/Periodic3DGaussianWeakLimit.lean:204:0: 'Pphi2Clean.Conti
 info: AImathPPhi2Clean/Periodic3DGaussianWeakLimit.lean:205:0: 'Pphi2Clean.Continuum.periodic3DFixedVolume_weak_tendsto_gaussianTarget' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-ℹ [8927/8952] Replayed AImathPPhi2Clean.Periodic3DGaussianFourierMarginals
+⚠ [8927/8952] Built AImathPPhi2Clean.NelsonLayerCake (2.0s)
+warning: AImathPPhi2Clean/NelsonLayerCake.lean:65:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+⚠ [8928/8952] Built AImathPPhi2Clean.NelsonBridge (3.8s)
+warning: AImathPPhi2Clean/NelsonBridge.lean:22:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+✔ [8929/8952] Built AImathPPhi2Clean.HermiteDeriv (7.4s)
+✔ [8930/8952] Built AImathPPhi2Clean.OSPositivity (7.4s)
+ℹ [8931/8952] Built AImathPPhi2Clean.Periodic3DGaussianFourierMarginals (7.4s)
 info: AImathPPhi2Clean/Periodic3DGaussianFourierMarginals.lean:48:0: 'Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_hasGaussianLaw' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1312,15 +1318,9 @@ info: AImathPPhi2Clean/Periodic3DGaussianFourierMarginals.lean:51:0: 'Pphi2Clean
 info: AImathPPhi2Clean/Periodic3DGaussianFourierMarginals.lean:52:0: 'Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_measure' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-⚠ [8928/8952] Built AImathPPhi2Clean.NelsonLayerCake (3.2s)
-warning: AImathPPhi2Clean/NelsonLayerCake.lean:65:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-⚠ [8929/8952] Built AImathPPhi2Clean.NelsonBridge (3.2s)
-warning: AImathPPhi2Clean/NelsonBridge.lean:22:13: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
-✔ [8930/8952] Built AImathPPhi2Clean.OSReflectionLimit (6.3s)
-✔ [8931/8952] Built AImathPPhi2Clean.LatticeGaussianTransfer (6.2s)
-✔ [8932/8952] Built AImathPPhi2Clean.ContinuumMoment (6.3s)
-✔ [8933/8952] Built AImathPPhi2Clean.PolynomialCoefficientDecay (6.4s)
-⚠ [8934/8952] Built AImathPPhi2Clean.PeriodicHMinusThreeCylinderBorelUniqueness (6.4s)
+✔ [8932/8952] Built AImathPPhi2Clean.OSReflectionLimit (7.5s)
+✔ [8933/8952] Built AImathPPhi2Clean.RealMarginalTightness (7.6s)
+⚠ [8934/8952] Built AImathPPhi2Clean.PeriodicHMinusThreeCylinderBorelUniqueness (7.6s)
 warning: AImathPPhi2Clean/PeriodicHMinusThreeCylinderBorelUniqueness.lean:15:16: Variable name `i` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
@@ -1345,22 +1345,12 @@ Hint: The binding can be removed (if unused) or named `_` (if used implicitly). 
   [apply] _i
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-✔ [8935/8952] Built AImathPPhi2Clean.OSPositivity (6.6s)
-✔ [8936/8952] Built AImathPPhi2Clean.PPhi2Wick (6.6s)
-✔ [8937/8952] Built AImathPPhi2Clean.SequenceMomentTightness (6.6s)
-✔ [8938/8952] Built AImathPPhi2Clean.PeriodicContinuumGaussianWeakLimitInterfaces (6.6s)
-✔ [8939/8952] Built AImathPPhi2Clean.Wick (7.0s)
-✔ [8940/8952] Built AImathPPhi2Clean.HermiteDeriv (6.0s)
-✔ [8941/8952] Built AImathPPhi2Clean.RealMarginalTightness (7.1s)
-⚠ [8942/8952] Built AImathPPhi2Clean.PeriodicFourierContinuumTail (7.2s)
-warning: AImathPPhi2Clean/PeriodicFourierContinuumTail.lean:91:15: This simp argument is unused:
-  Complex.star_def
-
-Hint: Omit it from the simp argument list.
-  [apply] simp only [Complex.norm_conj, Complex.norm_of_nonneg hD.le]
-
-Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8943/8952] Built AImathPPhi2Clean.NelsonFixedVolume (2.3s)
+✔ [8935/8952] Built AImathPPhi2Clean.PPhi2Wick (7.8s)
+✔ [8936/8952] Built AImathPPhi2Clean.ContinuumMoment (7.8s)
+✔ [8937/8952] Built AImathPPhi2Clean.Wick (7.9s)
+✔ [8938/8952] Built AImathPPhi2Clean.LatticeGaussianTransfer (7.9s)
+✔ [8939/8952] Built AImathPPhi2Clean.PeriodicContinuumGaussianWeakLimitInterfaces (7.9s)
+⚠ [8940/8952] Built AImathPPhi2Clean.NelsonFixedVolume (2.7s)
 warning: AImathPPhi2Clean/NelsonFixedVolume.lean:36:4: Try this: 
   letI̵
 
@@ -1369,19 +1359,28 @@ The difference between `let` and `letI` is that `letI` inlines the value.
 But this is not relevant for proofs because of proof irrelevance.
 
 Note: This linter can be disabled with `set_option linter.style.haveILetI false`
-⚠ [8944/8952] Built AImathPPhi2Clean.LatticeCovarianceRepresentation (9.1s)
+✔ [8941/8952] Built AImathPPhi2Clean.PolynomialCoefficientDecay (7.0s)
+✔ [8942/8952] Built AImathPPhi2Clean.SequenceMomentTightness (8.4s)
+⚠ [8943/8952] Built AImathPPhi2Clean.PeriodicFourierContinuumTail (9.0s)
+warning: AImathPPhi2Clean/PeriodicFourierContinuumTail.lean:91:15: This simp argument is unused:
+  Complex.star_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Complex.norm_conj, Complex.norm_of_nonneg hD.le]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8944/8952] Built AImathPPhi2Clean.LatticeCovarianceRepresentation (9.9s)
 warning: AImathPPhi2Clean/LatticeCovarianceRepresentation.lean:79:13: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
 
 Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
-⚠ [8945/8952] Built AImathPPhi2Clean.OSGaussian (3.9s)
+⚠ [8945/8952] Built AImathPPhi2Clean.OSGaussian (4.2s)
 warning: AImathPPhi2Clean/OSGaussian.lean:20:21: Variable name `hσ` is not explicitly referenced.
 
 Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
   [apply] _hσ
 
 Note: This linter can be disabled with `set_option linter.unusedVariables false`
-✔ [8946/8952] Built AImathPPhi2Clean.PolynomialWeakDualBox (4.0s)
-⚠ [8947/8952] Built AImathPPhi2Clean.WickBridge (4.7s)
+⚠ [8946/8952] Built AImathPPhi2Clean.WickBridge (4.6s)
 warning: AImathPPhi2Clean/WickBridge.lean:32:8: This simp argument is unused:
   map_mul
 
@@ -1423,7 +1422,8 @@ Hint: Omit it from the simp argument list.
   [apply] simp only [pow_one, mul_comp, X_comp]
 
 Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
-⚠ [8948/8952] Built AImathPPhi2Clean.PeriodicHMinusThreeTopologyBorel (7.8s)
+✔ [8947/8952] Built AImathPPhi2Clean.PolynomialWeakDualBox (4.7s)
+⚠ [8948/8952] Built AImathPPhi2Clean.PeriodicHMinusThreeTopologyBorel (6.8s)
 warning: AImathPPhi2Clean/PeriodicHMinusThreeTopologyBorel.lean:53:2: Try this: 
   letI̵
 
@@ -1480,7 +1480,7 @@ The difference between `let` and `letI` is that `letI` inlines the value.
 But this is not relevant for proofs because of proof irrelevance.
 
 Note: This linter can be disabled with `set_option linter.style.haveILetI false`
-✔ [8949/8952] Built AImathPPhi2Clean.PolynomialMomentTightness (5.0s)
-✔ [8950/8952] Built AImathPPhi2Clean.BasisMomentBridge (4.7s)
-✔ [8951/8952] Built AImathPPhi2Clean (4.3s)
+✔ [8949/8952] Built AImathPPhi2Clean.PolynomialMomentTightness (5.1s)
+✔ [8950/8952] Built AImathPPhi2Clean.BasisMomentBridge (4.8s)
+✔ [8951/8952] Built AImathPPhi2Clean (4.0s)
 Build completed successfully (8952 jobs).
