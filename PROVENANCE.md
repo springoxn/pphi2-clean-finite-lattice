@@ -66,6 +66,31 @@ boundary. Exact raw complex mode identities and sharp paper constants are not
 substituted for the formal all-N bound actually used by the final theorem.
 The optional SymPy probe is a bounded check and is not theorem-level evidence.
 
+## Five-dimensional actual-source H-minus-three endpoint
+
+The independent 5D theorem project is published as a reproducible archive at
+`paper/PERIODIC_GAUSSIAN_5D_HMINUS3/periodic_gaussian_5d_hminus3_endpoint.zip`.
+Its SHA-256 is `3424b3573469c4f894efdfc911922a6348fb9e15f3302de0c56a047a460c06b`.
+The archive includes the full Lean source tree, pinned Lake configuration and
+lockfile, source-hash manifest, a typed endpoint contract, and the successful
+build and axiom transcripts. The theorem is
+`Pphi2Clean.Continuum.periodic5DFixedVolume_weak_tendsto_gaussianTarget`.
+
+This project pins Lean `leanprover/lean4:v4.34.0-rc2` (commit
+`6a10ac8c22beadecabdbb0919c2b50214762f91d`) and Mathlib commit
+`852d20a84581aeba8527bd01d0be361d8c0e71c0`. The queried endpoint footprint is
+exactly `{propext, Classical.choice, Quot.sound}`; the 5D source has no `sorry`
+or declared `axiom`. The published transcript is also available at
+`audit/periodic5d_hminus3_endpoint.log`.
+
+The five-dimensional source is the physical `a^5` raw atomic lift, not a higher-
+dimensional auxiliary slice. Its uniform H^-3 tail, compact containment, all
+finite real Fourier-family resolvent Gaussian marginals, uniqueness and full
+sequence weak convergence are documented in
+`paper/PERIODIC_GAUSSIAN_5D_HMINUS3/inputs/periodic5d_hminus3_endpoint.md`.
+The endpoint proves all finite Fourier-family Gaussian laws, not a separate
+infinite-dimensional `IsGaussian` predicate.
+
 ## Original finite-lattice archive
 
 | Field | Value |

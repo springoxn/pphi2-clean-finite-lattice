@@ -37,6 +37,35 @@ python verify.py
 The endpoint contract was executed with Lean `v4.34.0-rc2`; its queried theorem
 axioms are exactly `propext`, `Classical.choice`, and `Quot.sound`.
 
+## Five-dimensional actual-source H-minus-three limit
+
+**[Download the complete pinned Lean project and audit bundle](paper/PERIODIC_GAUSSIAN_5D_HMINUS3/periodic_gaussian_5d_hminus3_endpoint.zip)** ·
+[Proof and scope notes](paper/PERIODIC_GAUSSIAN_5D_HMINUS3/inputs/periodic5d_hminus3_endpoint.md) ·
+[Typed theorem and axiom transcript](audit/periodic5d_hminus3_endpoint.lean)
+
+For fixed `L > 0` and `mass > 0`, set `N = n+1` and `a = L/N`. The actual
+five-dimensional lattice source uses physical amplitude `a^5`; its laws converge
+weakly in the weighted Fourier H^-3 completion. An explicit expected H^-3 Fourier
+tail bound is uniform in `N` and tends to zero with the frequency cutoff. The
+proof builds compact containment from a stronger H^-11/4 energy bound and a compact
+embedding, identifies every finite real Fourier-family marginal with the centered
+five-dimensional massive-resolvent Gaussian law, and proves uniqueness and
+full-sequence convergence.
+
+The target is constructed from the actual source laws. This endpoint does not
+assert a separate infinite-dimensional `IsGaussian` predicate or an isomorphism
+to an external distribution-space library. It is an independent pinned Lean
+project bundle: extract it to a clean directory and run:
+
+```sh
+lake exe cache get
+python REPRODUCE.py
+```
+
+The bundle pins Lean `v4.34.0-rc2` and Mathlib commit
+`852d20a84581aeba8527bd01d0be361d8c0e71c0`. Its SHA-256 is recorded in
+`PROVENANCE.md`; the repository manifest covers the published bundle and evidence.
+
 ## Article connecting the two- and four-dimensional proofs
 
 **[Read the PDF](paper/PERIODIC_GAUSSIAN_DIMENSION_BRIDGE/periodic_gaussian_dimension_bridge.pdf)** ·
