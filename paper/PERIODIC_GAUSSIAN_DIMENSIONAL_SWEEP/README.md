@@ -7,6 +7,7 @@ This article combines the dimension-uniform Fourier proof for the actual periodi
 - Sections: `sections/`
 - Claim-to-evidence ledger: Appendix A
 - Source/PDF audit: `audit/audit.py`
+- Audit record: `audit/AUDIT.md`
 - Standalone pinned Lean project for `d = 122409`: `../../projects/D122409_RAW_GAUSSIAN/`
 
 ## Build and audit the article
