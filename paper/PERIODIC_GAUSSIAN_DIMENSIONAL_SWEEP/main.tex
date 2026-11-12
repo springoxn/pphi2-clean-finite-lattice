@@ -1,0 +1,38 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue]{hyperref}
+\renewcommand{\sfdefault}{\rmdefault}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}\newcommand{\E}{\mathbb E}
+\newcommand{\T}{\mathbb T}\newcommand{\Law}{\operatorname{Law}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\Hh}[1]{H^{-#1}_{\mathrm{Fourier}}}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\evidence}[1]{\par\smallskip\noindent\emph{Evidence boundary.} #1\par\smallskip}
+\emergencystretch=2em
+\title[Periodic raw Gaussian limits across dimensions]{Periodic Raw Atomic Gaussian Limits Across Dimensions:\\Dimension-Uniform Analysis and Lean Instances at $d=2$--$5$ and $d=122409$}
+\author{Yj Zheng}
+\date{November 12, 2026}
+\subjclass[2020]{60G15, 60B10, 68V15}
+\keywords{periodic Gaussian field, raw atomic lift, negative Sobolev space, weak convergence, Lean 4, formal verification}
+\hypersetup{pdftitle={Periodic Raw Atomic Gaussian Limits Across Dimensions},pdfauthor={Yj Zheng},pdfsubject={Dimension-uniform analytic proof and fixed-dimensional Lean endpoints},pdfkeywords={periodic Gaussian field, weak convergence, negative Sobolev space, Lean 4}}
+\begin{document}
+\begin{abstract}
+We study the fixed-volume continuum limit of the actual atomic lift of a massive periodic lattice Gaussian field. A Fourier argument proves, for every integer dimension $d\geq1$ and every $s>d/2$, weak convergence in a weighted periodic Fourier realization of $H^{-s}$. We then separate this dimension-uniform analytic theorem from the dimension-specific Lean endpoints available in the public release: dimensions two through five, and the exceptional fixed dimension $d=122409$. The latter is an unconditional whole-sequence theorem for the actual finite-source pushforwards in $H^{-61206}$, with compactness supplied by a stronger $H^{-61205}$ energy estimate. Dimension-parameterized Lean lemmas establish weight summability and comparison facts, but the full convergence theorem is not parameterized by $d$. We record the source normalization, carrier conventions, target identification, proof dependencies, reproducibility commands, and explicit exclusions. In particular, no arbitrary-dimensional Lean convergence theorem, interacting limit, infinite-volume limit, or separate infinite-dimensional Gaussian predicate is claimed.
+\end{abstract}
+\maketitle
+\tableofcontents
+\input{sections/01-introduction}
+\input{sections/02-model}
+\input{sections/03-general-theorem}
+\input{sections/04-formal-endpoints}
+\input{sections/05-evidence}
+\appendix
+\input{sections/06-evidence-ledger}
+\input{sections/07-references}
+\end{document}

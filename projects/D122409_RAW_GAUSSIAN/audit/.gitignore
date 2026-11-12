@@ -1,0 +1,3 @@
+# Retain the pinned proof evidence alongside its source manifest.
+!build.log
+!EndpointContract122409.log

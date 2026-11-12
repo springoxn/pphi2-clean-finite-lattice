@@ -1,9 +1,17 @@
 # pphi2-clean-finite-lattice
 
 Lean 4 proofs of finite periodic-lattice Gaussian fields and their fixed-volume
-continuum limits in **two, three and four dimensions**. The repository name retains
-its original two-dimensional history; the four-dimensional result is a massive
-**free-field** limit, not an interacting four-dimensional construction.
+continuum limits in **two, three, four, and five dimensions**. The repository name retains
+its original two-dimensional history; all stated limits are massive **free-field**
+limits, not interacting constructions.
+
+## Dimensional synthesis: 2D through 5D and the fixed 122409D instance
+
+**[Read the article PDF](paper/PERIODIC_GAUSSIAN_DIMENSIONAL_SWEEP/periodic_gaussian_dimensional_sweep.pdf)** ·
+[LaTeX source and build/audit instructions](paper/PERIODIC_GAUSSIAN_DIMENSIONAL_SWEEP/) ·
+[Standalone pinned 122409D Lean project](projects/D122409_RAW_GAUSSIAN/)
+
+The article gives an analytic raw-lift convergence proof for every fixed integer dimension `d >= 1` and target order `s > d/2`, then distinguishes it from the Lean endpoints actually released at `d = 2, 3, 4, 5, 122409`. The arbitrary-dimensional convergence proof is **not** a generic Lean theorem. The included 122409D endpoint converges in weighted Fourier H^-61206 with stronger H^-61205 source energy; its Lean toolchain and Mathlib revision are pinned.
 
 ## Three-dimensional H-minus-three endpoint and combined article
 

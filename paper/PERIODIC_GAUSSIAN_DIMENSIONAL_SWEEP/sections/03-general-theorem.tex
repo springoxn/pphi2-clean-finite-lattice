@@ -1,0 +1,32 @@
+\section{Dimension-uniform analytic theorem}\label{sec:general}
+\begin{theorem}[Raw-lift convergence in every fixed dimension]\label{thm:general}
+Fix an integer $d\geq1$, $L>0$, $m>0$, and $s>d/2$. Let $\mu_N$ be the law of the actual raw lift $X_N$ in the carrier $\Hh{s}(\T_L^d)$. Then there is a unique Borel probability measure $\gamma_{d,L,m}$ on that carrier with centered periodic-resolvent Gaussian finite Fourier marginals, and
+\[
+ \mu_N\Longrightarrow\gamma_{d,L,m}\qquad(N=n+1\to\infty).
+\]
+\end{theorem}
+\begin{proof}
+Choose $r$ with $d/2<r<s$ and write $\rho(k)=\norm{k}_\infty$. The number of frequencies on the shell $\rho(k)=q$ is $(2q+1)^d-(2q-1)^d=O_d(q^{d-1})$, so $S_{d,r}=\sum_{k\in\Z^d}(1+\rho(k))^{-2r}<\infty$. By Lemma~\ref{lem:mode} and Tonelli,
+\[
+ \sup_N\E\norm{X_N}_{-r}^2\leq L^d m^{-2}S_{d,r}<\infty.
+\]
+Every finite atomic lift has bounded periodic Fourier coefficients, and hence lies in $H^{-r}$ for $r>d/2$. The inclusion from the stronger coefficient norm $H^{-r}$ into $H^{-s}$ has compact closure on bounded sets: if $P_M$ keeps only $r(k)\leq M$, then
+\[
+ \norm{z-P_Mz}_{-s}^2\leq(1+M)^{-2(s-r)}\norm{z}_{-r}^2.
+\]
+Each $P_M$ has finite-dimensional range. Thus stronger-energy balls have compact closure in the target carrier, and Markov's inequality gives tightness of $(\mu_N)$.
+
+To specify the limit, choose one representative of each pair $\{k,-k\}$, and take independent standard real Gaussians $\xi_0,\xi_k,\eta_k$. Set
+\[
+ Z(0)=L^{d/2}m^{-1}\xi_0,\qquad
+ Z(k)=\frac{L^{d/2}}{\sqrt{2\lambda_d(k)}}(\xi_k+i\eta_k),\qquad Z(-k)=\overline{Z(k)}.
+\]
+Since $\E\norm{Z}_{-s}^2=L^d\sum_kw_s(k)/\lambda_d(k)<\infty$, the weighted sequence is almost surely in the carrier and defines a Borel random element. Its finite real Fourier families are centered Gaussian with the stated resolvent covariance.
+
+For any fixed finite family of real sine and cosine evaluations, the lattice vector and its limit are centered Gaussian. Character orthogonality gives the exact joint covariance, and for each fixed mode $k$ one has $\lambda_{N,d}(k)\to\lambda_d(k)$. For a fixed finite set of frequencies, distinct residue classes remain distinct modulo $N$ once $N$ is sufficiently large; the finite covariance matrices therefore converge entrywise to those of $Z$, and the corresponding finite-dimensional Gaussian laws converge. Tightness and Prokhorov's theorem yield a weakly convergent subsubsequence from every subsequence~\cite{billingsley}. By the continuous mapping theorem, every subsequential limit has the same finite real Fourier marginals as $Z$. Finite coordinate cylinders generate the Borel sigma-algebra of the separable weighted $\ell^2$ carrier, so these marginals determine the measure uniquely. All subsequential limits are therefore $\gamma_{d,L,m}$, which implies convergence of the full sequence.
+\end{proof}
+
+\subsection{Why the raw lift needs $s>d/2$}
+The limiting field is smoother than the finite raw approximants: the extra resolvent factor yields finite expected $H^{-s}$ norm already for $s>d/2-1$. The raw finite atomic lift, by contrast, has a frequency-periodic coefficient sequence. A nonzero periodic sequence does not decay at infinity, so it is generally not in $H^{-s}$ at or below the summability threshold $s=d/2$. Thus the theorem's carrier condition is adapted to the actual approximants, not just to the limit law.
+
+\evidence{The preceding proof is a conventional mathematical proof within this article. Its finite-dimensional character computations and summability estimates are stated for variable $d$, but the cited Lean convergence theorems remain the finite list in Section~\ref{sec:formal}. No source file is used to claim a universal Lean theorem.}

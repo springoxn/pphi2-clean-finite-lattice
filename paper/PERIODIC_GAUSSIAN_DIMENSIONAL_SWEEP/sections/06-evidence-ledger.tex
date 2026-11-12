@@ -1,0 +1,25 @@
+\section{Claim-to-evidence ledger}\label{app:ledger}
+\begin{table}[ht]
+\centering\footnotesize
+\caption{Evidence ledger for the article's theorem-level claims.}\label{tab:ledger}
+\begin{tabular}{@{}p{0.28\textwidth}p{0.37\textwidth}p{0.27\textwidth}@{}}
+\toprule
+Claim & Evidence location & Classification / boundary\\
+\midrule
+Uniform bound on one raw Fourier mode & Lemma~\ref{lem:mode}; finite character diagonalization & Analytic derivation in this paper\\
+Summability for $s>d/2$ & Max-norm shell cardinality and convergent power series & Analytic proof in this paper\\
+Tightness of actual laws & Stronger $H^{-r}$ moment, compact inclusion and Markov & Analytic proof in this paper\\
+Identification of the limit & Finite Gaussian covariance convergence and Borel cylinder uniqueness & Analytic proof in this paper\\
+2D endpoint in $H^{-3}$ & Public Lean modules and native contracts & Lean formalization; not rerun by this article\\
+3D endpoint in $H^{-3}$ & Published endpoint contract and 3D overlay & Lean formalization; finite real marginals identify the target\\
+4D endpoint in $H^{-4}$ & Public endpoint modules and release contract & Lean formalization\\
+5D endpoint in $H^{-3}$ & Pinned source archive and typed theorem contract & Lean formalization in standalone project\\
+$122409$ endpoint in $H^{-61206}$ & Included standalone project and queried endpoint contract & Lean formalization at this single fixed dimension\\
+Arbitrary-$d$ Lean weak convergence & No such endpoint is included or claimed & Explicitly not established by this article\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the high-dimensional row, \code{source_manifest.json} binds the included Lean sources and retained build/contract logs; the adjacent contract transcript records signatures and axiom footprints. The exponent audit is elementary: $2\cdot61206=122412$, $2\cdot61205=122410$, and both Sobolev orders exceed $122409/2$ where required. The optional fractional target assessment at $61204.75$ does not change the theorem row.
+
+\evidence{The audit status attached to each row is deliberately not collapsed into a single "verified" label. In particular, the paper-level dimension-uniform proof and the fixed-dimensional Lean theorems are different evidence classes.}

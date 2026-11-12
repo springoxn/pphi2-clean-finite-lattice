@@ -1,0 +1,185 @@
+Pphi2Clean.Dim122409Gaussian.fractionalSourceWeight_summable : Summable fun k => (1 + ‖k‖) ^ (-2 * (61204 + 3 / 4))
+Pphi2Clean.Dim122409Gaussian.fractionalSource_to_61205_weight_ratio (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  (1 + ‖k‖) ^ (-2 * 61205) = (1 + ‖k‖) ^ (-(1 / 2)) * (1 + ‖k‖) ^ (-2 * (61204 + 3 / 4))
+Pphi2Clean.Dim122409Gaussian.actualTarget_fixedVolume_weak_tendsto_gaussianLimit (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) :
+  Filter.Tendsto (Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume L mass hL hmass) Filter.atTop
+    (nhds (Pphi2Clean.Dim122409Gaussian.actualTargetGaussianLimit L mass hL hmass))
+Pphi2Clean.Dim122409Gaussian.actualTarget_fixedVolume_weak_limit_existsUnique (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) :
+  ∃! ν,
+    Filter.Tendsto (Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume L mass hL hmass)
+        Filter.atTop (nhds ν) ∧
+      ∀ (s : Finset Pphi2Clean.Dim122409Gaussian.Index),
+        ν.map (Pphi2Clean.Dim122409Gaussian.targetFiniteCoordinates s) =
+          Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit s L mass hL hmass
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianLimit_finite_marginal (s : Finset Pphi2Clean.Dim122409Gaussian.Index)
+  (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass) :
+  (Pphi2Clean.Dim122409Gaussian.actualTargetGaussianLimit L mass hL hmass).map
+      (Pphi2Clean.Dim122409Gaussian.targetFiniteCoordinates s) =
+    Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit s L mass hL hmass
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianLimit_unique_of_finite_marginals (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (ν : MeasureTheory.ProbabilityMeasure ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion)
+  (hν :
+    ∀ (s : Finset Pphi2Clean.Dim122409Gaussian.Index),
+      ν.map (Pphi2Clean.Dim122409Gaussian.targetFiniteCoordinates s) =
+        Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit s L mass hL hmass) :
+  ν = Pphi2Clean.Dim122409Gaussian.actualTargetGaussianLimit L mass hL hmass
+Pphi2Clean.Dim122409Gaussian.actualTarget_fixedVolume_finite_marginal_tendsto
+  (s : Finset Pphi2Clean.Dim122409Gaussian.Index) (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass) :
+  Filter.Tendsto
+    (fun n =>
+      (Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume L mass hL hmass n).map
+        (Pphi2Clean.Dim122409Gaussian.targetFiniteCoordinates s))
+    Filter.atTop (nhds (Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit s L mass hL hmass))
+Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit_isGaussian (s : Finset Pphi2Clean.Dim122409Gaussian.Index)
+  (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass) :
+  ProbabilityTheory.IsGaussian ↑(Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit s L mass hL hmass)
+Pphi2Clean.Dim122409Gaussian.target_cylinder_sigma_eq_borel :
+  MeasurableSpace.generateFrom Pphi2Clean.Dim122409Gaussian.targetMeasurableCylinders =
+    borel ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion
+'Pphi2Clean.Dim122409Gaussian.actualTarget_fixedVolume_weak_tendsto_gaussianLimit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualTarget_fixedVolume_weak_limit_existsUnique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualTargetGaussianLimit_finite_marginal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.targetFiniteGaussianLimit_isGaussian' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume_tight (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (ε : ℝ) :
+  0 < ε →
+    ∃ K,
+      IsCompact K ∧
+        ∀ (n : ℕ),
+          ↑(Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume L mass hL hmass n) Kᶜ ≤
+            ENNReal.ofReal ε
+Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume_prokhorov_subsequence (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (ns : ℕ → ℕ) :
+  ∃ ms ν,
+    StrictMono ms ∧
+      Filter.Tendsto
+        (fun k => Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume L mass hL hmass (ns (ms k)))
+        Filter.atTop (nhds ν)
+Pphi2Clean.Dim122409Gaussian.isCompact_targetEnergyBall (M : ℝ) (hM : 0 ≤ M) :
+  IsCompact (Pphi2Clean.Dim122409Gaussian.targetEnergyBall M)
+'Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume_tight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume_prokhorov_subsequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift (N : ℕ) [NeZero N] (a L : ℝ) (hL : 0 < L) :
+  Pphi2Clean.Dim122409Gaussian.FiniteConfig N → Pphi2Clean.Dim122409Gaussian.Index → ℂ
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hL : 0 < L) : MeasureTheory.Measure ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion
+Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hL : 0 < L) : MeasureTheory.ProbabilityMeasure ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion
+Pphi2Clean.Dim122409Gaussian.actualTargetProbabilityMeasure_fixedVolume (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass)
+  (n : ℕ) : MeasureTheory.ProbabilityMeasure ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion
+Pphi2Clean.Dim122409Gaussian.measurable_actualTargetLift (N : ℕ) [NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L) :
+  Measurable (Pphi2Clean.Dim122409Gaussian.actualTargetLift N a L ha hL)
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_apply (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hL : 0 < L) (s : Set ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion) (hs : MeasurableSet s) :
+  (Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure N a mass L ha hmass hL) s =
+    (Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure
+        (Pphi2Clean.Continuum.numberedLatticeCovarianceGJ 122409 N a mass ha hmass))
+      (Pphi2Clean.Dim122409Gaussian.actualTargetLift N a L ha hL ⁻¹' s)
+Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail_fixedVolume_tendsto_zero (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (n : ℕ) :
+  Filter.Tendsto
+    (fun R => Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail (n + 1) R (L / ↑(n + 1)) mass L ⋯ hmass hL)
+    Filter.atTop (nhds 0)
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_integral_tail_eq (N R : ℕ) [NeZero N] (a mass L : ℝ)
+  (ha : 0 < a) (hmass : 0 < mass) (hvol : a * ↑N = L) (hL : 0 < L) :
+  ∫ (x : ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion),
+      ∑' (k : Pphi2Clean.Dim122409Gaussian.Index),
+        if ↑R < ‖k‖ then ‖↑x k‖ ^ 2
+        else 0 ∂Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure N a mass L ha hmass hL =
+    Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail N R a mass L ha hmass hL
+'Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_integral_tail_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail_fixedVolume_uniform (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass)
+  (ε : ℝ) (hε : 0 < ε) :
+  ∃ R, ∀ (n : ℕ), Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail (n + 1) R (L / ↑(n + 1)) mass L ⋯ hmass hL < ε
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_isProbability (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hL : 0 < L) :
+  MeasureTheory.IsProbabilityMeasure (Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure N a mass L ha hmass hL)
+Pphi2Clean.Dim122409Gaussian.actualTargetLift_norm_sq (N : ℕ) [NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L)
+  (ξ : Pphi2Clean.Dim122409Gaussian.FiniteConfig N) (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  ‖↑(Pphi2Clean.Dim122409Gaussian.actualTargetLift N a L ha hL ξ) k‖ ^ 2 =
+    Pphi2Clean.Dim122409Gaussian.targetWeight k * ‖Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift N a L hL ξ k‖ ^ 2
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_coordinate_second_moment (N : ℕ) [NeZero N] (a mass L : ℝ)
+  (ha : 0 < a) (hmass : 0 < mass) (hL : 0 < L) (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  ∫ (x : ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion),
+      ‖↑x k‖ ^ 2 ∂Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure N a mass L ha hmass hL =
+    Pphi2Clean.Dim122409Gaussian.targetWeight k *
+      ∫ (ξ : WeakDual ℝ (Fin (Fintype.card (Pphi2Clean.UpstreamLattice.FinLatticeSites 122409 N)) → ℝ)),
+        ‖Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift N a L hL ξ k‖ ^
+          2 ∂Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure
+          (Pphi2Clean.Continuum.numberedLatticeCovarianceGJ 122409 N a mass ha hmass)
+Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_coordinate_integrable_sq (N : ℕ) [NeZero N] (a mass L : ℝ)
+  (ha : 0 < a) (hmass : 0 < mass) (hL : 0 < L) (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  MeasureTheory.Integrable (fun x => ‖↑x k‖ ^ 2)
+    (Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure N a mass L ha hmass hL)
+'Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail_fixedVolume_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_coordinate_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualTargetGaussianMeasure_coordinate_integrable_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift_integral_norm_sq_le (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hvol : a * ↑N = L) (hL : 0 < L) (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  ∫ (ξ : WeakDual ℝ (Fin (Fintype.card (Pphi2Clean.UpstreamLattice.FinLatticeSites 122409 N)) → ℝ)),
+      ‖Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift N a L hL ξ k‖ ^
+        2 ∂Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure
+        (Pphi2Clean.Continuum.numberedLatticeCovarianceGJ 122409 N a mass ha hmass) ≤
+    2 * (mass⁻¹ ^ 2 * L ^ 122409)
+Pphi2Clean.Dim122409Gaussian.actualExpectedRawEnergy_le (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hvol : a * ↑N = L) (hL : 0 < L) :
+  Pphi2Clean.Dim122409Gaussian.actualExpectedRawEnergy N a mass L ha hmass hL ≤
+    2 * (mass⁻¹ ^ 2 * L ^ 122409) *
+      ∑' (k : Pphi2Clean.Dim122409Gaussian.Index), Pphi2Clean.Dim122409Gaussian.energyWeight k
+Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail_le (N R : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hvol : a * ↑N = L) (hL : 0 < L) :
+  Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail N R a mass L ha hmass hL ≤
+    (1 + ↑R) ^ (-2) *
+      (2 * (mass⁻¹ ^ 2 * L ^ 122409) *
+        ∑' (k : Pphi2Clean.Dim122409Gaussian.Index), Pphi2Clean.Dim122409Gaussian.energyWeight k)
+Pphi2Clean.Dim122409Gaussian.physicalRawLiftDim_eq_site_sum (d N : ℕ) [NeZero N] (a L : ℝ) (hL : 0 < L)
+  (ξ : Pphi2Clean.Dim122409Gaussian.ConfigDim d N) (k : Fin d → ℤ) :
+  Pphi2Clean.Dim122409Gaussian.physicalRawLiftDim d N a L hL ξ k =
+    Pphi2Clean.Dim122409Gaussian.rawAtomicLiftDim d N a L (Pphi2Clean.Dim122409Gaussian.rawFieldDim ξ) k
+Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift_eq_rawAtomicFourierLift (N : ℕ) [NeZero N] (a L : ℝ) (hL : 0 < L)
+  (ξ : Pphi2Clean.Dim122409Gaussian.FiniteConfig N) (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift N a L hL ξ k =
+    Pphi2Clean.Dim122409RawLift.rawAtomicFourierLift N a L (Pphi2Clean.Dim122409Gaussian.rawLiftSourceField122409 ξ) k
+Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift_target_weight_summable (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hL : 0 < L) (ξ : Pphi2Clean.Dim122409Gaussian.FiniteConfig N) :
+  Summable fun k =>
+    Pphi2Clean.Dim122409Gaussian.targetWeight k * ‖Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift N a L hL ξ k‖ ^ 2
+Pphi2Clean.Dim122409Gaussian.actualTargetLift (N : ℕ) [NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L)
+  (ξ : Pphi2Clean.Dim122409Gaussian.FiniteConfig N) : ↥Pphi2Clean.Dim122409Gaussian.TargetCompletion
+Pphi2Clean.Dim122409Gaussian.actualTargetLift_apply (N : ℕ) [NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L)
+  (ξ : Pphi2Clean.Dim122409Gaussian.FiniteConfig N) (k : Pphi2Clean.Dim122409Gaussian.Index) :
+  ↑(Pphi2Clean.Dim122409Gaussian.actualTargetLift N a L ha hL ξ) k =
+    ↑√(Pphi2Clean.Dim122409Gaussian.targetWeight k) * Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift N a L hL ξ k
+Pphi2Clean.Dim122409Gaussian.continuous_actualTargetLift (N : ℕ) [NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L) :
+  Continuous (Pphi2Clean.Dim122409Gaussian.actualTargetLift N a L ha hL)
+'Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift_eq_rawAtomicFourierLift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualRawAtomicLift_target_weight_summable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualTargetLift_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.continuous_actualTargetLift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Dim122409Gaussian.actualExpectedTargetTail_le' depends on axioms: [propext, Classical.choice, Quot.sound]

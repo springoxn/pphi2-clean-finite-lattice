@@ -1,0 +1,42 @@
+\section{Formalization, audit, and limitations}\label{sec:evidence}
+The Lean and paper arguments have distinct validation roles. A successful Lean build establishes that the selected source files elaborate under their pinned toolchain and dependencies. A theorem contract queries exact declarations and their axiom footprints. A TeX build and PDF audit establish document production and artifact integrity. None of those checks, alone, substitutes for the other two forms of reasoning.
+
+\subsection{Pinned 122409 project}
+The standalone project in \code{projects/D122409_RAW_GAUSSIAN} pins Lean \code{v4.34.0-rc2}; the exact Mathlib revision is pinned in \code{lake-manifest.json}. Its successful build command targets \code{ActualWeakLimit122409}, and the endpoint contract is \code{EndpointContract122409.lean}. The supplied build log and endpoint transcript are preserved. The endpoint theorem and queried auxiliary declarations report only Lean/Mathlib foundational axioms \code{propext}, \code{Classical.choice}, and \code{Quot.sound}; there is no project axiom or \code{sorryAx} in the queried endpoint dependency contracts. This statement is limited to the checked declarations, not a theorem about every possible imported declaration in Mathlib.
+
+\subsection{Reproduction and evidence classes}
+From the repository root, run:
+\begin{verbatim}
+cd projects/D122409_RAW_GAUSSIAN
+python audit/verify_manifest.py
+lake build AImathPPhi2Clean.ActualWeakLimit122409
+lake env lean EndpointContract122409.lean
+\end{verbatim}
+The audit manifest binds every included Lean source, project configuration file and the retained build/contract logs by SHA-256. The contract prints endpoint signatures and calls \code{#print axioms}. To rebuild this article, run:
+\begin{verbatim}
+python paper/PERIODIC_GAUSSIAN_DIMENSIONAL_SWEEP/build.py
+\end{verbatim}
+The script compiles with Tectonic and then independently inspects the resulting PDF.
+
+\begin{table}[ht]
+\centering\small
+\caption{Evidence roles for the principal claims.}\label{tab:evidence}
+\begin{tabular}{@{}p{0.30\textwidth}p{0.29\textwidth}p{0.31\textwidth}@{}}
+\toprule
+Claim & Primary evidence & Independent or artifact check\\
+\midrule
+$d$-uniform analytic convergence & Proof in Section~\ref{sec:general} & Shell-count and covariance derivations are exposed; not a Lean theorem\\
+2D--5D Lean endpoints & Existing public Lean declarations and pinned 5D archive & Their native typed contracts and build records; not rebuilt by this article's audit\\
+$d=122409$ actual-source convergence & Included Lean source and endpoint contract & Recorded successful pinned build, source manifest, and axiom transcript\\
+Real-exponent weight threshold & Exact comparison $61205>122409/2$ & Independent arithmetic check in the article audit\\
+PDF delivery & Tectonic output & PyMuPDF text extraction, page-bound checks, title/scope assertions, embedded-font inspection\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Limitations}
+All limits are at fixed positive physical volume and positive mass. The analytic theorem and formal endpoints do not establish an infinite-volume limit, an interacting field, reflection positivity, or Osterwalder--Schrader reconstruction. The $122409$ Lean proof does not imply that the same Lean development works for arbitrary $d$. The dimension-parameterized summability lemmas address only weight comparison/summability inputs. The general weak-convergence statement is supported here by the written Fourier proof, with its analytic steps explicitly outside the Lean evidence claim.
+
+The low-dimensional modules and 5D source bundle are preserved releases rather than dependencies of the included $122409$ Lake project. Reproducing all of their proofs requires following the versioned commands in those artifacts. The article's audit checks its own text and PDF and the integrity of the included $122409$ project; it does not re-execute the independent 2D--5D Lake builds.
+
+\evidence{The stated axiom footprint and successful build are reports about the included pinned evidence files. The PDF audit is not a proof checker. No numerical experiment is used to support the infinite-dimensional convergence theorem.}

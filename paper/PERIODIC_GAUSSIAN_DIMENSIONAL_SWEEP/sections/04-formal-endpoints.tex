@@ -1,0 +1,46 @@
+\section{Formalized dimensions and the large-dimensional instance}\label{sec:formal}
+The Lean endpoints below are separate theorems. The Sobolev index in the table is the target index; the energy column records the stronger exponent used for compact containment, not a second convergence endpoint.
+
+\begin{table}[ht]
+\centering\small
+\caption{Whole-sequence Lean endpoints in the public release.}\label{tab:endpoints}
+\begin{tabular}{@{}rllll@{}}
+\toprule
+$d$ & Target carrier & Strong energy & Source artifact & Status of claim\\
+\midrule
+2 & $H^{-3}$ & $H^{-2}$ & Native project modules & Lean endpoint\\
+3 & $H^{-3}$ & $H^{-2}$ & Native endpoint overlay & Lean endpoint\\
+4 & $H^{-4}$ & $H^{-3}$ & Native project modules & Lean endpoint\\
+5 & $H^{-3}$ & $H^{-11/4}$ & Pinned source archive & Lean endpoint\\
+122409 & $H^{-61206}$ & $H^{-61205}$ & Included standalone project & Lean endpoint\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In every row, $L>0$ and $m>0$ are the only analytic hypotheses, $N=n+1$, and the source is the actual raw atomic Gaussian lift. The precise coefficient weights, source pushforwards, and target-identification conventions differ between the dimension-specific projects; the table is a summary, not a claim that all five use one common Lean carrier definition. The public 2D--4D root includes its endpoint theorems and audit contracts. The complete 5D pinned project is linked from the public release README as a source archive. The $122409$ project is copied into this repository at \code{projects/D122409_RAW_GAUSSIAN}.
+
+\subsection{The 122409-dimensional theorem}
+Put $d=122409$ and let the frequency index be $k:\mathrm{Fin}(122409)\to\Z$, equipped in Lean with the Pi supremum norm. The target weight and completion are
+\[
+ w_{61206}(k)=(1+\norm{k})^{-122412},\qquad \mathcal X=\ell^2(\mathrm{Fin}(122409)\to\Z;\C),
+\]
+where the physical coefficient $c(k)$ is encoded as $\sqrt{w_{61206}(k)}c(k)$. The source-energy weight is $(1+\norm{k})^{-122410}$. The strict inequalities
+\[
+ 61206>122409/2,\qquad 61205>122409/2
+\]
+place both exponents on the summable side. The Lean project proves summability by a dimension-parameterized product majorant and then specializes the actual-source arguments and final endpoint to exactly $122409$.
+
+\begin{theorem}[Fixed $122409$-dimensional raw-lift limit]\label{thm:122409}
+For each $L>0$ and $m>0$, the actual fixed-volume raw atomic Gaussian probability measures converge weakly, as $N=n+1\to\infty$, on the weighted Fourier $H^{-61206}$ completion to a unique Borel probability measure. Every finite real cosine/sine coordinate marginal of the limit is the centered periodic massive-resolvent Gaussian law.
+\end{theorem}
+
+The exact declaration name and elaborated type are preserved in the included endpoint contract, which also queries the kernel axiom footprint. The principal theorem is defined in module \code{ActualWeakLimit122409}. Its proof chain includes measurability of the actual lift, the actual Gaussian pushforward, coordinate moments and the integral-series tail identity; compact closures of stronger-energy sublevels; uniform tightness and Prokhorov extraction; the normalized bridge from physical Fourier families to the target's weighted coordinates; convergence and identification of finite marginals; Borel generation by finite coordinate cylinders; uniqueness; and full-sequence convergence. The limit is selected as a probability measure on the actual target Borel space.
+
+\begin{remark}[Fractional stronger target]
+The project also proves that a source weight with exponent $61204.75$ is summable and that it has a positive decay gap to the $61205$ source-energy weight. This supports a weight-level feasibility assessment for an $H^{-61205}$ target, but does not prove convergence in that stronger target. The completed convergence theorem is in $H^{-61206}$.
+\end{remark}
+
+\subsection{Dimension-free Lean lemmas}
+The project also proves a dimension-parameterized weight-summability lemma for arbitrary natural dimension and real decay parameter $q>1$, together with radial-to-product weight comparisons and one-dimensional axis-factor summability. These are genuinely dimension-generic helper results. They do not assemble a dimension-generic probability measure, compactness argument, finite-marginal limit, or whole-sequence theorem. The top-level convergence theorem is concretely instantiated at $d=122409$; it is not obtained by applying a universal Lean convergence theorem.
+
+\evidence{The exact queried signatures and axiom footprints for the $122409$ declarations are preserved in the included contract transcript. The pinned successful build and source/dependency manifest are in the same project. The 2D--5D theorem signatures and audit transcripts remain in their previously published project artifacts; see the release README and the ledger in Appendix~\ref{app:ledger}.}

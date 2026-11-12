@@ -1,0 +1,51 @@
+\section{Model and Fourier carrier}\label{sec:model}
+For $N\geq1$, write $a=L/N$ and identify lattice sites with $x\in(\Z/N\Z)^d$. The positive operator is
+\[
+ (-\Delta_a f)(x)=a^{-2}\sum_{j=1}^d\bigl(2f(x)-f(x+e_j)-f(x-e_j)\bigr).
+\]
+The source field is the centered real Gaussian vector with covariance
+\[
+ \operatorname{Cov}(\phi_N(x),\phi_N(y))=a^{-d}(m^2-\Delta_a)^{-1}(x,y).
+\]
+The raw lift $X_N$ is defined in the introduction. Its Fourier coefficient, with the physical torus convention, is
+\[
+ c_N(k)=a^d\sum_{x\in(\Z/N\Z)^d}\phi_N(x)e^{-2\pi i k\cdot x/N},\qquad k\in\Z^d.
+\]
+For $r(k)=\norm{k}_\infty=\max_j|k_j|$, set
+\[
+ w_s(k)=(1+r(k))^{-2s},\qquad \norm{c}_{-s}^2=\sum_{k\in\Z^d}w_s(k)|c(k)|^2.
+\]
+The carrier is the closed real subspace $c(-k)=\overline{c(k)}$ of the weighted complex $\ell^2$ completion, represented isometrically by $J_sc=(\sqrt{w_s(k)}c(k))_{k\in\Z^d}$. At each fixed $d$ this max-frequency norm is equivalent to the Euclidean Fourier Sobolev norm: $r(k)^2\leq\sum_jk_j^2\leq d r(k)^2$. The formula above, not the equivalence, is the precise carrier convention used in the Lean projects.
+
+The discrete dispersion and its continuum counterpart are
+\[
+ \lambda_{N,d}(k)=m^2+4a^{-2}\sum_{j=1}^d\sin^2(\pi k_j/N),\qquad
+ \lambda_d(k)=m^2+(2\pi/L)^2\sum_{j=1}^d k_j^2.
+\]
+Because $c_N(k)$ is periodic in each frequency coordinate modulo $N$, its covariance includes all aliases. The limiting real Gaussian Fourier family has
+\[
+ \E|c(k)|^2=\frac{L^d}{\lambda_d(k)},
+\]
+with the conjugacy constraint $c(-k)=\overline{c(k)}$. Equivalently, for real periodic test functions $f,g$ and Fourier coefficients $\widehat f(k)=\int_{[0,L]^d}f(x)e^{-2\pi i k\cdot x/L}\,dx$,
+\[
+ \E[\langle X,f\rangle\langle X,g\rangle]
+ =L^{-d}\sum_{k\in\Z^d}\frac{\overline{\widehat f(k)}\widehat g(k)}{\lambda_d(k)}.
+\]
+
+\begin{lemma}[Uniform mode estimate]\label{lem:mode}
+For each $N\geq1$ and $k\in\Z^d$,
+\[
+ \E|c_N(k)|^2\leq L^d m^{-2}.
+\]
+\end{lemma}
+\begin{proof}
+Diagonalize the periodic lattice operator by characters. The covariance eigenvalues are $a^{-d}\lambda_{N,d}(p)^{-1}$, where $p$ is the residue of $k$ modulo $N$. Orthogonality of the $N^d$ characters and the raw-lift factor $a^d$ give
+\[
+ \E|c_N(k)|^2=\frac{L^d}{\lambda_{N,d}(p)}\leq L^d m^{-2},
+\]
+since every summand in the lattice dispersion is nonnegative. This calculation is finite-dimensional and exact; it retains the source normalization $a^{-d}$.
+\end{proof}
+
+\begin{remark}
+Some machine-checked releases use a deliberately weaker upper bound with a factor $2$ to simplify estimates. The present analytic proof uses the exact character covariance above. The Lean endpoint contracts and their own estimates, not this sharper paper bound, are the authority for claims about what those Lean declarations prove.
+\end{remark}

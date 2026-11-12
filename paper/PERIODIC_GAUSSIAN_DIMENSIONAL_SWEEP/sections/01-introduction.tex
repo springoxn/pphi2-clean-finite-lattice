@@ -1,0 +1,20 @@
+\section{Introduction}\label{sec:intro}
+Let $\T_L^d=(\R/L\Z)^d$ be a periodic box with fixed side length $L>0$. For mesh $a=L/N$, a centered Gaussian field on the periodic lattice $(\Z/N\Z)^d$ is sampled and lifted without interpolation to the atomic distribution
+\[
+ X_N=a^d\sum_{x\in(\Z/N\Z)^d}\phi_N(x)\,\delta_{[ax]},\qquad N=n+1.
+\]
+The normalization is part of the statement: the site covariance is $a^{-d}(m^2-\Delta_a)^{-1}$, where $m>0$ and $\Delta_a$ is the nearest-neighbour periodic Laplacian. This is the raw atomic source, not a piecewise-constant interpolation or a spectral truncation.
+
+The project now has two complementary kinds of result. First, a direct Fourier proof yields a theorem uniform in integer dimension. Second, Lean verifies concrete source-to-target convergence theorems at dimensions $2,3,4,5$ and at $122409$. These are not one dimension-quantified Lean endpoint. Keeping those claims distinct is central: the paper proof explains why the argument works for every $d$, while the theorem contracts and pinned projects state exactly which instances have been kernel-checked.
+
+The unusually large dimension is useful as a stress test of the bookkeeping. At $d=122409$, the target exponent $s=61206$ lies strictly above $d/2=61204.5$, and the stronger source-energy exponent $61205$ also lies above that threshold. The argument still uses the same shell-count and compact-tail mechanism; what changes is that every final convergence endpoint is instantiated at this single dimension.
+
+\subsection{Contributions and scope}
+The article gives: (i) the precise periodic model and weighted Fourier carrier; (ii) a dimension-uniform analytic proof for every integer $d\geq1$ and $s>d/2$; (iii) a comparison table of the published Lean endpoints from two through five dimensions and the $122409$-dimensional endpoint; and (iv) a reproducible evidence ledger binding the new high-dimensional project to its pinned Lean sources and query transcript.
+
+The intended conclusion is weak convergence of probability measures on a separable weighted coefficient completion. It is not an interacting-field result. The finite-dimensional marginals of each limiting measure are centered Gaussian resolvent marginals; we do not promote this to a separately proved global `IsGaussian` predicate. Nor do we claim that all dimensions have been built as one generic Lean theorem.
+
+\subsection{Relation to the existing releases}
+The two-, three-, four-, and five-dimensional results have their own theorem declarations and previously published proof artifacts~\cite{dimensionbridge,threeDimensional,fiveDimensional}. This paper is a synthesis and scope map, not a replacement for those sources. The new $122409$-dimensional Lean project is included under \code{projects/D122409_RAW_GAUSSIAN}; it is pinned independently and imports only its declared Mathlib revision. The existing 5D endpoint remains distributed as a complete pinned source archive, linked from the repository README and listed in the ledger below.
+
+\evidence{The dimension-uniform theorem in Section~\ref{sec:general} is proved analytically in this article. Its generality is not inferred from the finite list of Lean builds. Conversely, the five-dimensional and $122409$-dimensional Lean results are source-specific, whole-sequence theorems; they are not merely numerical checks of the paper argument.}
