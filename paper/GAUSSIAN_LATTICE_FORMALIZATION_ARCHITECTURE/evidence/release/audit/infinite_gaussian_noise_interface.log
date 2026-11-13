@@ -1,0 +1,54 @@
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_map' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_integral_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_memLp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_memLp_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_variance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_variance_scaled' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_independent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_coordinate_cross_moment_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_finsum_integral_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_finsum_variance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_finsum_variance_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_finsum_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_series_L2_hasSum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_series_L2_hasSum_of_abs_summable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_series_L2_norm_le_of_abs_summable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_series_summable_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.GaussianField.gaussianNoiseMeasure_hilbert_series_summable_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

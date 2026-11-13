@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.ProductGaussianLinearMoment
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian_linear_second_moment_bound

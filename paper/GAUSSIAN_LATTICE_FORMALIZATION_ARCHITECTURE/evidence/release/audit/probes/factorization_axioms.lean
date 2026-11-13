@@ -1,0 +1,4 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+open scoped MatrixOrder
+#print axioms Pphi2Clean.Continuum.finiteRealMatrix_factorization_of_posSemidef
+#print axioms Pphi2Clean.Continuum.periodicResolventCovarianceFactorization_of_matrix_posSemidef

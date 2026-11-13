@@ -1,0 +1,8 @@
+import AImathPPhi2Clean.PhysicalLatticeGaussianLaw
+open MeasureTheory ProbabilityTheory
+#check HasGaussianLaw.map_eq_gaussian
+#check HasGaussianLaw.map_eq_gaussianReal
+#check charFun_gaussian
+#check charFun_gaussianReal
+#check ProbabilityTheory.charFun_map
+#check HasGaussianLaw.charFun

@@ -1,0 +1,10 @@
+import AImathPPhi2Clean.LatticeGaussianTransfer
+#print axioms Pphi2Clean.LatticeTransfer.SpatialField
+#print axioms Pphi2Clean.LatticeTransfer.freeSpatialAction
+#print axioms Pphi2Clean.LatticeTransfer.timeCoupling
+#print axioms Pphi2Clean.LatticeTransfer.freeKernel
+#print axioms Pphi2Clean.LatticeTransfer.freeKernel_pos
+#print axioms Pphi2Clean.LatticeTransfer.freeKernel_symmetric
+#print axioms Pphi2Clean.LatticeTransfer.freeKernel_integral_pos
+#print axioms Pphi2Clean.LatticeTransfer.freeKernel_row_continuous
+#print axioms Pphi2Clean.LatticeTransfer.freeKernel_pos_on_compact_input

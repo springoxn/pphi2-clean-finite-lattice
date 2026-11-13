@@ -1,0 +1,17 @@
+'Pphi2Clean.Continuum.finiteCoefficientInclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCoefficientEmbedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCovariance_repr' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCoefficientEmbedding_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.finiteCoefficientInclusion_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.spectralCoefficientEmbedding_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_upstream_coefficients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.reindexCovariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.reindexCovariance_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.numberedLatticeCovarianceGJ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.numberedLatticeCovarianceGJ_lift_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

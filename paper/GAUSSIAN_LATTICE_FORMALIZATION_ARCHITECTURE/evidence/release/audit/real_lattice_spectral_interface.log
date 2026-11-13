@@ -1,0 +1,16 @@
+'Pphi2Clean.Continuum.finiteFieldConfiguration_eval_single' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.finiteSiteEmbedLift_configuration_eval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.finiteSiteEmbedLift_gaussian_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.LatticeGaussian.productGaussian_linear_second_moment_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperator_pos_def' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.UpstreamLattice.massOperatorMatrix_eigenvalues_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovariance_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_inner' depends on axioms: [propext, Classical.choice, Quot.sound]

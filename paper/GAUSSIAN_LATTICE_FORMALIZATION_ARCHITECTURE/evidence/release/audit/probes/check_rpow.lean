@@ -1,0 +1,6 @@
+import AImathPPhi2Clean.PeriodicNegativeSobolevCarriers
+#check Real.rpow_le_rpow_of_exponent_nonpos
+#check Real.rpow_le_rpow_of_exponent_le
+#check Real.rpow_le_rpow
+#check Real.one_le_rpow
+#check Real.rpow_le_rpow_of_exponent_le

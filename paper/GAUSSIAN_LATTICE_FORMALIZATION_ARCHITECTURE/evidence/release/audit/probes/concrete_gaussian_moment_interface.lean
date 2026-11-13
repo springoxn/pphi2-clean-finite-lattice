@@ -1,0 +1,17 @@
+import AImathPPhi2Clean
+#print axioms Pphi2Clean.Continuum.covarianceConfiguration
+#print axioms Pphi2Clean.Continuum.covarianceConfiguration_apply
+#print axioms Pphi2Clean.Continuum.covarianceConfiguration_second_moment
+#print axioms Pphi2Clean.Continuum.covarianceConfiguration_memLp
+#print axioms Pphi2Clean.Continuum.covarianceConfiguration_covariance
+#print axioms Pphi2Clean.Continuum.covarianceConfiguration_measurable
+#print axioms Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure
+#print axioms Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure_probability
+#print axioms Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure_covariance
+#print axioms Pphi2Clean.Continuum.finiteSiteEmbedLift_eval_eq
+#print axioms Pphi2Clean.Continuum.finiteSiteEmbedLift_measurable
+#print axioms Pphi2Clean.Continuum.latticeCovarianceGJ_gaussian_covariance
+#print axioms Pphi2Clean.Continuum.latticeCovarianceGJ_lift_second_moment
+#print axioms Pphi2Clean.Continuum.latticeCovarianceGJ_pushforward_second_moment
+#print axioms Pphi2Clean.Continuum.latticeEmbedLift_covariance_second_moment
+#print axioms Pphi2Clean.Continuum.latticeEmbedLift_pushforward_second_moment

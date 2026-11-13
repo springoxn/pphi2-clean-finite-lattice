@@ -1,0 +1,5 @@
+import AImathPPhi2Clean.PhysicalLatticeGaussianLaw
+open Pphi2Clean.Continuum MeasureTheory ProbabilityTheory
+#check finiteCovarianceGaussianMeasure_family_hasGaussianLaw
+#check finiteCovarianceGaussianMeasure_eval_mean_zero
+#check HasGaussianLaw.memLp_two

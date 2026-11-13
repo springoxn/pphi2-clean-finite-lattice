@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.FiniteDimensionalGaussianConvergence
+#print axioms Pphi2Clean.Continuum.finiteDimensional_weak_tendsto_of_charFun

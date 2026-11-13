@@ -1,0 +1,58 @@
+note: Running TeX ...
+Fontconfig error: Cannot load default config file: No such file: (null)
+warning: main.tex:30: Underfull \hbox (badness 10000) in paragraph at lines 29--30
+warning: main.tex:59: Underfull \hbox (badness 1052) in paragraph at lines 58--59
+warning: main.tex:267: Underfull \hbox (badness 10000) in paragraph at lines 266--267
+warning: main.tex:282: Underfull \hbox (badness 10000) in paragraph at lines 281--282
+warning: main.tex:282: Underfull \hbox (badness 1917) in paragraph at lines 281--282
+warning: main.tex:289: Underfull \hbox (badness 1194) in paragraph at lines 288--289
+warning: main.tex:320: Underfull \hbox (badness 1142) in paragraph at lines 319--320
+note: Rerunning TeX because "main.out" changed ...
+warning: main.tex:30: Underfull \hbox (badness 10000) in paragraph at lines 29--30
+warning: main.tex:59: Underfull \hbox (badness 1052) in paragraph at lines 58--59
+warning: main.tex:132: Underfull \hbox (badness 1158) in paragraph at lines 131--132
+warning: main.tex:267: Underfull \hbox (badness 10000) in paragraph at lines 266--267
+warning: main.tex:282: Underfull \hbox (badness 10000) in paragraph at lines 281--282
+warning: main.tex:282: Underfull \hbox (badness 1917) in paragraph at lines 281--282
+warning: main.tex:289: Underfull \hbox (badness 1194) in paragraph at lines 288--289
+warning: main.tex:320: Underfull \hbox (badness 1142) in paragraph at lines 319--320
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.
+note: Running xdvipdfmx ...
+note: Writing `E:\study\AImath\paper\GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE\build\first\main.log` (12.5908203125 KiB)
+note: Writing `E:\study\AImath\paper\GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE\build\first\main.pdf` (141.5634765625 KiB)
+note: Skipped writing 2 intermediate files (use --keep-intermediates to keep them)
+note: Running TeX ...
+Fontconfig error: Cannot load default config file: No such file: (null)
+warning: main.tex:30: Underfull \hbox (badness 10000) in paragraph at lines 29--30
+warning: main.tex:59: Underfull \hbox (badness 1052) in paragraph at lines 58--59
+warning: main.tex:267: Underfull \hbox (badness 10000) in paragraph at lines 266--267
+warning: main.tex:282: Underfull \hbox (badness 10000) in paragraph at lines 281--282
+warning: main.tex:282: Underfull \hbox (badness 1917) in paragraph at lines 281--282
+warning: main.tex:289: Underfull \hbox (badness 1194) in paragraph at lines 288--289
+warning: main.tex:320: Underfull \hbox (badness 1142) in paragraph at lines 319--320
+note: Rerunning TeX because "main.out" changed ...
+warning: main.tex:30: Underfull \hbox (badness 10000) in paragraph at lines 29--30
+warning: main.tex:59: Underfull \hbox (badness 1052) in paragraph at lines 58--59
+warning: main.tex:132: Underfull \hbox (badness 1158) in paragraph at lines 131--132
+warning: main.tex:267: Underfull \hbox (badness 10000) in paragraph at lines 266--267
+warning: main.tex:282: Underfull \hbox (badness 10000) in paragraph at lines 281--282
+warning: main.tex:282: Underfull \hbox (badness 1917) in paragraph at lines 281--282
+warning: main.tex:289: Underfull \hbox (badness 1194) in paragraph at lines 288--289
+warning: main.tex:320: Underfull \hbox (badness 1142) in paragraph at lines 319--320
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.
+note: Running xdvipdfmx ...
+note: Writing `E:\study\AImath\paper\GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE\build\second\main.log` (12.5908203125 KiB)
+note: Writing `E:\study\AImath\paper\GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE\build\second\main.pdf` (141.5634765625 KiB)
+note: Skipped writing 2 intermediate files (use --keep-intermediates to keep them)
+{
+  "status": "PASS",
+  "source_manifest_files": 458,
+  "generic_manifest_files": 73,
+  "recorded_axiom_reports": 35,
+  "negative_controls": 4,
+  "pdf_pages": 16,
+  "pdf_table_captions": 3,
+  "overfull_hboxes": 0,
+  "pdf_sha256": "124bc1bc356d1b98bb85f0bfc5e8b4a72ace046ceca19e0806b3b2bdea517e48",
+  "evidence_boundary": "Hash/source/transcript/PDF audit. No fresh Lean replay; no interacting-proof certification."
+}

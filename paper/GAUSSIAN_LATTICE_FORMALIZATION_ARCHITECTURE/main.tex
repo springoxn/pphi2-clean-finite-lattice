@@ -1,0 +1,324 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array,xurl}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=3em
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}\newcommand{\Z}{\mathbb Z}\newcommand{\N}{\mathbb N}
+\newcommand{\E}{\mathbb E}\newcommand{\HH}{\mathcal H_{-s}^{\mathrm{Fourier}}}
+\newcommand{\ev}[1]{\par\smallskip\noindent\textit{Evidence.} #1\par\smallskip}
+\title[From lattice measures to continuum laws]{From periodic lattice measures to continuum laws:\\architecture, dimensional case studies, and the scope of a Lean formalization}
+\author{AImath Project}
+\date{November 13, 2026}
+\subjclass[2020]{Primary 60B10; Secondary 60G15, 60G60, 68V15}
+\keywords{Lean 4, Gaussian field, lattice approximation, weak convergence, formalization architecture}
+\begin{document}
+\begin{abstract}
+We explain the place of a formalized periodic lattice-to-continuum Gaussian weak limit within a broader constructive-field research programme. The central contribution is not a new existence theorem for Gaussian fields or a claim that arbitrary-dimensional continuum fields were previously unavailable in Lean. It is the connection of actual finite lattice Gaussian probability laws to a unique continuum law in a specified weighted Fourier coefficient completion. We exhibit the two-, three-, four-, and five-dimensional constructions, identify what the parameterized theorem does and does not subsume, and isolate reusable interfaces for physical normalization, real Gaussian marginals, compact containment, and Borel uniqueness. We compare this problem with characteristic-functional measure construction and continuum Gaussian free-field formalizations. A separate scope ledger distinguishes the released Gaussian Lean endpoints from analytical work on interacting fields and reflection positivity, and from reconstruction theorems retained as literature inputs. The article is an architectural companion, with pinned source evidence, not a replacement for the endpoint proof or an announcement of a completed interacting quantum field theory.
+\end{abstract}
+\maketitle
+
+\section{The contribution and its location}
+The existence of a Gaussian measure and convergence to that measure from a particular physical discretization are different mathematical obligations. A characteristic functional can specify a continuum law without mentioning a lattice. Conversely, a lattice model with a positive covariance matrix does not by itself determine an infinite-dimensional weak limit. One must relate the sampled observables to the continuum covariance, construct a common topological carrier for the discrete laws, prove compact containment there, and show that every possible limit has the same finite-dimensional distributions.
+
+This article describes the architecture of a Lean development that carries out that second task. Its main message is:
+\begin{quote}
+A machine-checked arbitrary-dimensional discrete-to-continuum weak convergence theorem for actual periodic lattice Gaussian measures.
+\end{quote}
+The qualifications in this sentence matter. ``Actual'' excludes an abstract family for which the desired covariance or tightness is merely an input. ``Periodic'' fixes the geometry. ``Arbitrary-dimensional'' means quantification over every positive finite integer dimension, not estimates uniform over dimensions. ``Weak convergence'' concerns probability measures on a specified normed coefficient space, not only pointwise convergence of propagators.
+
+Our companion endpoint paper gives the precise parameterized theorem and its normalization conventions \cite{Endpoint}. Here we explain the reusable proof interfaces, the role of the earlier fixed-dimensional constructions, the relation to other Lean work, and the boundary between this Gaussian result and the broader research programme. This separation is intentional: a concise theorem paper should not be made to represent interacting-field or reconstruction results that its Lean endpoint does not prove.
+
+\subsection{Four contributions, with distinct evidence}
+The released development connects finite site Gaussian laws to their raw atomic Fourier maps; establishes tightness and finite-marginal convergence in a concrete completion; exposes a theorem parameterized by dimension and real target order; and supplies typed contracts and recorded foundational-axiom checks for the endpoints. The present article adds an explanation and a reproducible source map, not a new Lean theorem. Numerical or symbolic checks used in the wider programme are not promoted to kernel proofs here. Likewise, a declaration in an upstream repository is distinguished from an upstream build independently reproduced by us.
+
+\section{A common mathematical model}
+Fix $d\in\N$, $d>0$, side length $L>0$, and mass $m>0$. For $N=n+1$ set $a=L/N$ and $\Lambda_N=(\Z/N\Z)^d$. On real lattice fields define
+\begin{equation}\label{eq:operator}
+ (A_Nu)_x=m^2u_x+a^{-2}\sum_{i=1}^d(2u_x-u_{x+e_i}-u_{x-e_i}).
+\end{equation}
+The physical inner product is $a^d\sum_xu_xv_x$. Thus the centered site Gaussian density is proportional to
+$\exp[-\tfrac12 a^d\sum_xu_x(A_Nu)_x]$; in the ordinary site-coordinate basis its covariance matrix is $a^{-d}A_N^{-1}$, not simply $A_N^{-1}$.
+
+The raw atomic notation and its Fourier coefficients are
+\begin{equation}\label{eq:atomic}
+ \Phi_N=a^d\sum_{x\in\Lambda_N}\phi_N(x)\delta_{ax},\qquad
+ c_N(k)=a^d\sum_{x\in\Lambda_N}\phi_N(x)e^{2\pi i k\cdot ax/L}.
+\end{equation}
+Here the atomic expression explains a finite sum; it does not assert an implemented distribution-space isomorphism. Reality gives
+\begin{equation}\label{eq:conjugacy}
+ c_N(-k)=\overline{c_N(k)}.
+\end{equation}
+In particular, all complex modes cannot be treated as independent circular complex Gaussians.
+
+\subsection{The carrier and the continuum covariance}
+Write $|k|_\infty=\max_i|k_i|$ and $|k|_2^2=\sum_i k_i^2$. For $s>d/2$ put
+\begin{equation}\label{eq:carrier}
+ w_s(k)=(1+|k|_\infty)^{-2s},\qquad
+ \|c\|_{-s}^2=\sum_{k\in\Z^d}w_s(k)|c_k|^2.
+\end{equation}
+We denote the completion by $\HH$. In Lean its weighted realization is represented by the ordinary $\ell^2(\Z^d;\C)$ type via $J_s(c)_k=\sqrt{w_s(k)}c_k$. The underlying type is therefore unweighted; the parameter enters the embedding and the measures. Our notation emphasizes a negative-order Fourier carrier, not an already formalized identification with an external Sobolev or tempered-distribution library.
+
+For real trigonometric polynomials, let
+\begin{align}
+ \widehat f_L(k)&=\int_{[0,L]^d}f(x)e^{-2\pi i k\cdot x/L}\,dx,\notag\\
+ Q_{L,m}(f,g)&=\operatorname{Re}\left[L^{-d}\sum_{k\in\Z^d}
+ \frac{\overline{\widehat f_L(k)}\widehat g_L(k)}{m^2+(2\pi/L)^2|k|_2^2}\right].\label{eq:green}
+\end{align}
+The Fourier sum is finite for these tests. Notice both the unnormalized Lebesgue transform and the $L^{-d}$ prefactor. The carrier weight uses the sup norm, whereas dispersion uses the Euclidean sum of squares. These conventions are part of the theorem, not interchangeable notation.
+
+For a finite frequency set $F$, form the centered real Gaussian vector indexed by $(k,b)\in F\times\{0,1\}$ with covariance $Q_{L,m}(u_{k,b},u_{\ell,c})$, where $u_{k,0}=\cos(2\pi k\cdot x/L)$ and $u_{k,1}=\sin(2\pi k\cdot x/L)$. Reconstruct its weighted complex coordinates by $\sqrt{w_s(k)}(X_{k,0}+iX_{k,1})$ and call their law $\gamma_F$. It may be degenerate: the zero-mode sine is identically zero.
+
+\begin{theorem}[Released parameterized endpoint]\label{thm:endpoint}
+For every $d>0$, every real $s>d/2$, and $L,m>0$, the laws $\mu_n=\operatorname{Law}(J_s(c_{n+1}))$ converge weakly on $\HH$ to a probability measure $\nu$. For every finite $F$, $(P_F)_*\nu=\gamma_F$. These finite-marginal equalities alone determine $\nu$ uniquely among probability measures on this carrier.
+\end{theorem}
+\ev{The pinned standalone project contains \path{SharpContractArbitraryDim.lean}, theorem \path{sharp_actual_raw_gaussian_weak_convergence}; the actual-source identity is \path{actualRawAtomicLift_eq_rawAtomicFourierLift}. The proof and scope are documented in \cite{Endpoint,Release}.}
+The word ``sharp'' in the source name records the exact requested target exponent; it is not a theorem of optimal continuum regularity. No separate infinite-dimensional \texttt{IsGaussian} instance is claimed.
+
+\section{Two through five dimensions as construction case studies}\label{sec:dimensions}
+These cases are substantive stages, not a list of large numerical dimensions. Each fixes the source, target carrier, finite-coordinate maps, and the interface by which the limit is identified. The discussion describes released artifacts, not a claim that every historical proof object is definitionally the same as the parameterized one.
+
+\subsection{Two dimensions: a finite-lattice foundation}
+For $d=2$, the starting object is an honest finite Gaussian law with the positive massive periodic lattice covariance. The Fourier transform diagonalizes the lattice operator, yielding the symbol
+\begin{equation}\label{eq:symbol}
+ \lambda_{N,a}(p)=m^2+4a^{-2}\sum_{i=1}^d\sin^2(\pi p_i/N).
+\end{equation}
+The early continuum chain uses a weighted Fourier $H^{-3}$ carrier and a stronger $H^{-2}$ source-energy control. This makes the passage from finite-dimensional linear algebra to compact containment concrete.
+
+There is an important nonidentity hidden by the familiar notation. The historical two-dimensional target weight is $1$ at $k=0$ and $|k|_\infty^{-6}$ otherwise, whereas the parameterized target at $s=3$ is $(1+|k|_\infty)^{-6}$. For nonzero integer frequencies,
+\[
+ 2^{-6}|k|_\infty^{-6}\le (1+|k|_\infty)^{-6}\le |k|_\infty^{-6}.
+\]
+Thus the raw weighted norms are equivalent mathematically, with identical treatment of the zero mode. But their weighted coordinate embeddings are not literally equal. Identifying the historical pushforward measure with the parameterized one would still require an explicit transport map and a commutation identity for the source and target laws. We do not claim that additional Lean equivalence theorem here.
+\ev{The historical definition is in \path{PeriodicNegativeSobolevCarriers.lean}; its weak-limit endpoint is in \path{PeriodicHMinusThreeWeakLimitMarginal.lean}. These modules are included in the selected source evidence.}
+
+\subsection{Three dimensions: target reuse and a stronger carrier}
+The first three-dimensional raw-lift limit uses a weighted $H^{-4}$ carrier. Its continuum target is obtained from a normalized four-dimensional frequency-zero slice: restriction to the fourth frequency equal to zero is accompanied by an $L^{-1/2}$ coefficient scaling. The normalization compensates the extra power of physical volume in the four-dimensional covariance. This is target reuse, not a statement that the lattice source is four-dimensional.
+
+The stronger three-dimensional $H^{-3}$ endpoint uses a uniform $H^{-2}$ source second moment. A continuous injective $H^{-3}$-to-$H^{-4}$ map relates the carriers. The target is selected as a probability lift of the existing $H^{-4}$ target, with a proved pushforward identity. Finite real Fourier laws and uniqueness identify the lift. This case shows why a carrier change requires measure-theoretic work beyond changing an exponent in prose.
+\ev{See \path{Periodic3DGaussianTarget.lean}, \path{Periodic3DHminusTwoSourceEnergy.lean}, \path{Periodic3DHminusThreeWeakLimit.lean}, and \path{Periodic3DHminusThreeMarginals.lean}; the release includes the typed \path{periodic3d_hminus3_endpoint.lean} contract and transcript.}
+
+\subsection{Four dimensions: a concrete whole-sequence endpoint}
+The four-dimensional construction places actual raw Fourier lifts in a weighted $H^{-4}$ realization, with stronger $H^{-3}$ control furnishing compactness. Its target is an explicitly represented real-supported Gaussian law, and the identification uses finite physical Fourier families. The final theorem is not a conditional assertion that tightness or target convergence holds: the source-specific estimates and covariance convergence are connected to it.
+
+The distinction between a proved estimate and an optimal trace identity is useful here. Tightness needs a valid uniform all-$N$ moment bound. It does not require the sharpest possible constant, and an exact complex raw-moment formula recorded analytically must not be silently attributed to a Lean endpoint proving a sufficient upper bound.
+\ev{The endpoint \path{fs4PeriodicFixedVolume_weak_tendsto_free} is in \path{PeriodicFS4DProbeMoment.lean}. The release gate \path{audit/check_fs4_release.py} checks recorded source and contract evidence separately from its optional Lean replay.}
+
+\subsection{Five dimensions: a small positive regularity gap}
+The five-dimensional source has physical atomic amplitude $a^5$ and converges on a weighted $H^{-3}$ coefficient carrier. Its compact containment uses the intermediate order $r=11/4$, strictly above $d/2=5/2$ and strictly below the target order $3$. The gap is only $1/4$, yet the weight ratio tends to zero and suffices for compactness. This case motivates a real-valued energy-order parameter instead of restricting the architecture to integer orders.
+
+The five-dimensional target is constructed from the actual source laws and is identified by its massive-resolvent finite real Gaussian marginals. A separately pinned project and its evidence are released as an archive. This packaging is part of reproducibility: an independent project is not automatically compiled by running the root library's default build.
+\ev{The five-dimensional pinned archive is included in the evidence subset under \path{paper/PERIODIC_GAUSSIAN_5D_HMINUS3/}. Its internal source and recorded contracts, rather than the repository name, define its scope.}
+
+\begin{table}[ht]
+\centering\small
+\caption{Dimensional constructions and their compactness orders. Orders describe weighted Fourier realizations, not external distribution-space isomorphisms.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.10\textwidth}>{\raggedright\arraybackslash}p{.19\textwidth}>{\raggedright\arraybackslash}p{.18\textwidth}>{\raggedright\arraybackslash}p{.40\textwidth}@{}}
+\toprule
+$d$ & Source control & Target & Distinctive interface\\\midrule
+2 & $H^{-2}$ & $H^{-3}$ & Historical weight differs from the generic shifted weight\\
+3 & $H^{-2}$ & $H^{-3}$ & Injective inclusion and lift of a normalized slice target\\
+4 & $H^{-3}$ & $H^{-4}$ & Explicit real-supported target and physical marginals\\
+5 & $H^{-11/4}$ & $H^{-3}$ & Positive fractional gap; separately pinned project\\
+Any $d>0$ & $r=(s+d/2)/2$ & $\HH$, $s>d/2$ & Actual-source target construction and marginal uniqueness\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{What unification means}
+Theorem~\ref{thm:endpoint} supplies the numerical choices $(d,s)=(2,3),(3,3),(4,4),(5,3)$. Their existence is a mathematical specialization of its statement. That does not identify all of their historical realizations or selected target measures. In particular, the wrapper's midpoint source order need not equal an earlier proof's intermediate order: at $(d,s)=(2,3)$ it is $2$, at $(3,3)$ it is $9/4$, at $(4,4)$ it is $3$, and at $(5,3)$ it is $11/4$. Different valid intermediate orders can prove the same target regularity.
+
+A genuine formal compatibility claim must specify a continuous carrier map $T$, prove that the raw lift maps commute with $T$, and identify the target pushforward using finite-coordinate laws. The earlier three-dimensional carrier inclusion provides an example of such an implemented compatibility layer. General equivalence of every historical endpoint with every specialized parameterized law is not an additional result of this article. Fixed-dimensional examples remain valuable as tests of conventions and interfaces, not as independent proofs of a quantified theorem.
+
+\section{Reusable interfaces and where the difficulty lies}\label{sec:architecture}
+The architecture is most easily understood as five interfaces. A downstream user should know precisely which physical identities and analytic estimates must be supplied, rather than importing a theorem whose assumptions already contain the desired conclusion.
+
+\subsection{Interface I: actual source to coefficient law}
+The finite Gaussian law must be transported by the actual map in \eqref{eq:atomic}. A normalized orthonormal coordinate of a finite covariance operator is not automatically a physical Fourier coefficient. The factors $a^d$, $L^{-d}$, Fourier signs, and the distinction between the physical inner product and the Euclidean site matrix must all be accounted for.
+
+The implementation proves equality of the Gaussian lift with the raw finite sum, then its weighted summability and continuity into the $\ell^2$ carrier. A bound on a coordinate formula without this identity would prove something about an auxiliary object, not necessarily about the lattice law in the theorem.
+\ev{Generic modules: \path{RawAtomicGaussianAtomicIdentityArbitraryDim.lean}, \path{RawAtomicGaussianSiteIdentityArbitraryDim.lean}, and \path{RawAtomicGaussianTargetSpaceArbitraryDim.lean}. In particular, \path{actualTargetLift_apply} exhibits the weighted actual coefficient.}
+
+\subsection{Interface II: summability and a positive weight gap}
+Choose $d/2<r<s$ and $\delta=s-r>0$. Lattice shell counting gives
+\begin{equation}\label{eq:shell}
+ \sum_{k\in\Z^d}(1+|k|_\infty)^{-2r}<\infty.
+\end{equation}
+For example, the shell $|k|_\infty=j\ge1$ has cardinality $(2j+1)^d-(2j-1)^d=O_d((j+1)^{d-1})$. The shell series is summable when $2r>d$. This displayed argument explains the threshold; the Lean implementation instead uses a tensor-product majorant of one-dimensional weights with exponent $2r/d>1$. The actual Gaussian moment estimates give the sufficient bound
+\begin{equation}\label{eq:energy}
+ \E\sum_k(1+|k|_\infty)^{-2r}|c_N(k)|^2
+ \le B_{d,r,L,m}:=2m^{-2}L^d\sum_k(1+|k|_\infty)^{-2r}.
+\end{equation}
+Its constant depends on dimension, energy order, side length and mass. In the source, \path{actualTargetGaussianMeasure_sourceEnergy_bound} in \path{TargetTruncationArbitraryDim.lean} proves the expectation bound, including the nonnegative integral--sum interchange via \texttt{lintegral\_tsum}; a sum-of-coordinate-expectations estimate alone would not state this interchange. Uniformity here is in the mesh $N$, with these parameters fixed. There is no dimension-independent bound and no uniform claim as $\delta\downarrow0$.
+
+On an energy ball of radius parameter $M$, the target tail satisfies
+\begin{equation}\label{eq:tail}
+ \sum_{|k|_\infty>R}w_s(k)|c_k|^2\le (1+R)^{-2\delta}M.
+\end{equation}
+Finite-dimensional heads are bounded; the uniformly small tails make the energy ball totally bounded in the target. Its closure is compact. Markov's inequality puts at least $1-B/M$ of every source law in that closure. This turns the moment estimate into tightness, rather than leaving tightness as a formal hypothesis.
+\ev{Generic modules: \path{DimensionFreeWeightSummability.lean}, \path{RawAtomicGaussianArbitraryDim.lean}, \path{TargetTruncationArbitraryDim.lean}; the latter proves \path{actualTargetProbabilityMeasure_fixedVolume_isTightMeasureSet} and a Prokhorov subsequence theorem. ``DimensionFree'' names parameterized infrastructure, not dimension-independent constants.}
+
+\subsection{Interface III: lattice aliasing and covariance convergence}
+For a fixed finite set of integer frequencies with component magnitudes at most $K$, the lattice is eventually fine enough, for example $N>2K$, to distinguish its distinct frequencies in a Nyquist representative box. At small $N$ they may alias. Thus an exact finite reindexing must be stated eventually, not for every lattice size. In that eventual regime,
+\begin{equation}\label{eq:dispersion}
+ 4(L/N)^{-2}\sum_i\sin^2(\pi k_i/N)\longrightarrow (2\pi/L)^2|k|_2^2.
+\end{equation}
+The mass lower bound prevents singular inversion. Correct sampled Fourier normalization then identifies the limit covariance with \eqref{eq:green}.
+
+Real cosine and sine families are the appropriate finite interface. They include repeated or opposite frequencies, zero sine coordinates, and singular covariance matrices. Finite Gaussian convergence therefore must not rely on invertibility of the covariance or independence of all complex coordinates. Reconstruction is a continuous real-linear map and preserves the required finite law.
+\ev{Shared modules include \path{PeriodicFourierCovarianceLimit.lean}, \path{FiniteRealFamilyCovarianceConvergence.lean}, and \path{FiniteRealFamilyWeakLimitInterface.lean}. The generic bridge \path{TargetFiniteMarginalArbitraryDim.lean} proves \path{actualTarget_fixedVolume_finite_marginal_tendsto} for the actual source law.}
+
+\subsection{Interface IV: the coefficient Borel space}
+Agreement of selected observables is not automatically equality of measures on an arbitrarily chosen space. One must establish that the coordinate cylinders generate the Borel sigma algebra of the target carrier. For countable coefficient indices, the continuous inclusion of $\ell^2$ into the product coordinate space is injective. The implementation uses the resulting measurable-embedding/cylinder structure to derive measure extensionality from finite marginals.
+
+This is the missing step in an argument that only proves every finite projection converges. Finite projections alone do not provide tightness in the norm topology; tightness alone does not identify which target law occurs. Both interfaces are needed.
+\ev{\path{TargetCylinderArbitraryDim.lean} contains \path{target_cylinder_sigma_eq_borel} and \path{target_probabilityMeasure_ext_of_finite_marginals}.}
+
+\subsection{Interface V: subsequences to the entire sequence}
+Prokhorov compactness gives a convergent subsequence, not the desired whole-sequence theorem. Finite-coordinate pushforwards of any weak limit agree with the finite Gaussian limits. Cylinder uniqueness then identifies every subsequential limit. Applying this reasoning to subsequences of the original sequence proves convergence of the whole sequence. Finally, the selected measure is characterized by finite marginals without retaining a convergence premise in its uniqueness hypothesis.
+\ev{\path{ActualWeakLimitArbitraryDim.lean} contains \path{actualTarget_fixedVolume_weak_limit_existsUnique} and \path{actualTargetGaussianLimit_unique_of_finite_marginals}.}
+
+\subsection{Reuse is conditional on the supplied contracts}
+The compactness and Borel arguments can be reused beyond this exact Gaussian model. Reuse of the full theorem for an interacting source, however, would require new uniform energy estimates and new finite-marginal limits. Gaussian characteristic-function arguments cannot identify a non-Gaussian limit. Likewise, extending the spatial volume is a new limiting problem; the $L^d$ factor in \eqref{eq:energy} is already a warning that fixed-volume control does not imply uniform infinite-volume control.
+
+\section{Relation to Lean probability and continuum field theory}\label{sec:related}
+Classical Gaussian measure theory, tightness and weak convergence provide the mathematical background \cite{Bogachev,Billingsley}; Gaussian free-field surveys distinguish lattice and continuum viewpoints \cite{Sheffield}. Lean and Mathlib provide a general proof language and mathematical infrastructure \cite{Lean,Mathlib}. The source-level comparison below concerns different proof obligations, not a ranking of projects.
+
+\subsection{Characteristic functionals and Minlos}
+The \texttt{bochner} development includes finite-dimensional Bochner and nuclear-space Minlos results \cite{Bochner}. Its inspected \path{bochner_theorem} and \path{minlos_theorem} endpoints establish existence or uniqueness of a measure from a suitable characteristic functional. The Bochner proof itself uses Gaussian regularization, tightness, Prokhorov compactness and a weakly convergent subsequence. Our distinction is therefore the prescribed lattice-source sequence and its endpoint, not the supposed absence of weak-convergence tools in that work. Such a theorem can construct a continuum Gaussian law, but does not, merely by being instantiated, prove that the particular lattice pushforwards \eqref{eq:atomic} are tight in our coefficient norm or converge to that law. Those source-specific conclusions are precisely the role of Interfaces I--V.
+
+Conversely, selecting a limit from actual lattice laws does not replace a general Minlos theorem. The former construction is tied to this periodic model and carrier. The two approaches can be compatible mathematically without a formal identification having been supplied between their different measure spaces.
+
+\subsection{Continuum GFF and OS axioms}
+At the pinned revision inspected for this article, \texttt{OSforGFF} contains a theorem \path{gaussianFreeField_satisfies_all_OS_axioms_of_dim} for every dimension at least two, using \path{GFFPropagator.ofProperTime} \cite{OSforGFF}. Its setting is a continuum Gaussian field on a Schwartz-dual distribution space. This rules out positioning our work as novel simply because it quantifies over dimension, or as filling an alleged absence of arbitrary-dimensional Lean GFF theory.
+
+Our problem is instead to connect a specified periodic finite-volume discretization to a unique law in a weighted coefficient completion. We do not claim the continuum OS conclusions of \texttt{OSforGFF} for that law, nor identify its Schwartz-dual measure with ours. The present comparison inspects pinned upstream source statements; it does not report an independent upstream compilation or an axiom audit of their entire dependency cones.
+
+\subsection{The broader QFT formalization programme}
+\emph{Formalization of QFT} supplies the wider context for formal probability, Euclidean fields and constructive-QFT interfaces \cite{FormalQFT}. Its breadth should not be confused with the exact theorem statement of one released lattice endpoint. In particular, proving Euclidean axioms of a field and proving an Osterwalder--Schrader reconstruction theorem are different tasks. A programme-level paper, a repository's declared scope, a source theorem and a replayed kernel check have different evidential roles.
+
+\begin{table}[ht]
+\centering\small
+\caption{Complementary obligations; this is not a priority claim.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.27\textwidth}>{\raggedright\arraybackslash}p{.31\textwidth}>{\raggedright\arraybackslash}p{.30\textwidth}@{}}
+\toprule
+Development & Principal input and output & Not supplied by that description alone\\\midrule
+Bochner/Minlos & Characteristic-functional hypotheses to a measure & Convergence of a particular lattice sequence\\
+Continuum GFF/OS & A continuum propagator to distribution-space field properties & Our periodic raw-lift/carrier identities\\
+Present Gaussian endpoint & Actual lattice laws to coefficient-space weak limit & Interacting limits, OS reconstruction, or carrier isomorphism\\\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The wider research programme and its evidence boundary}\label{sec:scope}
+The Gaussian theorem is a foundation, not a completed construction of an interacting quantum field theory. To make the broader work visible without inflating its formal status, we separate three layers: released Lean endpoints, analytical arguments with declared external inputs, and literature theorems that remain external. The included scope snapshot is a dated excerpt of the project registry, not an additional mathematical proof or an authority for future status.
+
+\subsection{Reflection positivity is an additional property}
+For a reflection $\theta$, continuum covariance reflection positivity involves a quadratic form such as $\langle\theta f,Cf\rangle\ge0$ on positive-time tests. The analytical programme develops spatial Fourier positive-factor representations and the passage from covariance positivity to finite reflection-positive Gaussian functionals. Its recorded status is analytical proof, not a claim that the arbitrary-dimensional lattice weak-limit endpoint also proves this property.
+
+For example, in the separate four-dimensional full-space analysis, put $\omega_p=\sqrt{|p|^2+m^2}$ and let $\widetilde f(t,p)$ be the unnormalized spatial Fourier transform. For positive-time Schwartz tests the reflected quadratic form has the representation
+\begin{equation}\label{eq:rp}
+ Q_m^{\theta}(f)=\int_{\R^3}\frac{dp}{(2\pi)^3\,2\omega_p}
+ \left|\int_0^\infty e^{-\omega_p t}\widetilde f(t,p)\,dt\right|^2\ge0.
+\end{equation}
+This isolates positivity as a squared norm and exposes all normalization factors. For real-valued $f_i$, passing from the covariance Gram matrix $R_{ij}=C(\theta f_i,f_j)$ to the Gaussian generating functional uses the Schur product theorem: $R$ positive semidefinite implies its entrywise exponential is positive semidefinite, and positive diagonal conjugation supplies the individual Gaussian variance factors. These are classical facts; the analytical work makes the chain and its conventions explicit, rather than claiming a new reflection-positivity principle.
+
+Passing reflection positivity through weak convergence would require a common reflected carrier, continuity or integrability of the relevant observables, and an explicit relation between the discrete reflection and the limiting operation. None of these follows solely from bounded-continuous-test weak convergence for unrestricted products of field evaluations. The Gaussian endpoint therefore does not automatically close the reflection-positive continuum-field interface.
+\ev{The scope snapshot records the covariance reflection-positivity item as \texttt{PROVED\_PAPER}. The selected analytical sources include \path{rp_chain.md} and \path{os1_reflection_positivity.md}; this label denotes paper-level evidence, not a Lean theorem for the present target.}
+
+\subsection{Interacting two-dimensional fields}
+A formal expression for an interacting finite-cutoff law is
+\[
+ d\rho_{N,\lambda}=Z_{N,\lambda}^{-1}\exp\left[-\lambda a^2\sum_x:P(\phi_N(x)):\right]d\mu_N.
+\]
+This expression states a research object, not a theorem proved by the Gaussian endpoint. It requires a definition of Wick ordering at the relevant cutoff, integrability, a finite positive partition function, and estimates that survive the limits being taken. Even a completely proved Gaussian base law cannot supply these obligations by itself.
+
+The broader analytical work addresses coercivity, volume-normalized estimates, interacting reflection positivity and infinite-volume tightness, with literature inputs recorded separately. The registry marks the interacting milestone and the selected infinite-volume and reflection-positivity items as paper-level results, not a closed Lean dependency chain. We report this to locate the programme, not to re-certify all those analytical arguments within this article. In particular, the full analytic programme is not the theorem of Section~2, and its source files are not evidence of an independently replayed interacting Lean construction.
+
+There is also a useful negative lesson: a source bound uniform in mesh at fixed $L$ cannot be reinterpreted as uniform in volume. Partition functions, counterterms, and non-Gaussian finite-dimensional laws must be controlled on their own terms. The reusable tightness architecture describes where new estimates would enter; it does not manufacture them.
+
+\subsubsection{Existence uses a weaker input than clustering}
+A concrete architectural distinction is the separation of a coercive/variational existence route from a cluster-expansion route. In the former, the relevant analytical target is an exponential bound for the \emph{normalized} interacting measures, of the form
+\begin{equation}\label{eq:interacting-exponential}
+ \sup_{\Lambda}\int \exp(\eta\|\phi\|_E^2)\,d\rho_\Lambda(\phi)\le C,
+ \qquad \eta>0,\quad C<\infty,
+\end{equation}
+where $E$ denotes the stronger weighted negative-order source space. Once it is compactly embedded into a weaker target space, Markov's inequality gives compact containment, while Jensen gives
+$\sup_\Lambda\E_{\rho_\Lambda}\|\phi\|_E^2\le\eta^{-1}\log C$.
+The fixed spatial weight must be chosen independently of $\Lambda$; replacing it with the indicator of the varying domain does not preserve the asserted volume independence.
+
+The variational infinite-volume work of Barashkov--Gubinelli provides the analytical setting for this route \cite{BG}. The project's analytical notes develop the coercivity adaptation, normalization bookkeeping and passage to test-function bounds while retaining named external analytic inputs. We describe that dependency organization, not a new proof of all the variational estimates in \eqref{eq:interacting-exponential}. Tightness supplies accumulation points; it does not by itself prove their uniqueness or decay of their correlations.
+
+A related distinction concerns the partition function. Replacing an interaction $H$ by $H+b$ leaves $Z^{-1}e^{-H}\mu$ unchanged but multiplies $Z$ by $e^{-b}$. Consequently, tightness of normalized measures cannot establish an extensive unnormalized partition-function estimate without additional information. This is a structural reason for separating the analytical obligations, not just a choice of terminology.
+
+\subsubsection{Clustering is not already a reconstructed mass theorem}
+The stronger analytical branch organizes connected Schwinger functions through Ursell combinatorics, a convergent polymer expansion, activity bounds and geometric decay estimates. Its registry records paper-level exponential-clustering work. The selected notes include a solvable lattice-gas check of the combinatorial/decay mechanism; such a model check is not an independent proof of the interacting field estimate. No claim that all those estimates are Lean-closed is made here.
+
+Exponential decay of connected Euclidean correlations and a positive physical mass in a reconstructed theory are distinct conclusions. The first lives at the Schwinger-function level; the second needs the appropriate reconstruction and spectral hypotheses. This distinction is why the broader programme cannot be summarized either as ``only Gaussian'' or as ``a completed interacting quantum field theory''.
+
+\subsection{Reconstruction and physical conclusions}
+Osterwalder--Schrader reconstruction is the passage from suitable Euclidean field data to a physical Hilbert-space/Wightman framework \cite{OS1,OS2}. It is retained as a literature input in the project's current registry. This article neither reproves nor formalizes its body. Consequently, particle interpretation, reconstructed physical mass, vacuum structure and scattering cannot be advertised as consequences already established by the released coefficient-space weak-limit theorem.
+
+This separation does not diminish the lattice theorem. It makes its position exact: it closes a source-to-continuum probability interface that is needed in many constructive approaches, while leaving model-dependent interacting estimates and the field-to-physics reconstruction interface separately accountable.
+
+\section{Reproducibility and interpretation of evidence}\label{sec:reproduce}
+The public source anchor is repository \texttt{springoxn/pphi2-clean-finite-lattice}, commit
+\begin{center}\path{0c082ff7f33ae42876123507b2bb108e1089c2c2}.\end{center}
+A fixed-commit tree and downloadable archive are cited in \cite{Release}. This is preferable to a moving branch link. From a clean checkout at that commit:
+\begin{verbatim}
+git checkout 0c082ff7f33ae42876123507b2bb108e1089c2c2
+python verify.py
+cd projects/ARBITRARY_DIM_RAW_GAUSSIAN
+python verify_manifest.py
+lake exe cache get
+lake build AImathPPhi2Clean.ActualWeakLimitArbitraryDim
+lake env lean SharpContractArbitraryDim.lean
+lake env lean EndpointContractArbitraryDim.lean
+\end{verbatim}
+The pinned project uses Lean \texttt{v4.34.0-rc2} and Mathlib revision
+\begin{center}\path{852d20a84581aeba8527bd01d0be361d8c0e71c0}.\end{center}
+Its recorded endpoint axiom reports contain only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}. The original server evidence archive has SHA-256
+\begin{center}\small\path{d1e9ab6b5f0790c2cc87d6dabfb91aee7292c8b8d5702181f8e4b903b90c497b}.\end{center}
+These foundational axioms are not additional probabilistic assumptions. However, a clean footprint for queried declarations is not an axiom audit of unrelated modules or of an entire external repository.
+
+The present source package includes a selected byte-preserved evidence tree, the five-dimensional project archive, the generic source closure, a local state excerpt and selected analytical arguments. It is not a full clone; the historical root manifest in that selection must not be run against a deliberately incomplete tree. Use the fixed public checkout for the complete repository check, and the article's own evidence manifest for this package. The included analytical notes may refer to additional literature or files; they are provenance context, not a self-contained certification of the entire interacting programme.
+
+\subsection{What this article's audit establishes}
+The companion audit checks evidence hashes, expected source declarations, recorded generic contract footprints, elementary normalization and weight identities, citation/reference resolution, and the produced PDF's page bounds and expected sections. It includes deliberately corrupted hash, axiom and source-anchor controls. The source and final PDF checks are separate because extracting PDF text can erase a conjugation bar even when it is typeset correctly.
+
+No new Lean build of the local or upstream projects is performed by the LaTeX build. The reproducibility commands above describe a fresh replay; the bundled logs describe recorded successful execution. The audit cannot decide completeness of the analytical interacting-field arguments or establish a formal distribution-space identification. The project author metadata remains a project attribution; personal authorship and affiliations require confirmation before submission.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}>{\raggedright\arraybackslash}p{.61\textwidth}@{}}
+\caption{Evidence ledger and explicit limits.}\label{tab:evidence}\\
+\toprule Claim & Evidence and qualification\\\midrule\endfirsthead
+\toprule Claim & Evidence and qualification\\\midrule\endhead
+Parameterized actual-source weak limit & Released source, typed contracts and recorded server build. This article does not rerun the kernel.\\
+2--5D construction stages & Historical modules, carrier definitions, contracts and 5D archive; not a claim of definitional identity of all targets.\\
+Reusable compactness and uniqueness & Explicit source-energy, truncation, cylinder and full-sequence modules; new sources must discharge their hypotheses.\\
+Relation to upstream work & Pinned repository source statements and bibliographic sources; no independent upstream build reported.\\
+Broader interacting and reflection-positive work & Selected analytical notes and dated registry excerpt; not a released arbitrary-dimensional interacting Lean theorem.\\
+Reconstruction & Classical literature input; not a theorem implemented by this endpoint.\\
+Carrier identification & Coefficient completion only; external Sobolev/Schwartz-dual isomorphism unproved here.\\
+Dimension uniformity & Quantification over positive finite $d$; energy constants depend on $d,r,L,m$.\\\bottomrule
+\end{longtable}
+
+\section{Conclusion}
+The development's position is best expressed by its closed interface: actual periodic lattice Gaussian measures converge to a unique continuum coefficient law, with normalization, topology and finite marginal identification connected in Lean. The dimensional constructions reveal why this interface is not merely a propagator limit, a continuum existence assertion, or a count of instantiated dimensions. The parameterized theorem unifies the numerical scope without erasing historically different carriers and target constructions. The wider programme remains visible through a separate account of analytical reflection positivity, interacting-field estimates and literature reconstruction inputs. Keeping those evidence layers distinct is essential both to reuse and to a credible statement of the contribution.
+
+\begin{thebibliography}{99}
+\bibitem{Endpoint} AImath Project, \emph{An arbitrary-dimensional lattice Gaussian weak limit: a Lean formalization in weighted Fourier coordinates}, companion manuscript, November 12, 2026. Source at the fixed release \cite{Release}, \path{paper/ARBITRARY_DIMENSIONAL_GAUSSIAN_LIMIT/}.
+\bibitem{Release} AImath Project, \emph{Periodic Gaussian lattice limits in Lean 4}, public source release, commit \texttt{0c082ff7f33ae42876123507b2bb108e1089c2c2}. \url{https://github.com/springoxn/pphi2-clean-finite-lattice/tree/0c082ff7f33ae42876123507b2bb108e1089c2c2}. Download: \url{https://github.com/springoxn/pphi2-clean-finite-lattice/archive/0c082ff7f33ae42876123507b2bb108e1089c2c2.zip}.
+\bibitem{Billingsley} P. Billingsley, \emph{Convergence of Probability Measures}, 2nd ed., Wiley, 1999.
+\bibitem{Bogachev} V. I. Bogachev, \emph{Gaussian Measures}, AMS, 1998.
+\bibitem{Sheffield} S. Sheffield, Gaussian free fields for mathematicians, \emph{Probab. Theory Related Fields} \textbf{139} (2007), 521--541, doi:10.1007/s00440-006-0050-1.
+\bibitem{Lean} L. de Moura and S. Ullrich, The Lean 4 theorem prover and programming language, \emph{CADE 28}, LNCS 12699 (2021), 625--635, doi:10.1007/978-3-030-79876-5\_37.
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, \emph{CPP 2020}, 367--381, doi:10.1145/3372885.3373824.
+\bibitem{Bochner} M. R. Douglas, \emph{Bochner's and Minlos' Theorems in Lean 4}, software repository (2026), pinned commit \texttt{58405ecd328cf8383a1c0b53d37605fe61a0b3f6}. \url{https://github.com/mrdouglasny/bochner/tree/58405ecd328cf8383a1c0b53d37605fe61a0b3f6}.
+\bibitem{OSforGFF} S. A. Cherkis, M. R. Douglas, S. Hoback, A. Mei and R. Nissim, \emph{Osterwalder--Schrader Axioms for the Gaussian Free Field}, software repository \texttt{OSforGFF} (2026), pinned source \texttt{fef84a82937dfd2bb7f672108a72da329d3ef0fd}, \path{OSforGFF/OS/Master.lean}. \url{https://github.com/mrdouglasny/OSforGFF/blob/fef84a82937dfd2bb7f672108a72da329d3ef0fd/OSforGFF/OS/Master.lean}.
+\bibitem{FormalQFT} M. R. Douglas, S. Hoback, A. Mei and R. Nissim, \emph{Formalization of QFT}, arXiv:2603.15770v1 [hep-th], March 16, 2026, doi:10.48550/arXiv.2603.15770. \url{https://arxiv.org/abs/2603.15770v1}.
+\bibitem{BG} N. Barashkov and M. Gubinelli, \emph{On the variational method for Euclidean quantum fields in infinite volume}, arXiv:2112.05562v2, December 9, 2021. \url{https://arxiv.org/abs/2112.05562v2}.
+\bibitem{OS1} K. Osterwalder and R. Schrader, Axioms for Euclidean Green's functions, \emph{Commun. Math. Phys.} \textbf{31} (1973), 83--112.
+\bibitem{OS2} K. Osterwalder and R. Schrader, Axioms for Euclidean Green's functions II, \emph{Commun. Math. Phys.} \textbf{42} (1975), 281--305.
+\end{thebibliography}
+\end{document}

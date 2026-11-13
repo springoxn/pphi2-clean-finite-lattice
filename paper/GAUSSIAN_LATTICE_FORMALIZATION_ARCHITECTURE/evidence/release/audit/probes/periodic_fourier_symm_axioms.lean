@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#print axioms Pphi2Clean.Continuum.periodicResolventCovarianceMatrix_symmetric_of_fourier

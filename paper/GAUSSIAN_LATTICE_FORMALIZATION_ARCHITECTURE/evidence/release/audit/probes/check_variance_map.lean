@@ -1,0 +1,5 @@
+import AImathPPhi2Clean.FiniteRealFamilyCovarianceQuadratic
+open MeasureTheory ProbabilityTheory
+#check variance_map
+#check HasGaussianLaw.memLp_two
+#check MeasureTheory.Integrable.integral_finset_sum

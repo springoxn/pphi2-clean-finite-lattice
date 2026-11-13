@@ -1,0 +1,37 @@
+'Pphi2Clean.Continuum.latticeEmbedLift_eval' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_eval_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeEmbedLift_uniform_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJData_gaussian_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.LatticeCovarianceGJRescalingData.covariance_eq_inv_smul_bare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.LatticeCovarianceGJRescalingData.covariance_self_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.LatticeCovarianceGJRescalingData.gaussianMeasure_isProbability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJRescalingData_gaussian_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJRescalingData_uniform_gaussian_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_uniform_pushforward_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.latticeCovarianceGJ_uniform_data_eval_L2_norm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,14 @@
+PASS: finLatticeDelta
+PASS: finiteLaplacianFun
+PASS: finiteLaplacian
+PASS: massOperator
+PASS: massOperatorEntry
+PASS: massOperatorMatrix
+PASS: massEigenvalues
+PASS: massEigenvectorBasis
+PASS: finiteLaplacianLM.toFun
+PASS: spectralLatticeCovariance.toFun
+PASS: latticeCovarianceGJ scalar
+PASS: latticeCovariance delegates to spectral construction
+PASS: coefficient corruption negative controls
+Pinned upstream finite lattice definitions correspond: d63a28568a75d99f6cb27af1f888a49a69855a66

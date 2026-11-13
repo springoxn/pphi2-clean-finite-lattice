@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.FiniteRealFamilyCovarianceQuadratic
+#print axioms Pphi2Clean.Continuum.finiteGaussian_weak_tendsto_of_covariance_entries

@@ -1,0 +1,3 @@
+'Pphi2Clean.LatticeGaussian.productGaussian_linear_second_moment_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,4 @@
+[OK] §10 判据表 ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8', 'L9', 'L10', 'L11'] == 实现 ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8', 'L9', 'L10', 'L11']
+[OK] 宪章无会腐烂的结构性计数 []（唯一源：`artifacts.yaml::enforce_globs` / `check_L*`）
+[OK] L11 行写明强制范围 `docs/reports`（与实现一致）
+[OK] AGENTS.md 治理指针在重建保留区内（`rebuild_agents_index.py::HEADER_END_MARK` 之前的第 15 行为界）

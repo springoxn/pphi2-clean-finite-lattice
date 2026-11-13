@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.PeriodicFourierCovarianceLimit
+#print axioms Pphi2Clean.Continuum.torusFourierGreenPairing_symm

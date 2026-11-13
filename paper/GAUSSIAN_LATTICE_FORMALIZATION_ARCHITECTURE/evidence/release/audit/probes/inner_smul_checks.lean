@@ -1,0 +1,7 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+open Pphi2Clean.Continuum
+#check real_inner_smul_left
+#check real_inner_smul_right
+#check real_inner_smul
+#check inner_smul_left
+#check inner_smul_right

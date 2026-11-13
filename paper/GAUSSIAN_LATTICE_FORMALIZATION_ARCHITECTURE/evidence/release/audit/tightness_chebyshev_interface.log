@@ -1,0 +1,2 @@
+'Pphi2Clean.Continuum.second_moment_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.uniform_second_moment_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

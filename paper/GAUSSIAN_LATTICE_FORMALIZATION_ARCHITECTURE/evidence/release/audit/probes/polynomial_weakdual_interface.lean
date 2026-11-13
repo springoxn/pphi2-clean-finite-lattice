@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.PolynomialWeakDualBox
+#print axioms Pphi2Clean.Continuum.polynomial_weakDual_box_isCompact

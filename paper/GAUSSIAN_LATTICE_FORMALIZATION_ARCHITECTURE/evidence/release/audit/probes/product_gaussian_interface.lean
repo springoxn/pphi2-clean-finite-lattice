@@ -1,0 +1,8 @@
+import AImathPPhi2Clean.ProductGaussian
+#print axioms Pphi2Clean.LatticeGaussian.SpatialField
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian_isProbability
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian_coordinate_map
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian_coordinate_second_moment
+#print axioms Pphi2Clean.LatticeGaussian.gaussianReal_integral_sq_zero
+#print axioms Pphi2Clean.LatticeGaussian.productGaussian_coordinate_second_moment_eq

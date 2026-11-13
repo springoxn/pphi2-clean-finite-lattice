@@ -1,0 +1,4 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#print axioms Pphi2Clean.Continuum.targetCoordinateMeasure_mean_zero
+#print axioms Pphi2Clean.Continuum.targetCoordinateMeasure_hasGaussianLaw
+#print axioms Pphi2Clean.Continuum.periodicResolventCovarianceMatrix_symmetric_of_factorization

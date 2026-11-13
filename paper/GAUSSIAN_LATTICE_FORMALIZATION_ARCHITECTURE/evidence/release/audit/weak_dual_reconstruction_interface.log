@@ -1,0 +1,8 @@
+'Pphi2Clean.Continuum.reconstructWeakDual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.reconstructWeakDual_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.weakDual_coordinateBox_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.weakDual_compact_containment_of_tail_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.hilbertVectorConfiguration' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.Continuum.hilbertVectorConfiguration_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]

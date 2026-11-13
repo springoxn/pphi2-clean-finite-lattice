@@ -1,0 +1,3 @@
+'Pphi2Clean.Continuum.real_compact_containment_of_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

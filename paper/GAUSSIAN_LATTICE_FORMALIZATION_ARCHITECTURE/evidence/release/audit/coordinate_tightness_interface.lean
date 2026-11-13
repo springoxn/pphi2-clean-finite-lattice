@@ -1,0 +1,6 @@
+import AImathPPhi2Clean.SequenceMomentTightness
+#print axioms Pphi2Clean.Continuum.observableBox
+#print axioms Pphi2Clean.Continuum.observableBox_compl_le
+#print axioms Pphi2Clean.Continuum.sequence_observableBox_isCompact
+#print axioms Pphi2Clean.Continuum.sequence_compact_containment_of_tail_budget
+#print axioms Pphi2Clean.Continuum.sequence_compact_containment_of_second_moments

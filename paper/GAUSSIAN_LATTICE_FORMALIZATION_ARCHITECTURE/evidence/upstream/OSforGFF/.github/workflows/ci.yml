@@ -1,0 +1,54 @@
+name: CI
+
+# `lake build` is the real verification for this library: OSforGFF/Guardrails.lean is compiled as
+# part of the default target, and its `#guard_msgs` blocks fail the build if the axiom footprint or
+# the statement of any of the six headline theorems drifts. Running it here turns that guarantee
+# into an enforced status check rather than something each contributor has to remember locally.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# A newer push to the same branch/PR makes an in-flight run redundant.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guardrails:
+    name: Source guardrails
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No axiom / sorry / escape hatch in the build graph
+        run: ./scripts/check-guardrails.sh
+
+  build:
+    name: lake build
+    runs-on: ubuntu-latest
+    # Fetching the mathlib cache and building the two upstream deps dominates the wall clock.
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      # The runner's default free space is tight once mathlib's oleans are unpacked.
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          df -h /
+
+      # lean-action installs elan at the toolchain pinned in lean-toolchain, runs
+      # `lake exe cache get` (mathlib oleans), then `lake build`.
+      #
+      # `leanchecker: true` replays the resulting environment through an external kernel check —
+      # independent confirmation that the axiom-clean headline theorems really do typecheck. It is
+      # incremental on top of the build, not a rebuild; drop this line if it costs too much time.
+      - uses: leanprover/lean-action@v1
+        with:
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          leanchecker: true

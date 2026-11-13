@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.FiniteRealFamilyCharacteristicFunction
+#print axioms Pphi2Clean.Continuum.gaussian_charFun_tendsto_of_mean_variance
+#print axioms Pphi2Clean.Continuum.finiteGaussian_weak_tendsto_of_mean_variance

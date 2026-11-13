@@ -1,0 +1,9 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#check Matrix.PosSemidef
+#check Matrix.IsPSD
+#check Matrix.posSemidef_iff
+#check Matrix.sq_sqrt
+#check Matrix.sqrt
+#check Matrix.IsHermitian
+#check Matrix.isHermitian_iff
+#check LinearMap.exists_eq_smul_self

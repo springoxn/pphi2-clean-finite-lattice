@@ -1,0 +1,12 @@
+import AImathPPhi2Clean.PeriodicFourierCovarianceLimit
+#check Complex.re_tsum
+#check Complex.im_tsum
+#check Complex.ofReal_re
+#check Complex.mul_re
+#check Complex.div_re
+#check tsum_nonneg
+#check Summable.hasSum
+#check tsum_mul_left
+#check tsum_mul_right
+#check summable_finset_sum
+#check Summable.finset_sum

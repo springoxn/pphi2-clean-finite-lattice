@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.PeriodicHMinusTwoWeight
+#print axioms Pphi2Clean.Continuum.summable_periodicHMinusTwoWeight
+#print axioms Pphi2Clean.Continuum.zero_mem_periodicHMinusTwoCarrier

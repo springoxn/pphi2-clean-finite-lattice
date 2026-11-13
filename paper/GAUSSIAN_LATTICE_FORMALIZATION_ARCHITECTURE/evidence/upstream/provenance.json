@@ -1,0 +1,111 @@
+{
+  "inspection": "Pinned source inspection; no independent build. CI JSON is upstream-reported status, not a local replay.",
+  "sources": [
+    {
+      "repository": "bochner",
+      "commit": "58405ecd328cf8383a1c0b53d37605fe61a0b3f6",
+      "path": "Bochner/Main.lean",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/bochner/58405ecd328cf8383a1c0b53d37605fe61a0b3f6/Bochner/Main.lean",
+      "sha256": "8607c4b0a529466ab45c9b65927c60e5d8f160935747646cc9a3bb50af3f18e4"
+    },
+    {
+      "repository": "bochner",
+      "commit": "58405ecd328cf8383a1c0b53d37605fe61a0b3f6",
+      "path": "Minlos/Main.lean",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/bochner/58405ecd328cf8383a1c0b53d37605fe61a0b3f6/Minlos/Main.lean",
+      "sha256": "73599735d3faa5b0ba3a8cf70145562dbbec5a151dfb287521d9ffedf2257f00"
+    },
+    {
+      "repository": "bochner",
+      "commit": "58405ecd328cf8383a1c0b53d37605fe61a0b3f6",
+      "path": "lean-toolchain",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/bochner/58405ecd328cf8383a1c0b53d37605fe61a0b3f6/lean-toolchain",
+      "sha256": "62c2d9c0fc1ec4c67e151c11eff41ca004ef38e179cf9476c230406e6defedef"
+    },
+    {
+      "repository": "bochner",
+      "commit": "58405ecd328cf8383a1c0b53d37605fe61a0b3f6",
+      "path": "lake-manifest.json",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/bochner/58405ecd328cf8383a1c0b53d37605fe61a0b3f6/lake-manifest.json",
+      "sha256": "579cc0e03223fe558b01c4b0be8238e96131e36d8ddb7aa3505c2a896aa87cd9"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "OSforGFF/OS/Master.lean",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/OSforGFF/OS/Master.lean",
+      "sha256": "4bf733976ffc0e9f61efa2778aaf019b25772ab3a1b5f2a53eab79f3231c7a03"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "OSforGFF/Spacetime/Basic.lean",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/OSforGFF/Spacetime/Basic.lean",
+      "sha256": "99a5614ca76849399e6dd6a7cb94e6e06f0801ee87bcafa05b41ae5dbd907303"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "OSforGFF/Measure/Construct.lean",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/OSforGFF/Measure/Construct.lean",
+      "sha256": "3b357bd8cf54bd3eb762d760296d0f5de1cf793d1e5311efe4fede3adb97b72e"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "OSforGFF/Guardrails.lean",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/OSforGFF/Guardrails.lean",
+      "sha256": "b675f0dee0789851f12d66ddf451fa578c4a399dd9a4539ead1700aec503dd05"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "lean-toolchain",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/lean-toolchain",
+      "sha256": "62c2d9c0fc1ec4c67e151c11eff41ca004ef38e179cf9476c230406e6defedef"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "lake-manifest.json",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/lake-manifest.json",
+      "sha256": "60d8df65c491b267b5b865d797ecc281aa983d05e635dee703a8c497adfff82b"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": ".github/workflows/ci.yml",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/.github/workflows/ci.yml",
+      "sha256": "31e8d9ca33f44aacef1f65c8ebc09aff58d28edae77e499b94c4eaa602182481"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.15770v1",
+      "path": "formalization_qft_arxiv.html",
+      "sha256": "c857b796edd4b14506c6eafcd65c1df96c04f36fd2c20fd1534fd025ca05e1ce"
+    },
+    {
+      "url": "https://api.github.com/repos/mrdouglasny/OSforGFF/actions/runs/33391397404",
+      "path": "osforgff_ci.json",
+      "sha256": "929645d873abc57b63680137a528c8883b26b214727d2f9414ad6820d20f6c36"
+    },
+    {
+      "repository": "bochner",
+      "commit": "58405ecd328cf8383a1c0b53d37605fe61a0b3f6",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/bochner/58405ecd328cf8383a1c0b53d37605fe61a0b3f6/LICENSE",
+      "sha256": "8ebdd6164d5245aba45342f898b1a9f1c1509246a22fdf3002a66bbbe5d70089"
+    },
+    {
+      "repository": "OSforGFF",
+      "commit": "fef84a82937dfd2bb7f672108a72da329d3ef0fd",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/mrdouglasny/OSforGFF/fef84a82937dfd2bb7f672108a72da329d3ef0fd/LICENSE",
+      "sha256": "375bd1c170a96855dc3177b9da61c46bb4dd92fbe54b6ca1e59c4dcf7ba2586b"
+    },
+    {
+      "url": "https://arxiv.org/abs/2112.05562v2",
+      "path": "barashkov_gubinelli_arxiv.html",
+      "sha256": "892cd1f6660a412b36a01fc2592cafb5ca8ee05d1975bb8a1ed48b0858e8ce52"
+    }
+  ]
+}

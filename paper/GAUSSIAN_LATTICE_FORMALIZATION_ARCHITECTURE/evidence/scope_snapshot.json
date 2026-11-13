@@ -1,0 +1,254 @@
+{
+  "source": "proof_graph/theory_graph.yaml",
+  "source_sha256": "b372198fb43b26b322deadc07848d005a2482d4f509d044c23423892f8c6e16e",
+  "interpretation": "Archived selected state, not independent proof or future authority. Historical descriptions may have superseded vocabulary.",
+  "nodes": {
+    "INTERACTING_SCALAR_2D_COMPLETE": {
+      "status": "PROVED_PAPER",
+      "requires": [
+        "PPHI2_MEASURE_EXISTS",
+        "PPHI2_WICK_ORDERING",
+        "PPHI2_NELSON_BOUND",
+        "PPHI2_OS_POSITIVITY",
+        "PPHI2_MASS_GAP",
+        "PPHI2_NONTRIVIALITY",
+        "OS_RECONSTRUCTION"
+      ],
+      "next_gate": "FORMALIZED",
+      "evidence": [
+        {
+          "type": "paper",
+          "ref": "Glimm\u2013Jaffe\u2013Spencer, Ann. of Math. 100 (1974) 585\u2013632\uff08P(\u03c6)\u2082 \u7684 Wightman \u516c\u7406\u4e0e\u7c92\u5b50\u7ed3\u6784\uff09\uff1b Nelson 1973\uff08Nelson \u6307\u6570\u754c/\u8d85\u538b\u7f29\uff09\uff1bGuerra\u2013Rosen\u2013Simon, Ann. of Math. 101 (1975) 111\u2013259 \uff08RP \u7684\u683c\u70b9\u8f6c\u79fb\uff09\uff1bSimon, The P(\u03c6)\u2082 Euclidean (Quantum) Field Theory (1974)\n"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_global_proof.md\uff082026-09-13 \u5168\u5c40\u7eb8\u9762\u95ed\u5408\uff1a\u8bc1\u660e\u300c\u5047\u8bbe\u7ec4 A \u27f9 \u4e3b\u5b9a\u7406\u300d\uff1b S4 \u5185\u90e8\u95ed\u5408\uff0cS1/S3/S7 \u90e8\u5206\u5185\u90e8\u95ed\u5408\uff0cS2/S5/S6 \u5f52\u7ea6\u5230\u5177\u540d\u8f93\u5165\uff09"
+        },
+        {
+          "type": "symbolic",
+          "ref": "verify/pphi2_global_probe.py\uff08P1\u2013P6\uff1b\u5df2\u5e76\u5165 run_checks\uff0c121/121\uff09"
+        },
+        {
+          "type": "stage",
+          "ref": "\u672c\u5730\u590d\u73b0\u8d77\u70b9 = proofs/pphi2_reproduction_plan.md\uff1b\u4e0a\u6e38\u767b\u8bb0 = docs/upstream/pphi2/README.md\uff1b \u4e0a\u6e38 discharge plans = docs/upstream/pphi2/discharge_plans.md\uff08CYL-1a 4 \u5c42 / R\u00b2 \u7d27\u6027 / keystone 18\uff09"
+        }
+      ]
+    },
+    "PPHI2_MEASURE_R2_LIMIT": {
+      "status": "PROVED_PAPER",
+      "requires": [
+        "PPHI2_MEASURE_FINITE_VOL",
+        "PPHI2_NELSON_VOLUME",
+        "PPHI2_WICK_ORDERING",
+        "PPHI2_R2_COERCIVE_TIGHTNESS"
+      ],
+      "evidence": [
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_cluster_expansion_core.md \u00a73\uff08\u6307\u6570\u805a\u7c07 \u27f9 \u5747\u5300\u4e8c\u9636\u77e9 \u27f9 Mitoma/Prokhorov \u27f9 \u7d27\u6027\uff09"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_r2_tightness.md\uff08\u5b9a\u7406 3.1 Mitoma \u5f52\u7ea6\uff1bUV \u5bf9\u6570\u7cfb\u6570 1/2\u03c0 \u7cbe\u786e\uff1b5 \u6761\u516c\u7406\u9010\u6761\u8bc4\u4f30\uff09"
+        },
+        {
+          "type": "numeric",
+          "ref": "verify/pphi2_r2_probe.py T1\uff08UV \u5bf9\u6570\uff09/T2\uff08\u91cd\u6574\u5316\u4e24\u70b9\u754c\uff09/T3\uff08HS \u5d4c\u5165\uff09"
+        },
+        {
+          "type": "paper",
+          "ref": "Fr\u00f6hlich, Adv. Math. 23 (1976)\uff1bPark, J. Math. Phys. 18 (1977)\uff1bGlimm\u2013Jaffe Ch. 11\uff1b\u4e0a\u6e38 `pphi2_limit_exists`"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_r2_coercivity_route.md"
+        },
+        {
+          "type": "numeric",
+          "ref": "verify/pphi2_r2_coercivity_tightness_probe.py"
+        },
+        {
+          "type": "paper",
+          "ref": "Barashkov\u2013Gubinelli, arXiv:2112.05562 v2, \u00a72 (Lemma 21/23, Theorem 22, Lemma 24)\u2014\u2014\u77eb\u987d\u6027\u27f9\u6307\u6570\u7d27\u6027\uff0c\u5e38\u6570\u4e0e |\u039b| \u65e0\u5173\uff0c\u4e0d\u7528\u805a\u7c07"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_r2_ir_uniform.md"
+        }
+      ]
+    },
+    "PPHI2_OS_POSITIVITY": {
+      "status": "PROVED_PAPER",
+      "requires": [
+        "PPHI2_MEASURE_EXISTS",
+        "PPHI2_WICK_ORDERING",
+        "PPHI2_FREE_FIELD_2D"
+      ],
+      "evidence": [
+        {
+          "type": "paper",
+          "ref": "Guerra\u2013Rosen\u2013Simon, Ann. of Math. 101 (1975) 111\u2013259\uff1bOsterwalder\u2013Schrader II (1975)"
+        },
+        {
+          "type": "paper",
+          "ref": "\u4e0a\u6e38\u767b\u8bb0\uff08\u80fd\u529b\u57fa\u7ebf\uff0c**\u975e**\u672c\u9879\u76ee\u5bf9\u672c\u5bf9\u8c61\u7684 Lean\uff09\uff1amrdouglasny/pphi2 \u67f1\u9762 OS0\u2013OS3\uff08RP \u5df2\u5b8c\u5168\u843d\u5b9e\uff0c0 \u516c\u7406\uff09"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_global_proof.md \u00a7S4\uff08\u5b9a\u7406 S4\uff1aRP \u7ecf e^{\u2212H} \u4f20\u9012\uff0c\u8de8\u53cd\u5c04\u9762\u56e0\u5f0f\u5206\u89e3\uff09"
+        },
+        {
+          "type": "numeric",
+          "ref": "verify/pphi2_global_probe.py P5"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_free_field_2d.md"
+        },
+        {
+          "type": "numeric",
+          "ref": "verify/pphi2_free_field_2d_probe.py FF1-FF10, NC1-NC2"
+        }
+      ]
+    },
+    "RP_COVARIANCE": {
+      "status": "PROVED_PAPER",
+      "requires": [
+        "S1_DISTRIBUTION_IDENTIFICATION",
+        "SCHWINGER_FUNCTIONS"
+      ],
+      "next_gate": "FORMALIZED",
+      "evidence": [
+        {
+          "type": "proof",
+          "ref": "proofs/os1_reflection_positivity.md RP-COV\uff08\u7a7a\u95f4 Fourier \u6b63\u56e0\u5b50\u5206\u89e3\uff0c\u7eb8\u9762\u95ed\u5408\uff09"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/rp_chain.md \u547d\u9898 C + \u00a70 N3 \u7ea6\u5b9a\u6838\u5bf9\uff08\u4e0e\u8bba\u6587 (B.19)-(B.26) \u53ea\u5dee\u6b63\u56e0\u5b50 (2pi)^4\uff0c\u53cd\u5c04\u6b63\u6027\u6b63\u9f50\u6b21 \u21d2 \u7b49\u4ef7\uff09"
+        },
+        {
+          "type": "paper",
+          "ref": "arXiv:2603.15770 B.4 (B.19)-(B.26)\uff08Schwinger \u53c2\u6570\u5316\u8def\u7ebf\uff0c\u5907\u9009\uff09"
+        }
+      ]
+    },
+    "OS_RECONSTRUCTION": {
+      "status": "LITERATURE",
+      "requires": [
+        "RECONSTRUCTION"
+      ],
+      "evidence": [
+        {
+          "type": "paper",
+          "ref": "Osterwalder\u2013Schrader 1973/75\uff08OS \u516c\u7406 \u21d2 Wightman \u573a\u91cd\u6784\uff09"
+        }
+      ]
+    },
+    "PPHI2_EXPONENTIAL_CLUSTERING": {
+      "status": "PROVED_PAPER",
+      "evidence": [
+        {
+          "type": "proof",
+          "ref": "proofs/pphi2_exponential_clustering.md"
+        },
+        {
+          "type": "numeric",
+          "ref": "verify/pphi2_exponential_clustering_probe.py EC1-EC7, NC1-NC2"
+        }
+      ]
+    },
+    "FS4D_PERIODIC_DISTRIBUTION_LIMIT": {
+      "status": "PROVED",
+      "requires": [
+        "PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT"
+      ],
+      "evidence": [
+        {
+          "type": "symbolic",
+          "ref": "verify/fs4d_periodic_gaussian_limit_probe.py"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/fs4d_periodic_gaussian_measure_limit.md"
+        },
+        {
+          "type": "lean",
+          "ref": "formal/lean/s6/pphi2_clean/AImathPPhi2Clean/RealFourierSecondMoment.lean",
+          "lean_provenance": "self",
+          "lean_version": "v4.34.0-rc2"
+        },
+        {
+          "type": "lean",
+          "ref": "formal/lean/s6/pphi2_clean/AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean",
+          "lean_version": "v4.34.0-rc2",
+          "lean_provenance": "self"
+        },
+        {
+          "type": "lean",
+          "ref": "formal/lean/s6/pphi2_clean/AImathPPhi2Clean/FiniteFourierCoordinateConvergence.lean",
+          "lean_provenance": "self",
+          "lean_version": "v4.34.0-rc2"
+        },
+        {
+          "type": "lean",
+          "ref": "formal/lean/s6/pphi2_clean/AImathPPhi2Clean/PeriodicFS4DProbeMoment.lean",
+          "lean_version": "v4.34.0-rc2",
+          "lean_provenance": "self"
+        }
+      ],
+      "next_gate": "REVIEW"
+    },
+    "PERIODIC3D_GAUSSIAN_RAW_LIFT_LIMIT": {
+      "status": "PROVED",
+      "requires": [
+        "FS4D_PERIODIC_DISTRIBUTION_LIMIT",
+        "PPHI2_FIXED_VOLUME_COVARIANCE_LIMIT"
+      ],
+      "evidence": [
+        {
+          "type": "proof",
+          "ref": "proofs/periodic3d_gaussian_raw_lift_limit.md"
+        },
+        {
+          "type": "lean",
+          "ref": "/home/zhengyj/AImath-lean/AImathPPhi2Clean/AImathPPhi2Clean/Periodic3DGaussianWeakLimit.lean#periodic3DFixedVolume_weak_tendsto_gaussianTarget",
+          "lean_provenance": "self",
+          "lean_version": "v4.34.0-rc2"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/periodic3d_hminus3_endpoint.md"
+        },
+        {
+          "type": "machine",
+          "ref": "deliverables/20261111_periodic3d_hminus3_endpoint.zip"
+        },
+        {
+          "type": "paper",
+          "ref": "deliverables/20261111_periodic_gaussian_3d_hminus3_complete.pdf"
+        }
+      ]
+    },
+    "PERIODIC5D_GAUSSIAN_RAW_LIFT_LIMIT": {
+      "status": "PROVED",
+      "evidence": [
+        {
+          "type": "lean",
+          "ref": "formal/lean/challenges/PERIODIC5D_GAUSSIAN_RAW_LIFT_LIMIT.check.lean",
+          "lean_version": "v4.34.0-rc2",
+          "lean_provenance": "self"
+        },
+        {
+          "type": "proof",
+          "ref": "proofs/periodic5d_gaussian_raw_lift_limit.md"
+        },
+        {
+          "type": "machine",
+          "ref": "deliverables/20261111_periodic5d_hminus3_endpoint.zip"
+        }
+      ]
+    }
+  },
+  "asof": "2026-11-13"
+}

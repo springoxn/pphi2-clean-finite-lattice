@@ -1,0 +1,2 @@
+import AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface
+#print axioms Pphi2Clean.Continuum.periodicResolventCovarianceMatrix_nonneg_quadratic_of_factorization

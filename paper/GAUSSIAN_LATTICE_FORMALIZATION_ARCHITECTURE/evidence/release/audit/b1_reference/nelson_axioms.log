@@ -1,0 +1,6 @@
+'Pphi2.canonicalSmoothInteraction_lower_bound_at_cutoff_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2.canonicalRoughError_cutoff_tail_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2.polynomial_chaos_exp_moment_bridge_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2.nelson_exponential_estimate_master' depends on axioms: [propext, Classical.choice, Quot.sound]

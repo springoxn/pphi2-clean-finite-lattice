@@ -2,7 +2,29 @@
 
 A Lean 4 development of finite periodic-lattice Gaussian fields and their fixed-volume continuum limits. The repository now includes a parameterized Lean theorem for **every positive integer dimension**; the older two-, three-, four- and five-dimensional results remain available as separate proof releases.
 
-**Start here:** [Arbitrary-dimensional theorem](#arbitrary-dimension) · [Lean source and replay](#reproduce-the-arbitrary-dimensional-proof) · [Results index](#results-index) · [Scope](#scope)
+**Start here:** [Architecture and dimensional constructions](#architecture-companion) · [Arbitrary-dimensional theorem](#arbitrary-dimension) · [Lean source and replay](#reproduce-the-arbitrary-dimensional-proof) · [Results index](#results-index) · [Scope and license](#scope-and-license)
+
+## Architecture companion
+
+The new **16-page architecture article** explains how the actual periodic lattice measures are connected to continuum coefficient laws, what can be reused, and where the source-specific mathematical work remains. It is a separate companion, not a replacement for the endpoint theorem paper below.
+
+| Read or reproduce | Artifact |
+|---|---|
+| Architecture article | [PDF](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/main.pdf) |
+| Portable source and evidence | [Source archive](deliverables/20261113_gaussian_lattice_formalization_architecture_sources.zip) · [LaTeX, build and audit](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/) |
+| Review findings and limits | [Audit notes](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/audit/AUDIT.md) · [Executed audit result](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/audit/result.json) |
+| Release downloads | [Architecture release](https://github.com/springoxn/pphi2-clean-finite-lattice/releases/tag/v2026.11.13-architecture) |
+
+The article presents the two-, three-, four- and five-dimensional constructions individually, including their different weights, target measures and proved carrier maps. It then explains five interfaces: actual-source Fourier identities, energy bounds and compactness, finite Gaussian marginal convergence, Borel/cylinder uniqueness, and whole-sequence convergence. Mathematical specialization of the quantified theorem is distinguished from a formally implemented identification of historical laws.
+
+The comparison with Bochner/Minlos, OSforGFF and the wider QFT formalization programme is pinned to inspected sources. In particular, the inspected OSforGFF theorem already treats every dimension at least two, and Bochner's proof itself uses weak-convergence methods. The distinction here is convergence of the specified periodic lattice laws, not arbitrary dimension alone. The broader reflection-positive and interacting-field work is described with its analytical evidence and external inputs separated from Gaussian Lean endpoints and reconstruction.
+
+```sh
+cd paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE
+python build.py
+```
+
+The article was compiled twice deterministically and rebuilt from its source archive in an independent directory with an identical PDF. Its audit checks frozen evidence and rendered output; it does not claim a fresh Lean replay.
 
 ## Arbitrary dimension
 
