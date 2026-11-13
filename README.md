@@ -1,17 +1,47 @@
 # pphi2-clean-finite-lattice
 
 Lean 4 proofs of finite periodic-lattice Gaussian fields and their fixed-volume
-continuum limits in **two, three, four, and five dimensions**. The repository name retains
+continuum limits in **arbitrary positive integer dimension**. The repository name retains
 its original two-dimensional history; all stated limits are massive **free-field**
 limits, not interacting constructions.
 
-## Dimensional synthesis: 2D through 5D and the fixed 122409D instance
+## Arbitrary-dimensional formalization and standalone article
+
+**[Read the article PDF](paper/ARBITRARY_DIMENSIONAL_GAUSSIAN_LIMIT/main.pdf)** ·
+[LaTeX sources, reproducible build and audit](paper/ARBITRARY_DIMENSIONAL_GAUSSIAN_LIMIT/) ·
+[Pinned standalone Lean project](projects/ARBITRARY_DIM_RAW_GAUSSIAN/) ·
+[Original server evidence archive](deliverables/20261112_arbitrary_dim_raw_gaussian.zip)
+
+For every positive integer `d`, every real target order `s > d/2`, and positive
+`L` and `mass`, the actual raw atomic lattice Gaussian laws at `N=n+1`, `a=L/N`
+converge weakly in the Fourier coefficient completion with weight
+`(1+‖k‖∞)^(-2s)`. The limit is uniquely characterized by all continuum Gaussian
+Fourier finite marginals. The [explicit quantified contract](projects/ARBITRARY_DIM_RAW_GAUSSIAN/SharpContractArbitraryDim.lean)
+proves this for arbitrary dimension and order; it does not assume convergence,
+tightness or a target identification. The range `s>d/2` is sufficient for the
+unsmoothed atomic approximants, not an optimal continuum-field regularity claim.
+
+Server builds and typed contracts pass at the included pinned Lean/Mathlib
+versions. Queried endpoints depend only on `propext`, `Classical.choice` and
+`Quot.sound`. The article distinguishes the coefficient-space realization from
+an external distribution-library isomorphism and does not claim interacting,
+infinite-volume or OS-reconstruction results.
+
+```sh
+cd projects/ARBITRARY_DIM_RAW_GAUSSIAN
+python verify_manifest.py
+lake exe cache get
+lake build AImathPPhi2Clean.ActualWeakLimitArbitraryDim
+lake env lean SharpContractArbitraryDim.lean
+```
+
+## Historical dimensional synthesis: 2D through 5D and the fixed 122409D instance
 
 **[Read the article PDF](paper/PERIODIC_GAUSSIAN_DIMENSIONAL_SWEEP/periodic_gaussian_dimensional_sweep.pdf)** ·
 [LaTeX source and build/audit instructions](paper/PERIODIC_GAUSSIAN_DIMENSIONAL_SWEEP/) ·
 [Standalone pinned 122409D Lean project](projects/D122409_RAW_GAUSSIAN/)
 
-The article gives an analytic raw-lift convergence proof for every fixed integer dimension `d >= 1` and target order `s > d/2`, then distinguishes it from the Lean endpoints actually released at `d = 2, 3, 4, 5, 122409`. The arbitrary-dimensional convergence proof is **not** a generic Lean theorem. The included 122409D endpoint converges in weighted Fourier H^-61206 with stronger H^-61205 source energy; its Lean toolchain and Mathlib revision are pinned.
+The historical article gives an analytic raw-lift convergence proof for every fixed integer dimension `d >= 1` and target order `s > d/2`, then distinguishes it from the Lean endpoints released with that article at `d = 2, 3, 4, 5, 122409`. At that snapshot the arbitrary-dimensional convergence proof was **not** a generic Lean theorem; the separate article and project above now provide the parameterized theorem. The included 122409D endpoint converges in weighted Fourier H^-61206 with stronger H^-61205 source energy; its Lean toolchain and Mathlib revision are pinned.
 
 ## Three-dimensional H-minus-three endpoint and combined article
 

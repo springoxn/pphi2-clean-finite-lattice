@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "asof": "2026-11-12",
+  "source": "python audit/audit.py",
+  "archive_sha256": "d1e9ab6b5f0790c2cc87d6dabfb91aee7292c8b8d5702181f8e4b903b90c497b",
+  "verified_file_hashes": 73,
+  "axiom_reports": 14,
+  "negative_controls": 3,
+  "generic_source_files": 15,
+  "pdf_pages": 8,
+  "pdf_sha256": "32f3de511752dc1e8678a7787dcd3c3dfb26f926245dc50bd9dba03641e83f2a"
+}

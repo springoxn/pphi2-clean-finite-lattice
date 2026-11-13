@@ -1,0 +1,42 @@
+SharpContractArbitraryDim.lean:23:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+SharpContractArbitraryDim.lean:41:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+sharp_actual_raw_gaussian_weak_convergence : ∀ (d : ℕ) (hd : 0 < d) (s : ℝ) (hs : ↑d / 2 < s) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass),
+  ∃! ν,
+    Tendsto (actualTargetProbabilityMeasure_fixedVolume L mass hL hmass) atTop (𝓝 ν) ∧
+      ∀ (t : Finset Index), ν.map (targetFiniteCoordinates t) = targetFiniteGaussianLimit t L mass hL hmass
+sharp_target_weight : ∀ (d : ℕ) (hd : 0 < d) (s : ℝ) (hs : ↑d / 2 < s) (k : Fin d → ℤ),
+  targetWeight k = (1 + ‖k‖) ^ (-2 * s)
+@actualRawAtomicLift_eq_rawAtomicFourierLift : ∀ [inst : Parameters] (N : ℕ) [inst_1 : NeZero N] (a L : ℝ) (hL : 0 < L)
+  (ξ : FiniteConfig N) (k : Index),
+  actualRawAtomicLift N a L hL ξ k = ArbitraryDimRawLift.rawAtomicFourierLift N a L (rawLiftSourceFielddimension ξ) k
+@actualTargetLift_apply : ∀ [inst : Parameters] (N : ℕ) [inst_1 : NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L)
+  (ξ : FiniteConfig N) (k : Index),
+  ↑(actualTargetLift N a L ha hL ξ) k = ↑√(targetWeight k) * actualRawAtomicLift N a L hL ξ k
+@targetFiniteGaussianLimit_isGaussian : ∀ [inst : Parameters] (s : Finset Index) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass), IsGaussian ↑(targetFiniteGaussianLimit s L mass hL hmass)
+'Pphi2Clean.ArbitraryDimContract.sharp_actual_raw_gaussian_weak_convergence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.ArbitraryDimContract.sharp_target_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.ArbitraryDimGaussian.actualRawAtomicLift_eq_rawAtomicFourierLift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.ArbitraryDimGaussian.actualTargetLift_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.ArbitraryDimGaussian.targetFiniteGaussianLimit_isGaussian' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
