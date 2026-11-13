@@ -1,0 +1,16 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/main
+COMMAND=["/home/zhengyj/.elan/bin/lake", "env", "lean", "audit/fs3_periodic_raw_lift_interface.lean"]
+'Pphi2Clean.Continuum.periodic3DFixedVolume_weak_tendsto_gaussianTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_marginal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_hasGaussianLaw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DGaussianTarget_fourierFamily_mean' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+EXIT=0

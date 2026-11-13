@@ -6,14 +6,14 @@ A Lean 4 development of finite periodic-lattice Gaussian fields and their fixed-
 
 ## Architecture companion
 
-The new **16-page architecture article** explains how the actual periodic lattice measures are connected to continuum coefficient laws, what can be reused, and where the source-specific mathematical work remains. It is a separate companion, not a replacement for the endpoint theorem paper below.
+The new **16-page architecture article by YJ ZHENG** explains how the actual periodic lattice measures are connected to continuum coefficient laws, what can be reused, and where the source-specific mathematical work remains. It is a separate companion, not a replacement for the endpoint theorem paper below.
 
 | Read or reproduce | Artifact |
 |---|---|
 | Architecture article | [PDF](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/main.pdf) |
 | Portable source and evidence | [Source archive](deliverables/20261113_gaussian_lattice_formalization_architecture_sources.zip) · [LaTeX, build and audit](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/) |
 | Review findings and limits | [Audit notes](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/audit/AUDIT.md) · [Executed audit result](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/audit/result.json) |
-| Release downloads | [Architecture release](https://github.com/springoxn/pphi2-clean-finite-lattice/releases/tag/v2026.11.13-architecture) |
+| Release downloads | [Architecture release](https://github.com/springoxn/pphi2-clean-finite-lattice/releases/tag/v2026.11.13-architecture-yj-zheng) |
 
 The article presents the two-, three-, four- and five-dimensional constructions individually, including their different weights, target measures and proved carrier maps. It then explains five interfaces: actual-source Fourier identities, energy bounds and compactness, finite Gaussian marginal convergence, Borel/cylinder uniqueness, and whole-sequence convergence. Mathematical specialization of the quantified theorem is distinguished from a formally implemented identification of historical laws.
 
@@ -24,7 +24,7 @@ cd paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE
 python build.py
 ```
 
-The article was compiled twice deterministically and rebuilt from its source archive in an independent directory with an identical PDF. Its audit checks frozen evidence and rendered output; it does not claim a fresh Lean replay.
+The article was compiled twice deterministically and rebuilt from its source archive in an independent directory with an identical PDF. Separate fresh server builds and endpoint replays passed for the pinned two-, three-, four-, five- and arbitrary-dimensional Gaussian sources: 13 version/build/contract steps and 37 contract axiom reports within `{propext, Classical.choice, Quot.sound}`. Commands, exact source hashes, toolchain output, exits and the initial missing-build-target correction are retained in [server replay evidence](paper/GAUSSIAN_LATTICE_FORMALIZATION_ARCHITECTURE/evidence/server_replay/). Pinned Mathlib dependency artifacts were reused; upstream and interacting-field proofs were not replayed. The LaTeX build audits these transcripts but does not itself execute Lean. [Agent rules](AGENTS.md) require `YJ ZHENG` authorship for future articles/rebuilds and server execution for Lean builds/replays.
 
 ## Arbitrary dimension
 

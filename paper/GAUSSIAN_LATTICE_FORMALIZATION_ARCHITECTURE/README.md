@@ -1,6 +1,6 @@
 # Architecture Companion: Build and Evidence
 
-This is a new, standalone architectural companion. It does not modify or replace the earlier arbitrary-dimensional endpoint paper.
+This is a new, standalone architectural companion by **YJ ZHENG**. It does not modify or replace the earlier arbitrary-dimensional endpoint paper. Future explicit revisions and rebuilds must retain this author in LaTeX, the visible PDF and PDF metadata; the build and audit enforce it.
 
 ## Build
 
@@ -22,6 +22,8 @@ The build compiles twice with a fixed `SOURCE_DATE_EPOCH`, requires byte-identic
 - `evidence/release/`: selected byte-preserved files from public commit `0c082ff7f33ae42876123507b2bb108e1089c2c2`.
 - `evidence/release/projects/ARBITRARY_DIM_RAW_GAUSSIAN/`: standalone pinned generic source closure and recorded build/contract transcripts.
 - `evidence/release/paper/PERIODIC_GAUSSIAN_5D_HMINUS3/`: separately pinned 5D source archive.
+- `evidence/server_replay/`: fresh server build/contract output, exact input hashes and commands; `attempt-1/` preserves the initially incomplete build-target run.
+- `audit/server_replay.py`: Linux-server-only runner for isolated copies of the pinned dimensional, arbitrary-dimensional and five-dimensional projects. It reuses pinned Mathlib dependency artifacts but rebuilds the local modules in isolated build directories; it is not a clean rebuild of Mathlib itself.
 - `evidence/upstream/`: pinned source captures, licenses, bibliographic HTML and upstream CI status; no independent upstream build is claimed.
 - `evidence/scope_snapshot.json`: archived selected registry fields, not independent certification or future state authority.
 - `evidence/analysis/`: historical analytical notes used to locate the broader programme; these are not newly checked Lean proofs, and may cite inputs outside the package.

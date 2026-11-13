@@ -1,0 +1,5 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/main
+COMMAND=["/home/zhengyj/.elan/bin/lake", "env", "lean", "audit/fs3_periodic_raw_lift_interface.lean"]
+audit/fs3_periodic_raw_lift_interface.lean:1:0: error: object file '/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/main/.lake/build/lib/lean/AImathPPhi2Clean/Periodic3DGaussianFourierMarginals.olean' of module AImathPPhi2Clean.Periodic3DGaussianFourierMarginals does not exist
+
+EXIT=1

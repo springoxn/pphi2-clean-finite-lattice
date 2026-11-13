@@ -11,6 +11,8 @@ ROOT = Path(__file__).resolve().parent
 
 
 def main():
+    if r'\author{YJ ZHENG}' not in (ROOT / 'main.tex').read_text(encoding='utf-8'):
+        raise AssertionError('Article author must be YJ ZHENG')
     engine = os.environ.get('TECTONIC') or shutil.which('tectonic')
     fallback = Path(r'D:\Anaconda\envs\latex\Library\bin\tectonic.exe')
     if not engine and fallback.is_file():

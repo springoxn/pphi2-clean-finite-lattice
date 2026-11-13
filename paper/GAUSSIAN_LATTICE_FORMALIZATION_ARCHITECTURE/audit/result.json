@@ -1,12 +1,15 @@
 {
   "status": "PASS",
-  "source_manifest_files": 458,
+  "source_manifest_files": 489,
   "generic_manifest_files": 73,
   "recorded_axiom_reports": 35,
+  "server_replay_steps": 13,
+  "server_replay_axiom_reports": 37,
+  "author": "YJ ZHENG",
   "negative_controls": 4,
   "pdf_pages": 16,
   "pdf_table_captions": 3,
   "overfull_hboxes": 0,
-  "pdf_sha256": "124bc1bc356d1b98bb85f0bfc5e8b4a72ace046ceca19e0806b3b2bdea517e48",
-  "evidence_boundary": "Hash/source/transcript/PDF audit. No fresh Lean replay; no interacting-proof certification."
+  "pdf_sha256": "566b83cc3f4e9abc35a216d0c62cd82211996f056fe452002cb4b60cd10126f7",
+  "evidence_boundary": "Hash/source/transcript/PDF audit, including fresh isolated server builds and local Gaussian endpoint replays. No independent upstream build or interacting-proof certification."
 }

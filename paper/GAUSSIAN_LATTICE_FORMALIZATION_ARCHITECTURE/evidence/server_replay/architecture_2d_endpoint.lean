@@ -1,0 +1,3 @@
+import AImathPPhi2Clean.PeriodicHMinusThreeWeakLimitMarginal
+#check @Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders
+#print axioms Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders

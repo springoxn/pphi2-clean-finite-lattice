@@ -11,7 +11,8 @@
 \newcommand{\E}{\mathbb E}\newcommand{\HH}{\mathcal H_{-s}^{\mathrm{Fourier}}}
 \newcommand{\ev}[1]{\par\smallskip\noindent\textit{Evidence.} #1\par\smallskip}
 \title[From lattice measures to continuum laws]{From periodic lattice measures to continuum laws:\\architecture, dimensional case studies, and the scope of a Lean formalization}
-\author{AImath Project}
+\author{YJ ZHENG}
+\hypersetup{pdfauthor={YJ ZHENG}}
 \date{November 13, 2026}
 \subjclass[2020]{Primary 60B10; Secondary 60G15, 60G60, 68V15}
 \keywords{Lean 4, Gaussian field, lattice approximation, weak convergence, formalization architecture}
@@ -287,14 +288,14 @@ The present source package includes a selected byte-preserved evidence tree, the
 \subsection{What this article's audit establishes}
 The companion audit checks evidence hashes, expected source declarations, recorded generic contract footprints, elementary normalization and weight identities, citation/reference resolution, and the produced PDF's page bounds and expected sections. It includes deliberately corrupted hash, axiom and source-anchor controls. The source and final PDF checks are separate because extracting PDF text can erase a conjugation bar even when it is typeset correctly.
 
-No new Lean build of the local or upstream projects is performed by the LaTeX build. The reproducibility commands above describe a fresh replay; the bundled logs describe recorded successful execution. The audit cannot decide completeness of the analytical interacting-field arguments or establish a formal distribution-space identification. The project author metadata remains a project attribution; personal authorship and affiliations require confirmation before submission.
+The LaTeX build does not itself run Lean. For this author-confirmed revision, separate fresh server builds and endpoint replays were performed on isolated copies of the pinned two-, three-, four-, five- and arbitrary-dimensional Gaussian sources. The package records their exact source hashes, toolchain output, commands, exits and queried axiom footprints in \path{evidence/server_replay/}. Existing pinned Mathlib dependency artifacts were reused; the local Gaussian modules were built in isolated build directories. The initial run omitted a module imported only by a three-dimensional contract and reported a missing object file; after adding that explicit build target, all thirteen version, build and contract steps passed. Both attempts are retained. This is not an independent upstream Bochner/Minlos or OSforGFF build. The audit cannot decide completeness of the analytical interacting-field arguments or establish a formal distribution-space identification. The author has confirmed the attribution YJ ZHENG; no affiliation is asserted.
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}>{\raggedright\arraybackslash}p{.61\textwidth}@{}}
 \caption{Evidence ledger and explicit limits.}\label{tab:evidence}\\
 \toprule Claim & Evidence and qualification\\\midrule\endfirsthead
 \toprule Claim & Evidence and qualification\\\midrule\endhead
-Parameterized actual-source weak limit & Released source, typed contracts and recorded server build. This article does not rerun the kernel.\\
-2--5D construction stages & Historical modules, carrier definitions, contracts and 5D archive; not a claim of definitional identity of all targets.\\
+Parameterized actual-source weak limit & Released source and typed contracts, freshly built and replayed on the server; exact input hashes and axiom reports retained.\\
+2--5D construction stages & Pinned modules and 5D archive, with fresh server endpoint replays; not definitional identity of all targets.\\
 Reusable compactness and uniqueness & Explicit source-energy, truncation, cylinder and full-sequence modules; new sources must discharge their hypotheses.\\
 Relation to upstream work & Pinned repository source statements and bibliographic sources; no independent upstream build reported.\\
 Broader interacting and reflection-positive work & Selected analytical notes and dated registry excerpt; not a released arbitrary-dimensional interacting Lean theorem.\\

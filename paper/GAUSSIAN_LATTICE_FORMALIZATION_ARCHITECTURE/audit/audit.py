@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check source/evidence integrity and the rendered PDF, not Lean kernel replay."""
+"""Check pinned sources, fresh server replay evidence, authorship and the rendered PDF."""
 from pathlib import Path
 from fractions import Fraction
 import hashlib
@@ -38,6 +38,51 @@ def axioms(text):
 
 def has_anchor(source, anchor):
     require(anchor in source, 'missing declaration: ' + anchor)
+
+
+def server_replay():
+    folder = ROOT / 'evidence/server_replay'
+    result = json.loads((folder / 'result.json').read_text())
+    require(result['status'] == 'PASS', 'server replay did not pass')
+    require(result['lake'] == '/home/zhengyj/.elan/bin/lake', 'unexpected server Lean executable')
+    expected = {
+        ('dimensional', 'version'), ('dimensional', 'build'),
+        ('dimensional', 'architecture_2d_endpoint'), ('dimensional', 'periodic3d_hminus3_endpoint'),
+        ('dimensional', 'fs3_periodic_raw_lift_interface'), ('dimensional', 'fs4_periodic_raw_lift_interface'),
+        ('generic', 'version'), ('generic', 'build'), ('generic', 'SharpContractArbitraryDim'),
+        ('generic', 'EndpointContractArbitraryDim'), ('five', 'version'), ('five', 'build'),
+        ('five', 'periodic5d_hminus3_endpoint'),
+    }
+    require({(s['project'], s['name']) for s in result['steps']} == expected, 'incomplete server replay scope')
+    reports = 0
+    for step in result['steps']:
+        require(step['pass'] and step['exit'] == 0, 'failed server step')
+        data = (folder / step['log']).read_bytes()
+        verify_hash(data, step['sha256'])
+        text = data.decode('utf-8')
+        require('EXIT=0' in text, 'missing server exit marker')
+        require(step['command'][0] == result['lake'], 'server command differs')
+        if step['name'] not in {'build', 'version'}:
+            reports += axioms(text)
+        elif step['name'] == 'build':
+            require('Build completed successfully' in text, 'missing successful server build')
+        else:
+            require('4.34.0-rc2' in text, 'unexpected Lean version')
+    source_hashes = result['source_sha256']
+    release = ROOT / 'evidence/release'
+    for p in (release / 'AImathPPhi2Clean').rglob('*.lean'):
+        key = 'main/' + p.relative_to(release).as_posix()
+        verify_hash(p.read_bytes(), source_hashes[key])
+    generic = release / 'projects/ARBITRARY_DIM_RAW_GAUSSIAN'
+    for p in generic.rglob('*'):
+        if p.is_file() and (p.suffix == '.lean' or p.name in {'lake-manifest.json', 'lean-toolchain'}):
+            verify_hash(p.read_bytes(), source_hashes['generic/' + p.relative_to(generic).as_posix()])
+    archive = release / 'paper/PERIODIC_GAUSSIAN_5D_HMINUS3/periodic_gaussian_5d_hminus3_endpoint.zip'
+    with zipfile.ZipFile(archive) as z:
+        for name in z.namelist():
+            if name.endswith('.lean') or name in {'lake-manifest.json', 'lean-toolchain'}:
+                verify_hash(z.read(name), source_hashes['five/' + name])
+    return len(result['steps']), reports
 
 
 def main():
@@ -102,6 +147,7 @@ def main():
             rejected += 1
     require(rejected == 4, 'negative controls failed')
     tex = (ROOT / 'main.tex').read_text(encoding='utf-8')
+    require(r'\author{YJ ZHENG}' in tex, 'required author is YJ ZHENG')
     cites = {v for group in re.findall(r'\\cite\{([^}]+)\}', tex) for v in group.split(',')}
     bib = set(re.findall(r'\\bibitem\{([^}]+)\}', tex))
     require(cites <= bib, 'undefined citation')
@@ -111,6 +157,8 @@ def main():
     pdf = ROOT / 'main.pdf'
     doc = fitz.open(pdf)
     text = ' '.join(' '.join(p.get_text().split()) for p in doc)
+    require('YJ ZHENG' in doc[0].get_text(), 'author missing from first PDF page')
+    require(doc.metadata.get('author') == 'YJ ZHENG', 'PDF author metadata differs')
     for phrase in ['Two through five dimensions', 'Reusable interfaces', 'Relation to Lean probability',
                    'wider research programme', 'Evidence ledger', 'References']:
         require(phrase.lower() in text.lower(), 'missing PDF section: ' + phrase)
@@ -131,10 +179,13 @@ def main():
         log = logpath.read_text(encoding='utf-8')
         warnings = re.findall(r'Overfull \\hbox[^\n]*', log)
         require(not warnings, 'overfull horizontal boxes: ' + repr(warnings))
+    server_steps, server_reports = server_replay()
     result = {'status': 'PASS', 'source_manifest_files': len(entries), 'generic_manifest_files': generic_hashes,
-              'recorded_axiom_reports': reports, 'negative_controls': rejected, 'pdf_pages': len(doc),
+              'recorded_axiom_reports': reports, 'server_replay_steps': server_steps,
+              'server_replay_axiom_reports': server_reports, 'author': 'YJ ZHENG',
+              'negative_controls': rejected, 'pdf_pages': len(doc),
               'pdf_table_captions': captions, 'overfull_hboxes': len(warnings), 'pdf_sha256': sha(pdf.read_bytes()),
-              'evidence_boundary': 'Hash/source/transcript/PDF audit. No fresh Lean replay; no interacting-proof certification.'}
+              'evidence_boundary': 'Hash/source/transcript/PDF audit, including fresh isolated server builds and local Gaussian endpoint replays. No independent upstream build or interacting-proof certification.'}
     (ROOT / 'audit/result.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(result, indent=2))
     return 0

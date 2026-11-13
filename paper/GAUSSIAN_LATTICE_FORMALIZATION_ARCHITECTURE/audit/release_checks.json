@@ -3,5 +3,7 @@
   "governance_specification": 0,
   "new_article_dangling_references": 0,
   "broad_probe_suite": "Stopped deliberately before completion; not claimed as passed; no Lean sources or proof states changed.",
-  "relocated_build": "PASS; independently extracted source rebuild produced the same PDF bytes; see relocated_build.log."
+  "relocated_build": "PASS: author-corrected article rebuilt byte-identically from independently extracted source package",
+  "author": "YJ ZHENG",
+  "fresh_server_replay": "PASS: 13 steps; 37 endpoint axiom reports; exact hashes checked"
 }

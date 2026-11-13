@@ -1,0 +1,12 @@
+dimensional version PASS
+dimensional build PASS
+dimensional architecture_2d_endpoint PASS
+dimensional periodic3d_hminus3_endpoint PASS
+dimensional fs3_periodic_raw_lift_interface FAIL
+generic version PASS
+generic build PASS
+generic SharpContractArbitraryDim PASS
+generic EndpointContractArbitraryDim PASS
+five version PASS
+five build PASS
+five periodic5d_hminus3_endpoint PASS

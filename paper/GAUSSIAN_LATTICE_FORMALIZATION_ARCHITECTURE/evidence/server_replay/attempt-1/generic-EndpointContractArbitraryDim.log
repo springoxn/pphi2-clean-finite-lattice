@@ -1,0 +1,63 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/generic
+COMMAND=["/home/zhengyj/.elan/bin/lake", "env", "lean", "EndpointContractArbitraryDim.lean"]
+EndpointContractArbitraryDim.lean:7:0: warning: Definition `Pphi2Clean.ArbitraryDimContract.parameters` of class type is semireducible. Most type class instances should be instance-reducible, so consider marking this
+definition with `@[instance_reducible]`. If it is intentionally semireducible, this warning can be disabled with `set_option warn.classDefReducibility false`.
+EndpointContractArbitraryDim.lean:21:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+EndpointContractArbitraryDim.lean:24:0: warning: Definition `Pphi2Clean.ArbitraryDimContract.defaultParameters` of class type is semireducible. Most type class instances should be instance-reducible, so consider marking this
+definition with `@[instance_reducible]`. If it is intentionally semireducible, this warning can be disabled with `set_option warn.classDefReducibility false`.
+EndpointContractArbitraryDim.lean:32:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+EndpointContractArbitraryDim.lean:39:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+EndpointContractArbitraryDim.lean:46:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+arbitrary_dimensional_actual_raw_gaussian_weak_convergence : ∀ (d : ℕ) (hd : 0 < d) (r : ℝ) (hr : ↑d / 2 < r)
+  (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass),
+  ∃! ν,
+    Tendsto (actualTargetProbabilityMeasure_fixedVolume L mass hL hmass) atTop (𝓝 ν) ∧
+      ∀ (s : Finset Index), ν.map (targetFiniteCoordinates s) = targetFiniteGaussianLimit s L mass hL hmass
+@actualRawAtomicLift_eq_rawAtomicFourierLift : ∀ [inst : Parameters] (N : ℕ) [inst_1 : NeZero N] (a L : ℝ) (hL : 0 < L)
+  (ξ : FiniteConfig N) (k : Index),
+  actualRawAtomicLift N a L hL ξ k = ArbitraryDimRawLift.rawAtomicFourierLift N a L (rawLiftSourceFielddimension ξ) k
+@actualTargetLift_apply : ∀ [inst : Parameters] (N : ℕ) [inst_1 : NeZero N] (a L : ℝ) (ha : 0 < a) (hL : 0 < L)
+  (ξ : FiniteConfig N) (k : Index),
+  ↑(actualTargetLift N a L ha hL ξ) k = ↑√(targetWeight k) * actualRawAtomicLift N a L hL ξ k
+@targetFiniteGaussianLimit_isGaussian : ∀ [inst : Parameters] (s : Finset Index) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass), IsGaussian ↑(targetFiniteGaussianLimit s L mass hL hmass)
+'Pphi2Clean.ArbitraryDimContract.arbitrary_dimensional_actual_raw_gaussian_weak_convergence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.ArbitraryDimGaussian.actualRawAtomicLift_eq_rawAtomicFourierLift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.ArbitraryDimGaussian.actualTargetLift_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Pphi2Clean.ArbitraryDimGaussian.targetFiniteGaussianLimit_isGaussian' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+EXIT=0

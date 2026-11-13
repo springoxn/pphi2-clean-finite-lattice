@@ -1,0 +1,16 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/main
+COMMAND=["/home/zhengyj/.elan/bin/lake", "env", "lean", "audit/architecture_2d_endpoint.lean"]
+Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders : ∀ (L mass : ℝ)
+  (hL : 0 < L) (hmass : 0 < mass),
+  ∃ μfree,
+    Pphi2Clean.Continuum.periodicHMinusThreeFixedVolumeFreeFieldWeakLimit L mass hL hmass μfree ∧
+      ∀ (m : ℕ) (modes : Fin m → Pphi2Clean.Continuum.PeriodicFourierIndex),
+        μfree.map (Pphi2Clean.Continuum.periodicHMinusThreeCylinderMap m modes) =
+          (Pphi2Clean.Continuum.periodicResolventTargetProbabilityMeasure 2 (Fintype.card (Fin m × Bool)) L mass hmass
+                (Pphi2Clean.Continuum.periodicHMinusThreeCylinderTestFamily m L hL modes)).map
+            (Pphi2Clean.Continuum.periodicHMinusThreeComplexifyCylinder m modes)
+'Pphi2Clean.Continuum.periodicHMinusThree_fixedVolume_weak_limit_exists_with_expected_cylinders' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+EXIT=0

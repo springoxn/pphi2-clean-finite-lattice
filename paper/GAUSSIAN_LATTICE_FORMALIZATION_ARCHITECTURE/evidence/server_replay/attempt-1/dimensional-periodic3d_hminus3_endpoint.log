@@ -1,0 +1,55 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/main
+COMMAND=["/home/zhengyj/.elan/bin/lake", "env", "lean", "audit/periodic3d_hminus3_endpoint.lean"]
+Pphi2Clean.Continuum.periodic3DRawAtomicLift_integral_energy_hminusTwo_le (N : ℕ) [NeZero N] (a mass L : ℝ) (ha : 0 < a)
+  (hmass : 0 < mass) (hvol : a * ↑N = L) (hL : 0 < L) :
+  ∫ (ω : WeakDual ℝ (Fin (Fintype.card (Pphi2Clean.UpstreamLattice.FinLatticeSites 3 N)) → ℝ)),
+      ∑' (k : Periodic3DIndex),
+        periodic3DHminusTwoWeight k *
+          ‖periodic3DRawAtomicLift N a L hL ω k‖ ^
+            2 ∂finiteCovarianceGaussianMeasure (numberedLatticeCovarianceGJ 3 N a mass ha hmass) ≤
+    2 * (mass⁻¹ ^ 2 * L ^ 3) * ∑' (k : Periodic3DIndex), periodic3DHminusTwoWeight k
+Pphi2Clean.Continuum.periodic3DFixedVolumeProbabilityMeasureH3Set_tight (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass) :
+  MeasureTheory.IsTightMeasureSet {ρ | ∃ n, ρ = ↑(periodic3DFixedVolumeProbabilityMeasureH3 L mass hL hmass n)}
+Pphi2Clean.Continuum.periodic3DFixedVolumeH3_weak_tendsto_gaussianTarget (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass) :
+  Filter.Tendsto (periodic3DFixedVolumeProbabilityMeasureH3 L mass hL hmass) Filter.atTop
+    (nhds (periodic3DGaussianTargetProbabilityMeasureH3 L mass hL hmass))
+Pphi2Clean.Continuum.periodic3DGaussianTargetH3_map_inclusion (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass) :
+  (periodic3DGaussianTargetProbabilityMeasureH3 L mass hL hmass).map periodic3DH3ToH4 =
+    periodic3DGaussianTargetProbabilityMeasure L mass
+Pphi2Clean.Continuum.periodic3DGaussianTargetH3_fourierFamily_law {m : ℕ} (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass)
+  (modes : Fin m → Periodic3DIndex) (useSine : Fin m → Bool) :
+  (periodic3DGaussianTargetProbabilityMeasureH3 L mass hL hmass).map
+      (periodic3DFourierFamilyProjectionH3 L hL modes useSine) =
+    periodicResolventTargetProbabilityMeasure 3 m L mass hmass (periodic3DFourierTestFamily L hL modes useSine)
+Pphi2Clean.Continuum.periodic3DH3_probability_ext_of_fourierFamily_marginals (L : ℝ) (hL : 0 < L)
+  (μ ν : MeasureTheory.ProbabilityMeasure ↥Periodic3DCompletion)
+  (hmarg :
+    ∀ (m : ℕ) (modes : Fin m → Periodic3DIndex) (useSine : Fin m → Bool),
+      μ.map (periodic3DFourierFamilyProjectionH3 L hL modes useSine) =
+        ν.map (periodic3DFourierFamilyProjectionH3 L hL modes useSine)) :
+  μ = ν
+Pphi2Clean.Continuum.periodic3DGaussianTargetH3_unique_lift (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass)
+  (ν : MeasureTheory.ProbabilityMeasure ↥Periodic3DCompletion)
+  (hν : ν.map periodic3DH3ToH4 = periodic3DGaussianTargetProbabilityMeasure L mass) :
+  ν = periodic3DGaussianTargetProbabilityMeasureH3 L mass hL hmass
+'Pphi2Clean.Continuum.periodic3DRawAtomicLift_integral_energy_hminusTwo_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DFixedVolumeProbabilityMeasureH3Set_tight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DFixedVolumeH3_weak_tendsto_gaussianTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DGaussianTargetH3_map_inclusion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DGaussianTargetH3_fourierFamily_law' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DH3_probability_ext_of_fourierFamily_marginals' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Pphi2Clean.Continuum.periodic3DGaussianTargetH3_unique_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+EXIT=0

@@ -1,0 +1,123 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/five
+COMMAND=["/home/zhengyj/.elan/bin/lake", "env", "lean", "audit/periodic5d_hminus3_endpoint.lean"]
+Pphi2Clean.Continuum.periodic5DRawAtomicLift_uniform_hminusThree_tail : ∀ (mass L : ℝ) (hmass : 0 < mass) (hL : 0 < L)
+  {ε : ℝ},
+  0 < ε →
+    ∃ K,
+      ∀ (N : ℕ) [inst : NeZero N] (a : ℝ) (ha : 0 < a),
+        a * ↑N = L →
+          ∫ (ω : WeakDual ℝ (Fin (Fintype.card (Pphi2Clean.UpstreamLattice.FinLatticeSites 5 N)) → ℝ)),
+              ∑' (k : { k // k ∉ K }),
+                Pphi2Clean.Continuum.periodic5DHminusThreeWeight ↑k *
+                  ‖Pphi2Clean.Continuum.periodic5DRawAtomicLift N a L hL ω ↑k‖ ^
+                    2 ∂Pphi2Clean.Continuum.finiteCovarianceGaussianMeasure
+                (Pphi2Clean.Continuum.numberedLatticeCovarianceGJ 5 N a mass ha hmass) <
+            ε
+'Pphi2Clean.Continuum.periodic5DRawAtomicLift_uniform_hminusThree_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasureSet_tight : ∀ (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass),
+  MeasureTheory.IsTightMeasureSet
+    {ρ | ∃ n, ρ = ↑(Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasure L mass hL hmass n)}
+'Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasureSet_tight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DFixedVolume_prokhorov_subsequence : ∀ (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass)
+  (ns : ℕ → ℕ),
+  Filter.Tendsto ns Filter.atTop Filter.atTop →
+    ∃ ms ν,
+      StrictMono ms ∧
+        Filter.Tendsto
+          (fun k => Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasure L mass hL hmass (ns (ms k)))
+          Filter.atTop (nhds ν)
+'Pphi2Clean.Continuum.periodic5DFixedVolume_prokhorov_subsequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DFourierFamilyProjection_finiteSource_map : ∀ (m N : ℕ) [inst : NeZero N] (L mass : ℝ)
+  (hL : 0 < L) (hmass : 0 < mass) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool),
+  MeasureTheory.Measure.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine)
+      (Pphi2Clean.Continuum.periodic5DFiniteSourceGaussianMeasure N (L / ↑N) mass L ⋯ hmass) =
+    Pphi2Clean.Continuum.physicalFamilyEvalMeasure 5 N m (L / ↑N) mass ⋯ hmass
+      (Pphi2Clean.Continuum.periodic5DFourierTestFamily L hL modes useSine)
+'Pphi2Clean.Continuum.periodic5DFourierFamilyProjection_finiteSource_map' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DFixedVolume_fourierFamily_marginal_tendsto : ∀ (m : ℕ) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool),
+  Filter.Tendsto
+    (fun n =>
+      (Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasure L mass hL hmass n).map
+        (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine))
+    Filter.atTop
+    (nhds
+      (Pphi2Clean.Continuum.periodicResolventTargetProbabilityMeasure 5 m L mass hmass
+        (Pphi2Clean.Continuum.periodic5DFourierTestFamily L hL modes useSine)))
+'Pphi2Clean.Continuum.periodic5DFixedVolume_fourierFamily_marginal_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5D_probabilityMeasure_ext_of_fourierFamily_marginals : ∀ (L : ℝ) (hL : 0 < L)
+  (μ ν : MeasureTheory.ProbabilityMeasure ↥Pphi2Clean.Continuum.Periodic5DCompletion),
+  (∀ (m : ℕ) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool),
+      μ.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine) =
+        ν.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine)) →
+    μ = ν
+'Pphi2Clean.Continuum.periodic5D_probabilityMeasure_ext_of_fourierFamily_marginals' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DFixedVolume_weak_limit_existsUnique : ∀ (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass),
+  ∃! μ,
+    Filter.Tendsto (Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasure L mass hL hmass) Filter.atTop (nhds μ)
+'Pphi2Clean.Continuum.periodic5DFixedVolume_weak_limit_existsUnique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DFixedVolume_weak_tendsto_gaussianTarget : ∀ (L mass : ℝ) (hL : 0 < L) (hmass : 0 < mass),
+  Filter.Tendsto (Pphi2Clean.Continuum.periodic5DFixedVolumeProbabilityMeasure L mass hL hmass) Filter.atTop
+    (nhds (Pphi2Clean.Continuum.periodic5DGaussianTarget L mass hL hmass))
+'Pphi2Clean.Continuum.periodic5DFixedVolume_weak_tendsto_gaussianTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DGaussianTarget_unique_of_fourierFamily_law : ∀ (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (ν : MeasureTheory.ProbabilityMeasure ↥Pphi2Clean.Continuum.Periodic5DCompletion),
+  (∀ (m : ℕ) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool),
+      ν.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine) =
+        Pphi2Clean.Continuum.periodicResolventTargetProbabilityMeasure 5 m L mass hmass
+          (Pphi2Clean.Continuum.periodic5DFourierTestFamily L hL modes useSine)) →
+    ν = Pphi2Clean.Continuum.periodic5DGaussianTarget L mass hL hmass
+'Pphi2Clean.Continuum.periodic5DGaussianTarget_unique_of_fourierFamily_law' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DGaussianTarget_fourierFamily_hasGaussianLaw : ∀ (m : ℕ) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool),
+  ProbabilityTheory.HasGaussianLaw id
+    (MeasureTheory.Measure.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine)
+      ↑(Pphi2Clean.Continuum.periodic5DGaussianTarget L mass hL hmass))
+'Pphi2Clean.Continuum.periodic5DGaussianTarget_fourierFamily_hasGaussianLaw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DGaussianTarget_fourierFamily_mean_zero : ∀ (m : ℕ) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool)
+  (t : EuclideanSpace ℝ (Fin m)),
+  ∫ (z : EuclideanSpace ℝ (Fin m)),
+      inner ℝ t
+        z ∂MeasureTheory.Measure.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine)
+        ↑(Pphi2Clean.Continuum.periodic5DGaussianTarget L mass hL hmass) =
+    0
+'Pphi2Clean.Continuum.periodic5DGaussianTarget_fourierFamily_mean_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Pphi2Clean.Continuum.periodic5DGaussianTarget_fourierFamily_covariance_quadratic : ∀ (m : ℕ) (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (modes : Fin m → Pphi2Clean.Continuum.Periodic5DIndex) (useSine : Fin m → Bool)
+  (t : EuclideanSpace ℝ (Fin m)),
+  ProbabilityTheory.variance (fun z => inner ℝ t z)
+      (MeasureTheory.Measure.map (Pphi2Clean.Continuum.periodic5DFourierFamilyProjection L hL modes useSine)
+        ↑(Pphi2Clean.Continuum.periodic5DGaussianTarget L mass hL hmass)) =
+    ∑ i,
+      ∑ j,
+        t.ofLp i * t.ofLp j *
+          Pphi2Clean.Continuum.periodicResolventCovarianceMatrix 5 m L mass hmass
+            (Pphi2Clean.Continuum.periodic5DFourierTestFamily L hL modes useSine) i j
+'Pphi2Clean.Continuum.periodic5DGaussianTarget_fourierFamily_covariance_quadratic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+EXIT=0

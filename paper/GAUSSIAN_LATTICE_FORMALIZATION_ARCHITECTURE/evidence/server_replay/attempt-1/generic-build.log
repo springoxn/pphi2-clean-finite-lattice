@@ -1,0 +1,860 @@
+CWD=/home/zhengyj/AImath-lean/scratch/architecture-replay-20261113-161252/sources/generic
+COMMAND=["/home/zhengyj/.elan/bin/lake", "build", "AImathPPhi2Clean.ActualWeakLimitArbitraryDim"]
+⚠ [6711/6883] Built AImathPPhi2Clean.PeriodicHMinusTwoWeight (2.2s)
+warning: AImathPPhi2Clean/PeriodicHMinusTwoWeight.lean:14:39: This simp argument is unused:
+  Real.rpow_nonneg
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [periodicHMinusTwoWeight, hk]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8843/8904] Built AImathPPhi2Clean.PeriodicNegativeSobolevCarriers (2.2s)
+warning: AImathPPhi2Clean/PeriodicNegativeSobolevCarriers.lean:14:41: This simp argument is unused:
+  Real.rpow_nonneg
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [periodicHMinusThreeWeight, hk]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8845/8904] Built AImathPPhi2Clean.ProductGaussian (2.7s)
+✔ [8846/8904] Built AImathPPhi2Clean.PeriodicTorusModeDerivative (2.8s)
+✔ [8847/8904] Built AImathPPhi2Clean.PeriodicNegativeSobolevWeightComparison (2.3s)
+⚠ [8848/8904] Built AImathPPhi2Clean.PhysicalCellRiemann (3.4s)
+warning: AImathPPhi2Clean/PhysicalCellRiemann.lean:25:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
+⚠ [8849/8904] Built AImathPPhi2Clean.PeriodicMassiveWeakSolver (3.8s)
+warning: AImathPPhi2Clean/PeriodicMassiveWeakSolver.lean:76:33: This simp argument is unused:
+  Ne.symm hj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [lp.single_apply, hj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8850/8904] Built AImathPPhi2Clean.ProductGaussianLinearMoment (3.2s)
+warning: AImathPPhi2Clean/ProductGaussianLinearMoment.lean:130:74: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hvar, Finset.mul_sum, mul_left_comm, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/ProductGaussianLinearMoment.lean:130:84: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hvar, Finset.mul_sum, mul_comm, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/ProductGaussianLinearMoment.lean:130:99: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hvar, Finset.mul_sum, mul_comm, mul_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8851/8904] Built AImathPPhi2Clean.InfiniteGaussianNoise (3.4s)
+warning: AImathPPhi2Clean/InfiniteGaussianNoise.lean:121:58: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/InfiniteGaussianNoise.lean:122:17: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/InfiniteGaussianNoise.lean:216:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: AImathPPhi2Clean/InfiniteGaussianNoise.lean:315:25: `Measurable.ennreal_tsum` has been deprecated: Use `Measurable.tsum` from `Mathlib.MeasureTheory.Constructions.Polish.Basic` instead
+warning: AImathPPhi2Clean/InfiniteGaussianNoise.lean:363:25: `Measurable.ennreal_tsum` has been deprecated: Use `Measurable.tsum` from `Mathlib.MeasureTheory.Constructions.Polish.Basic` instead
+✔ [8852/8904] Built AImathPPhi2Clean.ContinuumProbability (4.8s)
+⚠ [8853/8904] Built AImathPPhi2Clean.PeriodicFS4DSobolevWeights (3.5s)
+info: AImathPPhi2Clean/PeriodicFS4DSobolevWeights.lean:60:8: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: AImathPPhi2Clean/PeriodicFS4DSobolevWeights.lean:301:39: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: AImathPPhi2Clean/PeriodicFS4DSobolevWeights.lean:301:39: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+✔ [8854/8904] Built AImathPPhi2Clean.TightnessChebyshev (5.6s)
+✔ [8855/8904] Built AImathPPhi2Clean.PeriodicH1Completion (4.6s)
+⚠ [8856/8904] Built AImathPPhi2Clean.PeriodicTorusWeakResolvent (4.6s)
+warning: AImathPPhi2Clean/PeriodicTorusWeakResolvent.lean:23:8: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.MassiveEnergyEmbedding.liftCLM_apply`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/PeriodicTorusWeakResolvent.lean:37:8: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.MassiveEnergyEmbedding.resolventInCLM_apply`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/PeriodicTorusWeakResolvent.lean:40:8: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.MassiveEnergyEmbedding.repr_lift`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/PeriodicTorusWeakResolvent.lean:103:48: This simp argument is unused:
+  Ne.symm hj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [inclusion_apply, lp.single_apply, hj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8857/8904] Built AImathPPhi2Clean.Periodic5DSobolevWeights (3.0s)
+warning: AImathPPhi2Clean/Periodic5DSobolevWeights.lean:28:12: This simp argument is unused:
+  block
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [fs4BlockWeight, hq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/Periodic5DSobolevWeights.lean:87:27: `if_pos` has been deprecated: Use `ite_eq_left` instead
+✔ [8858/8904] Built AImathPPhi2Clean.CoordinateTightness (4.5s)
+ℹ [8859/8904] Built AImathPPhi2Clean.TailRatio (2.2s)
+info: AImathPPhi2Clean/TailRatio.lean:26:0: 'Pphi2Clean.DimensionFreeProbe.target_fourier_term_le_radius_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+⚠ [8860/8904] Built AImathPPhi2Clean.DimensionFreeWeightSummability (2.5s)
+warning: AImathPPhi2Clean/DimensionFreeWeightSummability.lean:24:43: `if_neg` has been deprecated: Use `ite_eq_right` instead
+info: AImathPPhi2Clean/DimensionFreeWeightSummability.lean:186:0: 'Pphi2Clean.DimensionFreeProbe.target_weight_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: AImathPPhi2Clean/DimensionFreeWeightSummability.lean:187:0: 'Pphi2Clean.DimensionFreeProbe.energy_weight_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [8861/8904] Built AImathPPhi2Clean.FiniteFrequencyBall (2.3s)
+info: AImathPPhi2Clean/FiniteFrequencyBall.lean:21:0: 'Pphi2Clean.DimensionFreeProbe.finite_frequency_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8862/8904] Built AImathPPhi2Clean.ArbitraryDimParameters (5.4s)
+info: AImathPPhi2Clean/ArbitraryDimParameters.lean:33:26: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: AImathPPhi2Clean/ArbitraryDimParameters.lean:33:22: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: AImathPPhi2Clean/ArbitraryDimParameters.lean:39:41: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: AImathPPhi2Clean/ArbitraryDimParameters.lean:39:37: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [8863/8904] Built AImathPPhi2Clean.WeakDualReconstruction (6.3s)
+warning: AImathPPhi2Clean/WeakDualReconstruction.lean:147:0: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.hilbertVectorConfiguration_continuous`:
+  [IsTopologicalAddGroup E]
+  [CompleteSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup E] [CompleteSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+ℹ [8864/8904] Built AImathPPhi2Clean.RawLiftDimensionArbitraryDim (5.8s)
+info: AImathPPhi2Clean/RawLiftDimensionArbitraryDim.lean:78:0: 'Pphi2Clean.ArbitraryDimRawLift.siteCoefficient_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: AImathPPhi2Clean/RawLiftDimensionArbitraryDim.lean:79:0: 'Pphi2Clean.ArbitraryDimRawLift.rawAtomicFourierLift_mem_energyCarrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+⚠ [8865/8904] Built AImathPPhi2Clean.GaussianConfiguration (7.0s)
+warning: AImathPPhi2Clean/GaussianConfiguration.lean:26:0: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.gaussianHilbertSeriesLimit_stronglyMeasurable`:
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/GaussianConfiguration.lean:45:0: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.gaussianSeriesConfiguration_measurable`:
+  [IsTopologicalAddGroup E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/GaussianConfiguration.lean:78:0: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.gaussianHilbertSeriesLimit_eq_tsum_ae`:
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/GaussianConfiguration.lean:90:0: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.gaussianSeriesConfiguration_eval_eq_tsum_ae`:
+  [IsTopologicalAddGroup E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/GaussianConfiguration.lean:105:0: automatically included section variable(s) unused in theorem `Pphi2Clean.Continuum.gaussianSeriesConfiguration_coeff_summable`:
+  [IsTopologicalAddGroup E]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsTopologicalAddGroup E] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: AImathPPhi2Clean/GaussianConfiguration.lean:183:4: Unused tactic linter: `change Measurable (fun ω : WeakDual ℝ E => (ω : E → ℝ) f)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [8866/8904] Built AImathPPhi2Clean.LatticeGaussianContinuumConsumer (6.9s)
+warning: AImathPPhi2Clean/LatticeGaussianContinuumConsumer.lean:21:4: Unused tactic linter: `change Measurable (fun ω : WeakDual ℝ E => (ω : E → ℝ) f)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: AImathPPhi2Clean/LatticeGaussianContinuumConsumer.lean:92:6: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+warning: AImathPPhi2Clean/LatticeGaussianContinuumConsumer.lean:155:23: This simp argument is unused:
+  Pi.smul_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [map_smul, Pi.single_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/LatticeGaussianContinuumConsumer.lean:155:38: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [map_smul, Pi.smul_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/LatticeGaussianContinuumConsumer.lean:242:13: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+⚠ [8867/8904] Built AImathPPhi2Clean.RealLatticeSpectralCovariance (9.2s)
+warning: AImathPPhi2Clean/RealLatticeSpectralCovariance.lean:28:6: `ContinuousLinearMap.sum_apply` has been deprecated: Use `sum_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.sum_apply` to `sum_apply x`).
+warning: AImathPPhi2Clean/RealLatticeSpectralCovariance.lean:57:65: This simp argument is unused:
+  Finset.sum_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Pi.smul_apply, RingHom.id_apply, smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/RealLatticeSpectralCovariance.lean:101:21: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealLatticeSpectralCovariance.lean:115:13: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+✔ [8868/8904] Built AImathPPhi2Clean.FiniteLiftGaussianMoment (5.7s)
+⚠ [8869/8904] Built AImathPPhi2Clean.ConcreteLatticeOperator (7.1s)
+warning: AImathPPhi2Clean/ConcreteLatticeOperator.lean:236:27: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+warning: AImathPPhi2Clean/ConcreteLatticeOperator.lean:237:4: `ContinuousLinearMap.neg_apply` has been deprecated: Use `neg_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.neg_apply` to `neg_apply x`).
+warning: AImathPPhi2Clean/ConcreteLatticeOperator.lean:237:35: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+warning: AImathPPhi2Clean/ConcreteLatticeOperator.lean:277:27: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+warning: AImathPPhi2Clean/ConcreteLatticeOperator.lean:278:4: `ContinuousLinearMap.neg_apply` has been deprecated: Use `neg_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.neg_apply` to `neg_apply x`).
+warning: AImathPPhi2Clean/ConcreteLatticeOperator.lean:278:35: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+⚠ [8870/8904] Built AImathPPhi2Clean.ConcreteLatticeCovariance (5.8s)
+warning: AImathPPhi2Clean/ConcreteLatticeCovariance.lean:65:4: Try `simp at hp` instead of `simpa using hp`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8871/8904] Built AImathPPhi2Clean.PeriodicFourierLaplacian (6.9s)
+warning: AImathPPhi2Clean/PeriodicFourierLaplacian.lean:80:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/PeriodicFourierLaplacian.lean:87:51: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/PeriodicFourierLaplacian.lean:161:57: This simp argument is unused:
+  neg_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [periodicFourierCharacter, Pi.neg_apply, mul_neg, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8872/8904] Built AImathPPhi2Clean.PeriodicFrequencyBox (5.4s)
+warning: AImathPPhi2Clean/PeriodicFrequencyBox.lean:40:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/PeriodicFrequencyBox.lean:44:58: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/PeriodicFrequencyBox.lean:50:28: This simp argument is unused:
+  ZMod.natCast_zmod_val
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [frequencyBoxMode]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [8873/8904] Built AImathPPhi2Clean.FourierMassResolvent (6.4s)
+warning: AImathPPhi2Clean/FourierMassResolvent.lean:92:2: Try `simp at h0` instead of `simpa using h0`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [8874/8904] Built AImathPPhi2Clean.ConcreteGaussianMoment (7.5s)
+warning: AImathPPhi2Clean/ConcreteGaussianMoment.lean:16:30: This simp argument is unused:
+  mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Finset.mul_sum, mul_left_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/ConcreteGaussianMoment.lean:16:56: This simp argument is unused:
+  mul_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Finset.mul_sum, mul_assoc, mul_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [8875/8904] Built AImathPPhi2Clean.NumberedLatticeGaussianMoment (7.3s)
+⚠ [8876/8904] Built AImathPPhi2Clean.PhysicalLatticeGaussianBound (5.7s)
+warning: AImathPPhi2Clean/PhysicalLatticeGaussianBound.lean:22:27: `ContinuousLinearMap.add_apply` has been deprecated: Use `add_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.add_apply` to `add_apply x`).
+warning: AImathPPhi2Clean/PhysicalLatticeGaussianBound.lean:23:4: `ContinuousLinearMap.neg_apply` has been deprecated: Use `neg_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.neg_apply` to `neg_apply x`).
+warning: AImathPPhi2Clean/PhysicalLatticeGaussianBound.lean:23:35: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+warning: AImathPPhi2Clean/PhysicalLatticeGaussianBound.lean:19:31: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8877/8904] Built AImathPPhi2Clean.PhysicalLatticeSampling (5.6s)
+⚠ [8878/8904] Built AImathPPhi2Clean.RealFourierTestFunctions (5.4s)
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:11:56: Variable name `hL` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hL
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:35:54: Variable name `hL` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hL
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:68:15: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierTestFunctions.lean:76:15: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8879/8904] Built AImathPPhi2Clean.PhysicalLatticeGaussianLaw (11s)
+warning: AImathPPhi2Clean/PhysicalLatticeGaussianLaw.lean:444:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+✔ [8880/8904] Built AImathPPhi2Clean.FiniteDimensionalGaussianConvergence (5.0s)
+⚠ [8881/8904] Built AImathPPhi2Clean.FiniteRealFamilyMeasure (5.3s)
+warning: AImathPPhi2Clean/FiniteRealFamilyMeasure.lean:7:18: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/FiniteRealFamilyMeasure.lean:7:31: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8882/8904] Built AImathPPhi2Clean.RawAtomicGaussianSiteIdentityArbitraryDim (9.4s)
+warning: AImathPPhi2Clean/RawAtomicGaussianSiteIdentityArbitraryDim.lean:32:0: automatically included section variable(s) unused in theorem `Pphi2Clean.ArbitraryDimGaussian.physicalRawLiftDim_eq_site_sum`:
+  [Parameters]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Parameters] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+info: AImathPPhi2Clean/RawAtomicGaussianSiteIdentityArbitraryDim.lean:65:0: 'Pphi2Clean.ArbitraryDimGaussian.physicalRawLiftDim_eq_site_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+⚠ [8883/8904] Built AImathPPhi2Clean.FiniteRealFamilyCovarianceConvergence (5.2s)
+warning: AImathPPhi2Clean/FiniteRealFamilyCovarianceConvergence.lean:51:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [8884/8904] Built AImathPPhi2Clean.PeriodicFourierCovarianceLimit (11s)
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:112:20: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:112:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:139:10: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:139:10: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:169:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:182:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:210:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:302:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:302:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:362:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:362:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:461:15: `tendsto_finset_sum` has been deprecated: Use `tendsto_finsetSum` instead
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:594:21: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:694:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:810:15: This simp argument is unused:
+  Complex.star_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Complex.norm_conj, hDnorm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:848:56: This simp argument is unused:
+  Complex.star_def
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [div_eq_mul_inv, Finset.sum_mul, Finset.mul_sum, Complex.conj_ofReal]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1001:13: This simp argument is unused:
+  Finset.sum_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Finset.mul_sum]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1154:20: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1158:20: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1346:5: Variable name `H` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _H
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1447:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1427:13: Variable name `hf` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hf
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/PeriodicFourierCovarianceLimit.lean:1428:8: Variable name `hg` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hg
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✔ [8885/8904] Built AImathPPhi2Clean.FiniteRealFamilyCharacteristicFunction (5.3s)
+✔ [8886/8904] Built AImathPPhi2Clean.PeriodicMassiveEnergy (6.3s)
+⚠ [8887/8904] Built AImathPPhi2Clean.PeriodicTorusL2 (6.8s)
+warning: AImathPPhi2Clean/PeriodicTorusL2.lean:76:77: This simp argument is unused:
+  div_one
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [UnitAddTorus.mFourier, ContinuousMap.coe_mk, fourier_coe_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/PeriodicTorusL2.lean:86:6: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: AImathPPhi2Clean/PeriodicTorusL2.lean:86:6: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [8888/8904] Built AImathPPhi2Clean.RealFourierSecondMoment (7.5s)
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:172:19: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:172:31: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:187:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:215:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:172:19: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [if_pos hself]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:174:8: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:201:8: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:206:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:218:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:245:8: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:254:21: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:260:21: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:260:32: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:266:8: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:296:4: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:324:21: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:329:21: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:329:32: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:300:52: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:346:8: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:346:23: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:351:10: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:351:25: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:364:52: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:397:24: This simp argument is unused:
+  hnegqr
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hqr', hqn', hnegn]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:397:32: This simp argument is unused:
+  hnegn
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hqr', hqn', hnegqr]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:404:26: This simp argument is unused:
+  hqrr
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hqr', hqn', hqnn]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:404:32: This simp argument is unused:
+  hqnn
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hqr', hqn', hqrr]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:412:52: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:466:52: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/RealFourierSecondMoment.lean:580:52: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [8889/8904] Built AImathPPhi2Clean.FiniteRealFamilyCovarianceQuadratic (4.7s)
+warning: AImathPPhi2Clean/FiniteRealFamilyCovarianceQuadratic.lean:30:10: `tendsto_finset_sum` has been deprecated: Use `tendsto_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyCovarianceQuadratic.lean:32:10: `tendsto_finset_sum` has been deprecated: Use `tendsto_finsetSum` instead
+ℹ [8890/8904] Built AImathPPhi2Clean.GaussianModeArbitraryDim (5.5s)
+info: AImathPPhi2Clean/GaussianModeArbitraryDim.lean:108:0: 'Pphi2Clean.ArbitraryDimGaussian.rawFourierProbeMoment_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: AImathPPhi2Clean/GaussianModeArbitraryDim.lean:109:0: 'Pphi2Clean.ArbitraryDimGaussian.expectedRawEnergy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8891/8904] Built AImathPPhi2Clean.FiniteRealFamilyVarianceIdentity (5.0s)
+warning: AImathPPhi2Clean/FiniteRealFamilyVarianceIdentity.lean:44:8: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyVarianceIdentity.lean:57:6: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyVarianceIdentity.lean:61:8: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyVarianceIdentity.lean:89:14: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+⚠ [8892/8904] Built AImathPPhi2Clean.PeriodicTorusH1 (10s)
+warning: AImathPPhi2Clean/PeriodicTorusH1.lean:89:63: This simp argument is unused:
+  Ne.symm hj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [periodicEnergyGradient_apply, lp.single_apply, hj]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/PeriodicTorusH1.lean:132:50: This simp argument is unused:
+  Finset.sum_pi_single
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [lp.coeFn_sum, lp.coeFn_single]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/PeriodicTorusH1.lean:134:50: This simp argument is unused:
+  Finset.sum_pi_single
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [lp.coeFn_sum, lp.coeFn_single]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+ℹ [8893/8904] Built AImathPPhi2Clean.RawAtomicGaussianArbitraryDim (5.4s)
+info: AImathPPhi2Clean/RawAtomicGaussianArbitraryDim.lean:78:0: 'Pphi2Clean.ArbitraryDimGaussian.actualRawAtomicLift_integral_norm_sq_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/RawAtomicGaussianArbitraryDim.lean:79:0: 'Pphi2Clean.ArbitraryDimGaussian.actualExpectedRawEnergy_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [8894/8904] Built AImathPPhi2Clean.PeriodicTorusResolventLimit (6.4s)
+⚠ [8895/8904] Built AImathPPhi2Clean.RawAtomicGaussianTargetTailArbitraryDim (6.3s)
+warning: AImathPPhi2Clean/RawAtomicGaussianTargetTailArbitraryDim.lean:42:10: `if_pos` has been deprecated: Use `ite_eq_left` instead
+warning: AImathPPhi2Clean/RawAtomicGaussianTargetTailArbitraryDim.lean:52:10: `if_neg` has been deprecated: Use `ite_eq_right` instead
+warning: AImathPPhi2Clean/RawAtomicGaussianTargetTailArbitraryDim.lean:59:10: `if_pos` has been deprecated: Use `ite_eq_left` instead
+info: AImathPPhi2Clean/RawAtomicGaussianTargetTailArbitraryDim.lean:72:0: 'Pphi2Clean.ArbitraryDimGaussian.actualExpectedTargetTail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [8896/8904] Built AImathPPhi2Clean.RawAtomicGaussianAtomicIdentityArbitraryDim (6.1s)
+warning: AImathPPhi2Clean/RawAtomicGaussianAtomicIdentityArbitraryDim.lean:47:10: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: AImathPPhi2Clean/RawAtomicGaussianAtomicIdentityArbitraryDim.lean:33:33: Variable name `hmass` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hmass
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: AImathPPhi2Clean/RawAtomicGaussianAtomicIdentityArbitraryDim.lean:59:0: 'Pphi2Clean.ArbitraryDimGaussian.actualRawAtomicLift_eq_rawAtomicFourierLift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/RawAtomicGaussianAtomicIdentityArbitraryDim.lean:60:0: 'Pphi2Clean.ArbitraryDimGaussian.actualRawAtomicLift_target_weight_summable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+⚠ [8897/8904] Built AImathPPhi2Clean.FiniteRealFamilyWeakLimitInterface (9.1s)
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:41:40: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:48:43: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:66:46: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:110:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:120:6: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:146:6: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:157:4: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:172:5: Variable name `T` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _T
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:406:46: This simp argument is unused:
+  real_inner_smul_left
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [v, real_inner_comm, inner_sum, real_inner_smul_right]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:545:5: Variable name `hC` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:547:5: Variable name `hfactor` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hfactor
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:596:10: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:601:8: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:698:10: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:701:12: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+warning: AImathPPhi2Clean/FiniteRealFamilyWeakLimitInterface.lean:708:14: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+✔ [8898/8904] Built AImathPPhi2Clean.FiniteFourierCoordinateConvergence (7.0s)
+⚠ [8899/8904] Built AImathPPhi2Clean.RawAtomicGaussianTargetSpaceArbitraryDim (8.5s)
+warning: AImathPPhi2Clean/RawAtomicGaussianTargetSpaceArbitraryDim.lean:75:64: Variable name `hL` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hL
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: AImathPPhi2Clean/RawAtomicGaussianTargetSpaceArbitraryDim.lean:124:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetLift_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: AImathPPhi2Clean/RawAtomicGaussianTargetSpaceArbitraryDim.lean:125:0: 'Pphi2Clean.ArbitraryDimGaussian.continuous_actualTargetLift' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [8900/8904] Built AImathPPhi2Clean.ActualTargetGaussianMeasureArbitraryDim (8.2s)
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:76:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetGaussianMeasure_coordinate_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:147:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetGaussianMeasure_integral_tail_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:226:0: 'Pphi2Clean.ArbitraryDimGaussian.actualExpectedTargetTail_fixedVolume_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:228:0: Pphi2Clean.ArbitraryDimGaussian.actualTargetProbabilityMeasure_fixedVolume [Parameters] (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (n : ℕ) : ProbabilityMeasure ↥TargetCompletion
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:229:0: Pphi2Clean.ArbitraryDimGaussian.actualExpectedTargetTail_fixedVolume_tendsto_zero [Parameters] (L mass : ℝ) (hL : 0 < L)
+  (hmass : 0 < mass) (n : ℕ) :
+  Tendsto (fun R => actualExpectedTargetTail (n + 1) R (L / ↑(n + 1)) mass L ⋯ hmass hL) atTop (𝓝 0)
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:230:0: 'Pphi2Clean.ArbitraryDimGaussian.actualExpectedTargetTail_fixedVolume_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:243:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetGaussianMeasure_isProbability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/ActualTargetGaussianMeasureArbitraryDim.lean:244:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetGaussianMeasure_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ℹ [8901/8904] Built AImathPPhi2Clean.TargetTruncationArbitraryDim (10s)
+info: AImathPPhi2Clean/TargetTruncationArbitraryDim.lean:382:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetProbabilityMeasure_fixedVolume_prokhorov_subsequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetTruncationArbitraryDim.lean:383:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetProbabilityMeasure_fixedVolume_tight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetTruncationArbitraryDim.lean:384:0: 'Pphi2Clean.ArbitraryDimGaussian.isCompact_targetEnergyBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: AImathPPhi2Clean/TargetTruncationArbitraryDim.lean:386:0: 'Pphi2Clean.ArbitraryDimGaussian.target_isCompact_of_uniform_truncation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetTruncationArbitraryDim.lean:388:0: 'Pphi2Clean.ArbitraryDimGaussian.targetFrequency_tail_norm_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetTruncationArbitraryDim.lean:389:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTargetGaussianMeasure_integral_truncation_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ℹ [8902/8904] Built AImathPPhi2Clean.TargetCylinderArbitraryDim (7.4s)
+info: AImathPPhi2Clean/TargetCylinderArbitraryDim.lean:123:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTarget_fixedVolume_exists_weak_limit_of_finite_marginal_limits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetCylinderArbitraryDim.lean:124:0: 'Pphi2Clean.ArbitraryDimGaussian.target_cylinder_sigma_eq_borel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetCylinderArbitraryDim.lean:125:0: 'Pphi2Clean.ArbitraryDimGaussian.target_probabilityMeasure_ext_of_finite_marginals' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetCylinderArbitraryDim.lean:126:0: 'Pphi2Clean.ArbitraryDimGaussian.target_weak_limits_eq_of_finite_marginals' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+⚠ [8903/8904] Built AImathPPhi2Clean.TargetFiniteMarginalArbitraryDim (9.7s)
+warning: AImathPPhi2Clean/TargetFiniteMarginalArbitraryDim.lean:122:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+info: AImathPPhi2Clean/TargetFiniteMarginalArbitraryDim.lean:130:0: 'Pphi2Clean.ArbitraryDimGaussian.targetFiniteGaussianLimit_isGaussian' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: AImathPPhi2Clean/TargetFiniteMarginalArbitraryDim.lean:131:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTarget_fixedVolume_finite_marginal_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ℹ [8904/8904] Built AImathPPhi2Clean.ActualWeakLimitArbitraryDim (6.6s)
+info: AImathPPhi2Clean/ActualWeakLimitArbitraryDim.lean:65:0: 'Pphi2Clean.ArbitraryDimGaussian.actualTarget_fixedVolume_weak_limit_existsUnique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Build completed successfully (8904 jobs).
+
+EXIT=0
