@@ -1,0 +1,243 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array,url,xurl}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=3em
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}\newcommand{\Z}{\mathbb Z}\newcommand{\N}{\mathbb N}
+\newcommand{\E}{\mathbb E}\newcommand{\Prob}{\mathcal P}
+\newcommand{\evidence}[1]{\textup{[Evidence: #1]}}
+\title[An arbitrary-dimensional lattice Gaussian limit]{An arbitrary-dimensional lattice Gaussian weak limit:\\a Lean formalization in weighted Fourier coordinates}
+\author{AImath Project}
+\date{November 12, 2026}
+\subjclass[2020]{Primary 60B10; Secondary 60G15, 60G60, 68V15}
+\keywords{Gaussian measure, periodic lattice, weak convergence, Fourier coefficients, Lean 4}
+\begin{document}
+\begin{abstract}
+For every positive integer dimension $d$, positive side length and mass, and real $s>d/2$, we describe a Lean 4 proof of weak convergence of actual raw atomic lattice Gaussian probability measures in a weighted Fourier coefficient completion. The target weight is exactly $(1+\|k\|_\infty)^{-2s}$. The limit is uniquely determined by its finite weighted real Fourier marginals, whose covariance is the periodic massive Green pairing. The proof combines a uniform source-energy bound at an intermediate order, compactness from a positive weight gap, finite Gaussian convergence, and uniqueness on the coefficient Borel space. We specify the sampling and Fourier normalizations, distinguish finite Gaussian assertions from the infinite-dimensional measure construction, and provide an evidence ledger tied to a pinned source archive and recorded Lean axiom checks.
+\end{abstract}
+\maketitle
+
+\section{Introduction and scope}
+The periodic massive Gaussian field is a basic setting in which a lattice approximation can be followed all the way from a finite covariance matrix to a probability measure on an infinite coefficient space. The underlying probability theory is classical: tightness and finite-dimensional distributions identify weak limits \cite{Billingsley,Bogachev}. The subject of this article is the precise interface between that argument and a Lean implementation, uniformly in every positive finite dimension.
+
+The input measures here are the actual Gaussian lattice laws transported by their raw atomic Fourier maps. The conclusion concerns the whole sequence of mesh sizes, rather than an unspecified convergent subsequence or a conditional interface requiring tightness as a hypothesis. Its regularity range is the sufficient range $s>d/2$. No optimality assertion is made. The volume and the positive mass remain fixed throughout.
+
+The carrier is defined intrinsically from Fourier coefficients. We do not identify it with an externally constructed space of distributions. Gaussianity is certified for every finite marginal as a real Gaussian law; the formal endpoint does not supply an infinite-dimensional \texttt{IsGaussian} instance. Neither interacting fields, an infinite-volume limit, nor Osterwalder--Schrader reconstruction is part of this result. This is a formalization case study and makes no priority claim.
+
+\section{Normalizations and the target space}\label{sec:normalization}
+Fix $d\in\N$ with $d>0$, $L>0$, and $m>0$ (the source variable \texttt{mass}). Let
+\[
+ I=\Z^d,\qquad |k|_\infty=\max_{1\le i\le d}|k_i|,
+ \qquad |k|_2^2=\sum_{i=1}^d k_i^2.
+\]
+In the Lean function type from \texttt{Fin d} to \texttt{Z}, the default norm is the sup norm. We write it explicitly as $|k|_\infty$. The dispersion relation below instead uses $|k|_2^2$.
+
+For real $s>d/2$ put
+\begin{equation}\label{eq:weight}
+ w_s(k)=(1+|k|_\infty)^{-2s},\qquad
+ \|c\|_{-s}^2=\sum_{k\in I}w_s(k)|c_k|^2.
+\end{equation}
+The weighted coefficient completion can be represented as
+\begin{equation}\label{eq:target}
+ H_s=\ell^2(I;\C),\qquad
+ J_s(c)_k=\sqrt{w_s(k)}\,c_k.
+\end{equation}
+Here $J_s$ takes coefficients of finite weighted norm to their weighted representatives; completing finitely supported coefficients in \eqref{eq:weight} gives the same representation. The formal type \texttt{TargetCompletion} is exactly the unweighted \texttt{lp} type in \eqref{eq:target}, with its norm topology and Borel sigma algebra. Thus $s$ enters the embedding and the laws, while the underlying \texttt{lp} type is unchanged. For a finite $F\subset I$, let $P_F:H_s\to\C^F$ be coordinate restriction. Coordinates of $P_FJ_s(c)$ already contain $\sqrt{w_s(k)}$ and are not raw Fourier coefficients.
+
+\subsection{Actual atomic input}
+For $n\in\N$ let $N=n+1$, $a=L/N$, and $\Lambda_N=(\Z/N\Z)^d$, represented at physical points $ax\in[0,L)^d$. Let $\phi_N$ have the centered real finite lattice Gaussian law with covariance given by the inverse massive periodic lattice operator and the physical volume normalization. Explicitly the inner product for fields is $a^d\sum_x u_xv_x$, and the positive operator is
+\[
+ (A_Nu)_x=m^2u_x+a^{-2}\sum_i(2u_x-u_{x+e_i}-u_{x-e_i}).
+\]
+Equivalently, in site coordinates the density is proportional to
+$\exp[-\tfrac12 a^d\sum_x u_x(A_Nu)_x]$; its covariance matrix is $a^{-d}A_N^{-1}$. Its Fourier symbol is
+\begin{equation}\label{eq:symbol}
+ \lambda_{N,a}(p)=m^2+4a^{-2}\sum_{i=1}^d\sin^2(\pi p_i/N).
+\end{equation}
+The atomic field and its raw positive-phase coefficients are
+\begin{equation}\label{eq:atomic}
+ \Phi_N=a^d\sum_{x\in\Lambda_N}\phi_N(x)\delta_{ax},\qquad
+ c_N(k)=a^d\sum_{x\in\Lambda_N}\phi_N(x)e^{2\pi i k\cdot ax/L}.
+\end{equation}
+This notation for atoms explains the explicit finite sum and does not assert a formal distribution-space identification. The transported probability law studied here is
+\begin{equation}\label{eq:law}
+ \mu_n=\operatorname{Law}(J_s(c_{n+1}))\in\Prob(H_s).
+\end{equation}
+The source proves equality of this sum with the actual Gaussian lift, as well as continuity and measurability of its map into $H_s$. Thus \eqref{eq:law} is an actual pushforward probability measure.
+
+\subsection{Continuum pairing and finite real marginals}
+For real periodic trigonometric polynomials $f,g$ define
+\begin{align}
+ \widehat f_L(k)&=\int_{[0,L]^d}f(x)e^{-2\pi i k\cdot x/L}\,dx,\label{eq:fhat}\\
+ Q_{L,m}(f,g)&=\operatorname{Re}\left[
+ L^{-d}\sum_{k\in I}
+ \frac{\overline{\widehat f_L(k)}\widehat g_L(k)}
+ {m^2+(2\pi/L)^2\sum_i k_i^2}\right].\label{eq:green}
+\end{align}
+All sums needed for these tests are finite. Formula \eqref{eq:green} is the real periodic massive Green pairing. The negative phase in \eqref{eq:fhat} and positive phase in \eqref{eq:atomic} are compatible: put
+\[
+ u_{k,0}(x)=\cos(2\pi k\cdot x/L),\qquad
+ u_{k,1}(x)=\sin(2\pi k\cdot x/L).
+\]
+Then the real and imaginary parts of $c_N(k)$ are the atomic evaluations at $u_{k,0}$ and $u_{k,1}$.
+
+For finite $F\subset I$, let $X_F=(X_{k,b})_{(k,b)\in F\times\{0,1\}}$ be the centered real Gaussian vector with covariance
+\begin{equation}\label{eq:cov}
+ \E[X_{k,b}X_{\ell,c}]=Q_{L,m}(u_{k,b},u_{\ell,c}).
+\end{equation}
+Define its reconstructed weighted law
+\begin{equation}\label{eq:finite}
+ \gamma_F=\operatorname{Law}\left(
+ \left(\sqrt{w_s(k)}(X_{k,0}+iX_{k,1})\right)_{k\in F}\right).
+\end{equation}
+This is a real Gaussian law on the real vector space underlying $\C^F$ and may be degenerate. For example, the zero-frequency sine coordinate vanishes. Reality gives $c_N(-k)=\overline{c_N(k)}$, the conjugacy relation between opposite frequencies. There is no assertion that all complex modes are independent circular complex Gaussians.
+
+\section{The precise convergence theorem}
+\begin{theorem}\label{thm:main}
+Let $d\in\N$, $d>0$, $s\in\R$ with $s>d/2$, and $L,m>0$. With $N=n+1$, $a=L/N$ and the definitions \eqref{eq:weight}--\eqref{eq:finite}, there is a unique probability measure $\nu\in\Prob(H_s)$ such that
+\begin{equation}\label{eq:weak}
+ \mu_n\Longrightarrow\nu,\qquad (P_F)_*\nu=\gamma_F
+ \quad\hbox{for every finite }F\subset I.
+\end{equation}
+Moreover the finite-marginal equalities alone characterize $\nu$ among probability measures on $H_s$.
+\end{theorem}
+\evidence{\path{sharp_actual_raw_gaussian_weak_convergence};
+\texttt{actualTargetGaussianLimit\_unique\_of\_finite\_marginals}.}
+
+Weak convergence in \eqref{eq:weak} means convergence against bounded continuous real functions on the normed coefficient space. In Lean it is convergence in the topology on \texttt{ProbabilityMeasure TargetCompletion}. The theorem quantifies over arbitrary real $s>d/2$, not just integer orders. Its name contains ``sharp'' because the wrapper exposes the requested target exponent exactly; that name is not an optimal-regularity theorem.
+
+\section{Proof architecture}
+We give the mathematical argument behind the formal interfaces. The evidence cited below consists of the supplied source closure and its recorded build and axiom checks, rather than a new Lean build performed for this article.
+
+\subsection{An intermediate source order}
+Set
+\begin{equation}\label{eq:source}
+ r=\frac{s+d/2}{2},\qquad \delta=s-r.
+\end{equation}
+Then $d/2<r<s$, $\delta>0$, and $r+\delta=s$. The formal parameter structure stores \texttt{energyOrder} $=r$ and \texttt{gap} $=\delta$. Its target weight is $(1+|k|_\infty)^{-2(r+\delta)}$, so the equality with \eqref{eq:weight} is exact.
+
+\begin{lemma}\label{lem:summable}
+For $r>d/2$, $\sum_{k\in I}(1+|k|_\infty)^{-2r}<\infty$.
+\end{lemma}
+\begin{proof}
+The number of integer points with sup norm $j\ge1$ is
+$(2j+1)^d-(2j-1)^d$. This is bounded by a constant depending on $d$ times $(j+1)^{d-1}$. The resulting series is dominated by a constant times $\sum_{j\ge1}(j+1)^{d-1-2r}$, whose exponent is less than $-1$. The origin contributes a single finite term. The formal dimension-uniform summability infrastructure supplies this conclusion for the index type.
+\end{proof}
+
+Each raw atomic coefficient sequence is bounded in $k$ by the finite quantity $a^d\sum_x|\phi_N(x)|$, hence has finite source energy by Lemma~\ref{lem:summable}. More substantially, the actual Gaussian laws satisfy
+\begin{equation}\label{eq:energy}
+ \E\sum_{k\in I}(1+|k|_\infty)^{-2r}|c_N(k)|^2
+ \le 2m^{-2}L^d\sum_{k\in I}(1+|k|_\infty)^{-2r}=:B.
+\end{equation}
+The formal statement is \texttt{actualExpectedRawEnergy\_le}. It follows from the uniform per-mode bound $\E|c_N(k)|^2\le 2m^{-2}L^d$ and summability; nonnegative integration identifies expected energy with the sum of second moments. The factor $2$ is retained from the formal estimate and is not advertised as optimal.
+
+\subsection{Compact tails and tightness}
+For any coefficient sequence of source energy at most $M$,
+\begin{equation}\label{eq:tail}
+ \sum_{|k|_\infty>R}w_s(k)|c_k|^2
+ \le(1+R)^{-2\delta}\sum_k(1+|k|_\infty)^{-2r}|c_k|^2
+ \le (1+R)^{-2\delta}M.
+\end{equation}
+A source-energy ball is therefore totally bounded in the target metric: choose $R$ to make its tail small uniformly, then cover its bounded finite-coordinate projection by finitely many balls. Its closure in the complete target is compact. Markov's inequality and \eqref{eq:energy} put at least $1-B/M$ of every $\mu_n$ in that compact closure. This proves uniform tightness. The positive gap, however small, is the source of compactness; no uniform claim as $\delta\downarrow0$ is involved.
+
+\subsection{Finite-mode convergence and the Nyquist qualification}
+For a real test $f$ the sampled Fourier coefficient uses the physical normalization
+\begin{equation}\label{eq:sample}
+ \widehat f_{N,a}(p)=a^d\sum_{x\in\Lambda_N}f(ax)e^{-2\pi i p\cdot x/N}.
+\end{equation}
+Finite covariance expressions use $L^{-d}$ times the sum of
+$\overline{\widehat f_{N,a}(p)}\widehat g_{N,a}(p)/\lambda_{N,a}(p)$.
+For a fixed finite Fourier family, eventually the lattice is large enough to distinguish all distinct integer frequencies present and to place them within the chosen Nyquist representative box. For instance $N>2K$ suffices when all their component absolute values are at most $K$. Zero modes and repeated or conjugate modes are handled as such; no artificial independence is imposed. At smaller $N$, aliasing can occur, so this fixed-mode reindexing is only an eventual statement.
+
+For each fixed integer vector $p$,
+\begin{equation}\label{eq:dispersion}
+ 4(L/N)^{-2}\sum_i\sin^2(\pi p_i/N)
+ \longrightarrow (2\pi/L)^2\sum_i p_i^2.
+\end{equation}
+The denominator remains bounded below by $m^2>0$. The sampled Fourier normalization \eqref{eq:sample}, the eventual finite reindexing, and \eqref{eq:dispersion} give covariance convergence to \eqref{eq:green}. Convergence of centered finite real Gaussian laws follows from their characteristic functions. Reconstruction by the continuous real-linear map in \eqref{eq:finite} proves
+\begin{equation}\label{eq:marginalconv}
+ (P_F)_*\mu_n\Longrightarrow\gamma_F.
+\end{equation}
+The formal construction first enumerates $F\times\{0,1\}$ into a real Euclidean space and then reconstructs complex weighted coordinates. This is why the finite Gaussian certificate applies even with the necessary degeneracies.
+
+\subsection{Identification and the whole sequence}
+The target is a separable complete metric space. Tightness yields weakly convergent subsequences. Continuous coordinate restriction and \eqref{eq:marginalconv} force every such limit to have marginals $\gamma_F$. The Borel sigma algebra of this countable $\ell^2$ space is generated by finite-coordinate cylinders: coordinates are continuous, and norm balls can be expressed using increasing finite sums of squared coordinate distances. Thus equality of all finite marginals implies equality of measures.
+
+Every convergent subsequence consequently has the same limit. If the full sequence failed to converge to it, a subsequence outside a fixed neighborhood would, by tightness, have a convergent further subsequence, contradicting this identification. This proves Theorem~\ref{thm:main}, including uniqueness from the marginal equalities alone.
+
+\section{Formalization and related work}\label{sec:formal}
+Lean is a dependent type theory based proof assistant \cite{Lean}; Mathlib provides the mathematical infrastructure \cite{Mathlib}. The present formalization uses actual Borel probability measures, continuous maps, tightness infrastructure and finite real Gaussian measures. Table~\ref{tab:formal} identifies the main interfaces. File names are relative to the bundled \texttt{lean/} directory; the three implementation modules lie below \texttt{AImathPPhi2Clean/}.
+
+% Use normal-size table text: nested mathematical scripts at smaller sizes can
+% request cmsy5, absent from some offline Tectonic font bundles.
+\begin{table}[ht]
+\caption{Formal interfaces supporting the article.}\label{tab:formal}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.28\textwidth}>{\raggedright\arraybackslash}p{0.64\textwidth}}
+\toprule
+Component & File and principal declarations\\\midrule
+Exact target order & \path{SharpContractArbitraryDim.lean}: \texttt{sharp\_target\_weight}; \path{sharp_actual_raw_gaussian_weak_convergence}.\\[4pt]
+Whole-sequence limit & \path{ActualWeakLimitArbitraryDim.lean}: \path{actualTarget_fixedVolume_weak_limit_existsUnique}; uniqueness from finite marginals.\\[4pt]
+Weighted real marginals & \path{TargetFiniteMarginalArbitraryDim.lean}: \texttt{targetFiniteGaussianLimit\_isGaussian}; \path{actualTarget_fixedVolume_finite_marginal_tendsto}.\\[4pt]
+Actual raw energy & \path{RawAtomicGaussianArbitraryDim.lean}: \texttt{actualExpectedRawEnergy\_le}; actual second-moment bound.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The atomic identity is supplied by
+\path{RawAtomicGaussianAtomicIdentityArbitraryDim.lean}; the weighted target identity by
+\path{RawAtomicGaussianTargetSpaceArbitraryDim.lean}. The endpoint uses these actual constructions rather than assuming a hypothetical family of probability measures with the required properties.
+
+The supplied environment is Lean \texttt{v4.34.0-rc2} with Mathlib revision
+\begin{center}\texttt{852d20a84581aeba8527bd01d0be361d8c0e71c0}.
+\end{center}
+The recorded \texttt{\#print axioms} output for the main theorem, target weight, atomic identity, target-lift identity and finite Gaussian certificate has the standard-only footprint
+\[
+ [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}].
+\]
+These are the reported foundational axioms, not additional analytic assumptions. The article audit verifies integrity and the correspondence of this recorded evidence; it does not re-run Lean or independently kernel-check the archive. Rechecking Lean requires the pinned toolchain and dependencies, which are not included as build caches in the source archive.
+
+Classical accounts of Gaussian measures and weak convergence explain the abstract probability argument \cite{Bogachev,Billingsley}. Gaussian free field surveys place lattice and continuum constructions in a broader setting \cite{Sheffield}. Those works provide context; they are not evidence for the contents of this Lean artifact. The formal result documented here concerns the fixed periodic volume and the specified coefficient carrier. Stronger support results, other ambient carriers, and reconstruction statements would require further theorems.
+
+\appendix
+\section{Evidence ledger and reproducibility}\label{app:evidence}
+The immutable evidence object is the supplied archive
+\begin{center}\path{20261112_arbitrary_dim_raw_gaussian.zip},\end{center}
+whose SHA-256 is split below only for typography:
+\begin{center}\ttfamily
+ d1e9ab6b5f0790c2cc87d6dabfb91aee7292\\
+ c8b8d5702181f8e4b903b90c497b.
+\end{center}
+The extracted source closure contains its own \texttt{SHA256SUMS}, pinned Lake configuration, contract files and recorded build output. The accompanying article manifest independently pins all files in that closure and the manuscript/build/audit sources. When the archive is available, the audit compares its contents byte for byte with the extracted closure. An explicit archive path may be passed after publication.
+
+\begin{longtable}{p{0.22\textwidth}p{0.68\textwidth}}
+\caption{Evidence status and limits.}\label{tab:ledger}\\
+\toprule
+Claim & Evidence and qualification\\\midrule\endfirsthead
+\toprule Claim & Evidence and qualification\\\midrule\endhead
+CONFIRMED: exact exponent & \texttt{sharp\_target\_weight}, with the intermediate order and gap in \eqref{eq:source}. The paper audit also checks the parameter algebra symbolically.\\[4pt]
+CONFIRMED: actual measures & The atomic identity, \texttt{actualTargetLift\_apply}, and the target pushforward definitions link the raw finite sum to the Borel target law.\\[4pt]
+CONFIRMED: limit contract & The supplied \texttt{sharp-contract.log} records the theorem type and a successful exit; \texttt{build-sharp.log} records its implementation build. This is supplied formal evidence, not a new build.\\[4pt]
+CONFIRMED: finite Gaussianity & \texttt{targetFiniteGaussianLimit\_isGaussian} certifies the finite reconstructed real law.\\[4pt]
+QUALIFIED: regularity & $s>d/2$ is the proved sufficient range. The source contract name does not establish optimality.\\[4pt]
+QUALIFIED: coordinates & Finite target coordinates are weighted by $\sqrt{w_s}$; raw coefficients occur before the target embedding.\\[4pt]
+QUALIFIED: mode matching & The fixed finite family is reindexed only eventually in $N$; aliasing at small $N$ is not excluded.\\[4pt]
+UNVERIFIED here & A fresh Lean kernel replay, an external distribution-space isomorphism and infinite-dimensional Gaussian typeclass registration are outside the article audit.\\[4pt]
+Regression controls & Corrupted hash records and unresolved TeX references must trigger audit failure. Synthetic negative controls check both rejection paths.\\
+\bottomrule
+\end{longtable}
+
+The article build uses Tectonic with a fixed \texttt{SOURCE\_DATE\_EPOCH}. Its audit checks source references and citations, compilation diagnostics, source and archive hashes, recorded axiom footprints, elementary normalization identities, and the produced PDF with PyMuPDF. PDF checks include page text, expected section/table captions, missing-reference markers and text bounds. These are publication checks, not substitutes for the formal mathematical proof. A second build is compared byte for byte with the first to test reproducibility in the stated environment. The companion audit report records execution results and any limitations.
+
+\begin{thebibliography}{9}
+\bibitem{Billingsley} P. Billingsley, \emph{Convergence of Probability Measures}, 2nd ed., Wiley, New York, 1999.
+\bibitem{Bogachev} V. I. Bogachev, \emph{Gaussian Measures}, Mathematical Surveys and Monographs 62, American Mathematical Society, Providence, RI, 1998.
+\bibitem{Sheffield} S. Sheffield, Gaussian free fields for mathematicians, \emph{Probab. Theory Related Fields} \textbf{139} (2007), 521--541, doi:10.1007/s00440-006-0050-1.
+\bibitem{Lean} L. de Moura and S. Ullrich, The Lean 4 theorem prover and programming language, in \emph{Automated Deduction---CADE 28}, Lecture Notes in Computer Science 12699, Springer, 2021, pp. 625--635, doi:10.1007/978-3-030-79876-5\_37.
+\bibitem{Mathlib} The mathlib Community, The Lean mathematical library, in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on Certified Programs and Proofs}, ACM, 2020, pp. 367--381, doi:10.1145/3372885.3373824.
+\end{thebibliography}
+\end{document}
